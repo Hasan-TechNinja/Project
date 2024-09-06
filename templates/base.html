@@ -22,8 +22,9 @@
             <div class="hidden md:flex md:space-x-4 md:text-lg lg:flex space-x-4 text-lg" id="nav-links">
                 <a href="{% url 'home' %}" class="hover:text-blue-600">Home</a>
                 {% if user.is_authenticated %}
-                    <a href="{% url 'logout' %}" class="hover:text-blue-600">Logout</a>
-                    <a href="#" class="hover:text-blue-600">Contact</a>
+                <a href="{% url "blogs" %}" class="hover:text-blue-600">Blog</a>
+                <a href="#" class="hover:text-blue-600">Contact</a>
+                <a href="{% url 'logout' %}" class="hover:text-blue-600">Logout</a>
                     <a href="{% url 'password_change' %}" class="hover:text-blue-600">Change Password</a>
                 {% else %}
                     <a href="{% url 'login' %}" class="hover:text-blue-600">Login</a>
