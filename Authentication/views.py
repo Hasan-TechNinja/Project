@@ -12,7 +12,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 
-
 def RegistrationView(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
@@ -51,7 +50,7 @@ def LoginView(request):
 
 class CustomPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
     form_class = CustomPasswordChangeForm
-    template_name = 'registration/password_change.html'
+    template_name = 'password_change.html'
     success_url = reverse_lazy('password_change_done')
 
     def get_context_data(self, **kwargs):

@@ -2,5 +2,258 @@
 {% load static %}
 {% block title %}Home{% endblock title %}
 {% block content %}
-<h2 class='bg-blue-600 text-white'>Hello world</h2>
+
+<div class="grid grid-cols-1 lg:grid-cols-7 lg:w-11/12 mx-auto">
+        
+    <div class="lg:w-72 h-full lg:col-span-2">
+        <div class="bg-primary text-white font-bold text-xl py-3 px-4 flex items-center justify-between cursor-pointer" id="toggle-departments">
+            <div class="flex items-center">
+                <i class="fa fa-bars mr-2"></i>
+                <span class="font-semibold">All departments</span>
+            </div>
+            <i class="fa fa-chevron-down" id="chevron-icon"></i>
+        </div>
+        <div>
+            <ul id="departments-list" class="divide-y divide-gray-200 hidden">
+                <li class="hover:bg-gray-100">
+                    <a href="#" class="block py-3 px-4 text-gray-700 hover:text-gray-900">Fresh Meat</a>
+                </li>
+                <li class="hover:bg-gray-100">
+                    <a href="#" class="block py-3 px-4 text-gray-700 hover:text-gray-900">Vegetables</a>
+                </li>
+                <li class="hover:bg-gray-100">
+                    <a href="#" class="block py-3 px-4 text-gray-700 hover:text-gray-900">Fruit & Nut Gifts</a>
+                </li>
+                <li class="hover:bg-gray-100">
+                    <a href="#" class="block py-3 px-4 text-gray-700 hover:text-gray-900">Fresh Berries</a>
+                </li>
+                <li class="hover:bg-gray-100">
+                    <a href="#" class="block py-3 px-4 text-gray-700 hover:text-gray-900">Ocean Foods</a>
+                </li>
+                <li class="hover:bg-gray-100">
+                    <a href="#" class="block py-3 px-4 text-gray-700 hover:text-gray-900">Butter & Eggs</a>
+                </li>
+              
+            </ul>
+        </div>
+    </div>
+
+  
+    <div class="bg-form_img bg-cover bg-fixed lg:col-span-5 relative">
+       
+        <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+
+        
+        <div class="relative z-10 px-10 lg:px-20 py-20">
+            <h1 class="text-3xl lg:text-5xl text-white font-bold leading-tight">Vegetable <br> 100% Organic</h1>
+            <p class="text-base font-medium text-white py-7">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, minus?</p>
+            <button class="btn bg-primary text-white py-2 px-6 rounded-md">Shop Now</button>
+        </div>
+    </div>
+</div>
+
+
+<div class="w-11/12 mx-auto my-20 overflow-hidden relative">
+    <div id="carousel-container" class="grid grid-cols-4 gap-4 transition-transform duration-500 ease-in-out">
+        <div class="bg-slate-100 p-7 rounded-2xl">
+            <img class="rounded" src="./image/im2.jpg" alt="">
+            <h1 class="text-center mt-7 bg-white text-3xl p-3 font-bold text-text_col">Burger</h1>
+        </div>
+        <div class="bg-slate-100 p-7 rounded-2xl">
+            <img class="rounded" src="./image/im2.jpg" alt="">
+            <h1 class="text-center mt-7 bg-white text-3xl p-3 font-bold text-text_col">Burger</h1>
+        </div>
+        <div class="bg-slate-100 p-7 rounded-2xl">
+            <img class="rounded" src="./image/im2.jpg" alt="">
+            <h1 class="text-center mt-7 bg-white text-3xl p-3 font-bold text-text_col">Burger</h1>
+        </div>
+        <div class="bg-slate-100 p-7 rounded-2xl">
+            <img class="rounded" src="./image/im2.jpg" alt="">
+            <h1 class="text-center mt-7 bg-white text-3xl p-3 font-bold text-text_col">Burger</h1>
+        </div>
+        
+        
+    </div>
+
+    
+    <button id="prevBtn" class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-600 text-white px-4 py-2">Prev</button>
+    <button id="nextBtn" class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-600 text-white px-4 py-2">Next</button>
+</div>
+
+<div class="">
+    <div class="text-center">
+        <h1 class="text-5xl font-bold text-text_col">Featured Product</h1>
+
+        <ul class="flex  justify-center gap-7 font-medium my-7">
+            <li>All</li>
+            <li>Orange</li>
+            <li>Fresh Meet</li>
+            <li>Fast Food</li>
+        </ul>
+    </div>
+
+    <div class="w-11/12 mx-auto  grid grid-cols-4 gap-4">
+        <div class="card card-compact bg-base-100  shadow-xl">
+            <figure>
+              <img
+                src="./image/im2.jpg"
+                alt="Shoes" />
+            </figure>
+            <div class="card-body">
+              <h2 class="card-title">Shoes!</h2>
+              <p>If a dog chews shoes whose shoes does he choose?</p>
+              <div class="card-actions justify-end">
+                <button class="btn bg-primary">Buy Now</button>
+              </div>
+            </div>
+        </div>
+        <div class="card card-compact bg-base-100  shadow-xl">
+            <figure>
+              <img
+                src="./image/im2.jpg"
+                alt="Shoes" />
+            </figure>
+            <div class="card-body">
+              <h2 class="card-title">Shoes!</h2>
+              <p>If a dog chews shoes whose shoes does he choose?</p>
+              <div class="card-actions justify-end">
+                <button class="btn bg-primary">Buy Now</button>
+              </div>
+            </div>
+        </div>
+        <div class="card card-compact bg-base-100  shadow-xl">
+            <figure>
+              <img
+                src="./image/im2.jpg"
+                alt="Shoes" />
+            </figure>
+            <div class="card-body">
+              <h2 class="card-title">Shoes!</h2>
+              <p>If a dog chews shoes whose shoes does he choose?</p>
+              <div class="card-actions justify-end">
+                <button class="btn bg-primary">Buy Now</button>
+              </div>
+            </div>
+        </div>
+        <div class="card card-compact bg-base-100  shadow-xl">
+            <figure>
+              <img
+                src="./image/im2.jpg"
+                alt="Shoes" />
+            </figure>
+            <div class="card-body">
+              <h2 class="card-title">Shoes!</h2>
+              <p>If a dog chews shoes whose shoes does he choose?</p>
+              <div class="card-actions justify-end">
+                <button class="btn bg-primary">Buy Now</button>
+              </div>
+            </div>
+        </div>
+        <div class="card card-compact bg-base-100  shadow-xl">
+            <figure>
+              <img
+                src="./image/im2.jpg"
+                alt="Shoes" />
+            </figure>
+            <div class="card-body">
+              <h2 class="card-title">Shoes!</h2>
+              <p>If a dog chews shoes whose shoes does he choose?</p>
+              <div class="card-actions justify-end">
+                <button class="btn bg-primary">Buy Now</button>
+              </div>
+            </div>
+        </div>
+        <div class="card card-compact bg-base-100  shadow-xl">
+            <figure>
+              <img
+                src="./image/im2.jpg"
+                alt="Shoes" />
+            </figure>
+            <div class="card-body">
+              <h2 class="card-title">Shoes!</h2>
+              <p>If a dog chews shoes whose shoes does he choose?</p>
+              <div class="card-actions justify-end">
+                <button class="btn bg-primary">Buy Now</button>
+              </div>
+            </div>
+        </div>
+        <div class="card card-compact bg-base-100  shadow-xl">
+            <figure>
+              <img
+                src="./image/im2.jpg"
+                alt="Shoes" />
+            </figure>
+            <div class="card-body">
+              <h2 class="card-title">Shoes!</h2>
+              <p>If a dog chews shoes whose shoes does he choose?</p>
+              <div class="card-actions justify-end">
+                <button class="btn bg-primary">Buy Now</button>
+              </div>
+            </div>
+        </div>
+        <div class="card card-compact bg-base-100  shadow-xl">
+            <figure>
+              <img
+                src="./image/im2.jpg"
+                alt="Shoes" />
+            </figure>
+            <div class="card-body">
+              <h2 class="card-title">Shoes!</h2>
+              <p>If a dog chews shoes whose shoes does he choose?</p>
+              <div class="card-actions justify-end">
+                <button class="btn bg-primary">Buy Now</button>
+              </div>
+            </div>
+        </div>
+    </div>
+        
+</div>
+
+
+
+<script>
+    document.getElementById('toggle-departments').addEventListener('click', function() {
+        var departmentList = document.getElementById('departments-list');
+        var chevronIcon = document.getElementById('chevron-icon');
+
+        // Toggle the hidden class to show or hide the list
+        departmentList.classList.toggle('hidden');
+
+        // Toggle the chevron icon between up and down
+        if (chevronIcon.classList.contains('fa-chevron-down')) {
+            chevronIcon.classList.remove('fa-chevron-down');
+            chevronIcon.classList.add('fa-chevron-up');
+        } else {
+            chevronIcon.classList.remove('fa-chevron-up');
+            chevronIcon.classList.add('fa-chevron-down');
+        }
+    });
+
+    const carouselContainer = document.getElementById('carousel-container');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    let scrollAmount = 0;
+    const itemWidth = carouselContainer.querySelector('div').offsetWidth + 16; // Add gap (16px in this case)
+
+    // Next Button Click
+    nextBtn.addEventListener('click', () => {
+        scrollAmount += itemWidth;
+        carouselContainer.style.transform = `translateX(-${scrollAmount}px)`;
+        
+        // Prevent over-scrolling
+        if (scrollAmount >= carouselContainer.scrollWidth - carouselContainer.clientWidth) {
+            scrollAmount = carouselContainer.scrollWidth - carouselContainer.clientWidth;
+        }
+    });
+
+    // Prev Button Click
+    prevBtn.addEventListener('click', () => {
+        scrollAmount -= itemWidth;
+        if (scrollAmount < 0) scrollAmount = 0;
+        carouselContainer.style.transform = `translateX(-${scrollAmount}px)`;
+    });
+
+</script>
+
 {% endblock content %}  

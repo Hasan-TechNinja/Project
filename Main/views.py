@@ -6,3 +6,5 @@ def HomeView(request):
     
     return render(request, 'home.html')
 
+def ShopView(request):
+    return render(request, 'shop.html')

@@ -1,78 +1,109 @@
 <!DOCTYPE html>
 {% load static %}
 {% load static tailwind_tags %}
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% tailwind_css %}
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- daisy CDn -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- fontawoseome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: 'rgb(171, 239, 95)',
+                        text_col: 'rgb(33, 33, 33)',
+                        text_col2: 'rgb(115, 115, 115)',
+                        work1: 'rgb(231, 193, 211)',
+                        work2: 'rgb(239, 218, 110)',
+                        work3: 'rgb(164, 218, 195)',
+                        work4: 'rgb(119, 170, 234)',
+                        secondary:'rgb(28, 28, 28)',
+                    },
+                    backgroundImage: {
+                        form_img: "url('./image/bg.avif')",
+                        
+                    },
+                    fontFamily: {
+                        font: ['Manrope'],
+                    },
+                },
+            },
+        }
+    </script>
     <title>{% block title %}{% endblock title %}</title>
 </head>
-<body class='bg-gray-200'>
+<body class='bg-white'>
     {% comment %} nav start {% endcomment %}
-    <nav class="bg-white shadow-md mb-3">
-        <div class="flex justify-between items-center px-4 py-2">
-            <!-- Left Side: Logo and Name -->
-            <div class="flex items-center space-x-2">
-                <img src="#" alt="logo" class="h-8 w-auto">
-                <span class="text-xl font-semibold">Name</span>
+    <nav class="lg:w-11/12 text-text_col mx-auto ">
+        <div class="navbar bg-white">
+            <div class="navbar-start">
+              <div class="dropdown">
+                <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M4 6h16M4 12h8m-8 6h16" />
+                  </svg>
+                </div>
+                <ul
+                  tabindex="0"
+                  class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                  <li><a></a></li>
+                  <li>
+                    <a>pages</a>
+                    <ul class="p-2">
+                      <li><a>Submenu 1</a></li>
+                      <li><a>Submenu 2</a></li>
+                    </ul>
+                  </li>
+                  <li><a>Item 3</a></li>
+                </ul>
+              </div>
+              <a class="btn btn-ghost text-3xl font-bold hover:bg-white" href='{% url "home" %}'>Hasan <span class="text-primary ">Zone</span></a>
             </div>
-            
-            <!-- Center: Navigation Links (Hidden by default on mobile) -->
-            <div class="hidden md:flex md:space-x-4 md:text-lg lg:flex space-x-4 text-lg" id="nav-links">
-                <a href="{% url 'home' %}" class="hover:text-blue-600">Home</a>
+            <div class="navbar-center  hidden lg:flex">
+              <ul class="menu menu-horizontal text-base font-medioum px-1">
+                <li><a class="hover:bg-primary" href='{% url "home" %}'>Home</a></li>
+                <li><a class="hover:bg-primary" href='{% url "shop" %}'>Shop</a></li>
+                <li>
+                  <details class="hover:bg-primary">
+                    <summary >Pages</summary>
+                    <ul class="p-2">
+                      <li><a>Shopping Cart</a></li>
+                      <li><a>Order info</a></li>
+                    </ul>
+                  </details>
+                </li>
+                <li><a class="hover:bg-primary" >Blog</a></li>
+                <li><a class="hover:bg-primary" href='#' >Contact</a></li>
+              </ul>
+            </div>
+            <div class="navbar-end">
                 {% if user.is_authenticated %}
-                <a href="{% url "blogs" %}" class="hover:text-blue-600">Blog</a>
-                <a href="#" class="hover:text-blue-600">Contact</a>
-                <a href="{% url 'logout' %}" class="hover:text-blue-600">Logout</a>
-                    <a href="{% url 'password_change' %}" class="hover:text-blue-600">Change Password</a>
+                <a class="btn bg-primary hover:bg-primary" ><span><i class="fa-solid fa-user"></i> <span>Profile</span></span></a>
                 {% else %}
-                    <a href="{% url 'login' %}" class="hover:text-blue-600">Login</a>
-                    <a href="{% url 'registration' %}" class="hover:text-blue-600">Registration</a>
-                    <a href="{% url 'password_change_done' %}" class="hover:text-blue-600">Change Password Done</a>
+                <a class="btn bg-primary hover:bg-primary" href='{% url "login" %}'><span><i class="fa-solid fa-user"></i> <span>Login</span></span></a>
                 {% endif %}
             </div>
-        
-            <!-- Right Side: Profile Link (Hidden by default on mobile) -->
-            <div class="hidden lg:flex items-center space-x-2" id="profile-link">
-                <img src="#" alt="Logo">
-                <a href="#" class="hover:text-blue-600">Profile</a>
-            </div>
-            
-            <!-- Hamburger Menu Icon (Visible on mobile) -->
-            <div class="lg:hidden flex items-center">
-                <button id="menu-toggle" class="text-gray-600 hover:text-gray-800 focus:outline-none">
-                    <i class="fa fa-bars text-2xl"></i>
-                </button>
-            </div>
-        </div>
-        
-        <!-- Dropdown Menu (Visible on mobile when hamburger is clicked) -->
-        <div class="hidden lg:hidden" id="mobile-menu">
-            <a href="{% url 'home' %}" class="block py-2 px-4 text-gray-700 hover:text-blue-600">Home</a>
-            {% if user.is_authenticated %}
-                <a href="{% url 'logout' %}" class="block py-2 px-4 text-gray-700 hover:text-blue-600">Logout</a>
-                <a href="#" class="block py-2 px-4 text-gray-700 hover:text-blue-600">Contact</a>
-                <a href="{% url 'password_change' %}" class="block py-2 px-4 text-gray-700 hover:text-blue-600">Change Password</a>
-            {% else %}
-                <a href="{% url 'login' %}" class="block py-2 px-4 text-gray-700 hover:text-blue-600">Login</a>
-                <a href="{% url 'registration' %}" class="block py-2 px-4 text-gray-700 hover:text-blue-600">Registration</a>
-                <a href="{% url 'password_change_done' %}" class="block py-2 px-4 text-gray-700 hover:text-blue-600">Change Password Done</a>
-            {% endif %}
-            
-            {% if user.is_authenticated %}
-            <div class="flex items-center space-x-2 py-2 px-4">
-                <input type="search" placeholder="Search..." 
-                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
-                <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300">
-                    Search
-                </button>
-            </div>
-            {% endif %}
-            
-            <a href="#" class="block py-2 px-4 text-gray-700 hover:text-blue-600">Profile</a>
-        </div>
-        
+          </div>
     </nav>
     {% comment %} nav end {% endcomment %}
 
