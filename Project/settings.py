@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'Main',
     'Authentication',
     'Blogs',
+    'Profile',
     
     'tailwind',
     'theme',
@@ -131,8 +132,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR/'media'
+MEDIA_URL = '/media/'  # This is the URL prefix for media files
+MEDIA_ROOT = BASE_DIR / 'media'  # This is where uploaded media files will be stored
 # MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 

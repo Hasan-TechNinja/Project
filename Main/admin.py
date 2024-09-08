@@ -20,3 +20,29 @@ class ProductAdmin(admin.ModelAdmin):
     )
 
 admin.site.register(Product, ProductAdmin)
+
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'name',
+        'link'
+    )
+admin.site.register(Category, CategoryAdmin)
+
+
+class DepartmentsAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'name',
+        'link'
+    )
+admin.site.register(Departments, DepartmentsAdmin)
+
+
+class SizeAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'name',
+        'link'
+    )
+admin.site.register(Size, SizeAdmin)

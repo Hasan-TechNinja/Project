@@ -6,13 +6,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% tailwind_css %}
-    <!-- Tailwind CDN -->
+    <link rel="stylesheet" href="{% static "css/styles.css" %}">
     <script src="https://cdn.tailwindcss.com"></script>
-
     <!-- daisy CDn -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
-
     <!-- fontawoseome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -31,7 +29,7 @@
                         secondary:'rgb(28, 28, 28)',
                     },
                     backgroundImage: {
-                        form_img: "url('./image/bg.avif')",
+                        form_img: "url('{% static "img/bg.avif" %}')",
                         
                     },
                     fontFamily: {
@@ -74,7 +72,10 @@
                       <li><a>Submenu 2</a></li>
                     </ul>
                   </li>
-                  <li><a>Item 3</a></li>
+                  <li><a class="hover:bg-primary" href='{% url "home" %}'>Home</a></li>
+                <li><a class="hover:bg-primary" href='{% url "shop" %}'>Shop</a></li>
+                <li><a class="hover:bg-primary" >Blog</a></li>
+                <li><a class="hover:bg-primary" href='#' >Contact</a></li>
                 </ul>
               </div>
               <a class="btn btn-ghost text-3xl font-bold hover:bg-white" href='{% url "home" %}'>Hasan <span class="text-primary ">Zone</span></a>
@@ -98,7 +99,7 @@
             </div>
             <div class="navbar-end">
                 {% if user.is_authenticated %}
-                <a class="btn bg-primary hover:bg-primary" ><span><i class="fa-solid fa-user"></i> <span>Profile</span></span></a>
+                <a class="btn bg-primary hover:bg-primary" href='{% url "profile" %}'><span><i class="fa-solid fa-user"></i> <span>Profile</span></span></a>
                 {% else %}
                 <a class="btn bg-primary hover:bg-primary" href='{% url "login" %}'><span><i class="fa-solid fa-user"></i> <span>Login</span></span></a>
                 {% endif %}

@@ -70,9 +70,7 @@
         <div class="bg-slate-100 p-7 rounded-2xl">
             <img class="rounded" src="./image/im2.jpg" alt="">
             <h1 class="text-center mt-7 bg-white text-3xl p-3 font-bold text-text_col">Burger</h1>
-        </div>
-        
-        
+        </div> 
     </div>
 
     
@@ -85,129 +83,38 @@
         <h1 class="text-5xl font-bold text-text_col">Featured Product</h1>
 
         <ul class="flex  justify-center gap-7 font-medium my-7">
-            <li>All</li>
-            <li>Orange</li>
-            <li>Fresh Meet</li>
-            <li>Fast Food</li>
+          {% for department in departments %}
+            <li><a href="{{ department.link }}" class='hover:underline hover:text-blue-600'>{{ department.name }}</a></li>
+            {% endfor %}
         </ul>
     </div>
+    
 
-    <div class="w-11/12 mx-auto  grid grid-cols-4 gap-4">
-        <div class="card card-compact bg-base-100  shadow-xl">
+    <div class="w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      {% for product in products %}
+        <div class="card card-compact bg-base-100 shadow-xl">
             <figure>
               <img
-                src="./image/im2.jpg"
-                alt="Shoes" />
+                src="{{ product.image.url }}"
+                alt="{{ product.name }}"
+                class="h-56 w-full object-cover" />
             </figure>
             <div class="card-body">
-              <h2 class="card-title">Shoes!</h2>
-              <p>If a dog chews shoes whose shoes does he choose?</p>
-              <div class="card-actions justify-end">
+              <div class='flex flex-col sm:flex-row sm:justify-between'>
+                <h2 class="card-title text-xl font-semibold">{{ product.name }}</h2>
+                <h2 class="card-title text-xl font-semibold">{{ product.selling_price }} Tk</h2>
+            </div>
+              <p class="mt-2">{{ product.description }}</p>
+              <div class="card-actions justify-end mt-4">
                 <button class="btn bg-primary">Buy Now</button>
               </div>
-            </div>
-        </div>
-        <div class="card card-compact bg-base-100  shadow-xl">
-            <figure>
-              <img
-                src="./image/im2.jpg"
-                alt="Shoes" />
-            </figure>
-            <div class="card-body">
-              <h2 class="card-title">Shoes!</h2>
-              <p>If a dog chews shoes whose shoes does he choose?</p>
-              <div class="card-actions justify-end">
-                <button class="btn bg-primary">Buy Now</button>
-              </div>
-            </div>
-        </div>
-        <div class="card card-compact bg-base-100  shadow-xl">
-            <figure>
-              <img
-                src="./image/im2.jpg"
-                alt="Shoes" />
-            </figure>
-            <div class="card-body">
-              <h2 class="card-title">Shoes!</h2>
-              <p>If a dog chews shoes whose shoes does he choose?</p>
-              <div class="card-actions justify-end">
-                <button class="btn bg-primary">Buy Now</button>
-              </div>
-            </div>
-        </div>
-        <div class="card card-compact bg-base-100  shadow-xl">
-            <figure>
-              <img
-                src="./image/im2.jpg"
-                alt="Shoes" />
-            </figure>
-            <div class="card-body">
-              <h2 class="card-title">Shoes!</h2>
-              <p>If a dog chews shoes whose shoes does he choose?</p>
-              <div class="card-actions justify-end">
-                <button class="btn bg-primary">Buy Now</button>
-              </div>
-            </div>
-        </div>
-        <div class="card card-compact bg-base-100  shadow-xl">
-            <figure>
-              <img
-                src="./image/im2.jpg"
-                alt="Shoes" />
-            </figure>
-            <div class="card-body">
-              <h2 class="card-title">Shoes!</h2>
-              <p>If a dog chews shoes whose shoes does he choose?</p>
-              <div class="card-actions justify-end">
-                <button class="btn bg-primary">Buy Now</button>
-              </div>
-            </div>
-        </div>
-        <div class="card card-compact bg-base-100  shadow-xl">
-            <figure>
-              <img
-                src="./image/im2.jpg"
-                alt="Shoes" />
-            </figure>
-            <div class="card-body">
-              <h2 class="card-title">Shoes!</h2>
-              <p>If a dog chews shoes whose shoes does he choose?</p>
-              <div class="card-actions justify-end">
-                <button class="btn bg-primary">Buy Now</button>
-              </div>
-            </div>
-        </div>
-        <div class="card card-compact bg-base-100  shadow-xl">
-            <figure>
-              <img
-                src="./image/im2.jpg"
-                alt="Shoes" />
-            </figure>
-            <div class="card-body">
-              <h2 class="card-title">Shoes!</h2>
-              <p>If a dog chews shoes whose shoes does he choose?</p>
-              <div class="card-actions justify-end">
-                <button class="btn bg-primary">Buy Now</button>
-              </div>
-            </div>
-        </div>
-        <div class="card card-compact bg-base-100  shadow-xl">
-            <figure>
-              <img
-                src="./image/im2.jpg"
-                alt="Shoes" />
-            </figure>
-            <div class="card-body">
-              <h2 class="card-title">Shoes!</h2>
-              <p>If a dog chews shoes whose shoes does he choose?</p>
-              <div class="card-actions justify-end">
-                <button class="btn bg-primary">Buy Now</button>
-              </div>
-            </div>
-        </div>
-    </div>
-        
+          </div>
+      </div>
+      {% endfor %}
+  </div>
 </div>
+        
+{% comment %} </div> {% endcomment %}
 
 
 
@@ -234,7 +141,7 @@
     const nextBtn = document.getElementById('nextBtn');
 
     let scrollAmount = 0;
-    const itemWidth = carouselContainer.querySelector('div').offsetWidth + 16; // Add gap (16px in this case)
+    const itemWidth = carouselContainer.querySelector('div').offsetWidth + 16;
 
     // Next Button Click
     nextBtn.addEventListener('click', () => {

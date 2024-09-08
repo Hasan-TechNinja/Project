@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Profile{% endblock title %}
+{% block content %}
+
+<div class="container mx-auto my-10 p-5 max-w-4xl bg-white shadow-lg rounded-lg">
+    <!-- Profile Header -->
+    <div class="flex flex-col items-center">
+      <img src="profile.jpg" alt="Profile Picture" class="w-32 h-32 rounded-full border-4 border-white shadow-md">
+      <h1 class="text-2xl font-bold mt-4">John Doe</h1>
+      <p class="text-gray-500">@johndoe</p>
+      <p class="text-center text-gray-700 mt-2">Full Stack Developer | Tech Enthusiast | Coffee Addict</p>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="mt-6 border-b border-gray-200">
+      <nav class="flex space-x-4 justify-center">
+        <button class="tab-btn py-2 px-4 text-gray-600 border-b-4 border-transparent hover:border-blue-500 focus:border-blue-500" onclick="openTab('about')">About</button>
+        <button class="tab-btn py-2 px-4 text-gray-600 border-b-4 border-transparent hover:border-blue-500 focus:border-blue-500" onclick="openTab('posts')">Posts</button>
+        <button class="tab-btn py-2 px-4 text-gray-600 border-b-4 border-transparent hover:border-blue-500 focus:border-blue-500" onclick="openTab('friends')">Friends</button>
+        <button class="tab-btn py-2 px-4 text-gray-600 border-b-4 border-transparent hover:border-blue-500 focus:border-blue-500" onclick="openTab('settings')">Settings</button>
+      </nav>
+    </div>
+
+    <!-- Tab Content -->
+    <div class="mt-6">
+      <!-- About Tab -->
+      <section id="about" class="tab-content active">
+        <h2 class="text-xl font-bold mb-2">About Me</h2>
+        <p class="text-gray-700">I’m a full stack developer with a passion for building web apps and exploring new technologies. I enjoy working on both the frontend and backend, focusing on delivering high-quality code.</p>
+      </section>
+
+      <!-- Posts Tab -->
+      <section id="posts" class="tab-content hidden">
+        <h2 class="text-xl font-bold mb-2">Recent Posts</h2>
+        <ul class="list-disc pl-5 text-gray-700">
+          <li>Post 1: Building a modern web app with React</li>
+          <li>Post 2: Why I love coding at night</li>
+          <li>Post 3: Learning DevOps in 2024</li>
+        </ul>
+      </section>
+
+      <!-- Friends Tab -->
+      <section id="friends" class="tab-content hidden">
+        <h2 class="text-xl font-bold mb-2">Friends</h2>
+        <ul class="flex space-x-4">
+          <li class="flex flex-col items-center">
+            <img src="friend1.jpg" alt="Friend 1" class="w-16 h-16 rounded-full">
+            <p class="text-gray-700 mt-2">Jane Smith</p>
+          </li>
+          <li class="flex flex-col items-center">
+            <img src="friend2.jpg" alt="Friend 2" class="w-16 h-16 rounded-full">
+            <p class="text-gray-700 mt-2">Mark Johnson</p>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Settings Tab -->
+      <section id="settings" class="tab-content hidden">
+        <h2 class="text-xl font-bold mb-2">Settings</h2>
+        <p class="text-gray-700">This section will allow users to customize their profile and privacy settings.</p>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    function openTab(tabName) {
+      const tabs = document.querySelectorAll('.tab-content');
+      const buttons = document.querySelectorAll('.tab-btn');
+
+      // Hide all tab contents and remove active border from buttons
+      tabs.forEach(tab => tab.classList.add('hidden'));
+      buttons.forEach(button => button.classList.remove('border-blue-500'));
+
+      // Show selected tab content and add active border to the button
+      document.getElementById(tabName).classList.remove('hidden');
+      event.target.classList.add('border-blue-500');
+    }
+  </script>
+
+{% endblock content %}
