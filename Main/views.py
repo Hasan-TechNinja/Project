@@ -15,4 +15,6 @@ class HomeView(View):
         return render(request, 'home.html', context) 
 
 def ShopView(request):
+    
     return render(request, 'shop.html')
+
