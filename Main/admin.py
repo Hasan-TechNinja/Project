@@ -25,7 +25,8 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = (
         'id',
         'name',
-        'link'
+        'link',
+        'image'
     )
 admin.site.register(Category, CategoryAdmin)
 
@@ -34,7 +35,8 @@ class DepartmentsAdmin(admin.ModelAdmin):
     list_display = (
         'id',
         'name',
-        'link'
+        'link',
+        'image'
     )
 admin.site.register(Departments, DepartmentsAdmin)
 

@@ -6,7 +6,7 @@ from django.db import models
 class Category(models.Model):
     name = models.CharField(max_length=100, blank=False, null=False)
     link = models.CharField(max_length=100, blank=True, null=True)
-    # logo = models.ImageField(upload_to='Category logo', blank=True, null=True )
+    image = models.ImageField(upload_to='Category logo', blank=True, null=True )
 
     def __str__(self):
         return self.name
@@ -15,6 +15,7 @@ class Category(models.Model):
 class Departments(models.Model):
     name = models.CharField(max_length=200)
     link = models.CharField(max_length=500)
+    image = models.ImageField(upload_to='departments', blank=True, null=True)
 
     def __str__(self):
         return self.name
