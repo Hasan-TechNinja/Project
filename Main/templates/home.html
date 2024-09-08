@@ -63,8 +63,8 @@
         {% endfor %}
     </div>
     <div class="flex justify-between absolute top-1/2 transform -translate-y-1/2 left-0 right-0 px-4">
-        <button id="prevBtn" class="bg-transparent text-gray-900 font-bold px-4 py-2 rounded"><-Prev</button>
-        <button id="nextBtn" class="bg-transparent text-gray-900 font-bold px-4 py-2 rounded">Next-></button>
+        <button id="prevBtn" class="bg-transparent text-white font-bold px-4 py-2 rounded"><-Prev</button>
+        <button id="nextBtn" class="bg-transparent text-white font-bold px-4 py-2 rounded">Next-></button>
     </div>
 </div>
 
@@ -88,10 +88,10 @@
               <img
                 src="{{ product.image.url }}"
                 alt="{{ product.name }}"
-                class="h-56 w-full object-cover" />
+                class="h-56 w-64 object-cover" />
             </figure>
             <div class="card-body">
-              <div class='flex flex-col sm:flex-row sm:justify-between'>
+              <div class='flex justify-between sm:flex-row sm:justify-between'>
                 <h2 class="card-title text-xl font-semibold">{{ product.name }}</h2>
                 <h2 class="card-title text-xl font-semibold">{{ product.selling_price }} Tk</h2>
             </div>
