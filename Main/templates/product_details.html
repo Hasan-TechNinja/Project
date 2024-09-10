@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}{% endblock title %}
+{% block title %} {{ product.name }} {% endblock title %}
 {% block content %}
 
 <div class="max-w-7xl mx-auto py-10">
@@ -8,7 +8,7 @@
       <!-- Image Section -->
       <div>
         <div class="relative bg-white rounded-lg shadow-md p-4">
-          <img src="your-image-url.jpg" alt="Guava" class="w-full rounded-lg object-cover">
+          <img src="{{ product.image.url }}" alt="Guava" class="w-full rounded-lg object-cover">
         </div>
         <!-- Thumbnail Images -->
         <div class="grid grid-cols-4 gap-4 mt-4">
@@ -21,7 +21,7 @@
   
       <!-- Product Details Section -->
       <div>
-        <h1 class="text-3xl font-bold">Guava</h1>
+        <h1 class="text-3xl font-bold">{{ product.name }}</h1>
         <div class="flex items-center space-x-2">
           <div class="flex space-x-1 text-yellow-500">
             <!-- Star rating can be added using icons or emojis -->
@@ -29,10 +29,10 @@
           </div>
           <span class="text-sm text-gray-600">(4 reviews)</span>
         </div>
-        <p class="text-2xl font-semibold text-red-500 mt-2">$14.0</p>
+        <p class="text-2xl font-semibold text-red-500 mt-2">{{ product.discount_price }}Tk</p>
   
         <p class="mt-4 text-gray-700">
-          Here are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don’t look even slightly believable...
+          {{ product.description }}
         </p>
   
         <!-- Quantity Selector and Add to Cart Button -->
@@ -76,5 +76,32 @@
     </div>
   </div>
   
+
+
+  <div class="container mx-auto py-12">
+    <!-- Product Information Section -->
+    <div class="text-center">
+        <h2 class="text-2xl font-bold">Department Information</h2>
+        <p class="mt-4 text-gray-600 text-start">{{ rproduct.description }}</p>
+    </div>
+
+    <!-- Related Product Section -->
+    <div class="mt-12">
+        <h3 class="text-3xl font-bold text-center">Related Product</h3>
+        <div class="border-b-4 border-green-500 mx-auto w-16 mt-2 mb-10"></div>
+
+        <!-- Products Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+          {% for product in rproduct %}
+            <!-- Product 1 -->
+            <div class="bg-white shadow-md p-6 text-center">
+                <img src="{{ product.image.url }}" alt="Dried Fruit" class="mx-auto mb-4">
+                <h4 class="text-lg font-bold">{{ product.name }}</h4>
+                <p class="text-green-600 font-semibold">{{ product.discount_price }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 
 {% endblock content %}

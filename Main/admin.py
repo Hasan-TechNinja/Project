@@ -35,6 +35,7 @@ class DepartmentsAdmin(admin.ModelAdmin):
     list_display = (
         'id',
         'name',
+        'description',
         'link',
         'image'
     )

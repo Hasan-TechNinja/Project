@@ -14,6 +14,7 @@ class Category(models.Model):
 
 class Departments(models.Model):
     name = models.CharField(max_length=200)
+    description = models.TextField(blank= True, null=True)
     link = models.CharField(max_length=500)
     image = models.ImageField(upload_to='departments', blank=True, null=True)
 
