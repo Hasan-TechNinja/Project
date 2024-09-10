@@ -15,25 +15,32 @@ class HomeView(View):
             'departments': departments,
         }
         return render(request, 'home.html', context) 
+    
 
 def ShopView(request):
     
     return render(request, 'shop.html')
 
-class ProductDetails(LoginRequiredMixin, View):
-
-    login_url = '/login/'  # Redirects to login page if not logged in
-    redirect_field_name = 'redirect_to'
-
-
+class ProductDetails(View):
     def get(self, request, pk):
         product = get_object_or_404(Product, pk=pk)
+        department_description = product.department.description 
+        
         all = Product.objects.all()
-        rproduct = Product.objects.filter(department=product.department).exclude(pk=pk)
+        related_products = Product.objects.filter(department=product.department).exclude(pk=pk)
 
         context = {
             'product': product,
-            'rproduct':rproduct,
+            'rproduct':related_products,
+            'department_description':department_description,
 
         }
         return render(request, 'product_details.html', context)
+
+class AddToCart(LoginRequiredMixin ,View):
+    login_url = '/login/'
+    redirect_field_name = 'redirect_to'
+
+    def get(self, request):
+
+        return render(request, 'addtocart.html')

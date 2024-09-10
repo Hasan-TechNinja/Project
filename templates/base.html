@@ -84,7 +84,9 @@
               <ul class="menu menu-horizontal text-base font-medioum px-1">
                 <li><a class="hover:bg-primary" href='{% url "home" %}'>Home</a></li>
                 <li><a class="hover:bg-primary" href='{% url "shop" %}'>Shop</a></li>
-                <li><a class="hover:bg-primary" href="{% url "product_details" %}">Product Details</a></li>
+                {% if user.is_authenticated %}
+                <li><a class="hover:bg-primary" href="{% url "addtocart" %}">Cart</a></li>
+                {% endif %}
                 <li>
                   <details class="hover:bg-primary">
                     <summary >Pages</summary>
@@ -95,11 +97,14 @@
                   </details>
                 </li>
                 <li><a class="hover:bg-primary" >Blog</a></li>
+                {% if user.is_authenticated %}
                 <li><a class="hover:bg-primary" href='#' >Contact</a></li>
+                {% endif %}
               </ul>
             </div>
             <div class="navbar-end">
               {% if user.is_authenticated %}
+              
                   {% if request.path == '/profile/' %}
                       <a class="btn bg-yellow-300 hover:bg-red-300" href="{% url 'logout' %}">
                           <span><i class="fa-solid fa-user"></i> <span>Logout</span></span>

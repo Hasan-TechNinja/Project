@@ -7,35 +7,35 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       <!-- Image Section -->
       <div>
-        <div class="relative bg-white rounded-lg shadow-md p-4">
+        <div class="relative bg-white rounded-lg shadow-md p-4 border">
           <img src="{{ product.image.url }}" alt="Guava" class="w-full rounded-lg object-cover">
         </div>
         <!-- Thumbnail Images -->
-        <div class="grid grid-cols-4 gap-4 mt-4">
+        {% comment %} <div class="grid grid-cols-4 gap-4 mt-4">
           <img src="your-thumbnail-url.jpg" alt="Thumbnail" class="w-full rounded-lg object-cover">
           <img src="your-thumbnail-url.jpg" alt="Thumbnail" class="w-full rounded-lg object-cover">
           <img src="your-thumbnail-url.jpg" alt="Thumbnail" class="w-full rounded-lg object-cover">
           <img src="your-thumbnail-url.jpg" alt="Thumbnail" class="w-full rounded-lg object-cover">
-        </div>
+        </div> {% endcomment %}
       </div>
   
       <!-- Product Details Section -->
       <div>
         <h1 class="text-3xl font-bold">{{ product.name }}</h1>
-        <div class="flex items-center space-x-2">
+        {% comment %} <div class="flex items-center space-x-2">
           <div class="flex space-x-1 text-yellow-500">
             <!-- Star rating can be added using icons or emojis -->
             ★★★★☆
           </div>
           <span class="text-sm text-gray-600">(4 reviews)</span>
-        </div>
+        </div> {% endcomment %}
         <p class="text-2xl font-semibold text-red-500 mt-2">{{ product.discount_price }}Tk</p>
   
         <p class="mt-4 text-gray-700">
           {{ product.description }}
         </p>
   
-        <!-- Quantity Selector and Add to Cart Button -->
+        <!-- Quantity Selector and Add to Cart Button --> 
         <div class="flex items-center space-x-4 mt-6">
           <div class="flex items-center border border-gray-300 rounded">
             <button class="px-2 py-1 bg-gray-100 text-gray-700">-</button>
@@ -43,7 +43,7 @@
             <button class="px-2 py-1 bg-gray-100 text-gray-700">+</button>
           </div>
           <button class="bg-gray-800 text-white px-6 py-2 rounded-lg hover:bg-gray-900">
-            Add to Cart
+            <a href="{% url "addtocart" %} product.id">Add to Cart</a>
           </button>
           <button class="text-gray-500 hover:text-gray-800">
             ♥
@@ -82,10 +82,11 @@
     <!-- Product Information Section -->
     <div class="text-center">
         <h2 class="text-2xl font-bold">Department Information</h2>
-        <p class="mt-4 text-gray-600 text-start">{{ rproduct.description }}</p>
+        <p class="mt-4 text-gray-600 text-start">{{ department_description }}</p>
     </div>
 
     <!-- Related Product Section -->
+     {% if rproduct %}
     <div class="mt-12">
         <h3 class="text-3xl font-bold text-center">Related Product</h3>
         <div class="border-b-4 border-green-500 mx-auto w-16 mt-2 mb-10"></div>
@@ -94,7 +95,7 @@
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
           {% for product in rproduct %}
             <!-- Product 1 -->
-            <div class="bg-white shadow-md p-6 text-center">
+            <div class="bg-white shadow-lg p-6 text-center border">
                 <img src="{{ product.image.url }}" alt="Dried Fruit" class="mx-auto mb-4">
                 <h4 class="text-lg font-bold">{{ product.name }}</h4>
                 <p class="text-green-600 font-semibold">{{ product.discount_price }}</p>
@@ -102,6 +103,7 @@
             {% endfor %}
         </div>
     </div>
+    {% endif %}
 </div>
 
 {% endblock content %}
