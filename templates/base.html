@@ -84,6 +84,7 @@
               <ul class="menu menu-horizontal text-base font-medioum px-1">
                 <li><a class="hover:bg-primary" href='{% url "home" %}'>Home</a></li>
                 <li><a class="hover:bg-primary" href='{% url "shop" %}'>Shop</a></li>
+                <li><a class="hover:bg-primary" href="{% url "product_details" %}">Product Details</a></li>
                 <li>
                   <details class="hover:bg-primary">
                     <summary >Pages</summary>
@@ -98,12 +99,24 @@
               </ul>
             </div>
             <div class="navbar-end">
-                {% if user.is_authenticated %}
-                <a class="btn bg-primary hover:bg-primary" href='{% url "profile" %}'><span><i class="fa-solid fa-user"></i> <span>Profile</span></span></a>
-                {% else %}
-                <a class="btn bg-primary hover:bg-primary" href='{% url "login" %}'><span><i class="fa-solid fa-user"></i> <span>Login</span></span></a>
-                {% endif %}
-            </div>
+              {% if user.is_authenticated %}
+                  {% if request.path == '/profile/' %}
+                      <a class="btn bg-yellow-300 hover:bg-red-300" href="{% url 'logout' %}">
+                          <span><i class="fa-solid fa-user"></i> <span>Logout</span></span>
+                      </a>
+                  {% else %}
+                      <a class="btn bg-primary hover:bg-primary" href="{% url 'profile' %}">
+                          <span><i class="fa-solid fa-user"></i> <span>Profile</span></span>
+                      </a>
+                  {% endif %}
+              {% else %}
+                  <a class="btn bg-primary hover:bg-primary" href="{% url 'login' %}">
+                      <span><i class="fa-solid fa-user"></i> <span>Login</span></span>
+                  </a>
+              {% endif %}
+          </div>
+          
+          
           </div>
     </nav>
     {% comment %} nav end {% endcomment %}
@@ -113,6 +126,53 @@
 
 
     {% comment %} footer start {% endcomment %}
+
+      
+    <footer class="bg-gray-500 text-gray-300 py-8">
+      <div class="container mx-auto px-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div>
+                  <h3 class="text-xl font-semibold mb-4 text-white">Contact Information</h3>
+                  <p class="mb-2">Address: Dhaka, Bangladesh</p>
+                  <p class="mb-2">Phone: <a href="tel:+8801725478653" class="text-blue-400 hover:underline">+8801725478653</a></p>
+                  <p>Email: <a href="mailto:admin@gmail.com" class="text-blue-400 hover:underline">admin@gmail.com</a></p>
+              </div>
+              <div>
+                  <h3 class="text-xl font-semibold mb-4 text-white">Useful Links</h3>
+                  <ul class="space-y-2">
+                      <li><a href="#" class="hover:text-blue-400 transition-colors">About Us</a></li>
+                      <li><a href="#" class="hover:text-blue-400 transition-colors">About Our Shop</a></li>
+                      <li><a href="#" class="hover:text-blue-400 transition-colors">Secure Shopping</a></li>
+                      <li><a href="#" class="hover:text-blue-400 transition-colors">Delivery Information</a></li>
+                      <li><a href="#" class="hover:text-blue-400 transition-colors">Privacy Policy</a></li>
+                      <li><a href="#" class="hover:text-blue-400 transition-colors">Our Sitemap</a></li>
+                  </ul>
+              </div>
+              <div>
+                  <h3 class="text-xl font-semibold mb-4 text-white">Join Our Newsletter</h3>
+                  <p class="mb-4">Get email updates about our latest shop and special offers.</p>
+                  <div class="flex items-center space-x-2">
+                      <input type="email" class="border border-gray-700 bg-gray-800 text-gray-200 rounded px-3 py-2 w-full" placeholder="Enter your email">
+                      <button class="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 transition-colors">SUBSCRIBE</button>
+                  </div>
+                  <div class="flex justify-center mt-4 space-x-4">
+                      <a href="#" class="text-blue-500 hover:text-blue-400 transition-colors">
+                          <i class="fa-brands fa-facebook-f"></i>
+                      </a>
+                      <a href="#" class="text-blue-500 hover:text-blue-400 transition-colors">
+                          <i class="fa-brands fa-twitter"></i>
+                      </a>
+                      <a href="#" class="text-blue-500 hover:text-blue-400 transition-colors">
+                          <i class="fa-brands fa-instagram"></i>
+                      </a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </footer>
+  
+  
+
     {% comment %} footer end {% endcomment %}
 </body>
 </html>

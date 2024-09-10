@@ -18,3 +18,5 @@ def ShopView(request):
     
     return render(request, 'shop.html')
 
+def ProductDetails(request):
+    return render(request, 'product_details.html')
