@@ -11,11 +11,9 @@ class HomeView(View):
     def get(self, request, *args, **kwargs):
         products = Product.objects.all()
         departments = Departments.objects.all()
-        # all_department = Departments.objects.all()
         context = {
             'products': products,
             'departments': departments,
-            # 'department':all_department,
         }
         return render(request, 'home.html', context) 
     
@@ -41,14 +39,7 @@ class ProductDetails(View):
         }
         return render(request, 'product_details.html', context)
 
-# class AddToCart(LoginRequiredMixin ,View):
-#     login_url = '/login/'
-#     redirect_field_name = 'redirect_to'
 
-#     def get(self, request):
-
-#         return render(request, 'addtocart.html')
-    
 def AddToCart(request):
     if request.user.is_authenticated:
         user = request.user
