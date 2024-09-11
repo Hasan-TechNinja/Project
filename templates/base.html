@@ -94,8 +94,10 @@
                     <summary >Pages</summary>
                     <ul class="p-2 relative">
                         <div class="absolute inset-0 bg-white/60 backdrop-blur-lg rounded-lg z-0"></div>
+                        {% if user.is_authenticated %}
                         <li class="relative z-10"><a href="{% url "showcart" %}">Cart</a></li>
                         <li class="relative z-10"><a href="#">Order</a></li>
+                        {% endif %}
                       </ul>                      
                   </details>
                 </li>
