@@ -48,6 +48,7 @@
           </button> {% endcomment %}
 
           <form action="/addtocart" class='d-inline'>
+            {% csrf_token %}
             <input type="hidden" name="prod_id" value="{{product.id}}" id="prod_id">
             <input type="hidden" name="product_quantity" id="product_quantity" value="1">
             <button type="submit" class = "bg-gray-800 text-white px-6 py-2 rounded-lg hover:bg-gray-900">Add to Cart</button>

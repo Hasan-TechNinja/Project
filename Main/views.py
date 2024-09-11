@@ -60,10 +60,10 @@ def AddToCart(request):
         return redirect("/cart")
     
    
-    return redirect("/login")
+    return redirect("/authentication/login/")
 
 
-def show_cart(request):
+def ShowCart(request):
     if request.user.is_authenticated:
         user = request.user
         cart = Cart.objects.filter(user=user)
@@ -84,7 +84,18 @@ def show_cart(request):
         
     return redirect('/cart')
     
-
+    
 class DepartmentsView(View):
-    def get(self, request):
-        return render(request, 'departments.html')
+    def get(self, request, pk):
+        department = get_object_or_404(Departments, pk=pk)
+        all = Departments.objects.all()
+        
+        related_products = Product.objects.filter(department=department.Departments.name).exclude(pk=pk)
+
+        context = {
+            'department': department,
+            'rproduct':related_products,
+            
+
+        }
+        return render(request, 'departments.html', context)

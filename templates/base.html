@@ -68,8 +68,10 @@
                   <li>
                     <a>pages</a>
                     <ul class="p-2">
-                      <li><a>Submenu 1</a></li>
-                      <li><a>Submenu 2</a></li>
+                        {% if user.is_authenticated %}
+                      <li><a href="{% url "showcart" %}">Cart</a></li>
+                      <li><a>Order</a></li>
+                      {% endif %}
                     </ul>
                   </li>
                   <li><a class="hover:bg-primary" href='{% url "home" %}'>Home</a></li>
@@ -82,18 +84,19 @@
             </div>
             <div class="navbar-center  hidden lg:flex">
               <ul class="menu menu-horizontal text-base font-medioum px-1">
-                <li><a class="hover:bg-primary" href='{% url "home" %}'>Home</a></li>
-                <li><a class="hover:bg-primary" href='{% url "shop" %}'>Shop</a></li>
-                {% if user.is_authenticated %}
+                <li><a class="hover:bg-primary" href="{% url "home" %}">Home</a></li>
+                <li><a class="hover:bg-primary" href="{% url "shop" %}">Shop</a></li>
+                {% comment %} {% if user.is_authenticated %}
                 <li><a class="hover:bg-primary" href="{% url "showcart" %}">Cart</a></li>
-                {% endif %}
+                {% endif %} {% endcomment %}
                 <li>
                   <details class="hover:bg-primary">
                     <summary >Pages</summary>
-                    <ul class="p-2">
-                      <li><a>Shopping Cart</a></li>
-                      <li><a>Order info</a></li>
-                    </ul>
+                    <ul class="p-2 relative">
+                        <div class="absolute inset-0 bg-white/60 backdrop-blur-lg rounded-lg z-0"></div>
+                        <li class="relative z-10"><a href="{% url "showcart" %}">Cart</a></li>
+                        <li class="relative z-10"><a href="#">Order</a></li>
+                      </ul>                      
                   </details>
                 </li>
                 <li><a class="hover:bg-primary" >Blog</a></li>
