@@ -6,79 +6,54 @@
 <div class="container mx-auto p-6">
     <div class="flex justify-between items-center border-b pb-4">
       <h2 class="text-2xl font-bold">Cart</h2>
-      <button class="px-4 py-2 bg-gray-100 text-gray-600 rounded">Continue Shopping</button>
+      <button class="px-4 py-2 bg-gray-100 text-gray-600 rounded"><a href="{% url "home" %}">Continue Shopping</a></button>
     </div>
   
     <div class="mt-6">
       <table class="w-full text-left">
         <thead>
-          <tr class="border-b">
-            <th class="py-4">Products</th>
-            <th class="py-4">Price</th>
-            <th class="py-4">Quantity</th>
-            <th class="py-4">Total</th>
-            <th class="py-4"></th>
-          </tr>
+            <tr class="border-b">
+                <th class="py-4">Products</th>
+                <th class="py-4">Price</th>
+                <th class="py-4">Quantity</th>
+                <th class="py-4">Total</th>
+                <th class="py-4"></th>
+            </tr>
         </thead>
+        {% for cart in cart %}
         <tbody>
-          <!-- First item -->
-          <tr class="border-b">
-            <td class="py-6 flex items-center">
-              <img class="w-12 h-12 object-cover mr-4" src="apple_image_url" alt="Apple">
-              <span>Apple</span>
-            </td>
-            <td class="py-6">$5.0</td>
-            <td class="py-6 flex items-center">
-              <button class="px-2 py-1 bg-gray-200">-</button>
-              <input type="text" value="1" class="mx-2 w-12 text-center border-gray-300 rounded">
-              <button class="px-2 py-1 bg-gray-200">+</button>
-            </td>
-            <td class="py-6">$5.0</td>
-            <td class="py-6">
-              <button class="text-gray-500">✖</button>
-            </td>
-          </tr>
-  
-          <!-- Second item -->
-          <tr class="border-b">
-            <td class="py-6 flex items-center">
-              <img class="w-12 h-12 object-cover mr-4" src="pepsi_image_url" alt="Pepsi">
-              <span>Pepsi</span>
-            </td>
-            <td class="py-6">$7.0</td>
-            <td class="py-6 flex items-center">
-              <button class="px-2 py-1 bg-gray-200">-</button>
-              <input type="text" value="1" class="mx-2 w-12 text-center border-gray-300 rounded">
-              <button class="px-2 py-1 bg-gray-200">+</button>
-            </td>
-            <td class="py-6">$7.0</td>
-            <td class="py-6">
-              <button class="text-gray-500">✖</button>
-            </td>
-          </tr>
-  
-          <!-- Third item -->
-          <tr class="border-b">
-            <td class="py-6 flex items-center">
-              <img class="w-12 h-12 object-cover mr-4" src="banana_image_url" alt="Banana">
-              <span>Banana</span>
-            </td>
-            <td class="py-6">$25.0</td>
-            <td class="py-6 flex items-center">
-              <button class="px-2 py-1 bg-gray-200">-</button>
-              <input type="text" value="1" class="mx-2 w-12 text-center border-gray-300 rounded">
-              <button class="px-2 py-1 bg-gray-200">+</button>
-            </td>
-            <td class="py-6">$25.0</td>
-            <td class="py-6">
-              <button class="text-gray-500">✖</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+                <tr class="border rounded shadow-lg">
+                    <!-- Product Image and Name -->
+                    <td class="py-6 flex items-center">
+                        <img class="w-16 h-16 md:w-24 md:h-24 lg:w-36 lg:h-36 object-cover mr-4 rounded-lg" src="{{ cart.product.image.url }}" alt="{{ cart.product.name }}">
+                        <span class="text-sm md:text-base lg:text-lg">{{ cart.product.name }}</span>
+                    </td>
+    
+                    <!-- Product Price -->
+                    <td class="py-6 text-sm md:text-base lg:text-lg">{{ cart.product.selling_price }}</td>
+    
+                    <!-- Quantity with buttons -->
+                    <td class="py-6 flex items-center">
+                        <button class="px-2 py-1 bg-gray-200 text-xs md:text-sm">-</button>
+                        <input type="text" value="{{ cart.quantity }}" class="mx-2 w-10 md:w-12 lg:w-16 text-center border-gray-300 rounded text-xs md:text-sm lg:text-base">
+                        <button class="px-2 py-1 bg-gray-200 text-xs md:text-sm">+</button>
+                    </td>
+    
+                    <!-- Total Price -->
+                    <td class="py-6 text-sm md:text-base lg:text-lg">{{ cart.linetotal }}</td>
+    
+                    <!-- Remove Button -->
+                    <td class="py-6">
+                        <button class="text-gray-500 text-sm md:text-base lg:text-lg">✖</button>
+                    </td>
+                </tr>
+          </tbody>
+        {% endfor %}
+    </table>
+    
   
       <div class="mt-6 flex justify-between">
-        <button class="px-4 py-2 bg-gray-100 text-gray-600 rounded"><a href="{% url "shop" %}">Continue Shopping</a></button>
+        <button class="px-4 py-2 bg-gray-100 text-gray-600 rounded"><a href="{% url "home" %}">Continue Shopping</a></button>
         {% comment %} <button class="px-4 py-2 bg-blue-600 text-white rounded">Update Cart</button> {% endcomment %}
       </div>
     </div>
@@ -111,11 +86,11 @@
              <div class="border-t border-gray-200 py-4">
                  <div class="flex justify-between mb-2">
                      <span class="font-medium">Subtotal:</span>
-                     <span>$37.0</span>
+                     <span>{{ subtotal }} Tk.</span>
                  </div>
                  <div class="flex justify-between mb-4">
                      <span class="font-medium">Total:</span>
-                     <span>$37.0</span>
+                     <span>{{ subtotal }} Tk.</span>
                  </div>
              </div>
              <button class="bg-green-500 text-white px-6 py-3 rounded-lg w-full mt-4 hover:bg-green-600 transition">

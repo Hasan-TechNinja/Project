@@ -15,10 +15,12 @@
         </div>
         <div>
             <ul id="departments-list" class="divide-y divide-gray-200 hidden">
+                {% for department in departments %}
                 <li class="hover:bg-gray-100">
-                    <a href="#" class="block py-3 px-4 text-gray-700 hover:text-gray-900">Fresh Meat</a>
+                    <a href="{{ department.link }}" class="block py-3 px-4 text-gray-700 hover:text-gray-900">{{ department.name }}</a>
                 </li>
-                <li class="hover:bg-gray-100">
+                {% endfor %}
+                {% comment %} <li class="hover:bg-gray-100">
                     <a href="#" class="block py-3 px-4 text-gray-700 hover:text-gray-900">Vegetables</a>
                 </li>
                 <li class="hover:bg-gray-100">
@@ -32,8 +34,7 @@
                 </li>
                 <li class="hover:bg-gray-100">
                     <a href="#" class="block py-3 px-4 text-gray-700 hover:text-gray-900">Butter & Eggs</a>
-                </li>
-              
+                </li> {% endcomment %}
             </ul>
         </div>
     </div>
@@ -63,8 +64,8 @@
         {% endfor %}
     </div>
     <div class="flex justify-between absolute top-1/2 transform -translate-y-1/2 left-0 right-0 px-4">
-        <button id="prevBtn" class="bg-transparent text-white font-bold px-4 py-2 rounded"><-Prev</button>
-        <button id="nextBtn" class="bg-transparent text-white font-bold px-4 py-2 rounded">Next-></button>
+        <button id="prevBtn" class="bg-gray-200 text-black font-bold px-4 py-2 rounded"><-Prev</button>
+        <button id="nextBtn" class="bg-gray-200 text-black font-bold px-4 py-2 rounded">Next-></button>
     </div>
 </div>
 
@@ -83,7 +84,7 @@
 {% comment %} show product {% endcomment %}
     <div class="w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       {% for product in products %}
-        <div class="card card-compact bg-base-100 shadow-xl">
+        <div class="card card-compact bg-base-100 shadow-xl border my-3">
             <figure>
               <img
                 src="{{ product.image.url }}"

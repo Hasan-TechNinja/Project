@@ -85,7 +85,7 @@
                 <li><a class="hover:bg-primary" href='{% url "home" %}'>Home</a></li>
                 <li><a class="hover:bg-primary" href='{% url "shop" %}'>Shop</a></li>
                 {% if user.is_authenticated %}
-                <li><a class="hover:bg-primary" href="{% url "addtocart" %}">Cart</a></li>
+                <li><a class="hover:bg-primary" href="{% url "showcart" %}">Cart</a></li>
                 {% endif %}
                 <li>
                   <details class="hover:bg-primary">

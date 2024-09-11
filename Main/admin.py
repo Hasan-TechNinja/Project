@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import Product, Departments, Category, Size
+from . models import Product, Departments, Category, Size, Cart
 
 # Register your models here.
 
@@ -49,3 +49,11 @@ class SizeAdmin(admin.ModelAdmin):
         'link'
     )
 admin.site.register(Size, SizeAdmin)
+
+
+class CartAdmin(admin.ModelAdmin):
+    list_display = (
+        'id', 'user', 'product','quantity',
+    )
+
+admin.site.register(Cart, CartAdmin)
