@@ -11,12 +11,20 @@
           <img src="{{ product.image.url }}" alt="Guava" class="w-full rounded-lg object-cover">
         </div>
         <!-- Thumbnail Images -->
-        {% comment %} <div class="grid grid-cols-4 gap-4 mt-4">
-          <img src="your-thumbnail-url.jpg" alt="Thumbnail" class="w-full rounded-lg object-cover">
-          <img src="your-thumbnail-url.jpg" alt="Thumbnail" class="w-full rounded-lg object-cover">
-          <img src="your-thumbnail-url.jpg" alt="Thumbnail" class="w-full rounded-lg object-cover">
-          <img src="your-thumbnail-url.jpg" alt="Thumbnail" class="w-full rounded-lg object-cover">
-        </div> {% endcomment %}
+          <div class="grid grid-cols-4 gap-4 mt-4">
+            {% if product.image1 %}
+              <img src="{% url "product.image1.url" %}" alt="Thumbnail" class="w-full rounded-lg object-cover">
+            {% endif %}
+            {% if product.image2 %}
+              <img src="{% url "product.image2.url" %}" alt="Thumbnail" class="w-full rounded-lg object-cover">
+            {% endif %}
+            {% if product.image3 %}
+              <img src="{% url "product.image3.url" %}" alt="Thumbnail" class="w-full rounded-lg object-cover">
+            {% endif %}
+            {% if product.image4 %}
+              <img src="{% url "product.image4.url" %}" alt="Thumbnail" class="w-full rounded-lg object-cover">
+            {% endif %}
+        </div>
       </div>
   
       <!-- Product Details Section -->
