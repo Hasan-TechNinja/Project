@@ -83,35 +83,6 @@
 </div>
 
 <!-- JavaScript for Carousel Functionality -->
-<script>
-    const container = document.getElementById('carousel-container');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const items = container.children.length;
-    let currentIndex = 0;
-
-    function updateCarousel() {
-        const itemWidth = container.children[0].offsetWidth;
-        const offset = -currentIndex * itemWidth;
-        container.style.transform = `translateX(${offset}px)`;
-    }
-
-    nextBtn.addEventListener('click', () => {
-        if (currentIndex < items - 1) {
-            currentIndex++;
-            updateCarousel();
-        }
-    });
-
-    prevBtn.addEventListener('click', () => {
-        if (currentIndex > 0) {
-            currentIndex--;
-            updateCarousel();
-        }
-    });
-
-    window.addEventListener('resize', updateCarousel);
-</script>
 
 
 <div class="container mx-auto">
@@ -349,51 +320,8 @@
 
 
 
-<script>
-    document.getElementById('toggle-departments').addEventListener('click', function() {
-        var departmentList = document.getElementById('departments-list');
-        var chevronIcon = document.getElementById('chevron-icon');
 
-        // Toggle the hidden class to show or hide the list
-        departmentList.classList.toggle('hidden');
-
-        // Toggle the chevron icon between up and down
-        if (chevronIcon.classList.contains('fa-chevron-down')) {
-            chevronIcon.classList.remove('fa-chevron-down');
-            chevronIcon.classList.add('fa-chevron-up');
-        } else {
-            chevronIcon.classList.remove('fa-chevron-up');
-            chevronIcon.classList.add('fa-chevron-down');
-        }
-    });
-
-    const carouselContainer = document.getElementById('carousel-container');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-
-    let scrollAmount = 0;
-    const itemWidth = carouselContainer.querySelector('div').offsetWidth + 16;
-
-    // Next Button Click
-    nextBtn.addEventListener('click', () => {
-        scrollAmount += itemWidth;
-        carouselContainer.style.transform = `translateX(-${scrollAmount}px)`;
-        
-        // Prevent over-scrolling
-        if (scrollAmount >= carouselContainer.scrollWidth - carouselContainer.clientWidth) {
-            scrollAmount = carouselContainer.scrollWidth - carouselContainer.clientWidth;
-        }
-    });
-
-    // Prev Button Click
-    prevBtn.addEventListener('click', () => {
-        scrollAmount -= itemWidth;
-        if (scrollAmount < 0) scrollAmount = 0;
-        carouselContainer.style.transform = `translateX(-${scrollAmount}px)`;
-    });
-
-</script>
-
-<script src="{% static 'js/scripts.js' %}"></script>
+{% comment %} <script src="{% static 'js/app.js' %}"></script> {% endcomment %}
+<script src="{% static "js/scripts.js" %}"></script>
 
 {% endblock content %}  
