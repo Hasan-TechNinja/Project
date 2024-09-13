@@ -83,6 +83,35 @@ def ShowCart(request):
             return render(request, 'addtocart.html', {'cart': cart, 'subtotal': subtotal})
         
     return redirect('/cart')
+
+
+def increase_cart_quantity(request, product_id):
+    if request.user.is_authenticated:
+        user = request.user
+        cart_item = get_object_or_404(Cart, user=user, product_id=product_id)
+        
+        cart_item.quantity += 1
+        cart_item.save()
+        
+        return redirect('showcart')  
+    return redirect('login') 
+
+
+def decrease_cart_quantity(request, product_id):
+    if request.user.is_authenticated:
+        user = request.user
+        cart_item = get_object_or_404(Cart, user=user, product_id=product_id)
+        
+        if cart_item.quantity > 1:
+            cart_item.quantity -= 1
+            cart_item.save()
+        else:
+        
+            cart_item.delete()
+        
+        return redirect('showcart')  
+    return redirect('login') 
+
     
     
 class DepartmentsView(View):
@@ -96,6 +125,5 @@ class DepartmentsView(View):
             'department': department,
             'rproduct':related_products,
             
-
         }
         return render(request, 'departments.html', context)

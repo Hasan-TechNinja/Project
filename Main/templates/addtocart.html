@@ -34,9 +34,9 @@
     
                     <!-- Quantity with buttons -->
                     <td class="py-6 flex items-center">
-                        <button class="px-2 py-1 bg-gray-200 text-xs md:text-sm">-</button>
+                        <button class="px-2 py-1 bg-gray-200 text-xs md:text-sm"><a href="{% url 'decrease_cart_quantity' cart.product.id %}">-</a></button>
                         <input type="text" value="{{ cart.quantity }}" class="mx-2 w-10 md:w-12 lg:w-16 text-center border-gray-300 rounded text-xs md:text-sm lg:text-base">
-                        <button class="px-2 py-1 bg-gray-200 text-xs md:text-sm">+</button>
+                        <button class="px-2 py-1 bg-gray-200 text-xs md:text-sm"><a href="{% url 'increase_cart_quantity' cart.product.id %}">+</a></button>
                     </td>
     
                     <!-- Total Price -->
