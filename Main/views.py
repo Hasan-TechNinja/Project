@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.views import View
 from . models import Product, Departments, Cart
 from django.contrib.auth import authenticate
@@ -66,7 +67,7 @@ def AddToCart(request):
 def ShowCart(request):
     if request.user.is_authenticated:
         user = request.user
-        cart = Cart.objects.filter(user=user)
+        cart = Cart.objects.filter(user=user).order_by('-id')
         
         subtotal = 0 
         cart_product = [p for p in cart] 
@@ -111,6 +112,12 @@ def decrease_cart_quantity(request, product_id):
         
         return redirect('showcart')  
     return redirect('login') 
+
+@login_required
+def delete_cart_item(request, cart_id):
+    cart_item = get_object_or_404(Cart, id=cart_id, user=request.user)
+    cart_item.delete()
+    return redirect('showcart')
 
     
     
