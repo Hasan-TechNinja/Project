@@ -66,4 +66,4 @@ class CustomPasswordChangeDoneView(PasswordChangeDoneView):
 def LogoutView(request):
     logout(request)
     messages.success(request, "You have successfully logged out.")
-    return redirect('login')
+    return redirect('home')

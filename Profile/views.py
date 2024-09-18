@@ -1,23 +1,24 @@
-from django.shortcuts import render
-from django.contrib.auth.models import User
+# from django.shortcuts import render
+# from django.contrib.auth.models import User
 
-# Create your views here.
+# # Create your views here.
 
+
+# def Profile(request):
+
+
+#     return render(request, 'profile.html')
+
+
+from django.shortcuts import render, get_object_or_404
+from .models import ProfileModel
 
 def Profile(request):
-    user = request.user
-
-    username = user.username
-    first_name = user.first_name
-    last_name = user.last_name
-
-    full_name = f"{first_name} {last_name}"
-
+    # Get the profile for the logged-in user
+    profile = get_object_or_404(ProfileModel, user=request.user)
+    
+    # Pass the profile to the template
     context = {
-        'username': username,
-        'first_name': first_name,
-        'last_name': last_name,
-        'full_name': full_name
+        'profile': profile
     }
-
     return render(request, 'profile.html', context)

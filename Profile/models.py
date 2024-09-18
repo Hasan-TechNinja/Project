@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
-class Profile(models.Model):
+class ProfileModel(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(default='Hasan', max_length=100, null=True, blank=True)
     title = models.CharField(default='This is the default, title change it in profile', max_length=300, null=True, blank=True)
