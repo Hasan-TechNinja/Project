@@ -1,3 +1,17 @@
 html {
     scroll-behavior: smooth;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;700&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+h1, h2, h3, .product-title {
+    font-family: 'Poppins', sans-serif;
+}
+
+.product-description {
+    font-family: 'Roboto', sans-serif;
+}

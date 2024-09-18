@@ -20,22 +20,6 @@
                     <a href="{{ department.link }}" class="block py-3 px-4 text-gray-700 hover:text-gray-900">{{ department.name }}</a>
                 </li>
                 {% endfor %}
-
-                {% comment %} <li class="hover:bg-gray-100">
-                    <a href="#" class="block py-3 px-4 text-gray-700 hover:text-gray-900">Vegetables</a>
-                </li>
-                <li class="hover:bg-gray-100">
-                    <a href="#" class="block py-3 px-4 text-gray-700 hover:text-gray-900">Fruit & Nut Gifts</a>
-                </li>
-                <li class="hover:bg-gray-100">
-                    <a href="#" class="block py-3 px-4 text-gray-700 hover:text-gray-900">Fresh Berries</a>
-                </li>
-                <li class="hover:bg-gray-100">
-                    <a href="#" class="block py-3 px-4 text-gray-700 hover:text-gray-900">Ocean Foods</a>
-                </li>
-                <li class="hover:bg-gray-100">
-                    <a href="#" class="block py-3 px-4 text-gray-700 hover:text-gray-900">Butter & Eggs</a>
-                </li> {% endcomment %}
             </ul>
         </div>
     </div>
@@ -44,8 +28,7 @@
     <div class="bg-form_img bg-cover bg-fixed lg:col-span-5 relative">
        
         <div class="absolute inset-0 bg-black bg-opacity-60"></div>
-
-        
+      
         <div class="relative z-10 px-10 lg:px-20 py-20">
             <h1 class="text-3xl lg:text-5xl text-white font-bold leading-tight">Vegetable <br> 100% Organic</h1>
             <p class="text-base font-medium text-white py-7">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, minus?</p>
@@ -64,7 +47,7 @@
                     <img class="rounded w-full h-56 object-cover" src="{{ department.image.url }}" alt="{{ department.name }}">
                     <form action="/departments" class="mt-4 text-center">
                         <input type="hidden" name="department_id" value="{{ department.id }}">
-                        <button type="submit" class="bg-white px-6 py-2 rounded-lg hover:bg-gray-900 transition-colors">
+                        <button type="submit" class="bg-green-200 px-6 py-2 rounded-lg hover:bg-gray-200 transition-colors">
                             {{ department.name }}
                         </button>
                     </form>
@@ -83,7 +66,6 @@
 </div>
 
 <!-- JavaScript for Carousel Functionality -->
-
 
 <div class="container mx-auto">
     <div class="text-center">
@@ -122,8 +104,7 @@
    </div>
 {% comment %} show product end {% endcomment %}
 
-
-  <div class="container mx-auto w-10/12 grid gap-4 my-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
+<div class="container mx-auto w-10/12 grid gap-4 my-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
     <div class="flex flex-col sm:flex-row items-center bg-amber-200 p-6 space-x-0 sm:space-x-4 md:space-x-8 lg:space-x-20">
         <div class="flex-shrink-0 mb-4 sm:mb-0">
             <img src="./image/j3.png" alt="Summer Fruit" class="w-full h-40 object-cover md:w-40 lg:w-40">
@@ -149,7 +130,6 @@
 </div>
     
 </div>
-
 
 {% comment %} -------------------------------------------- {% endcomment %}
 
@@ -286,8 +266,6 @@
   </div>
 </div>
 
-
-
 {% comment %} blog start {% endcomment %}
 
 <div class="container mx-auto py-10">
@@ -320,8 +298,6 @@
 {% comment %} blog end {% endcomment %}
         
 {% comment %} </div> {% endcomment %}
-
-
 
 
 {% comment %} <script src="{% static 'js/app.js' %}"></script> {% endcomment %}

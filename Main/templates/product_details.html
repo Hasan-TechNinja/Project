@@ -28,7 +28,7 @@
       </div>
   
       <!-- Product Details Section -->
-      <div>
+      <div class='px-3'>
         <h1 class="text-3xl font-bold">{{ product.name }}</h1>
         {% comment %} <div class="flex items-center space-x-2">
           <div class="flex space-x-1 text-yellow-500">
@@ -93,23 +93,24 @@
     </div>
   </div>
   
-
-
   <div class="container mx-auto py-12">
     <!-- Product Information Section -->
-    <div class="text-center">
+    <div class='flex justify-center'>
+      <div class="text-center lg::w-9/12 md:w-10/12  rounded-sm shadow-lg p-5">
         <h2 class="text-2xl font-bold">Department Information</h2>
+        <hr>
         <p class="mt-4 text-gray-600 text-start">{{ department_description }}</p>
+    </div>
     </div>
 
     <!-- Related Product Section -->
-     {% if rproduct %}
+    {% if rproduct %}
     <div class="mt-12">
         <h3 class="text-3xl font-bold text-center">Related Product</h3>
         <div class="border-b-4 border-green-500 mx-auto w-16 mt-2 mb-10"></div>
 
         <!-- Products Grid -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {% for product in rproduct %}
             <!-- Product 1 -->
             <div class="bg-white shadow-lg p-6 text-center border transition-transform transform hover:-translate-y-1 hover:shadow-xl">
@@ -117,10 +118,11 @@
                 <h4 class="text-lg font-bold"><a href="{% url "product_details" product.id %}">{{ product.name }}</a></h4>
                 <p class="text-green-600 font-semibold">{{ product.discount_price }}</p>
             </div>
-            {% endfor %}  
+          {% endfor %}  
         </div>
     </div>
-    {% endif %}
+{% endif %}
+
 </div>
 
 {% endblock content %}
