@@ -45,11 +45,11 @@
   
         <!-- Quantity Selector and Add to Cart Button --> 
         <div class="flex items-center space-x-4 mt-6">
-          <div class="flex items-center border border-gray-300 rounded">
+          {% comment %} <div class="flex items-center border border-gray-300 rounded">
             <button class="px-2 py-1 bg-gray-100 text-gray-700">-</button>
             <input type="number" value="1" class="w-12 text-center py-1 border-l border-r border-gray-300">
             <button class="px-2 py-1 bg-gray-100 text-gray-700">+</button>
-          </div>
+          </div> {% endcomment %}
           
           {% comment %} <button class="bg-gray-800 text-white px-6 py-2 rounded-lg hover:bg-gray-900">
             <a href="{% url "addtocart" %}">Add to Cart</a>
@@ -112,7 +112,7 @@
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
           {% for product in rproduct %}
             <!-- Product 1 -->
-            <div class="bg-white shadow-lg p-6 text-center border">
+            <div class="bg-white shadow-lg p-6 text-center border transition-transform transform hover:-translate-y-1 hover:shadow-xl">
                 <img src="{{ product.image.url }}" alt="Dried Fruit" class="mx-auto mb-4">
                 <h4 class="text-lg font-bold"><a href="{% url "product_details" product.id %}">{{ product.name }}</a></h4>
                 <p class="text-green-600 font-semibold">{{ product.discount_price }}</p>

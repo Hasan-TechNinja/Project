@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views import View
-from . models import Product, Departments, Cart
+from . models import Product, Departments, Cart, Blog
 from django.contrib.auth import authenticate
 
 # Create your views here.
@@ -134,3 +134,11 @@ class DepartmentsView(View):
             
         }
         return render(request, 'departments.html', context)
+    
+def BlogView(request):
+    data = Blog.objects.all()
+
+    context = {
+        'data':data
+    }
+    return render(request, 'blog.html', context)

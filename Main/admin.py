@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import Product, Departments, Category, Size, Cart
+from . models import Product, Departments, Category, Size, Cart, Blog
 
 # Register your models here.
 
@@ -61,3 +61,14 @@ class CartAdmin(admin.ModelAdmin):
     )
 
 admin.site.register(Cart, CartAdmin)
+
+class BlogAdmin(admin.ModelAdmin):
+    list_display = (
+        'title',
+        'about',
+        'description',
+        'date',
+        'comment',
+        'image'
+    )
+admin.site.register(Blog, BlogAdmin)
