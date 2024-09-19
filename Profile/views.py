@@ -4,6 +4,7 @@ from .models import ProfileModel
 from django.shortcuts import redirect
 from .forms import ProfileForm
 
+@login_required(login_url='login')
 def Profile(request):
     # Get the profile for the logged-in user
     profile = get_object_or_404(ProfileModel, user=request.user)
@@ -29,5 +30,6 @@ def EditProfile(request):
 
     context = {
         'form': form,
+        'profile':profile
     }
     return render(request, 'editprofile.html', context)

@@ -7,14 +7,28 @@
         <!-- User Information Section -->
         <div class="bg-white shadow-md rounded-lg p-6 mb-6">
             <h2 class="text-2xl font-bold mb-6 text-center">User Information</h2>
-            <div class="flex flex-col items-center md:flex-row md:items-start md:justify-center md:space-x-20">
-                <img src="{{ profile.image.url }}" alt="Profile Picture" class="w-32 h-32 rounded-full md:w-40 md:h-40 lg:w-48 lg:h-48 object-cover mb-4 md:mb-0">
+            <hr class='-mt-5 mb-3'>
+            <div class="flex flex-col items-center md:flex-row md:items-start md:justify-center md:space-x-20 lg:justify-center lg:mx-24 md:mx-20">
+                {% if profile.image %}
+                <img src="{{ profile.image.url }}" alt="Profile Picture" class="w-32 h-32 rounded-full md:w-40 md:h-40 lg:w-60 lg:h-64 lg:rounded-md md:rounded-md object-cover mb-4 md:mb-0">
+                {% else %}
+                <img src="{% static "img/default.webp" %}" alt="Profile Picture" class="w-32 h-32 rounded-full md:w-40 md:h-40 lg:w-60 lg:h-64 lg:rounded-md md:rounded-md object-cover mb-4 md:mb-0">
+                {% endif %}
                 <div class="md:ml-6 text-center md:text-left">
                     <p class="text-3xl font-semibold">{{ profile.name }}</p>
                     <p class="text-gray-600">Email: {{ profile.user.email }}</p>
+                    {% if profile.phone %}
                     <p class="text-gray-600">Phone: {{ profile.contact }}</p>
+                    {% endif %}
+                    {% if profile.address %}
                     <p class="text-gray-600">Address: {{ profile.address }}</p>
+                    {% endif %}
+                    {% if fprofile.title %}
                     <p class="text-gray-600">About: {{ profile.title }}</p>
+                    {% endif %}
+                    {% if profile.created %}
+                    <p class='text-gray-600'>Created at: {{profile.created}}</p>
+                    {% endif %}
                     <p class="text-gray-600">Description: {{ profile.description }}</p>
                     <div class="mt-4 flex justify-center md:justify-start space-x-2">
                         <button class="bg-blue-500 text-white px-4 py-2 rounded"><a href="{% url "editprofile" %}">Edit Profile</a></button>
