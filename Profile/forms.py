@@ -11,20 +11,25 @@ class ProfileForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(ProfileForm, self).__init__(*args, **kwargs)
 
-        # Add Tailwind CSS classes to each form field
-        self.fields['name'].widget.attrs.update({
+        # Tailwind CSS classes for design
+        self.fields['first_name'].widget.attrs.update({
             'class': 'w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500',
-            'placeholder': 'Enter your name',
+            'placeholder': 'Enter your firstname',
+        })
+
+        self.fields['last_name'].widget.attrs.update({
+            'class': 'w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500',
+            'placeholder': 'Enter your lastname',
         })
         
-        self.fields['title'].widget.attrs.update({
+        self.fields['about'].widget.attrs.update({
             'class': 'w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500',
-            'placeholder': 'Enter your title',
+            'placeholder': 'About your self',
         })
         
         self.fields['description'].widget.attrs.update({
             'class': 'w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500',
-            'placeholder': 'Enter a description about yourself',
+            'placeholder': 'Enter a description',
         })
 
         self.fields['contact'].widget.attrs.update({
