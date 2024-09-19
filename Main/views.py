@@ -40,7 +40,7 @@ class ProductDetails(View):
         }
         return render(request, 'product_details.html', context)
 
-
+@login_required(login_url='login')
 def AddToCart(request):
     if request.user.is_authenticated:
         user = request.user
@@ -63,7 +63,7 @@ def AddToCart(request):
    
     return redirect("/authentication/login/")
 
-
+@login_required(login_url='login')
 def ShowCart(request):
     if request.user.is_authenticated:
         user = request.user
@@ -85,7 +85,7 @@ def ShowCart(request):
         
     return redirect('/cart')
 
-
+@login_required(login_url='login')
 def increase_cart_quantity(request, product_id):
     if request.user.is_authenticated:
         user = request.user
@@ -97,7 +97,7 @@ def increase_cart_quantity(request, product_id):
         return redirect('showcart')  
     return redirect('login') 
 
-
+@login_required(login_url='login')
 def decrease_cart_quantity(request, product_id):
     if request.user.is_authenticated:
         user = request.user
@@ -113,27 +113,43 @@ def decrease_cart_quantity(request, product_id):
         return redirect('showcart')  
     return redirect('login') 
 
-@login_required
+@login_required(login_url='login')
 def delete_cart_item(request, cart_id):
     cart_item = get_object_or_404(Cart, id=cart_id, user=request.user)
     cart_item.delete()
     return redirect('showcart')
 
-    
-    
-class DepartmentsView(View):
-    def get(self, request, pk):
-        department = get_object_or_404(Departments, pk=pk)
-        all = Departments.objects.all()
-        
-        related_products = Product.objects.filter(department=department.Departments.name).exclude(pk=pk)
 
-        context = {
-            'department': department,
-            'rproduct':related_products,
+
+class DepartmentsView(View, LoginRequiredMixin):
+    def get(self, request, pk=None):
+        # Fetch all departments (this will always be passed to the template)
+        departments = Departments.objects.all()
+
+        # If 'department_id' is in the query parameters or a pk is provided in the URL
+        department_id = request.GET.get('department_id') or pk
+        
+        if department_id:
+            # Get the department by 'department_id' or 'pk'
+            department = get_object_or_404(Departments, pk=department_id)
             
-        }
+            # Fetch related products for the selected department
+            related_products = Product.objects.filter(department=department)
+
+            context = {
+                'department': department,    # Currently selected department
+                'rproduct': related_products, # Products related to the department
+                'departments': departments,   # List of all departments (for sidebar/menu)
+            }
+        else:
+            # If no department is selected, show only the department list
+            context = {
+                'departments': departments,   # List of all departments (for sidebar/menu)
+            }
+
         return render(request, 'departments.html', context)
+
+
     
 def BlogView(request):
     data = Blog.objects.all()
