@@ -10,7 +10,7 @@ from django.contrib.auth import authenticate
 
 class HomeView(View):
     def get(self, request, *args, **kwargs):
-        products = Product.objects.all()
+        products = Product.objects.all()[:12:-1]
         departments = Departments.objects.all()
         context = {
             'products': products,
