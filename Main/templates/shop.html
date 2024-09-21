@@ -3,12 +3,10 @@
 {% block title %}Shop{% endblock title %}
 {% block content %}
 
-    <h2>Shop page</h2>
-
      <!-- Vegetbale -->
 {% for departments in department %}
-    <div class="" id="show-home">
-        <div class="w-11/12 mx-auto my-7 p-7 bg-[#F7F8F8]" id="vegetable">
+    <div class="container mx-auto" id="show-home">
+        <div class="w-11/12 mx-auto my-7 p-7 " id="vegetable">
             <div class="flex justify-center">
                 <div class="badge bg-primary text-white text-2xl py-7 px-10 font-bold">{{ departments.name }}</div>
             </div>
@@ -17,14 +15,14 @@
             <div class="grid grid-cols-4 mt-7 gap-4">
                 {% for product in products %}
                     {% if product.department.id == departments.id %}
-                        <div class="card bg-base-100 shadow-xl">
+                        <div class="card bg-base-100 shadow-xl text-sm transition-transform transform hover:-translate-y-1 hover:shadow-xl">
                             <figure>
-                                <img class=' h-48 w-60' src="{{ product.image.url }}" alt="{{ product.name }}" />
+                                <img class='h-52 w-64 object-cover rounded-md' src="{{ product.image.url }}" alt="{{ product.name }}" />
                             </figure>
                             <div class="card-body">
                                 <h1 class="text-xl font-medium">${{ product.price }}</h1>
                                 <h2 class="card-title">{{ product.name }}</h2>
-                                <p>{{ product.description }}</p>
+                                <p>{{ product.description|truncatechars:80 }}</p>
                                 <div class="card-actions justify-end">
                                     <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Cart</div>
                                 </div>
