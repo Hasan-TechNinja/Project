@@ -4,7 +4,8 @@ from . import views
 
 urlpatterns = [
     path('', views.HomeView.as_view(), name='home'),
-    path('shop/', views.ShopView, name='shop'),
+    path('shop/', views.ShopView.as_view(), name='shop'),  # Show all departments and products
+    path('shop/<int:pk>/', views.ShopView.as_view(), name='shop_by_department'),  # Show products for a specific department
     path('product_details/', views.ProductDetails.as_view(), name='product_details'),
     path('product_details/<int:pk>/', views.ProductDetails.as_view(), name='product_details'),
     path('addtocart/', views.AddToCart, name = 'addtocart'),

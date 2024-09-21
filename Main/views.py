@@ -19,9 +19,26 @@ class HomeView(View):
         return render(request, 'home.html', context) 
     
 
-def ShopView(request):
-    
-    return render(request, 'shop.html')
+class ShopView(View):
+    def get(self, request, pk=None):
+        departments = Departments.objects.all()
+        if pk:
+            # Fetch products that belong to the selected department
+            selected_department = get_object_or_404(Departments, pk=pk)
+            products = Product.objects.filter(department=selected_department)  # Adjust this line as per your model
+        else:
+            # If no department is selected, show all products or handle as needed
+            products = Product.objects.all()  # Show all products (or handle empty state)
+        
+        context = {
+            'department': departments,
+            'products': products
+        }
+        return render(request, 'shop.html', context)
+
+
+
+
 
 class ProductDetails(View):
     def get(self, request, pk):

@@ -22,7 +22,7 @@
   {% if rproduct %}
   <div class="w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       {% for product in rproduct %}
-      <div class="card card-compact bg-base-100 shadow-xl transition-transform transform hover:-translate-y-1 hover:shadow-xl">
+      <div class="card card-compact bg-base-100 shadow-xl transition-transform transform hover:-translate-y-1 hover:shadow-xl my-2">
           <figure>
             <img src="{{ product.image.url }}" alt="{{ product.name }}" class="h-56 w-64 object-cover" />
           </figure>

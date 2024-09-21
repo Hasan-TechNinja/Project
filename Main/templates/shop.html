@@ -5,33 +5,1239 @@
 
     <h2>Shop page</h2>
 
-    <div class="container mx-auto p-6 bg-white border shadow-lg">
-        <!-- Department Section -->
-        <div class="flex justify-center mb-6">
-            <button class="px-6 py-3 bg-gray-200 rounded-full border border-gray-300 text-gray-700 font-bold">
-                Department
-            </button>
-        </div>
+     <!-- Vegetbale -->
+{% for departments in department %}
+    <div class="" id="show-home">
+        <div class="w-11/12 mx-auto my-7 p-7 bg-[#F7F8F8]" id="vegetable">
+            <div class="flex justify-center">
+                <div class="badge bg-primary text-white text-2xl py-7 px-10 font-bold">{{ departments.name }}</div>
+            </div>
 
-        <!-- Grid Section -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mb-10 p-4 border">
-            <!-- Example of the 8 boxes -->
-            <div class="w-full h-52 bg-gray-200 border"></div>
-            <div class="w-full h-52 bg-gray-200 border"></div>
-            <div class="w-full h-52 bg-gray-200 border"></div>
-            <div class="w-full h-52 bg-gray-200 border"></div>
-            <div class="w-full h-52 bg-gray-200 border"></div>
-            <div class="w-full h-52 bg-gray-200 border"></div>
-            <div class="w-full h-52 bg-gray-200 border"></div>
-            <div class="w-full h-52 bg-gray-200 border"></div>
-        </div>
+            <!-- Product Grid -->
+            <div class="grid grid-cols-4 mt-7 gap-4">
+                {% for product in products %}
+                    {% if product.department.id == departments.id %}
+                        <div class="card bg-base-100 shadow-xl">
+                            <figure>
+                                <img class=' h-48 w-60' src="{{ product.image.url }}" alt="{{ product.name }}" />
+                            </figure>
+                            <div class="card-body">
+                                <h1 class="text-xl font-medium">${{ product.price }}</h1>
+                                <h2 class="card-title">{{ product.name }}</h2>
+                                <p>{{ product.description }}</p>
+                                <div class="card-actions justify-end">
+                                    <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Cart</div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
 
-        <!-- Button Section -->
-        <div class="flex justify-center">
-            <button class="px-6 py-3 bg-blue-500 text-white rounded-full shadow-lg">
-                Click me
-            </button>
+            <div class="flex justify-center mt-5" id="more-vegetable-btn">
+                <form action="{% url 'shop_by_department' departments.id %}">
+                    <button class="flex items-center space-x-2 font-medium border-2 border-primary px-4 py-2 rounded-md hover:bg-primary hover:text-white transition duration-300 text-xl">
+                        <span>More Products in {{ departments.name }}</span>
+                        <span><i class="fa-solid fa-arrow-right"></i></span>
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
+{% endfor %}
 
+  
+  <!-- electronics -->
+      {% comment %} <div class="w-11/12 mx-auto my-7 p-7   bg-[#F7F8F8]"  id="electronics">
+          <div class=" flex justify-center">
+            <div class="badge bg-primary text-white text-2xl py-7 px-10 font-bold">Electronics</div>
+          </div>
+          <!-- All -->
+          <div class="grid grid-cols-4  mt-7 gap-4">
+             
+              <div class="card bg-base-100   shadow-xl">
+                  <figure>
+                    <img
+                      src="./el.jpg"
+                      alt="Shoes" />
+                  </figure>
+                  <div class="card-body">
+                    <h2 class="card-title">
+                      Shoes!
+                      <div class="badge badge-secondary">NEW</div>
+                    </h2>
+                    <p>If a dog chews shoes whose shoes does he choose?</p>
+                    <div class="card-actions justify-end">
+                      <div class="badge badge-outline">Fashion</div>
+                      <div class="badge badge-outline">Products</div>
+                    </div>
+                  </div>
+              </div>
+              <div class="card bg-base-100   shadow-xl">
+                  <figure>
+                    <img
+                      src="./el.jpg"
+                      alt="Shoes" />
+                  </figure>
+                  <div class="card-body">
+                    <h2 class="card-title">
+                      Shoes!
+                      <div class="badge badge-secondary">NEW</div>
+                    </h2>
+                    <p>If a dog chews shoes whose shoes does he choose?</p>
+                    <div class="card-actions justify-end">
+                      <div class="badge badge-outline">Fashion</div>
+                      <div class="badge badge-outline">Products</div>
+                    </div>
+                  </div>
+              </div>
+              <div class="card bg-base-100   shadow-xl">
+                  <figure>
+                    <img
+                      src="./el.jpg"
+                      alt="Shoes" />
+                  </figure>
+                  <div class="card-body">
+                    <h2 class="card-title">
+                      Shoes!
+                      <div class="badge badge-secondary">NEW</div>
+                    </h2>
+                    <p>If a dog chews shoes whose shoes does he choose?</p>
+                    <div class="card-actions justify-end">
+                      <div class="badge badge-outline">Fashion</div>
+                      <div class="badge badge-outline">Products</div>
+                    </div>
+                  </div>
+              </div>
+              <div class="card bg-base-100   shadow-xl">
+                  <figure>
+                    <img
+                      src="./el.jpg"
+                      alt="Shoes" />
+                  </figure>
+                  <div class="card-body">
+                    <h2 class="card-title">
+                      Shoes!
+                      <div class="badge badge-secondary">NEW</div>
+                    </h2>
+                    <p>If a dog chews shoes whose shoes does he choose?</p>
+                    <div class="card-actions justify-end">
+                      <div class="badge badge-outline">Fashion</div>
+                      <div class="badge badge-outline">Products</div>
+                    </div>
+                  </div>
+              </div>
+              
+              
+          </div>
+          <div class="flex justify-center mt-5  "id="more-electronics-btn" >
+            <button class="flex items-center space-x-2 font-medium border-2 border-primary  px-4 py-2 rounded-md hover:bg-primary hover:text-white transition duration-300 text-xl" ><span>More Electronics Vegetable</span> <span><i class="fa-solid fa-arrow-right"></i></span></button>
+          </div>
+      </div>
+  
+      <!-- cold drinks -->
+      <div class="w-11/12 mx-auto my-7 p-7  bg-[#F7F8F8]"  id="cold-drinks">
+          <div class=" flex justify-center">
+            <div class="badge bg-primary text-white text-2xl py-7 px-10 font-bold">Cold Drinks</div>
+          </div>
+          <!-- All -->
+          <div class="grid grid-cols-4  mt-7 gap-4">
+             
+            <div class="card bg-base-100   shadow-xl">
+              <figure>
+                <img
+                  src="./cl4.jpg"
+                  alt="Shoes" />
+              </figure>
+              <div class="card-body">
+                <h1 class="text-xl font-medium">$34</h1>
+                <h2 class="card-title">
+                  Tomato
+                  <div class="badge badge-secondary">50% off</div>
+                </h2>
+                <p>If a dog chews shoes whose shoes does he choose?</p>
+                <div class="card-actions justify-end ">
+                  
+                  <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+                </div>
+              </div>
+          </div>
+            <div class="card bg-base-100   shadow-xl">
+              <figure>
+                <img
+                  src="./cl4.jpg"
+                  alt="Shoes" />
+              </figure>
+              <div class="card-body">
+                <h1 class="text-xl font-medium">$34</h1>
+                <h2 class="card-title">
+                  Tomato
+                  <div class="badge badge-secondary">50% off</div>
+                </h2>
+                <p>If a dog chews shoes whose shoes does he choose?</p>
+                <div class="card-actions justify-end ">
+                  
+                  <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+                </div>
+              </div>
+          </div>
+            <div class="card bg-base-100   shadow-xl">
+              <figure>
+                <img
+                  src="./cl4.jpg"
+                  alt="Shoes" />
+              </figure>
+              <div class="card-body">
+                <h1 class="text-xl font-medium">$34</h1>
+                <h2 class="card-title">
+                  Tomato
+                  <div class="badge badge-secondary">Fresh</div>
+                </h2>
+                <p>If a dog chews shoes whose shoes does he choose?</p>
+                <div class="card-actions justify-end ">
+                  
+                  <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+                </div>
+              </div>
+          </div>
+            <div class="card bg-base-100   shadow-xl">
+              <figure>
+                <img
+                  src="./cl4.jpg"
+                  alt="Shoes" />
+              </figure>
+              <div class="card-body">
+                <h1 class="text-xl font-medium">$34</h1>
+                <h2 class="card-title">
+                  Tomato
+                  <div class="badge badge-secondary">50% off</div>
+                </h2>
+                <p>If a dog chews shoes whose shoes does he choose?</p>
+                <div class="card-actions justify-end ">
+                  
+                  <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+                </div>
+              </div>
+          </div>
+              
+              
+          </div>
+          <div class="flex justify-center mt-5  "id="more-cold-drinks-btn" >
+            <button class="flex items-center space-x-2 font-medium border-2 border-primary  px-4 py-2 rounded-md hover:bg-primary hover:text-white transition duration-300 text-xl" ><span>More Cold Drinks Product </span> <span><i class="fa-solid fa-arrow-right"></i></span></button>
+          </div>
+      </div>
+  
+  <!-- fruit -->
+      <div class="w-11/12 mx-auto my-7 p-7  bg-[#F7F8F8]"  id="meet">
+          <div class=" flex justify-center">
+            <div class="badge bg-primary text-white text-2xl py-7 px-10 font-bold">Meat</div>
+          </div>
+          <!-- All -->
+          <div class="grid grid-cols-4  mt-7 gap-4">
+             
+              <div class="card bg-base-100   shadow-xl">
+                  <figure>
+                    <img
+                      src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                      alt="Shoes" />
+                  </figure>
+                  <div class="card-body">
+                    <h2 class="card-title">
+                      Shoes!
+                      <div class="badge badge-secondary">NEW</div>
+                    </h2>
+                    <p>If a dog chews shoes whose shoes does he choose?</p>
+                    <div class="card-actions justify-end">
+                      <div class="badge badge-outline">Fashion</div>
+                      <div class="badge badge-outline">Products</div>
+                    </div>
+                  </div>
+              </div>
+              <div class="card bg-base-100   shadow-xl">
+                  <figure>
+                    <img
+                      src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                      alt="Shoes" />
+                  </figure>
+                  <div class="card-body">
+                    <h2 class="card-title">
+                      Shoes!
+                      <div class="badge badge-secondary">NEW</div>
+                    </h2>
+                    <p>If a dog chews shoes whose shoes does he choose?</p>
+                    <div class="card-actions justify-end">
+                      <div class="badge badge-outline">Fashion</div>
+                      <div class="badge badge-outline">Products</div>
+                    </div>
+                  </div>
+              </div>
+              <div class="card bg-base-100   shadow-xl">
+                  <figure>
+                    <img
+                      src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                      alt="Shoes" />
+                  </figure>
+                  <div class="card-body">
+                    <h2 class="card-title">
+                      Shoes!
+                      <div class="badge badge-secondary">NEW</div>
+                    </h2>
+                    <p>If a dog chews shoes whose shoes does he choose?</p>
+                    <div class="card-actions justify-end">
+                      <div class="badge badge-outline">Fashion</div>
+                      <div class="badge badge-outline">Products</div>
+                    </div>
+                  </div>
+              </div>
+              <div class="card bg-base-100   shadow-xl">
+                  <figure>
+                    <img
+                      src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                      alt="Shoes" />
+                  </figure>
+                  <div class="card-body">
+                    <h2 class="card-title">
+                      Shoes!
+                      <div class="badge badge-secondary">NEW</div>
+                    </h2>
+                    <p>If a dog chews shoes whose shoes does he choose?</p>
+                    <div class="card-actions justify-end">
+                      <div class="badge badge-outline">Fashion</div>
+                      <div class="badge badge-outline">Products</div>
+                    </div>
+                  </div>
+              </div>
+              
+          </div>
+          <div class="flex justify-center mt-5  "id="more-meat-btn" >
+            <button class="btn btn-outline btn- bg-primary text-white font-medium ">More Product Meat <span><i class="fa-solid fa-arrow-right"></i></span></button>
+          </div>
+      </div>
+      </div>
+      
+  
+  
+  
+  <!-- More vegetable Product -->
+   
+  <div class="w-11/12 mx-auto hidden my-7 p-7  bg-[#F7F8F8]" " id="more-vegetable-product">
+    
+      <div class="">
+        <button class="flex items-center space-x-2 border-2 border-primary  px-4 py-2 rounded-md hover:bg-primary hover:text-white transition duration-300" id="close-vegetable">
+          <span><i class="fa-solid fa-arrow-left"></i></span>
+          <span>Back to Shop</span>
+        </button>
+        
+      </div>
+          
+        <div class="grid grid-cols-4  mt-7 gap-4">
+              
+          <div class="card bg-base-100   shadow-xl">
+            <figure>
+              <img
+                src="./v1.jpg"
+                alt="Shoes" />
+            </figure>
+            <div class="card-body">
+              <h1 class="text-xl font-medium">$34</h1>
+              <h2 class="card-title">
+                Tomato
+                <div class="badge badge-secondary">Fresh</div>
+              </h2>
+              <p>If a dog chews shoes whose shoes does he choose?</p>
+              <div class="card-actions justify-end ">
+                
+                <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+              </div>
+            </div>
+        </div>
+        <div class="card bg-base-100   shadow-xl">
+          <figure>
+            <img
+              src="./v1.jpg"
+              alt="Shoes" />
+          </figure>
+          <div class="card-body">
+            <h1 class="text-xl font-medium">$34</h1>
+            <h2 class="card-title">
+              Tomato
+              <div class="badge badge-secondary">Fresh</div>
+            </h2>
+            <p>If a dog chews shoes whose shoes does he choose?</p>
+            <div class="card-actions justify-end ">
+              
+              <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+            </div>
+          </div>
+      </div>
+          <div class="card bg-base-100   shadow-xl">
+              <figure>
+                <img
+                  src="./v1.jpg"
+                  alt="Shoes" />
+              </figure>
+              <div class="card-body">
+                <h1 class="text-xl font-medium">$34</h1>
+                <h2 class="card-title">
+                  Tomato
+                  <div class="badge badge-secondary">Fresh</div>
+                </h2>
+                <p>If a dog chews shoes whose shoes does he choose?</p>
+                <div class="card-actions justify-end ">
+                  
+                  <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+                </div>
+              </div>
+          </div>
+          <div class="card bg-base-100   shadow-xl">
+            <figure>
+              <img
+                src="./v1.jpg"
+                alt="Shoes" />
+            </figure>
+            <div class="card-body">
+              <h1 class="text-xl font-medium">$34</h1>
+              <h2 class="card-title">
+                Tomato
+                <div class="badge badge-secondary">Fresh</div>
+              </h2>
+              <p>If a dog chews shoes whose shoes does he choose?</p>
+              <div class="card-actions justify-end ">
+                
+                <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+              </div>
+            </div>
+        </div>
+          <div class="card bg-base-100   shadow-xl">
+            <figure>
+              <img
+                src="./v1.jpg"
+                alt="Shoes" />
+            </figure>
+            <div class="card-body">
+              <h1 class="text-xl font-medium">$34</h1>
+              <h2 class="card-title">
+                Tomato
+                <div class="badge badge-secondary">Fresh</div>
+              </h2>
+              <p>If a dog chews shoes whose shoes does he choose?</p>
+              <div class="card-actions justify-end ">
+                
+                <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+              </div>
+            </div>
+        </div>
+        <div class="card bg-base-100   shadow-xl">
+          <figure>
+            <img
+              src="./v1.jpg"
+              alt="Shoes" />
+          </figure>
+          <div class="card-body">
+            <h1 class="text-xl font-medium">$34</h1>
+            <h2 class="card-title">
+              Tomato
+              <div class="badge badge-secondary">Fresh</div>
+            </h2>
+            <p>If a dog chews shoes whose shoes does he choose?</p>
+            <div class="card-actions justify-end ">
+              
+              <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+            </div>
+          </div>
+      </div>
+          <div class="card bg-base-100   shadow-xl">
+              <figure>
+                <img
+                  src="./v1.jpg"
+                  alt="Shoes" />
+              </figure>
+              <div class="card-body">
+                <h1 class="text-xl font-medium">$34</h1>
+                <h2 class="card-title">
+                  Tomato
+                  <div class="badge badge-secondary">Fresh</div>
+                </h2>
+                <p>If a dog chews shoes whose shoes does he choose?</p>
+                <div class="card-actions justify-end ">
+                  
+                  <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+                </div>
+              </div>
+          </div>
+          <div class="card bg-base-100   shadow-xl">
+            <figure>
+              <img
+                src="./v1.jpg"
+                alt="Shoes" />
+            </figure>
+            <div class="card-body">
+              <h1 class="text-xl font-medium">$34</h1>
+              <h2 class="card-title">
+                Tomato
+                <div class="badge badge-secondary">Fresh</div>
+              </h2>
+              <p>If a dog chews shoes whose shoes does he choose?</p>
+              <div class="card-actions justify-end ">
+                
+                <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+              </div>
+            </div>
+        </div>
+          <div class="card bg-base-100   shadow-xl">
+            <figure>
+              <img
+                src="./v1.jpg"
+                alt="Shoes" />
+            </figure>
+            <div class="card-body">
+              <h1 class="text-xl font-medium">$34</h1>
+              <h2 class="card-title">
+                Tomato
+                <div class="badge badge-secondary">Fresh</div>
+              </h2>
+              <p>If a dog chews shoes whose shoes does he choose?</p>
+              <div class="card-actions justify-end ">
+                
+                <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+              </div>
+            </div>
+        </div>
+        <div class="card bg-base-100   shadow-xl">
+          <figure>
+            <img
+              src="./v1.jpg"
+              alt="Shoes" />
+          </figure>
+          <div class="card-body">
+            <h1 class="text-xl font-medium">$34</h1>
+            <h2 class="card-title">
+              Tomato
+              <div class="badge badge-secondary">Fresh</div>
+            </h2>
+            <p>If a dog chews shoes whose shoes does he choose?</p>
+            <div class="card-actions justify-end ">
+              
+              <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+            </div>
+          </div>
+      </div>
+          <div class="card bg-base-100   shadow-xl">
+              <figure>
+                <img
+                  src="./v1.jpg"
+                  alt="Shoes" />
+              </figure>
+              <div class="card-body">
+                <h1 class="text-xl font-medium">$34</h1>
+                <h2 class="card-title">
+                  Tomato
+                  <div class="badge badge-secondary">Fresh</div>
+                </h2>
+                <p>If a dog chews shoes whose shoes does he choose?</p>
+                <div class="card-actions justify-end ">
+                  
+                  <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+                </div>
+              </div>
+          </div>
+          <div class="card bg-base-100   shadow-xl">
+              <figure>
+                <img
+                  src="./v1.jpg"
+                  alt="Shoes" />
+              </figure>
+              <div class="card-body">
+                <h1 class="text-xl font-medium">$34</h1>
+                <h2 class="card-title">
+                  Tomato
+                  <div class="badge badge-secondary">Fresh</div>
+                </h2>
+                <p>If a dog chews shoes whose shoes does he choose?</p>
+                <div class="card-actions justify-end ">
+                  
+                  <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+                </div>
+              </div>
+          </div>
+          
+          
+      </div>
+      <div class="flex justify-center my-7">
+        <div class="join">
+          <button class="join-item btn">1</button>
+          <button class="join-item btn">2</button>
+          <button class="join-item btn btn-disabled">...</button>
+          <button class="join-item btn">99</button>
+          <button class="join-item btn">100</button>
+        </div>
+      </div>
+  </div>
+  
+  
+  <!-- Eloctronics -->
+  <div class="w-11/12 mx-auto  my-7 p-7 hidden  bg-[#F7F8F8]"  id="more-electronics-product">
+    
+      <div class="">
+        <button class="flex items-center space-x-2 border-2 border-primary  px-4 py-2 rounded-md hover:bg-primary hover:text-white transition duration-300" id="close-electronics">
+          <span><i class="fa-solid fa-arrow-left"></i></span>
+          <span>Back to Shop</span>
+        </button>
+        
+      </div>
+          
+        <div class="grid grid-cols-4  mt-7 gap-4">
+              
+          <div class="card bg-base-100   shadow-xl">
+            <figure>
+              <img
+                src="./el.jpg"
+                alt="Shoes" />
+            </figure>
+            <div class="card-body">
+              <h1 class="text-xl font-medium">$34</h1>
+              <h2 class="card-title">
+                Laptop
+                <div class="badge badge-secondary">New</div>
+              </h2>
+              <p>If a dog chews shoes whose shoes does he choose?</p>
+              <div class="card-actions justify-end ">
+                
+                <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+              </div>
+            </div>
+        </div>
+          <div class="card bg-base-100   shadow-xl">
+            <figure>
+              <img
+                src="./el.jpg"
+                alt="Shoes" />
+            </figure>
+            <div class="card-body">
+              <h1 class="text-xl font-medium">$34</h1>
+              <h2 class="card-title">
+                Laptop
+                <div class="badge badge-secondary">New</div>
+              </h2>
+              <p>If a dog chews shoes whose shoes does he choose?</p>
+              <div class="card-actions justify-end ">
+                
+                <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+              </div>
+            </div>
+        </div>
+          <div class="card bg-base-100   shadow-xl">
+            <figure>
+              <img
+                src="./el.jpg"
+                alt="Shoes" />
+            </figure>
+            <div class="card-body">
+              <h1 class="text-xl font-medium">$34</h1>
+              <h2 class="card-title">
+                Laptop
+                <div class="badge badge-secondary">New</div>
+              </h2>
+              <p>If a dog chews shoes whose shoes does he choose?</p>
+              <div class="card-actions justify-end ">
+                
+                <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+              </div>
+            </div>
+        </div>
+          <div class="card bg-base-100   shadow-xl">
+            <figure>
+              <img
+                src="./el.jpg"
+                alt="Shoes" />
+            </figure>
+            <div class="card-body">
+              <h1 class="text-xl font-medium">$34</h1>
+              <h2 class="card-title">
+                Laptop
+                <div class="badge badge-secondary">New</div>
+              </h2>
+              <p>If a dog chews shoes whose shoes does he choose?</p>
+              <div class="card-actions justify-end ">
+                
+                <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+              </div>
+            </div>
+        </div>
+          <div class="card bg-base-100   shadow-xl">
+            <figure>
+              <img
+                src="./el.jpg"
+                alt="Shoes" />
+            </figure>
+            <div class="card-body">
+              <h1 class="text-xl font-medium">$34</h1>
+              <h2 class="card-title">
+                Laptop
+                <div class="badge badge-secondary">New</div>
+              </h2>
+              <p>If a dog chews shoes whose shoes does he choose?</p>
+              <div class="card-actions justify-end ">
+                
+                <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+              </div>
+            </div>
+        </div>
+          <div class="card bg-base-100   shadow-xl">
+            <figure>
+              <img
+                src="./el.jpg"
+                alt="Shoes" />
+            </figure>
+            <div class="card-body">
+              <h1 class="text-xl font-medium">$34</h1>
+              <h2 class="card-title">
+                Laptop
+                <div class="badge badge-secondary">New</div>
+              </h2>
+              <p>If a dog chews shoes whose shoes does he choose?</p>
+              <div class="card-actions justify-end ">
+                
+                <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+              </div>
+            </div>
+        </div>
+          <div class="card bg-base-100   shadow-xl">
+            <figure>
+              <img
+                src="./el.jpg"
+                alt="Shoes" />
+            </figure>
+            <div class="card-body">
+              <h1 class="text-xl font-medium">$34</h1>
+              <h2 class="card-title">
+                Laptop
+                <div class="badge badge-secondary">New</div>
+              </h2>
+              <p>If a dog chews shoes whose shoes does he choose?</p>
+              <div class="card-actions justify-end ">
+                
+                <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+              </div>
+            </div>
+        </div>
+          <div class="card bg-base-100   shadow-xl">
+            <figure>
+              <img
+                src="./el.jpg"
+                alt="Shoes" />
+            </figure>
+            <div class="card-body">
+              <h1 class="text-xl font-medium">$34</h1>
+              <h2 class="card-title">
+                Laptop
+                <div class="badge badge-secondary">New</div>
+              </h2>
+              <p>If a dog chews shoes whose shoes does he choose?</p>
+              <div class="card-actions justify-end ">
+                
+                <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+              </div>
+            </div>
+        </div>
+          <div class="card bg-base-100   shadow-xl">
+            <figure>
+              <img
+                src="./el.jpg"
+                alt="Shoes" />
+            </figure>
+            <div class="card-body">
+              <h1 class="text-xl font-medium">$34</h1>
+              <h2 class="card-title">
+                Laptop
+                <div class="badge badge-secondary">New</div>
+              </h2>
+              <p>If a dog chews shoes whose shoes does he choose?</p>
+              <div class="card-actions justify-end ">
+                
+                <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+              </div>
+            </div>
+        </div>
+          <div class="card bg-base-100   shadow-xl">
+            <figure>
+              <img
+                src="./el.jpg"
+                alt="Shoes" />
+            </figure>
+            <div class="card-body">
+              <h1 class="text-xl font-medium">$34</h1>
+              <h2 class="card-title">
+                Laptop
+                <div class="badge badge-secondary">New</div>
+              </h2>
+              <p>If a dog chews shoes whose shoes does he choose?</p>
+              <div class="card-actions justify-end ">
+                
+                <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+              </div>
+            </div>
+        </div>
+          <div class="card bg-base-100   shadow-xl">
+            <figure>
+              <img
+                src="./el.jpg"
+                alt="Shoes" />
+            </figure>
+            <div class="card-body">
+              <h1 class="text-xl font-medium">$34</h1>
+              <h2 class="card-title">
+                Laptop
+                <div class="badge badge-secondary">New</div>
+              </h2>
+              <p>If a dog chews shoes whose shoes does he choose?</p>
+              <div class="card-actions justify-end ">
+                
+                <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+              </div>
+            </div>
+        </div>
+          <div class="card bg-base-100   shadow-xl">
+            <figure>
+              <img
+                src="./el.jpg"
+                alt="Shoes" />
+            </figure>
+            <div class="card-body">
+              <h1 class="text-xl font-medium">$34</h1>
+              <h2 class="card-title">
+                Laptop
+                <div class="badge badge-secondary">New</div>
+              </h2>
+              <p>If a dog chews shoes whose shoes does he choose?</p>
+              <div class="card-actions justify-end ">
+                
+                <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+              </div>
+            </div>
+        </div>
+          <div class="card bg-base-100   shadow-xl">
+            <figure>
+              <img
+                src="./el.jpg"
+                alt="Shoes" />
+            </figure>
+            <div class="card-body">
+              <h1 class="text-xl font-medium">$34</h1>
+              <h2 class="card-title">
+                Laptop
+                <div class="badge badge-secondary">New</div>
+              </h2>
+              <p>If a dog chews shoes whose shoes does he choose?</p>
+              <div class="card-actions justify-end ">
+                
+                <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+              </div>
+            </div>
+        </div>
+          <div class="card bg-base-100   shadow-xl">
+            <figure>
+              <img
+                src="./el.jpg"
+                alt="Shoes" />
+            </figure>
+            <div class="card-body">
+              <h1 class="text-xl font-medium">$34</h1>
+              <h2 class="card-title">
+                Laptop
+                <div class="badge badge-secondary">New</div>
+              </h2>
+              <p>If a dog chews shoes whose shoes does he choose?</p>
+              <div class="card-actions justify-end ">
+                
+                <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+              </div>
+            </div>
+        </div>
+          <div class="card bg-base-100   shadow-xl">
+            <figure>
+              <img
+                src="./el.jpg"
+                alt="Shoes" />
+            </figure>
+            <div class="card-body">
+              <h1 class="text-xl font-medium">$34</h1>
+              <h2 class="card-title">
+                Laptop
+                <div class="badge badge-secondary">New</div>
+              </h2>
+              <p>If a dog chews shoes whose shoes does he choose?</p>
+              <div class="card-actions justify-end ">
+                
+                <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+              </div>
+            </div>
+        </div>
+          <div class="card bg-base-100   shadow-xl">
+            <figure>
+              <img
+                src="./el.jpg"
+                alt="Shoes" />
+            </figure>
+            <div class="card-body">
+              <h1 class="text-xl font-medium">$34</h1>
+              <h2 class="card-title">
+                Laptop
+                <div class="badge badge-secondary">New</div>
+              </h2>
+              <p>If a dog chews shoes whose shoes does he choose?</p>
+              <div class="card-actions justify-end ">
+                
+                <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+              </div>
+            </div>
+        </div>
+          
+        
+          
+          
+      </div>
+      <div class="flex justify-center my-7">
+        <div class="join">
+          <button class="join-item btn">1</button>
+          <button class="join-item btn">2</button>
+          <button class="join-item btn btn-disabled">...</button>
+          <button class="join-item btn">99</button>
+          <button class="join-item btn">100</button>
+        </div>
+      </div>
+  </div>
+  
+  <!-- cold drinks -->
+  <div class="w-11/12 mx-auto  my-7 p-7 hidden  bg-[#F7F8F8]"  id="more-colddrinks-product">
+    
+    <div class="">
+      <button class="flex items-center space-x-2 border-2 border-primary  px-4 py-2 rounded-md hover:bg-primary hover:text-white transition duration-300" id="close-colddrinks">
+        <span><i class="fa-solid fa-arrow-left"></i></span>
+        <span>Back to Shop</span>
+      </button>
+      
+    </div>
+        
+      <div class="grid grid-cols-4  mt-7 gap-4">
+            
+        <div class="card bg-base-100   shadow-xl">
+          <figure>
+            <img
+              src="./cl3.jpg"
+              alt="Shoes" />
+          </figure>
+          <div class="card-body">
+            <h1 class="text-xl font-medium">$34</h1>
+            <h2 class="card-title">
+              Laptop
+              <div class="badge badge-secondary">New</div>
+            </h2>
+            <p>If a dog chews shoes whose shoes does he choose?</p>
+            <div class="card-actions justify-end ">
+              
+              <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+            </div>
+          </div>
+      </div>
+        <div class="card bg-base-100   shadow-xl">
+          <figure>
+            <img
+              src="./cl3.jpg"
+              alt="Shoes" />
+          </figure>
+          <div class="card-body">
+            <h1 class="text-xl font-medium">$34</h1>
+            <h2 class="card-title">
+              Laptop
+              <div class="badge badge-secondary">New</div>
+            </h2>
+            <p>If a dog chews shoes whose shoes does he choose?</p>
+            <div class="card-actions justify-end ">
+              
+              <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+            </div>
+          </div>
+      </div>
+        <div class="card bg-base-100   shadow-xl">
+          <figure>
+            <img
+              src="./cl3.jpg"
+              alt="Shoes" />
+          </figure>
+          <div class="card-body">
+            <h1 class="text-xl font-medium">$34</h1>
+            <h2 class="card-title">
+              Laptop
+              <div class="badge badge-secondary">New</div>
+            </h2>
+            <p>If a dog chews shoes whose shoes does he choose?</p>
+            <div class="card-actions justify-end ">
+              
+              <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+            </div>
+          </div>
+      </div>
+        <div class="card bg-base-100   shadow-xl">
+          <figure>
+            <img
+              src="./cl3.jpg"
+              alt="Shoes" />
+          </figure>
+          <div class="card-body">
+            <h1 class="text-xl font-medium">$34</h1>
+            <h2 class="card-title">
+              Laptop
+              <div class="badge badge-secondary">New</div>
+            </h2>
+            <p>If a dog chews shoes whose shoes does he choose?</p>
+            <div class="card-actions justify-end ">
+              
+              <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+            </div>
+          </div>
+      </div>
+        <div class="card bg-base-100   shadow-xl">
+          <figure>
+            <img
+              src="./cl3.jpg"
+              alt="Shoes" />
+          </figure>
+          <div class="card-body">
+            <h1 class="text-xl font-medium">$34</h1>
+            <h2 class="card-title">
+              Laptop
+              <div class="badge badge-secondary">New</div>
+            </h2>
+            <p>If a dog chews shoes whose shoes does he choose?</p>
+            <div class="card-actions justify-end ">
+              
+              <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+            </div>
+          </div>
+      </div>
+        <div class="card bg-base-100   shadow-xl">
+          <figure>
+            <img
+              src="./cl3.jpg"
+              alt="Shoes" />
+          </figure>
+          <div class="card-body">
+            <h1 class="text-xl font-medium">$34</h1>
+            <h2 class="card-title">
+              Laptop
+              <div class="badge badge-secondary">New</div>
+            </h2>
+            <p>If a dog chews shoes whose shoes does he choose?</p>
+            <div class="card-actions justify-end ">
+              
+              <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+            </div>
+          </div>
+      </div>
+        <div class="card bg-base-100   shadow-xl">
+          <figure>
+            <img
+              src="./cl3.jpg"
+              alt="Shoes" />
+          </figure>
+          <div class="card-body">
+            <h1 class="text-xl font-medium">$34</h1>
+            <h2 class="card-title">
+              Laptop
+              <div class="badge badge-secondary">New</div>
+            </h2>
+            <p>If a dog chews shoes whose shoes does he choose?</p>
+            <div class="card-actions justify-end ">
+              
+              <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+            </div>
+          </div>
+      </div>
+        <div class="card bg-base-100   shadow-xl">
+          <figure>
+            <img
+              src="./cl3.jpg"
+              alt="Shoes" />
+          </figure>
+          <div class="card-body">
+            <h1 class="text-xl font-medium">$34</h1>
+            <h2 class="card-title">
+              Laptop
+              <div class="badge badge-secondary">New</div>
+            </h2>
+            <p>If a dog chews shoes whose shoes does he choose?</p>
+            <div class="card-actions justify-end ">
+              
+              <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+            </div>
+          </div>
+      </div>
+        <div class="card bg-base-100   shadow-xl">
+          <figure>
+            <img
+              src="./cl3.jpg"
+              alt="Shoes" />
+          </figure>
+          <div class="card-body">
+            <h1 class="text-xl font-medium">$34</h1>
+            <h2 class="card-title">
+              Laptop
+              <div class="badge badge-secondary">New</div>
+            </h2>
+            <p>If a dog chews shoes whose shoes does he choose?</p>
+            <div class="card-actions justify-end ">
+              
+              <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+            </div>
+          </div>
+      </div>
+        <div class="card bg-base-100   shadow-xl">
+          <figure>
+            <img
+              src="./cl3.jpg"
+              alt="Shoes" />
+          </figure>
+          <div class="card-body">
+            <h1 class="text-xl font-medium">$34</h1>
+            <h2 class="card-title">
+              Laptop
+              <div class="badge badge-secondary">New</div>
+            </h2>
+            <p>If a dog chews shoes whose shoes does he choose?</p>
+            <div class="card-actions justify-end ">
+              
+              <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+            </div>
+          </div>
+      </div>
+        <div class="card bg-base-100   shadow-xl">
+          <figure>
+            <img
+              src="./cl3.jpg"
+              alt="Shoes" />
+          </figure>
+          <div class="card-body">
+            <h1 class="text-xl font-medium">$34</h1>
+            <h2 class="card-title">
+              Laptop
+              <div class="badge badge-secondary">New</div>
+            </h2>
+            <p>If a dog chews shoes whose shoes does he choose?</p>
+            <div class="card-actions justify-end ">
+              
+              <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+            </div>
+          </div>
+      </div>
+        <div class="card bg-base-100   shadow-xl">
+          <figure>
+            <img
+              src="./cl3.jpg"
+              alt="Shoes" />
+          </figure>
+          <div class="card-body">
+            <h1 class="text-xl font-medium">$34</h1>
+            <h2 class="card-title">
+              Laptop
+              <div class="badge badge-secondary">New</div>
+            </h2>
+            <p>If a dog chews shoes whose shoes does he choose?</p>
+            <div class="card-actions justify-end ">
+              
+              <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+            </div>
+          </div>
+      </div>
+        <div class="card bg-base-100   shadow-xl">
+          <figure>
+            <img
+              src="./cl3.jpg"
+              alt="Shoes" />
+          </figure>
+          <div class="card-body">
+            <h1 class="text-xl font-medium">$34</h1>
+            <h2 class="card-title">
+              Laptop
+              <div class="badge badge-secondary">New</div>
+            </h2>
+            <p>If a dog chews shoes whose shoes does he choose?</p>
+            <div class="card-actions justify-end ">
+              
+              <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+            </div>
+          </div>
+      </div>
+        <div class="card bg-base-100   shadow-xl">
+          <figure>
+            <img
+              src="./cl3.jpg"
+              alt="Shoes" />
+          </figure>
+          <div class="card-body">
+            <h1 class="text-xl font-medium">$34</h1>
+            <h2 class="card-title">
+              Laptop
+              <div class="badge badge-secondary">New</div>
+            </h2>
+            <p>If a dog chews shoes whose shoes does he choose?</p>
+            <div class="card-actions justify-end ">
+              
+              <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+            </div>
+          </div>
+      </div>
+        <div class="card bg-base-100   shadow-xl">
+          <figure>
+            <img
+              src="./cl3.jpg"
+              alt="Shoes" />
+          </figure>
+          <div class="card-body">
+            <h1 class="text-xl font-medium">$34</h1>
+            <h2 class="card-title">
+              Laptop
+              <div class="badge badge-secondary">New</div>
+            </h2>
+            <p>If a dog chews shoes whose shoes does he choose?</p>
+            <div class="card-actions justify-end ">
+              
+              <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+            </div>
+          </div>
+      </div>
+        <div class="card bg-base-100   shadow-xl">
+          <figure>
+            <img
+              src="./cl3.jpg"
+              alt="Shoes" />
+          </figure>
+          <div class="card-body">
+            <h1 class="text-xl font-medium">$34</h1>
+            <h2 class="card-title">
+              Laptop
+              <div class="badge badge-secondary">New</div>
+            </h2>
+            <p>If a dog chews shoes whose shoes does he choose?</p>
+            <div class="card-actions justify-end ">
+              
+              <div class="badge badge-outline py-5 px-5 font-bold hover:bg-primary hover:text-white">Add to Card</div>
+            </div>
+          </div>
+      </div>    
+    </div>
+    <div class="flex justify-center my-7">
+      <div class="join">
+        <button class="join-item btn">1</button>
+        <button class="join-item btn">2</button>
+        <button class="join-item btn btn-disabled">...</button>
+        <button class="join-item btn">99</button>
+        <button class="join-item btn">100</button>
+      </div>
+    </div>
+  </div> {% endcomment %}
+
+
+<script src="{% static 'js/utiliist.js' %}"></script>
+<script src="{% static 'js/shop.js' %}"></script>
 {% endblock content %}
