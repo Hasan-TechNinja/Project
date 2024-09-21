@@ -17,7 +17,13 @@
             <ul id="departments-list" class="divide-y divide-gray-200">
                 {% for department in departments %}
                 <li class="hover:bg-gray-100 shadow-md">
-                    <a href="{{ department.link }}" class="block py-3 px-4 text-gray-700 hover:text-gray-900">{{ department.name }}</a>
+                    <form action="/departments" class="mt-3 text-center">
+                    {% comment %} <a href="{{ department.link }}" class="block py-3 px-4 text-gray-700 hover:text-gray-900">{{ department.name }}</a> {% endcomment %}
+                        <input type="hidden" name="department_id" value="{{ department.id }}">
+                        <button type="submit" class="block py-1 px-4 text-gray-700 hover:text-gray-900">
+                            {{ department.name }}
+                        </button>
+                    </form>
                 </li>
                 {% endfor %}
             </ul>
@@ -37,7 +43,7 @@
     </div>
 </div>
 
-
+{% comment %} ----------------------------------------------------------------------- {% endcomment %}
 <div class="container mx-auto relative w-full my-20 overflow-hidden">
     <!-- Carousel Container -->
     <div id="carousel-container" class="flex transition-transform duration-500 ease-in-out">
@@ -48,7 +54,7 @@
 
                     <form action="/departments" class="mt-4 text-center">
                         <input type="hidden" name="department_id" value="{{ department.id }}">
-                        <button type="submit" class="bg-green-300 px-6 py-2 rounded-lg hover:bg-gray-200 transition-colors">
+                        <button type="submit" class="bg-gray-300 px-6 py-2 rounded-lg hover:bg-gray-200 transition-colors">
                             {{ department.name }}
                         </button>
                     </form>
@@ -65,8 +71,9 @@
         &#10095;
     </button>
 </div>
+{% comment %} -------------------------------------------- {% endcomment %}
 
-<!-- JavaScript for Carousel Functionality -->
+
 
 <div class="container mx-auto">
     <div class="text-center">

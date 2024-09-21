@@ -137,9 +137,9 @@ class DepartmentsView(View, LoginRequiredMixin):
             related_products = Product.objects.filter(department=department)
 
             context = {
-                'department': department,    # Currently selected department
-                'rproduct': related_products, # Products related to the department
-                'departments': departments,   # List of all departments (for sidebar/menu)
+                'department': department,   
+                'rproduct': related_products, 
+                'departments': departments,
             }
         else:
             # If no department is selected, show only the department list
