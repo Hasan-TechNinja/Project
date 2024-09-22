@@ -112,14 +112,36 @@
 
         <!-- Products Grid -->
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          {% for product in rproduct %}
+          {% comment %} {% for product in rproduct %}
             <!-- Product 1 -->
             <div class="bg-white shadow-lg p-6 text-center border transition-transform transform hover:-translate-y-1 hover:shadow-xl">
                 <img src="{{ product.image.url }}" alt="Dried Fruit" class="mx-auto mb-4">
                 <h4 class="text-lg font-bold"><a href="{% url "product_details" product.id %}">{{ product.name }}</a></h4>
                 <p class="text-green-600 font-semibold">{{ product.discount_price }}</p>
             </div>
-          {% endfor %}  
+          {% endfor %}   {% endcomment %}
+
+          {% for product in rproduct %}
+          <div class="card card-compact bg-base-100 shadow-xl border my-3 transition-transform transform hover:-translate-y-1 hover:shadow-xl">
+            <figure>
+                <img
+                    src="{{ product.image.url }}"
+                    alt="{{ product.name }}"
+                    class="h-56 w-64 object-cover rounded-md" />
+            </figure>
+            <div class="card-body">
+                <div class='flex justify-between sm:flex-row sm:justify-between'>
+                    <h2 class="card-title text-xl font-semibold">{{ product.name }}</h2>
+                    <h2 class="card-title text-xl font-semibold">{{ product.selling_price }} Tk</h2>
+                </div>
+                <p class="mt-2">{{ product.description|truncatechars:80 }}</p>
+                <div class="card-actions justify-end mt-4">
+                    <a href="{% url 'product_details' product.id %}" class="btn bg-primary">Buy Now</a>
+                </div>
+            </div>
+        </div>
+    
+      {% endfor %}
         </div>
     </div>
 {% endif %}

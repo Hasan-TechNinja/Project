@@ -101,7 +101,7 @@
                 <h2 class="card-title text-xl font-semibold">{{ product.name }}</h2>
                 <h2 class="card-title text-xl font-semibold">{{ product.selling_price }} Tk</h2>
             </div>
-            <p class="mt-2">{{ product.description }}</p>
+            <p class="mt-2">{{ product.description|truncatechars:80 }}</p>
             <div class="card-actions justify-end mt-4">
                 <a href="{% url 'product_details' product.id %}" class="btn bg-primary">Buy Now</a>
             </div>

@@ -15,7 +15,7 @@
             <div class="grid grid-cols-4 mt-7 gap-4">
                 {% for product in products %}
                     {% if product.department.id == departments.id %}
-                        <div class="card bg-base-100 shadow-xl text-sm transition-transform transform hover:-translate-y-1 hover:shadow-xl">
+                        <div class="card bg-base-100 shadow-xl text-sm transition-transform transform hover:-translate-y-1 hover:shadow-xl ring-1">
                             <figure>
                                 <img class='h-52 w-64 object-cover rounded-md' src="{{ product.image.url }}" alt="{{ product.name }}" />
                             </figure>
