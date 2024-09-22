@@ -79,7 +79,7 @@
     <div class="text-center">
         <h1 class="text-5xl font-bold text-text_col">Featured Product</h1>
 
-        <ul class="flex  justify-center gap-7 font-medium my-7">
+        <ul class="flex justify-center gap-7 font-medium my-7">
           {% for department in departments %}
             <li><a href="{{ department.link }}" class='hover:underline hover:text-blue-600'>{{ department.name }}</a></li>
             {% endfor %}

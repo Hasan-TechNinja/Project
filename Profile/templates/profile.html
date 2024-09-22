@@ -6,39 +6,42 @@
     <!-- Profile Page Container -->
     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <!-- User Information Section -->
-        <div class="bg-white shadow-md rounded-lg p-6 mb-6">
-            <h2 class="text-2xl font-bold mb-6 text-center">User Information</h2>
-            <hr class='-mt-5 mb-3'>
-            <div class="flex flex-col items-center md:flex-row md:items-start md:justify-center md:space-x-20 lg:justify-center lg:mx-24 md:mx-20">
+        <div class="bg-white shadow-lg rounded-lg p-8 mb-8">
+            <h2 class="text-3xl font-extrabold text-gray-800 text-center mb-4">User Information</h2>
+            <hr class="border-t-2 border-gray-200 mb-6">
+            <div class="flex flex-col items-center md:flex-row md:items-start md:space-x-16">
+                <!-- Profile Image Section -->
                 {% if profile.image %}
-                <img src="{{ profile.image.url }}" alt="Profile Picture" class="w-32 h-32 rounded-full md:w-40 md:h-40 lg:w-60 lg:h-64 lg:rounded-md md:rounded-md object-cover mb-4 md:mb-0">
+                <img src="{{ profile.image.url }}" alt="Profile Picture" class="w-36 h-36 rounded-full md:w-44 md:h-44 lg:w-56 lg:h-56 object-cover shadow-md">
                 {% else %}
-                <img src="{% static 'img/default.webp' %}" alt="Profile Picture" class="w-32 h-32 rounded-full md:w-40 md:h-40 lg:w-60 lg:h-64 lg:rounded-md md:rounded-md object-cover mb-4 md:mb-0">
+                <img src="{% static 'img/default.webp' %}" alt="Default Profile Picture" class="w-36 h-36 rounded-full md:w-44 md:h-44 lg:w-56 lg:h-56 object-cover shadow-md">
                 {% endif %}
-                <div class="md:ml-6 text-center md:text-left">
-                    {% if name %}
-                    <p class="text-3xl font-semibold">{{ name }}</p>
-                    {% endif %}
-                    <p class="text-gray-600">Email: {{ profile.user.email }}</p>
+                
+                <div class="md:ml-10 text-center md:text-left mt-6 md:mt-0">
+                    <p class="text-2xl font-bold text-gray-700">{{ name }}</p>
+                    <p class="text-gray-500 mt-1">Email: {{ profile.user.email }}</p>
                     {% if profile.contact %}
-                    <p class="text-gray-600">Phone: {{ profile.contact }}</p>
+                    <p class="text-gray-500 mt-1">Phone: {{ profile.contact }}</p>
                     {% endif %}
                     {% if profile.address %}
-                    <p class="text-gray-600">Address: {{ profile.address }}</p>
+                    <p class="text-gray-500 mt-1">Address: {{ profile.address }}</p>
                     {% endif %}
                     {% if profile.title %}
-                    <p class="text-gray-600">About: {{ profile.title }}</p>
+                    <p class="text-gray-500 mt-1">About: {{ profile.title }}</p>
                     {% endif %}
                     {% if profile.created %}
-                    <p class='text-gray-600'>Created at: {{ profile.created }}</p>
+                    <p class="text-gray-500 mt-1">Created at: {{ profile.created }}</p>
                     {% endif %}
-                    <p class="text-gray-600">Description: {{ profile.description }}</p>
-                    <div class="mt-4 flex justify-center md:justify-start space-x-2">
-                        <button class="bg-blue-500 text-white px-4 py-2 rounded"><a href="{% url 'editprofile' %}">Edit Profile</a></button>
-                        <button class="bg-gray-500 text-white px-4 py-2 rounded"><a href="{% url 'password_change' %}" class="block">Change Password</a></button>
+                    <p class="text-gray-600 mt-2">Description: {{ profile.description }}</p>
+                    
+                    <div class="mt-6 flex justify-center md:justify-start space-x-4">
+                        <a href="{% url 'editprofile' %}" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg shadow-lg transition duration-300">Edit Profile</a>
+                        <a href="{% url 'password_change' %}" class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-6 rounded-lg shadow-lg transition duration-300">Change Password</a>
                     </div>
                 </div>
             </div>
+        </div>
+        
         </div>
         
 
