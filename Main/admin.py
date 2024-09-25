@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import Product, Departments, Category, Size, Cart, Blog
+from . models import Product, Departments, Category, Size, Cart, Blog, Billing_Details
 
 # Register your models here.
 
@@ -72,3 +72,22 @@ class BlogAdmin(admin.ModelAdmin):
         'image'
     )
 admin.site.register(Blog, BlogAdmin)
+
+
+class Billing_DetailsAdmin(admin.ModelAdmin):
+    list_display = (
+        'user',
+        'first_name',
+        'last_name',
+        'country',
+        'division',
+        'district',
+        'thana',
+        'state',
+        'zip_code',
+        'phone',
+        'second_phone',
+        'email'
+    )
+
+admin.site.register(Billing_Details, Billing_DetailsAdmin)

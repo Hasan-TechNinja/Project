@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Checkout{% endblock title %}
+{% block content %}
+
+<div class="py-12 px-6 container mx-auto">
+
+  <!-- Flexbox layout for md and lg devices, stacked on mobile -->
+  <div class="md:flex md:space-x-8">
+
+    <!-- Checkout Form Section -->
+    <div class="w-full md:w-1/2 bg-gray-100 p-8 rounded-lg shadow-lg border mb-8 md:mb-0">
+      <h1 class="text-3xl font-bold mb-8">Checkout</h1>
+      
+      <form action="" method="post" class="space-y-6">
+        {% csrf_token %}
+        
+        <!-- Loop through the fields of the form -->
+        {% for field in form %}
+        <div class="space-y-2">
+          <label for="{{ field.id_for_label }}" class="block text-sm font-semibold text-gray-700">{{ field.label }}</label>
+          {{ field }}  <!-- This automatically includes the class attributes from the form -->
+
+          <!-- Display error message if exists -->
+          {% if field.errors %}
+          <p class="text-red-500 text-sm">{{ field.errors|striptags }}</p>  <!-- Display errors without HTML tags -->
+          {% endif %}
+        </div>
+        {% endfor %}
+      
+    </div>
+
+    <!-- Your Order Section -->
+    <div class="w-full md:w-1/2 bg-gray-100 p-8 rounded-lg shadow-lg border">
+      <h2 class="text-2xl font-semibold mb-8">Your Order</h2>
+
+      <div class="space-y-4 mb-6">
+        <div class="flex justify-between border-b pb-2">
+          <span class="text-gray-600 font-bold text-lg">Name</span>
+          <span class="font-bold text-lg">Price</span>
+        </div>
+        
+        <!-- Loop through cart items -->
+        {% for cart in cart %}
+        <div class="flex justify-between border-b pb-2">
+          <span class="text-gray-600">{{cart.product.name}}</span>
+          <span class="font-medium">{{cart.product.selling_price}}</span>
+        </div>
+        {% endfor %}
+      </div>
+
+      <div class="mb-6 space-y-2">
+        <label class="flex items-center">
+          <input type="radio" name="payment" class="form-radio text-green-600 focus:ring-green-500" />
+          <span class="ml-2 text-gray-700">Check Payment</span>
+        </label>
+        <label class="flex items-center">
+          <input type="radio" name="payment" class="form-radio text-green-600 focus:ring-green-500" checked />
+          <span class="ml-2 text-gray-700">Paypal</span>
+        </label>
+      </div>
+
+      <button type='submit' class="w-full py-3 bg-green-600 text-white font-semibold rounded-md hover:bg-green-700 transition">
+        PLACE ORDER
+      </button>
+    </div>
+
+  </div>
+</form>
+
+</div>
+
+{% endblock content %}

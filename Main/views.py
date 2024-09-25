@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views import View
 from . models import Product, Departments, Cart, Blog
+from . forms import BillingDetailsForm
 from django.contrib.auth import authenticate
 
 # Create your views here.
@@ -38,8 +39,6 @@ class ShopView(View):
 
 
 
-
-
 class ProductDetails(View):
     def get(self, request, pk):
         product = get_object_or_404(Product, pk=pk)
@@ -56,6 +55,8 @@ class ProductDetails(View):
 
         }
         return render(request, 'product_details.html', context)
+
+
 
 @login_required(login_url='login')
 def AddToCart(request):
@@ -80,6 +81,8 @@ def AddToCart(request):
    
     return redirect("/authentication/login/")
 
+
+
 @login_required(login_url='login')
 def ShowCart(request):
     if request.user.is_authenticated:
@@ -102,6 +105,8 @@ def ShowCart(request):
         
     return redirect('/cart')
 
+
+
 @login_required(login_url='login')
 def increase_cart_quantity(request, product_id):
     if request.user.is_authenticated:
@@ -113,6 +118,8 @@ def increase_cart_quantity(request, product_id):
         
         return redirect('showcart')  
     return redirect('login') 
+
+
 
 @login_required(login_url='login')
 def decrease_cart_quantity(request, product_id):
@@ -130,6 +137,8 @@ def decrease_cart_quantity(request, product_id):
         return redirect('showcart')  
     return redirect('login') 
 
+
+
 @login_required(login_url='login')
 def delete_cart_item(request, cart_id):
     cart_item = get_object_or_404(Cart, id=cart_id, user=request.user)
@@ -140,9 +149,7 @@ def delete_cart_item(request, cart_id):
 
 class DepartmentsView(View, LoginRequiredMixin):
     def get(self, request, pk=None):
-        # Fetch all departments (this will always be passed to the template)
         departments = Departments.objects.all()
-
         # If 'department_id' is in the query parameters or a pk is provided in the URL
         department_id = request.GET.get('department_id') or pk
         
@@ -159,12 +166,13 @@ class DepartmentsView(View, LoginRequiredMixin):
                 'departments': departments,
             }
         else:
-            # If no department is selected, show only the department list
+
             context = {
-                'departments': departments,   # List of all departments (for sidebar/menu)
+                'departments': departments,
             }
 
         return render(request, 'departments.html', context)
+
 
 
     
@@ -175,3 +183,35 @@ def BlogView(request):
         'data':data
     }
     return render(request, 'blog.html', context)
+
+
+
+@login_required
+def checkout(request):
+    cart = Cart.objects.filter(user=request.user)
+    if request.method == 'POST':
+
+        form = BillingDetailsForm(request.POST)
+        # cart = Cart.objects.filter(user = request.user)
+
+        if form.is_valid():
+
+            billing_details = form.save(commit=False)
+            billing_details.user = request.user  
+            billing_details.save()  
+
+            return redirect('home') 
+        else:
+
+            context = {'form': form}
+            return render(request, 'checkout.html', context)
+
+    else:
+
+        form = BillingDetailsForm()
+
+    context = {
+        'form': form,
+        'cart':cart
+    }
+    return render(request, 'checkout.html', context)
