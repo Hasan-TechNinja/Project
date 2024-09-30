@@ -1,137 +1,61 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}{{profile.first_name}}'s Profile{% endblock title %}
+{% block title %}Profile{% endblock title %}
 {% block content %}
-<div class="bg-gray-100 font-sans leading-normal tracking-normal">
-    <!-- Profile Page Container -->
-    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        <!-- User Information Section -->
-        <div class="bg-white shadow-lg rounded-lg p-8 mb-8">
-            <h2 class="text-3xl font-extrabold text-gray-800 text-center mb-4">User Information</h2>
-            <hr class="border-t-2 border-gray-200 mb-6">
-            <div class="flex flex-col items-center md:flex-row md:items-start md:space-x-16">
-                <!-- Profile Image Section -->
-                {% if profile.image %}
-                <img src="{{ profile.image.url }}" alt="Profile Picture" class="w-36 h-36 rounded-full md:w-44 md:h-44 lg:w-56 lg:h-56 object-cover shadow-md">
-                {% else %}
-                <img src="{% static 'img/default.webp' %}" alt="Default Profile Picture" class="w-36 h-36 rounded-full md:w-44 md:h-44 lg:w-56 lg:h-56 object-cover shadow-md">
-                {% endif %}
-                
-                <div class="md:ml-10 text-center md:text-left mt-6 md:mt-0">
-                    <p class="text-2xl font-bold text-gray-700">{{ name }}</p>
-                    <p class="text-gray-500 mt-1">Email: {{ profile.user.email }}</p>
-                    {% if profile.contact %}
-                    <p class="text-gray-500 mt-1">Phone: {{ profile.contact }}</p>
-                    {% endif %}
-                    {% if profile.address %}
-                    <p class="text-gray-500 mt-1">Address: {{ profile.address }}</p>
-                    {% endif %}
-                    {% if profile.title %}
-                    <p class="text-gray-500 mt-1">About: {{ profile.title }}</p>
-                    {% endif %}
-                    {% if profile.created %}
-                    <p class="text-gray-500 mt-1">Created at: {{ profile.created }}</p>
-                    {% endif %}
-                    <p class="text-gray-600 mt-2">Description: {{ profile.description }}</p>
-                    
-                    <div class="mt-6 flex justify-center md:justify-start space-x-4">
-                        <a href="{% url 'editprofile' %}" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg shadow-lg transition duration-300">Edit Profile</a>
-                        <a href="{% url 'password_change' %}" class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-6 rounded-lg shadow-lg transition duration-300">Change Password</a>
+
+<div class='container mx-auto py-6'>
+    <div class='bg-gray-50 flex flex-col md:flex-row justify-around my-2'>
+        <div class='bg-white w-full md:w-2/3 lg:w-1/2 p-4 m-3 rounded-md shadow-lg text-center'>
+            <h1 class='text-2xl font-bold mb-4 text-start'>Profile Information</h1>
+            <hr>
+            <img class='h-48 w-48 md:size-60 rounded-full mx-auto my-4' src="{{ profile.image.url }}" alt="Profile Image">
+            <h2 class='text-2xl font-bold mb-2'>{{ name }}</h2>
+            <p class='text-start'>{{ profile.about }}</p>
+            <p class='text-sm text-start my-3'>{{ profile.description }}</p>
+            <p class='text-start'> {{ profile.address }}</p>
+            <p class='text-start'> {{ profile.contact }}</p>
+            <p class='text-start'> {{ profile.created }}</p>
+
+            <button class='btn btn-secondary'><a href="{% url "editprofile" %}">Edit Profile</a></button>
+        </div>
+
+        <div class='flex flex-col w-full md:w-1/3 lg:w-1/2'>
+            <div class='bg-white p-6 m-3 rounded-lg shadow-lg'>
+                <h2 class='text-2xl font-semibold mb-4 text-left'>Cart Information</h2>
+                <hr class="mb-4">
+                <div class="space-y-4">
+                    {% for cart in cart|slice:":3" %}
+                    <div class='flex justify-between items-center border-b pb-4 shadow-md'>
+                        <img class='h-16 w-16 rounded-md' src="{{ cart.product.image.url }}" alt="Product Image">
+                        <div class='flex-1 px-4'>
+                            <p class="font-medium text-gray-900">{{ cart.product.name }}</p>
+                            <p class='text-gray-500 text-sm'>Price: <span class='text-green-500 font-semibold'>TK {{ cart.product.discount_price }}</span></p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class='mt-6'>
+                    <button class='w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition font-semibold'>
+                        <a href="{% url "showcart" %}">View full cart</a>
+                    </button>
+                </div>
+            </div>
+            
+
+            <div class='bg-white p-4 m-3 rounded-md shadow-md'>
+                <h2 class='text-xl font-bold mb-3'>Order Information</h2>
+                <hr>
+                <div class='flex justify-between items-center my-2'>
+                    <img class='h-16 w-16 rounded-md' src="#" alt="Product Image">
+                    <div class='flex-1 px-2'>
+                        <p>Product Name</p>
+                        <p class='text-gray-600'>Price</p>
                     </div>
                 </div>
-            </div>
-        </div>
-        
-        </div>
-        
-
-        
-        <!-- Order History Section -->
-        <div class="bg-white shadow-md rounded-lg p-6 mb-6">
-            <h2 class="text-2xl font-bold mb-4">Order History</h2>
-            <div class="space-y-4">
-                <div class="border p-4 rounded-lg">
-                    <p><span class="font-semibold">Order ID:</span> #12345</p>
-                    <p><span class="font-semibold">Date:</span> August 1, 2024</p>
-                    <p><span class="font-semibold">Total:</span> $150.00</p>
-                    <p><span class="font-semibold">Status:</span> Delivered</p>
-                    <button class="bg-green-500 text-white px-4 py-2 rounded mt-4">Track Order</button>
-                </div>
-                <!-- Repeat similar blocks for more orders -->
-            </div>
-        </div>
-
-        <!-- Wishlist Section -->
-        <div class="bg-white shadow-md rounded-lg p-6 mb-6">
-            <h2 class="text-2xl font-bold mb-4">Wishlist</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <!-- Wishlist Item -->
-                <div class="border p-4 rounded-lg">
-                    <img src="https://via.placeholder.com/100" alt="Wishlist Item" class="w-full h-32 object-cover">
-                    <p class="font-semibold mt-2">Product Name</p>
-                    <p class="text-gray-600">$25.00</p>
-                    <button class="bg-blue-500 text-white px-4 py-2 rounded mt-2">Move to Cart</button>
-                </div>
-                <!-- Repeat for more wishlist items -->
-            </div>
-        </div>
-
-        <!-- Shopping Cart Section -->
-        <div class="bg-white shadow-md rounded-lg p-6 mb-6">
-            <h2 class="text-2xl font-bold mb-4">Shopping Cart</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <!-- Cart Item -->
-                <div class="border p-4 rounded-lg">
-                    <img src="https://via.placeholder.com/100" alt="Cart Item" class="w-full h-32 object-cover">
-                    <p class="font-semibold mt-2">Product Name</p>
-                    <p class="text-gray-600">$30.00</p>
-                    <div class="flex items-center space-x-2 mt-2">
-                        <button class="bg-red-500 text-white px-4 py-2 rounded">Remove</button>
-                        <button class="bg-green-500 text-white px-4 py-2 rounded">Checkout</button>
-                    </div>
-                </div>
-                <!-- Repeat for more cart items -->
-            </div>
-        </div>
-
-        <!-- Address Book Section -->
-        <div class="bg-white shadow-md rounded-lg p-6 mb-6">
-            <h2 class="text-2xl font-bold mb-4">Address Book</h2>
-            <div class="space-y-4">
-                <div class="border p-4 rounded-lg">
-                    <p><span class="font-semibold">Billing Address:</span></p>
-                    <p>1234 Main St, Anytown, USA</p>
-                    <button class="bg-blue-500 text-white px-4 py-2 rounded mt-4">Edit Address</button>
-                </div>
-                <!-- Repeat similar blocks for shipping addresses -->
-            </div>
-        </div>
-
-        <!-- Payment Methods Section -->
-        <div class="bg-white shadow-md rounded-lg p-6 mb-6">
-            <h2 class="text-2xl font-bold mb-4">Payment Methods</h2>
-            <div class="space-y-4">
-                <div class="border p-4 rounded-lg">
-                    <p><span class="font-semibold">Credit Card:</span> **** **** **** 1234</p>
-                    <button class="bg-blue-500 text-white px-4 py-2 rounded mt-4">Edit Payment Method</button>
-                </div>
-                <!-- Repeat similar blocks for more payment methods -->
-            </div>
-        </div>
-
-        <!-- Order Tracking Section -->
-        <div class="bg-white shadow-md rounded-lg p-6 mb-6">
-            <h2 class="text-2xl font-bold mb-4">Order Tracking</h2>
-            <div class="space-y-4">
-                <div class="border p-4 rounded-lg">
-                    <p><span class="font-semibold">Order ID:</span> #12345</p>
-                    <p><span class="font-semibold">Tracking Number:</span> 1Z9999999999999999</p>
-                    <p><span class="font-semibold">Status:</span> In Transit</p>
-                    <button class="bg-green-500 text-white px-4 py-2 rounded mt-4">Track Package</button>
-                </div>
-                <!-- Repeat similar blocks for more orders being tracked -->
+                <button class='bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition'>Show Orders</button>
             </div>
         </div>
     </div>
 </div>
+
 {% endblock content %}
