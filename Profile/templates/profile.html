@@ -5,7 +5,7 @@
 
 <div class='container mx-auto py-6'>
     <div class='bg-gray-50 flex flex-col md:flex-row justify-around my-2'>
-        <div class='bg-white w-full md:w-2/3 lg:w-1/2 p-4 m-3 rounded-md shadow-lg text-center'>
+        <div class='bg-white w-full md:w-2/3 lg:w-1/2 p-4 m-2 rounded-md shadow-lg text-center'>
             <h1 class='text-2xl font-bold mb-4 text-start'>Profile Information</h1>
             <hr>
             <img class='h-48 w-48 md:size-60 rounded-full mx-auto my-4' src="{{ profile.image.url }}" alt="Profile Image">
@@ -19,14 +19,14 @@
             <button class='btn btn-secondary'><a href="{% url "editprofile" %}">Edit Profile</a></button>
         </div>
 
-        <div class='flex flex-col w-full md:w-1/3 lg:w-1/2'>
-            <div class='bg-white p-6 m-3 rounded-lg shadow-lg'>
-                <h2 class='text-2xl font-semibold mb-4 text-left'>Cart Information</h2>
-                <hr class="mb-4">
+        <div class='flex flex-col w-full md:w-1/3 lg:w-1/3'>
+            <div class='bg-white p-4 m-2 rounded-lg shadow-lg'>
+                <h2 class='text-2xl font-semibold text-left'>Cart Information</h2>
+                <hr class="my-2">
                 <div class="space-y-4">
                     {% for cart in cart|slice:":3" %}
-                    <div class='flex justify-between items-center border-b pb-4 shadow-md'>
-                        <img class='h-16 w-16 rounded-md' src="{{ cart.product.image.url }}" alt="Product Image">
+                    <div class='flex justify-between items-center border-b pb-2 shadow-md'>
+                        <img class='h-14 w-14 rounded-md' src="{{ cart.product.image.url }}" alt="Product Image">
                         <div class='flex-1 px-4'>
                             <p class="font-medium text-gray-900">{{ cart.product.name }}</p>
                             <p class='text-gray-500 text-sm'>Price: <span class='text-green-500 font-semibold'>TK {{ cart.product.discount_price }}</span></p>
@@ -35,7 +35,7 @@
                     {% endfor %}
                 </div>
                 <div class='mt-6'>
-                    <button class='w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition font-semibold'>
+                    <button class='w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition font-semibold'>
                         <a href="{% url "showcart" %}">View full cart</a>
                     </button>
                 </div>
