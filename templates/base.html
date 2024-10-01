@@ -40,6 +40,9 @@
         }
     </script>
     <title>{% block title %}{% endblock title %} | Hasan</title>
+
+
+
 </head>
 <body class='bg-white'>
     {% comment %} nav start {% endcomment %}
@@ -138,48 +141,63 @@
     {% comment %} footer start {% endcomment %}
 
       
-    <footer class="bg-gray-300 text-gray-300 py-8">
-      <div class="container mx-auto px-4">
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <div>
-                  <h3 class="text-xl font-semibold mb-4 text-black">Contact Information</h3>
-                  <p class="mb-2">Address: Dhaka, Bangladesh</p>
-                  <p class="mb-2">Phone: <a href="tel:+8801725478653" class="text-blue-400 hover:underline">+8801725478653</a></p>
-                  <p>Email: <a href="mailto:admin@gmail.com" class="text-blue-400 hover:underline">admin@gmail.com</a></p>
-              </div>
-              <div>
-                  <h3 class="text-xl font-semibold mb-4 text-black">Useful Links</h3>
-                  <ul class="space-y-2 text-black">
-                      <li><a href="#" class="hover:text-blue-400 transition-colors">About Us</a></li>
-                      <li><a href="#" class="hover:text-blue-400 transition-colors">About Our Shop</a></li>
-                      <li><a href="#" class="hover:text-blue-400 transition-colors">Secure Shopping</a></li>
-                      <li><a href="#" class="hover:text-blue-400 transition-colors">Delivery Information</a></li>
-                      <li><a href="#" class="hover:text-blue-400 transition-colors">Privacy Policy</a></li>
-                      <li><a href="#" class="hover:text-blue-400 transition-colors">Our Sitemap</a></li>
-                  </ul>
-              </div>
-              <div>
-                  <h3 class="text-xl font-semibold mb-4 text-black">Join Our Newsletter</h3>
-                  <p class="mb-4 text-black">Get email updates about our latest shop and special offers.</p>
-                  <div class="flex items-center space-x-2">
-                      <input type="email" class="border border-gray-700 bg-gray-800 text-gray-200 rounded px-3 py-2 w-full" placeholder="Enter your email">
-                      <button class="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 transition-colors">SUBSCRIBE</button>
-                  </div>
-                  <div class="flex justify-center mt-4 space-x-4">
-                      <a href="#" class="text-blue-500 hover:text-blue-400 transition-colors">
-                          <i class="fa-brands fa-facebook-f"></i>
-                      </a>
-                      <a href="#" class="text-blue-500 hover:text-blue-400 transition-colors">
-                          <i class="fa-brands fa-twitter"></i>
-                      </a>
-                      <a href="#" class="text-blue-500 hover:text-blue-400 transition-colors">
-                          <i class="fa-brands fa-instagram"></i>
-                      </a>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </footer>
+    <footer>
+        <div style="background-color: rgba(14, 18, 61, 1.0);" class="text-white p-6">
+            <div class="container mx-auto grid grid-cols-1 md:grid-cols-5 gap-6">
+                <!-- About Us Section -->
+                <div>
+                    <h4 class="font-bold mb-2">About Us</h4>
+                    <p>At [Store Name], we aim to provide the best products with a seamless online shopping experience.</p>
+                </div>
+    
+                <!-- Customer Support Section -->
+                <div>
+                    <h4 class="font-bold mb-2">Customer Support</h4>
+                    <ul>
+                        <li>Contact Us: <a href="mailto:email@example.com">email@example.com</a></li>
+                        <li>Call Us: +880-XXXX-XXXX</li>
+                        <li><a href="#">FAQs</a></li>
+                    </ul>
+                </div>
+    
+                <!-- Useful Links Section -->
+                <div>
+                    <h4 class="font-bold mb-2">Useful Links</h4>
+                    <ul>
+                        <li><a href="#">Shop Now</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">My Account</a></li>
+                        <li><a href="#">Track Order</a></li>
+                        <li><a href="#">Shipping & Returns</a></li>
+                    </ul>
+                </div>
+    
+                <!-- Social Media Section -->
+                <div>
+                    <h4 class="font-bold mb-2">Follow Us</h4>
+                    <ul>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                        <li><a href="#">X (Twitter)</a></li>
+                        <li><a href="#">YouTube</a></li>
+                    </ul>
+                </div>
+    
+                <!-- Payment Methods Section -->
+                <div>
+                    <h4 class="font-bold mb-2">Payment Methods</h4>
+                    <ul class='flex space-x-4'>
+                        <li>Bkash</li>
+                        <li>Rocket</li>
+                        <li>Nagad</li>
+                        <li>Bank</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <p class="text-center bg-gray-700 text-white py-2">© 2024 [Store Name]. All Rights Reserved.</p>
+    </footer>
     {% comment %} footer end {% endcomment %}
 </body>
 </html>
