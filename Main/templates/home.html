@@ -79,11 +79,25 @@
     <div class="text-center">
         <h1 class="text-5xl font-bold text-text_col">Featured Product</h1>
 
-        <ul class="flex justify-center gap-7 font-medium my-7">
+        {% comment %} <ul class="flex justify-center gap-7 font-medium my-7">
           {% for department in departments %}
             <li><a href="{{ department.link }}" class='hover:underline hover:text-blue-600'>{{ department.name }}</a></li>
             {% endfor %}
+        </ul> {% endcomment %}
+
+        <ul class="flex flex-wrap justify-center items-center gap-4">
+            {% for department in departments %}
+            <li class="flex flex-col items-center py-3 mb-2">
+                <form action="/departments" method="get" class="mt-4">
+                    <input type="hidden" name="department_id" value="{{ department.id }}">
+                    <button type="submit" class="text-md font-medium text-gray-700 hover:underline hover:text-blue-600">
+                        {{ department.name }}
+                    </button>
+                </form>
+            </li>
+            {% endfor %}
         </ul>
+
     </div>
     
 {% comment %} show product {% endcomment %}
