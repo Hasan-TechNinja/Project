@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django_countries.fields import CountryField
+from tinymce.models import HTMLField
+from django.utils import timezone
 
 # Create your models here.
 
@@ -66,16 +68,16 @@ class Cart(models.Model):
         return self.product.selling_price * self.quantity
     
 
-class Blog(models.Model):
-    title = models.CharField(max_length=100)
-    about = models.CharField(max_length=200, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    date = models.DateField(auto_now_add=True)
-    comment = models.CharField(max_length=200, blank=True, null=True)
-    image = models.ImageField(upload_to='Blog')
+# class Blog(models.Model):
+#     title = models.CharField(max_length=100)
+#     about = models.CharField(max_length=200, blank=True, null=True)
+#     description = models.TextField(blank=True, null=True)
+#     date = models.DateField(auto_now_add=True)
+#     comment = models.CharField(max_length=200, blank=True, null=True)
+#     image = models.ImageField(upload_to='Blog')
 
-    def __str__(self):
-        return self.title
+#     def __str__(self):
+#         return self.title
     
 
 class Billing_Details(models.Model):
@@ -94,3 +96,40 @@ class Billing_Details(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} ({self.user.username})"
+    
+
+
+    from django.db import models
+from django.contrib.auth.models import User
+from django.utils.text import slugify
+
+class BlogPost(models.Model):
+    title = models.CharField(max_length=255, blank=True, null=True)
+    slug = models.SlugField(unique=True, max_length=255)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = HTMLField()
+    featured_image = models.ImageField(upload_to='Blogs/')
+    tags = models.ManyToManyField('Tag', blank=True)  # Assuming 'Tag' is defined elsewhere
+    category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True, blank=True)  # Assuming 'Category' is defined elsewhere
+    excerpt = models.CharField(max_length=500, blank=True)
+    publish_date = models.DateTimeField(default=timezone.now)  # Default to now
+    updated_at = models.DateTimeField(auto_now=True)
+    status = models.CharField(max_length=10, choices=[('draft', 'Draft'), ('published', 'Published')], default='draft')
+    views = models.IntegerField(default=0)
+    meta_title = models.CharField(max_length=70, blank=True)
+    meta_description = models.CharField(max_length=160, blank=True)
+    comments_enabled = models.BooleanField(default=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.title
+
+class Tag(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name

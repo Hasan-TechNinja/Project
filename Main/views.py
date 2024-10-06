@@ -3,9 +3,10 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views import View
-from . models import Product, Departments, Cart, Blog
+from . models import Product, Departments, Cart, BlogPost
 from . forms import BillingDetailsForm
 from django.contrib.auth import authenticate
+from django.utils.html import strip_tags
 
 # Create your views here.
 
@@ -150,7 +151,7 @@ def delete_cart_item(request, cart_id):
 class DepartmentsView(View, LoginRequiredMixin):
     def get(self, request, pk=None):
         departments = Departments.objects.all()
-        # If 'department_id' is in the query parameters or a pk is provided in the URL
+ 
         department_id = request.GET.get('department_id') or pk
         
         if department_id:
@@ -177,12 +178,17 @@ class DepartmentsView(View, LoginRequiredMixin):
 
     
 def BlogView(request):
-    data = Blog.objects.all()
+    data = BlogPost.objects.all()
 
     context = {
         'data':data
     }
     return render(request, 'blog.html', context)
+
+
+
+def BlogDetails(request):
+    return render(request, 'blogdetails.html')
 
 
 

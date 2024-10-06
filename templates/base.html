@@ -79,7 +79,7 @@
                   </li>
                   <li><a class="hover:bg-primary" href='{% url "home" %}'>Home</a></li>
                 <li><a class="hover:bg-primary" href='{% url "shop" %}'>Shop</a></li>
-                <li><a class="hover:bg-primary" >Blog</a></li>
+                <li><a class="hover:bg-primary" href='{% url "blog" %}' >Blog</a></li>
                 <li><a class="hover:bg-primary" href='#' >Contact</a></li>
                 </ul>
               </div>
@@ -104,7 +104,7 @@
                       </ul>                      
                   </details>
                 </li>
-                <li><a class="hover:bg-primary" >Blog</a></li>
+                <li><a class="hover:bg-primary" href='{% url "blog" %}' >Blog</a></li>
                 {% if user.is_authenticated %}
                 <li><a class="hover:bg-primary" href='#' >Contact</a></li>
                 {% endif %}

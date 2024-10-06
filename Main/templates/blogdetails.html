@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% block title %}Blog Details{% endblock title %}
+{% block content %}
+
+<div class="container mx-auto my-12 px-4">
+    <!-- Back to Blog Button -->
+    <div class="mb-6">
+        <a href="/blog" class="text-blue-500 hover:underline">&larr; Back to Blog</a>
+    </div>
+
+    <!-- Blog Title & Metadata -->
+    <div class="mb-8 text-center">
+        <h1 class="text-4xl font-bold text-gray-800 mb-4">Blog Post Title</h1>
+        <p class="text-gray-500">Published on <span class="font-semibold">March 5, 2024</span> | by <span class="font-semibold">Author Name</span></p>
+    </div>
+
+    <!-- Blog Cover Image -->
+    <div class="mb-8">
+        <img src="https://via.placeholder.com/1200x600" alt="Blog Cover" class="w-full h-auto rounded-lg shadow-md">
+    </div>
+
+    <!-- Blog Content -->
+    <div class="prose prose-lg max-w-none text-gray-700 leading-relaxed mb-12">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id arcu aliquet, elementum nisi quis, condimentum nibh. Vestibulum lacinia tellus ut feugiat sagittis. Fusce tincidunt metus nec arcu ultrices, eget suscipit velit tempor. Donec fermentum leo lorem, eu faucibus eros egestas sit amet. Nam volutpat tincidunt lectus a imperdiet.</p>
+
+        <h2>Section Heading</h2>
+        <p>Nam tristique, libero id bibendum viverra, orci dui sodales sapien, vel euismod nisi est sit amet sapien. Quisque vehicula tincidunt justo at suscipit. Aenean commodo ultrices imperdiet. Aenean eget ligula ut velit vehicula vestibulum vitae ac lacus.</p>
+
+        <blockquote class="border-l-4 border-blue-500 pl-4 italic text-gray-600">
+            "This is an important quote or statement related to the blog content, emphasizing a key point for readers."
+        </blockquote>
+
+        <p>Vivamus vehicula dapibus turpis, id feugiat eros viverra et. Cras non erat vitae diam egestas tincidunt. Curabitur luctus luctus nisi sit amet malesuada. Maecenas at erat euismod, gravida felis a, pharetra arcu. Pellentesque vel est a justo viverra euismod.</p>
+
+        <h3>Subsection Heading</h3>
+        <ul>
+            <li>Key point or list item 1</li>
+            <li>Key point or list item 2</li>
+            <li>Key point or list item 3</li>
+        </ul>
+
+        <p>Donec mattis consequat justo, non ultricies erat sagittis eget. Etiam facilisis erat eget felis luctus tristique. Nullam semper quam sed dolor euismod, et elementum lorem facilisis. Ut venenatis magna in luctus aliquet.</p>
+
+        <p>Aliquam vehicula consequat lacus, non faucibus felis laoreet a. Ut vel sem ex. Curabitur at gravida sapien. Integer ultrices pulvinar ex, at pharetra odio convallis a. Nunc ut risus finibus, iaculis orci ut, vestibulum felis.</p>
+    </div>
+
+    <!-- Tags Section -->
+    <div class="mb-12">
+        <h3 class="text-lg font-semibold text-gray-800 mb-4">Tags:</h3>
+        <div>
+            <span class="inline-block bg-gray-100 text-gray-500 text-sm px-3 py-1 rounded-full mr-2">E-commerce</span>
+            <span class="inline-block bg-gray-100 text-gray-500 text-sm px-3 py-1 rounded-full mr-2">Shopping</span>
+            <span class="inline-block bg-gray-100 text-gray-500 text-sm px-3 py-1 rounded-full mr-2">Trends</span>
+        </div>
+    </div>
+
+    <!-- Author Info -->
+    <div class="bg-gray-100 p-6 rounded-lg shadow-md mb-12 flex items-center">
+        <img class="w-16 h-16 rounded-full object-cover" src="https://via.placeholder.com/150" alt="Author">
+        <div class="ml-4">
+            <h4 class="text-lg font-semibold text-gray-800">Author Name</h4>
+            <p class="text-gray-600">A brief bio about the author, providing readers with some background on the writer of the blog.</p>
+        </div>
+    </div>
+
+    <!-- Related Posts Section -->
+    <div>
+        <h3 class="text-2xl font-bold text-gray-800 mb-6">Related Posts</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Related Post 1 -->
+            <div class="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                <a href="#">
+                    <img src="https://via.placeholder.com/600x400" alt="Related Post 1" class="w-full h-48 object-cover">
+                </a>
+                <div class="p-6">
+                    <span class="bg-blue-100 text-blue-500 text-sm px-3 py-1 rounded">Category 1</span>
+                    <h2 class="text-2xl font-semibold text-gray-800 mt-4 hover:text-blue-600 transition">
+                        Related Blog Post Title 1
+                    </h2>
+                    <p class="mt-2 text-gray-600">A brief description or excerpt of the related post.</p>
+                </div>
+            </div>
+
+            <!-- Related Post 2 -->
+            <div class="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                <a href="#">
+                    <img src="https://via.placeholder.com/600x400" alt="Related Post 2" class="w-full h-48 object-cover">
+                </a>
+                <div class="p-6">
+                    <span class="bg-blue-100 text-blue-500 text-sm px-3 py-1 rounded">Category 2</span>
+                    <h2 class="text-2xl font-semibold text-gray-800 mt-4 hover:text-blue-600 transition">
+                        Related Blog Post Title 2
+                    </h2>
+                    <p class="mt-2 text-gray-600">A brief description or excerpt of the related post.</p>
+                </div>
+            </div>
+
+            <!-- Related Post 3 -->
+            <div class="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                <a href="#">
+                    <img src="https://via.placeholder.com/600x400" alt="Related Post 3" class="w-full h-48 object-cover">
+                </a>
+                <div class="p-6">
+                    <span class="bg-blue-100 text-blue-500 text-sm px-3 py-1 rounded">Category 3</span>
+                    <h2 class="text-2xl font-semibold text-gray-800 mt-4 hover:text-blue-600 transition">
+                        Related Blog Post Title 3
+                    </h2>
+                    <p class="mt-2 text-gray-600">A brief description or excerpt of the related post.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
