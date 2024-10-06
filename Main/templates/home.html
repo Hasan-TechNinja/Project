@@ -303,28 +303,17 @@
 
 <div class="container mx-auto py-10">
     <h2 class="text-3xl font-bold text-center mb-8">From The Blog</h2>
-
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        <div class="bg-white rounded-lg p-4 shadow-md transition-transform transform hover:-translate-y-1 hover:shadow-xl">
-            <img src="{% static "img/drinks.png" %}" alt="Image 1" class="w-full h-60 object-cover rounded-lg mb-4">
-            <h3 class="text-xl font-semibold mb-2">6 Ways to Prepare Breakfast for 30</h3>
-            <p class="text-gray-700">Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat.</p>
-            <div class="text-sm text-gray-500">May 7, 2024</div>
-        </div>
-
-        <div class="bg-white rounded-lg p-4 shadow-md transition-transform transform hover:-translate-y-1 hover:shadow-xl">
-            <img src="{% static "img/drinks.png" %}" alt="Image 2" class="w-full h-60 object-cover rounded-lg mb-4">
-            <h3 class="text-xl font-semibold mb-2">What is Lorem Ipsum?</h3>
-            <p class="text-gray-700">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-            <div class="text-sm text-gray-500">May 7, 2024</div>
-        </div>
-
-        <div class="bg-white rounded-lg p-4 shadow-md transition-transform transform hover:-translate-y-1 hover:shadow-xl">
-            <img src="{% static "img/drinks.png" %}" alt="Image 3" class="w-full h-60 object-cover rounded-lg mb-4">
-            <h3 class="text-xl font-semibold mb-2">Where Can I Get Some?</h3>
-            <p class="text-gray-700">There are many variations of passages of Lorem Ipsum available.</p>
-            <div class="text-sm text-gray-500">May 7, 2024</div>
-        </div>
+        {% for blog in blog %}
+        <a href="#">
+            <div class="bg-white rounded-lg p-4 shadow-md transition-transform transform hover:-translate-y-1 hover:shadow-xl">
+                <img src="{{ blog.featured_image.url }}" alt="Image 1" class="w-full h-60 object-cover rounded-lg mb-4">
+                <h3 class="text-xl font-semibold mb-2">{{ blog.title }}</h3>
+                <p class="text-gray-700">{{ blog.content | truncatechars:200 | safe }}</p>
+                <div class="text-sm text-gray-500">{{ blog.publish_date }}</div>
+            </div>
+        </a>
+        {% endfor %}
     </div>
 </div>
 

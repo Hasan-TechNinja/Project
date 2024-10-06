@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views import View
-from . models import Product, Departments, Cart, BlogPost
+from . models import Product, Departments, Cart, BlogPost, Billing_Details
 from . forms import BillingDetailsForm
 from django.contrib.auth import authenticate
 from django.utils.html import strip_tags
@@ -14,9 +14,11 @@ class HomeView(View):
     def get(self, request, *args, **kwargs):
         products = Product.objects.all()[:12:-1]
         departments = Departments.objects.all()
+        blog = BlogPost.objects.all()[0:3:-1]
         context = {
             'products': products,
             'departments': departments,
+            'blog':blog
         }
         return render(request, 'home.html', context) 
     
@@ -199,18 +201,31 @@ def checkout(request):
 
         form = BillingDetailsForm(request.POST)
         # cart = Cart.objects.filter(user = request.user)
-
         if form.is_valid():
+            first_name=request.POST.get('first_name')
+            last_name=request.POST.get('last_name')
+            country=request.POST.get('country')
+            division=request.POST.get('division')
+            district=request.POST.get('district')
+            thana=request.POST.get('thana')
+            state=request.POST.get('state')
+            zip_code=request.POST.get('zip_code')
+            phone=request.POST.get('phone')
+            second_phone=request.POST.get('second_phone')
+            email=request.POST.get('email')
+            user = request.user
 
-            billing_details = form.save(commit=False)
-            billing_details.user = request.user  
-            billing_details.save()  
+            cart = Cart.objects.filter(user = user)
+
+        for c in cart:
+            Billing_Details(user=user, thana=thana,first_name=first_name, last_name=last_name, country=country, division=division, district=district, state=state,zip_code=zip_code, phone= phone, second_phone=second_phone, email=email, product=c.product, quantity=c.quantity).save()
+            c.delete()
 
             return redirect('home') 
-        else:
+        # else:
 
-            context = {'form': form}
-            return render(request, 'checkout.html', context)
+        #     context = {'form': form}
+            # return render(request, 'checkout.html', context)
 
     else:
 

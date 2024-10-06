@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django_countries.fields import CountryField
 from tinymce.models import HTMLField
 from django.utils import timezone
+from django.utils.text import slugify
 
 # Create your models here.
 
@@ -84,6 +85,8 @@ class Billing_Details(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
+    product=models.ForeignKey(Product, on_delete=models.CASCADE, blank=True, null= True)
+    quantity=models.PositiveIntegerField(default=1)
     country = CountryField(blank_label='(select country)')
     division = models.CharField(max_length=255)
     district = models.CharField(max_length=100)
@@ -99,9 +102,7 @@ class Billing_Details(models.Model):
     
 
 
-    from django.db import models
-from django.contrib.auth.models import User
-from django.utils.text import slugify
+
 
 class BlogPost(models.Model):
     title = models.CharField(max_length=255, blank=True, null=True)
@@ -133,3 +134,22 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.name
+
+
+# class OrderPlaced(models.Model):
+#     user=models.ForeignKey(User, on_delete=models.CASCADE)
+#     product=models.ForeignKey(Product, on_delete=models.CASCADE)
+#     quantity=models.PositiveIntegerField(default=1)
+#     ordered_date=models.DateTimeField(auto_now_add=True)
+#     status=models.CharField(default='Pending', max_length=50)
+#     name=models.CharField( max_length=50)
+#     company_name=models.CharField( max_length=50)
+#     address=models.CharField( max_length=50)
+#     town=models.CharField( max_length=50)
+#     upozila=models.CharField( max_length=50)
+#     postcode=models.CharField( max_length=50)
+#     mobile=models.CharField( max_length=50)
+#     email=models.EmailField( max_length=254)
+    
+#     def _str_(self):
+#         return str(self.user)

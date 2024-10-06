@@ -88,6 +88,8 @@ class Billing_DetailsAdmin(admin.ModelAdmin):
         'user',
         'first_name',
         'last_name',
+        'product',
+        'quantity',
         'country',
         'division',
         'district',
