@@ -3,16 +3,6 @@
 
 {% block content %}
 <div class="container mx-auto my-10">
-    <h1 class="text-3xl font-bold mb-5 text-center sm:text-left">Order Details</h1>
-
-    <!-- Order Info -->
-    <div class="bg-gray-100 p-5 rounded-lg shadow mb-10">
-        <h2 class="text-xl font-semibold text-center sm:text-left">Order #{{ order.id }}</h2>
-        <p class="text-gray-600 text-center sm:text-left">Placed on: {{ order.created_at }}</p>
-        <p class="text-gray-600 text-center sm:text-left">Total Price: {{ total_price }} Tk</p>
-        <p class="text-gray-600 text-center sm:text-left">Status: {% if order.is_paid %} Paid {% else %} Not Paid {% endif %}</p>
-    </div>
-
     <!-- Order Items -->
     <h2 class="text-2xl font-bold mb-5 text-center sm:text-left">Items</h2>
     <div class="overflow-x-auto">
@@ -43,6 +33,17 @@
                 {% endfor %}
             </tbody>
         </table>
+    </div>
+
+
+    <h1 class="text-3xl font-bold mb-5 text-center sm:text-left">Order Details</h1>
+
+    <!-- Order Info -->
+    <div class="bg-gray-100 p-5 rounded-lg shadow mb-10">
+        <h2 class="text-xl font-semibold text-center sm:text-left">Order #{{ order.id }}</h2>   
+        <p class="text-gray-600 text-center sm:text-left">Placed on: {{ address }}</p>
+        <p class="text-gray-600 text-center sm:text-left">Total Items: {{ total }} Product</p>
+        <p class="text-gray-600 text-center sm:text-left">Status: {% if order.is_paid %} Paid {% else %} Not Paid {% endif %}</p>
     </div>
 
     <!-- Total Price -->
