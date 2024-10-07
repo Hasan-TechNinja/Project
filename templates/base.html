@@ -73,7 +73,7 @@
                     <ul class="p-2">
                         {% if user.is_authenticated %}
                       <li><a href="{% url "showcart" %}">Cart</a></li>
-                      <li><a>Order</a></li>
+                      <li><a href="{% url "order" %}">Order</a></li>
                       {% endif %}
                     </ul>
                   </li>
@@ -99,7 +99,7 @@
                         <div class="absolute inset-0 bg-white/60 backdrop-blur-lg rounded-lg z-0"></div>
                         {% if user.is_authenticated %}
                         <li class="relative z-10"><a href="{% url "showcart" %}">Cart</a></li>
-                        <li class="relative z-10"><a href="#">Order</a></li>
+                        <li class="relative z-10"><a href="{% url "order" %}">Order</a></li>
                         {% endif %}
                       </ul>                      
                   </details>

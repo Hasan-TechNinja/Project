@@ -64,6 +64,7 @@ admin.site.register(Cart, CartAdmin)
 
 class BlogPostAdmin(admin.ModelAdmin):
     list_display = (
+        'id',
         'title',
         'slug',
         'author',
@@ -85,6 +86,7 @@ admin.site.register(BlogPost, BlogPostAdmin)
 
 class Billing_DetailsAdmin(admin.ModelAdmin):
     list_display = (
+        'id',
         'user',
         'first_name',
         'last_name',

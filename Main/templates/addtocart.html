@@ -11,6 +11,7 @@
   
     <div class="mt-6">
       <table class="w-full text-left">
+        {% if cart %}
         <thead>
             <tr class="border-b">
                 <th class="py-4">Products</th>
@@ -49,6 +50,21 @@
                 </tr>
           </tbody>
         {% endfor %}
+        {% else %}
+        <tbody>
+            <tr>
+                <td colspan="100%">
+                    <div class="flex justify-center py-10">
+                        <div class="flex flex-col justify-center items-center">
+                            <img src="{% static 'img/cart.jpg' %}" alt="Empty Cart" class="w-40 h-40 mb-4 md:w-72 md:h-72">
+                            <h2 class="text-xl font-semibold text-gray-700">Your Cart is Empty</h2>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    {% endif %}
+    
     </table>
     
   
@@ -93,9 +109,11 @@
                      <span>{{ subtotal }} Tk.</span>
                  </div>
              </div>
+             {% if cart %}
              <button class="bg-green-500 text-white px-6 py-3 rounded-lg w-full mt-4 hover:bg-green-600 transition">
                  <a href="{% url "checkout" %}">PROCEED TO CHECKOUT</a>
              </button>
+             {% endif %}
          </div>
      </div>
  </div>

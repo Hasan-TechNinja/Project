@@ -236,3 +236,20 @@ def checkout(request):
         'cart':cart
     }
     return render(request, 'checkout.html', context)
+
+def OrderView(request):
+    order = Billing_Details.objects.filter(user=request.user)
+    order_product = [p for p in order]
+
+    subtotal = 0  # Initialize the subtotal variable
+
+    for p in order_product:
+        if p.product:  # Check if product exists before calculating
+            p.linetotal = p.quantity * p.product.selling_price  # Calculate line total
+            subtotal += p.linetotal  # Add to subtotal
+
+    context = {
+        'order': order,
+        'subtotal': subtotal,
+    }
+    return render(request, 'order.html', context)

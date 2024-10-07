@@ -100,6 +100,9 @@ class Billing_Details(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name} ({self.user.username})"
     
+    def linetotal(self):
+        return self.product.selling_price * self.quantity
+    
 
 
 
