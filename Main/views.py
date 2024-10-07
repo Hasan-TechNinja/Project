@@ -222,10 +222,10 @@ def checkout(request):
             c.delete()
 
             return redirect('home') 
-        # else:
+        else:
 
-        #     context = {'form': form}
-            # return render(request, 'checkout.html', context)
+            context = {'form': form}
+            return render(request, 'checkout.html', context)
 
     else:
 

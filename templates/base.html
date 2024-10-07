@@ -14,7 +14,7 @@
     <!-- fontawoseome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <script>
+     <script>
         tailwind.config = {
             theme: {
                 extend: {
@@ -28,19 +28,20 @@
                         work4: 'rgb(119, 170, 234)',
                         secondary:'rgb(28, 28, 28)',
                     },
-                    backgroundImage: {
-                        form_img: "url('{% static "img/bg.avif" %}')",
-                        
-                    },
+                    
                     fontFamily: {
                         font: ['Manrope'],
                     },
                 },
             },
         }
-    </script>
+    </script> 
     <title>{% block title %}{% endblock title %} | Hasan</title>
-
+    
+    {% comment %} backgroundImage: {
+        form_img: "url('{% static "img/bg.avif" %}')",
+        
+    }, {% endcomment %}
 
 
 </head>

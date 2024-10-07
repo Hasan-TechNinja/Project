@@ -69,17 +69,6 @@ class Cart(models.Model):
         return self.product.selling_price * self.quantity
     
 
-# class Blog(models.Model):
-#     title = models.CharField(max_length=100)
-#     about = models.CharField(max_length=200, blank=True, null=True)
-#     description = models.TextField(blank=True, null=True)
-#     date = models.DateField(auto_now_add=True)
-#     comment = models.CharField(max_length=200, blank=True, null=True)
-#     image = models.ImageField(upload_to='Blog')
-
-#     def __str__(self):
-#         return self.title
-    
 
 class Billing_Details(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -137,22 +126,3 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.name
-
-
-# class OrderPlaced(models.Model):
-#     user=models.ForeignKey(User, on_delete=models.CASCADE)
-#     product=models.ForeignKey(Product, on_delete=models.CASCADE)
-#     quantity=models.PositiveIntegerField(default=1)
-#     ordered_date=models.DateTimeField(auto_now_add=True)
-#     status=models.CharField(default='Pending', max_length=50)
-#     name=models.CharField( max_length=50)
-#     company_name=models.CharField( max_length=50)
-#     address=models.CharField( max_length=50)
-#     town=models.CharField( max_length=50)
-#     upozila=models.CharField( max_length=50)
-#     postcode=models.CharField( max_length=50)
-#     mobile=models.CharField( max_length=50)
-#     email=models.EmailField( max_length=254)
-    
-#     def _str_(self):
-#         return str(self.user)
