@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}Home{% endblock title %}
+<script></script>
 {% block content %}
 
 <div class="container mx-auto grid grid-cols-1 lg:grid-cols-7 lg:w-11/12">
@@ -32,73 +33,50 @@
 
   
     <div class="bg-form_img bg-cover bg-fixed lg:col-span-5 relative my-3">
-       
+        <!-- Overlay to darken background image -->
         <div class="absolute inset-0 bg-black bg-opacity-60"></div>
       
-        {% comment %} <div class="relative z-10 px-10 lg:px-20 py-20">
-            <h1 class="text-3xl lg:text-5xl text-white font-bold leading-tight">Vegetable <br> 100% Organic</h1>
-            <p class="text-base font-medium text-white py-7">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, minus?</p>
-            <button class="btn bg-primary text-white py-2 px-6 rounded-md">Shop Now</button>
-        </div> 
-
-        
-        {% comment %} carousel start {% endcomment %}
-        <div id="carouselExampleCaptions" class="relative">
-            <!-- Carousel Indicators -->
-            <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-3 z-10">
-              <button type="button" class="w-3 h-3 md:w-4 md:h-4 bg-white rounded-full opacity-70 hover:opacity-100 focus:outline-none" data-carousel-slide-to="0" aria-current="true" aria-label="Slide 1"></button>
-              <button type="button" class="w-3 h-3 md:w-4 md:h-4 bg-white rounded-full opacity-70 hover:opacity-100 focus:outline-none" data-carousel-slide-to="1" aria-label="Slide 2"></button>
-              <button type="button" class="w-3 h-3 md:w-4 md:h-4 bg-white rounded-full opacity-70 hover:opacity-100 focus:outline-none" data-carousel-slide-to="2" aria-label="Slide 3"></button>
-            </div>
-          
-            <!-- Carousel Items -->
-            <div class="overflow-hidden relative h-64 md:h-96 rounded-lg shadow-lg">
-              <!-- First Slide -->
-              <div class="carousel-item absolute inset-0 transition-opacity duration-700 ease-in-out opacity-100">
-                <img src="https://via.placeholder.com/1200x600" class="w-full h-full object-cover rounded-lg" alt="First Slide">
-                <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70 rounded-lg"></div>
-                <div class="absolute bottom-5 left-5 md:left-10 md:bottom-10 text-white">
-                  <h5 class="text-xl md:text-2xl font-bold">First Slide Label</h5>
-                  <p class="text-sm md:text-base">Some representative placeholder content for the first slide.</p>
-                </div>
-              </div>
-          
-              <!-- Second Slide -->
-              <div class="carousel-item absolute inset-0 transition-opacity duration-700 ease-in-out opacity-0">
-                <img src="https://via.placeholder.com/1200x600" class="w-full h-full object-cover rounded-lg" alt="Second Slide">
-                <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70 rounded-lg"></div>
-                <div class="absolute bottom-5 left-5 md:left-10 md:bottom-10 text-white">
-                  <h5 class="text-xl md:text-2xl font-bold">Second Slide Label</h5>
-                  <p class="text-sm md:text-base">Some representative placeholder content for the second slide.</p>
-                </div>
-              </div>
-          
-              <!-- Third Slide -->
-              <div class="carousel-item absolute inset-0 transition-opacity duration-700 ease-in-out opacity-0">
-                <img src="https://via.placeholder.com/1200x600" class="w-full h-full object-cover rounded-lg" alt="Third Slide">
-                <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70 rounded-lg"></div>
-                <div class="absolute bottom-5 left-5 md:left-10 md:bottom-10 text-white">
-                  <h5 class="text-xl md:text-2xl font-bold">Third Slide Label</h5>
-                  <p class="text-sm md:text-base">Some representative placeholder content for the third slide.</p>
-                </div>
-              </div>
-            </div>
-          
-            <!-- Previous Button -->
-            <button class="absolute top-1/2 left-2 md:left-5 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 focus:outline-none" data-carousel-prev>
-              <span class="material-icons">left</span>
-              <span class="sr-only">Previous</span>
-            </button>
-          
-            <!-- Next Button -->
-            <button class="absolute top-1/2 right-2 md:right-5 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 focus:outline-none" data-carousel-next>
-              <span class="material-icons">right</span>
-              <span class="sr-only">Next</span>
-            </button>
+        <!-- Carousel Start -->
+        <div id="carouselExampleCaptions" class="relative z-10">
+          <!-- Carousel Indicators -->
+          <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-3 z-10">
+            {% comment %} <button type="button" class="w-3 h-3 md:w-4 md:h-4 bg-white rounded-full opacity-70 hover:opacity-100 focus:outline-none" data-carousel-slide-to="0" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" class="w-3 h-3 md:w-4 md:h-4 bg-white rounded-full opacity-70 hover:opacity-100 focus:outline-none" data-carousel-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" class="w-3 h-3 md:w-4 md:h-4 bg-white rounded-full opacity-70 hover:opacity-100 focus:outline-none" data-carousel-slide-to="2" aria-label="Slide 3"></button> {% endcomment %}
           </div>
-                    
-        {% comment %} carousel end {% endcomment %}
-    </div>
+      
+          <!-- Carousel Items -->
+          <div class="overflow-hidden relative h-64 md:h-96 rounded-lg shadow-lg">
+            <!-- Loop through slides -->
+            {% for Carousel in Carousel %}
+            <a href="#">
+                <div class="carousel-item absolute inset-0 transition-opacity duration-700 ease-in-out {{ forloop.first|yesno:'opacity-100,opacity-0' }}">
+                    <img src="{{ Carousel.banner.url }}" class="w-full h-full object-cover rounded-lg" alt="{{ Carousel.title }}">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70 rounded-lg"></div>
+                    <div class="absolute bottom-5 left-5 md:left-10 md:bottom-10 text-white">
+                      <h5 class="text-xl md:text-2xl font-bold">{{ Carousel.title }}</h5>
+                      <p class="text-sm md:text-base">{{ Carousel.description }}</p>
+                    </div>
+                  </div>
+            </a>
+            {% endfor %}
+          </div>
+      
+          <!-- Previous Button -->
+          <button class="absolute top-1/2 left-2 md:left-5 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 focus:outline-none" data-carousel-prev>
+            <span class="material-icons"><</span>
+            <span class="sr-only">Previous</span>
+          </button>
+      
+          <!-- Next Button -->
+          <button class="absolute top-1/2 right-2 md:right-5 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 focus:outline-none" data-carousel-next>
+            <span class="material-icons">></span>
+            <span class="sr-only">Next</span>
+          </button>
+        </div>
+        <!-- Carousel End -->
+      </div>
+      
 </div>
 
 {% comment %} ----------------------------------------------------------------------- {% endcomment %}
@@ -382,5 +360,5 @@
 
 {% comment %} <script src="{% static 'js/app.js' %}"></script> {% endcomment %}
 <script src="{% static "js/scripts.js" %}"></script>
-
+<script src="{% static "js/home.js" %}"></script>
 {% endblock content %}  

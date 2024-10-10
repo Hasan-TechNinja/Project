@@ -103,23 +103,26 @@ prevBtn2.addEventListener("click", () => {
 
 
 // Search functionality
-// document.addEventListener("DOMContentLoaded", function () {
-//   const searchForm = document.getElementById("search-form");
-//   const searchInput = document.getElementById("search-input");
-//   const searchButton = document.getElementById("search-button");
+document.addEventListener("DOMContentLoaded", function () {
+  const searchForm = document.getElementById("search-form");
+  const searchInput = document.getElementById("search-input");
+  const searchButton = document.getElementById("search-button");
 
-//   searchForm.addEventListener("submit", function (e) {
-//     e.preventDefault();
-//     const query = searchInput.value.trim();
-//     if (query) {
-//       // Redirect to search page with query parameter
-//       window.location.href = `/search?query=${encodeURIComponent(query)}`;
-//     } else {
-//       alert("Please enter a search term");
-//     }
-//   });
+  searchForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const query = searchInput.value.trim();
+    if (query) {
+      // Redirect to search page with query parameter
+      window.location.href = `/search?query=${encodeURIComponent(query)}`;
+    } else {
+      alert("Please enter a search term");
+    }
+  });
 
-//   searchButton.addEventListener("click", function () {
-//     searchForm.submit();
-//   });
-// });
+  searchButton.addEventListener("click", function () {
+    searchForm.submit();
+  });
+});
+
+
+

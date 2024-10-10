@@ -141,7 +141,7 @@ class HomeCarousel(models.Model):
     name = models.CharField(max_length=300, blank=True, null=True)
     title = models.CharField(max_length=100, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
-    link = models.CharField(max_length=500, blank=True, null=True)
+    link = models.CharField(max_length=500, blank=True, null=True, default="#")
     banner = models.ImageField(upload_to='Project')
 
     def __str__(self):
