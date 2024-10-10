@@ -133,7 +133,10 @@
             <div class="card-body">
                 <div class='flex justify-between sm:flex-row sm:justify-between'>
                     <h2 class="card-title text-xl font-semibold">{{ product.name }}</h2>
-                    <h2 class="card-title text-xl font-semibold">{{ product.selling_price }} Tk</h2>
+                    <div>
+                      <h2 class="card-title text-xl font-semibold">{{ product.selling_price }} Tk</h2>
+                     <span class="text-sm text-red-500 line-through">{{ product.selling_price }} Tk</span>
+                    </div>
                 </div>
                 <p class="mt-2">{{ product.description|truncatechars:80 }}</p>
                 <div class="card-actions justify-end mt-4">

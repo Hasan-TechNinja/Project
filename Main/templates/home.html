@@ -162,7 +162,7 @@
                         <!-- Discounted price -->
                         <span class="text-xl font-semibold">{{ product.discount_price }} Tk</span>
                         <!-- Main price crossed out, smaller font -->
-                        <span class="text-sm text-gray-500 line-through">{{ product.selling_price }} Tk</span>
+                        <span class="text-sm text-red-500 line-through">{{ product.selling_price }} Tk</span>
                     {% else %}
                         <!-- Only main price (no discount) -->
                         <span class="text-xl font-semibold">{{ product.selling_price }} Tk</span>

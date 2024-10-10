@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import Product, Departments, Category, Size, Cart, BlogPost, Billing_Details, Brand, HomeCarousel
+from . models import Product, Departments, Category, Size, Cart, BlogPost, Billing_Details, Brand, HomeCarousel, Review
 
 # Register your models here.
 
@@ -125,3 +125,15 @@ class HomeCarouselAdmin(admin.ModelAdmin):
         'banner'
     )
 admin.site.register(HomeCarousel, HomeCarouselAdmin)
+
+
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = (
+        'product',
+        'user',
+        'rating',
+        'comment',
+        'created_at',
+        'updated_at'
+    )
+admin.site.register(Review, ReviewAdmin)

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Billing_Details
+from .models import Billing_Details, Review
 
 class BillingDetailsForm(forms.ModelForm):
     class Meta:
@@ -20,4 +20,15 @@ class BillingDetailsForm(forms.ModelForm):
             'phone': forms.TextInput(attrs={'class': 'mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500', 'placeholder': 'Phone'}),
             'second_phone': forms.TextInput(attrs={'class': 'mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500', 'placeholder': 'Second Phone (optional)'}),
             'email': forms.EmailInput(attrs={'class': 'mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500', 'placeholder': 'Email'}),
+        }
+
+
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ['rating', 'comment']
+        widgets = {
+            'rating': forms.TextInput(attrs={'class': 'mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500', 'placeholder': 'Rating'}),
+            'comment': forms.TextInput(attrs={'class': 'mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500', 'placeholder': 'Comment'}),
         }
