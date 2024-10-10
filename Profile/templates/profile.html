@@ -27,6 +27,7 @@
                 <h2 class='text-xl font-semibold text-left'>Cart Information</h2>
                 <hr class="my-2">
                 <div class="space-y-2">
+                    {% if cart %}
                     {% for cart in cart|slice:":3" %}
                     <div class='flex justify-between items-center border-b pb-2 shadow-md'>
                         <img class='h-14 w-14 rounded-md' src="{{ cart.product.image.url }}" alt="Product Image">
@@ -36,6 +37,20 @@
                         </div>
                     </div>
                     {% endfor %}
+                    {% else %}
+                    <tbody>
+                        <tr>
+                            <td colspan="100%">
+                                <div class="flex justify-center py-10">
+                                    <div class="flex flex-col justify-center items-center">
+                                        <img src="{% static 'img/cart.jpg' %}" alt="Empty Cart" class="w-40 h-40 mb-4 md:w-38 md:h-38">
+                                        <h2 class="text-xl font-semibold text-gray-700">Empty</h2>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                    {% endif %}
                 </div>
                 <div class='mt-6'>
                     <button class='w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition font-semibold'>
@@ -49,6 +64,7 @@
                 <h2 class='text-xl font-bold mb-3'>Order Information</h2>
                 <hr>
                 <div class="space-y-2">
+                    {% if order %}
                     {% for order in order|slice:":3" %}
                     <div class='flex justify-between items-center border-b pb-2 shadow-md'>
                         <img class='h-14 w-14 rounded-md' src="{{ order.product.image.url }}" alt="Product Image">
@@ -58,6 +74,20 @@
                         </div>
                     </div>
                     {% endfor %}
+                    {% else %}
+                    <tbody>
+                        <tr>
+                            <td colspan="100%">
+                                <div class="flex justify-center py-10">
+                                    <div class="flex flex-col justify-center items-center">
+                                        <img src="{% static 'img/cart.jpg' %}" alt="Empty Cart" class="w-40 h-40 mb-4 md:w-38 md:h-38">
+                                        <h2 class="text-xl font-semibold text-gray-700">Empty</h2>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                    {% endif %}
                 </div>
                 <div class='mt-6'>
                     <button class='w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition font-semibold'>
