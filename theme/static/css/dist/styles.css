@@ -3263,14 +3263,6 @@ select {
     height: 24rem;
   }
 
-  .md\:h-40 {
-    height: 10rem;
-  }
-
-  .md\:h-3 {
-    height: 0.75rem;
-  }
-
   .md\:w-1\/2 {
     width: 50%;
   }

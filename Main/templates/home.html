@@ -363,7 +363,7 @@
     <h2 class="text-3xl font-bold text-center mb-8">From The Blog</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {% for blog in blog %}
-        <a href="#">
+        <a href="{% url "blogdetails" blog.id %}">
             <div class="bg-white rounded-lg p-4 shadow-md transition-transform transform hover:-translate-y-1 hover:shadow-xl">
                 <img src="{{ blog.featured_image.url }}" alt="Image 1" class="w-full h-60 object-cover rounded-lg mb-4">
                 <h3 class="text-xl font-semibold mb-2">{{ blog.title }}</h3>

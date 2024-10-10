@@ -10,18 +10,18 @@
 
     <!-- Blog Title & Metadata -->
     <div class="mb-8 text-center">
-        <h1 class="text-4xl font-bold text-gray-800 mb-4">Blog Post Title</h1>
-        <p class="text-gray-500">Published on <span class="font-semibold">March 5, 2024</span> | by <span class="font-semibold">Author Name</span></p>
+        <h1 class="text-4xl font-bold text-gray-800 mb-4">{{ blog.title }}</h1>
+        <p class="text-gray-500">Published on <span class="font-semibold">{{ blog.publish_date }}</span> | by <span class="font-semibold">{{ blog.auther }}</span></p>
     </div>
 
     <!-- Blog Cover Image -->
     <div class="mb-8">
-        <img src="https://via.placeholder.com/1200x600" alt="Blog Cover" class="w-full h-auto rounded-lg shadow-md">
+        <img src="{{ blog.featured_image.url }}" alt="Blog Cover" class="w-full h-auto rounded-lg shadow-md">
     </div>
 
     <!-- Blog Content -->
     <div class="prose prose-lg max-w-none text-gray-700 leading-relaxed mb-12">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id arcu aliquet, elementum nisi quis, condimentum nibh. Vestibulum lacinia tellus ut feugiat sagittis. Fusce tincidunt metus nec arcu ultrices, eget suscipit velit tempor. Donec fermentum leo lorem, eu faucibus eros egestas sit amet. Nam volutpat tincidunt lectus a imperdiet.</p>
+        <p>{{ blog.content|striptags }}</p>
 
         <h2>Section Heading</h2>
         <p>Nam tristique, libero id bibendum viverra, orci dui sodales sapien, vel euismod nisi est sit amet sapien. Quisque vehicula tincidunt justo at suscipit. Aenean commodo ultrices imperdiet. Aenean eget ligula ut velit vehicula vestibulum vitae ac lacus.</p>

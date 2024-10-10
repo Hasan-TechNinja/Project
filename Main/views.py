@@ -189,8 +189,15 @@ def BlogView(request):
 
 
 
-def BlogDetails(request):
-    return render(request, 'blogdetails.html')
+class BlogDetails(View):
+    def get(self, request, pk):
+        Blog = get_object_or_404(BlogPost, pk=pk)
+        category = Blog.category
+        print(category)
+        context = {
+            'blog':Blog
+        }
+        return render(request, 'blogdetails.html', context)
 
 
 
