@@ -34,7 +34,14 @@ class Size(models.Model):
     def __str__(self):
         return self.name
 
+class Brand(models.Model):
+    name = models.CharField(max_length=100)
+    link = models.CharField(max_length=500)
+    logo = models.ImageField(upload_to='brand', null=True, blank=True)  
+    banner = models.ImageField(upload_to='brand', null=True, blank=True)
 
+    def __str__(self):
+        return self.name
 
 class Product(models.Model):
     name = models.CharField(max_length=255)
@@ -49,6 +56,8 @@ class Product(models.Model):
     image4 = models.ImageField(upload_to='products/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE, related_name='products', null=True)
+    # Shipping = models.CharField(max_length=50)
     department = models.ForeignKey(Departments, on_delete=models.CASCADE, related_name='products')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
     size = models.ForeignKey(Size, on_delete=models.CASCADE, related_name='products', blank=True, null=True)
@@ -123,6 +132,17 @@ class BlogPost(models.Model):
 
 class Tag(models.Model):
     name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
+class HomeCarousel(models.Model):
+    name = models.CharField(max_length=300, blank=True, null=True)
+    title = models.CharField(max_length=100, blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    link = models.CharField(max_length=500, blank=True, null=True)
+    banner = models.ImageField(upload_to='Project')
 
     def __str__(self):
         return self.name

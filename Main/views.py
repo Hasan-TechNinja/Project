@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views import View
-from . models import Product, Departments, Cart, BlogPost, Billing_Details
+from . models import Product, Departments, Cart, BlogPost, Billing_Details, HomeCarousel
 from . forms import BillingDetailsForm
 from django.contrib.auth import authenticate
 from django.utils.html import strip_tags
@@ -15,10 +15,13 @@ class HomeView(View):
         products = Product.objects.all()[:12:-1]
         departments = Departments.objects.all()
         blog = BlogPost.objects.all()[0:3:-1]
+        Carousel = HomeCarousel.objects.all()
+        
         context = {
             'products': products,
             'departments': departments,
-            'blog':blog
+            'blog':blog,
+            'Carousel':Carousel
         }
         return render(request, 'home.html', context) 
     
@@ -45,6 +48,12 @@ class ShopView(View):
 class ProductDetails(View):
     def get(self, request, pk):
         product = get_object_or_404(Product, pk=pk)
+        quantity = product.stock
+        if quantity < 1:
+            stoke = "Stoke out!"
+        else:
+            stoke = quantity
+
         department_description = product.department.description
         all = Product.objects.all()
         
@@ -52,6 +61,7 @@ class ProductDetails(View):
 
         context = {
             'product': product,
+            'stoke':stoke,
             'rproduct':related_products,
             'department_description':department_description,
             

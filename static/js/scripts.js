@@ -100,3 +100,26 @@ prevBtn2.addEventListener("click", () => {
   if (scrollAmount < 0) scrollAmount = 0;
   carouselContainer.style.transform = `translateX(-${scrollAmount}px)`;
 });
+
+
+// Search functionality
+// document.addEventListener("DOMContentLoaded", function () {
+//   const searchForm = document.getElementById("search-form");
+//   const searchInput = document.getElementById("search-input");
+//   const searchButton = document.getElementById("search-button");
+
+//   searchForm.addEventListener("submit", function (e) {
+//     e.preventDefault();
+//     const query = searchInput.value.trim();
+//     if (query) {
+//       // Redirect to search page with query parameter
+//       window.location.href = `/search?query=${encodeURIComponent(query)}`;
+//     } else {
+//       alert("Please enter a search term");
+//     }
+//   });
+
+//   searchButton.addEventListener("click", function () {
+//     searchForm.submit();
+//   });
+// });

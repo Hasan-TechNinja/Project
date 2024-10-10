@@ -31,14 +31,15 @@
       <!-- Product Details Section -->
       <div class='px-3'>
         <h1 class="text-3xl font-bold">{{ product.name }}</h1>
-        {% comment %} <div class="flex items-center space-x-2">
+       <div class="flex items-center space-x-2">
           <div class="flex space-x-1 text-yellow-500">
             <!-- Star rating can be added using icons or emojis -->
             ★★★★☆
           </div>
           <span class="text-sm text-gray-600">(4 reviews)</span>
-        </div> {% endcomment %}
-        <p class="text-2xl font-semibold text-red-500 mt-2">{{ product.discount_price }}Tk</p>
+        </div> 
+        <p class="text-2xl font-semibold text-green-600 mt-2">{{ product.discount_price }}Tk</p>  
+        <span class="text-sm text-gray-500 line-through">{{ product.selling_price }} Tk</span>
   
         <p class="mt-4 text-gray-700">
           {{ product.description }}
@@ -50,7 +51,7 @@
             <button class="px-2 py-1 bg-gray-100 text-gray-700">-</button>
             <input type="number" value="1" class="w-12 text-center py-1 border-l border-r border-gray-300">
             <button class="px-2 py-1 bg-gray-100 text-gray-700">+</button>
-          </div> {% endcomment %}
+          </div>
           
           {% comment %} <button class="bg-gray-800 text-white px-6 py-2 rounded-lg hover:bg-gray-900">
             <a href="{% url "addtocart" %}">Add to Cart</a>
@@ -68,13 +69,13 @@
           </button>
         </div>
   
-        {% comment %} <!-- Availability, Shipping, and Weight -->
+        <!-- Availability, Shipping, and Weight -->
         <ul class="mt-6 space-y-2">
-          <li><strong>Availability:</strong> In Stock</li>
+
+          <li><strong>Availability:</strong> {{ stoke }}</li>
           <li><strong>Shipping:</strong> 01 day shipping. <span class="text-red-500">Free pickup today</span></li>
-          <li><strong>Weight:</strong> 0.5 kg</li>
+          <li><strong>Brand: </strong><a class='hover:underline hover:text-blue-700' href="#">{{ product.brand }}</a></li>
         </ul>
-  
         <!-- Social Media Sharing -->
         <div class="mt-4 flex space-x-4">
           <a href="#" class="text-gray-500 hover:text-gray-800">
@@ -89,7 +90,7 @@
           <a href="#" class="text-gray-500 hover:text-gray-800">
             <i class="fab fa-pinterest"></i>
           </a>
-        </div> {% endcomment %}
+        </div>
       </div>
     </div>
   </div>

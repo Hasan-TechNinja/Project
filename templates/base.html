@@ -47,92 +47,114 @@
 </head>
 <body class='bg-white'>
     {% comment %} nav start {% endcomment %}
-    <nav class="lg:w-11/12 text-text_col mx-auto ">
+    <nav class="lg:w-11/12 text-text_col mx-auto">
         <div class="navbar bg-white">
-            <div class="navbar-start">
-              <div class="dropdown">
-                <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M4 6h16M4 12h8m-8 6h16" />
-                  </svg>
-                </div>
-                <ul
-                  tabindex="0"
-                  class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                  <li><a></a></li>
-                  <li>
-                    <a>pages</a>
-                    <ul class="p-2">
-                        {% if user.is_authenticated %}
-                      <li><a href="{% url "showcart" %}">Cart</a></li>
-                      <li><a href="{% url "order" %}">Order</a></li>
-                      {% endif %}
-                    </ul>
-                  </li>
-                  <li><a class="hover:bg-primary" href='{% url "home" %}'>Home</a></li>
-                <li><a class="hover:bg-primary" href='{% url "shop" %}'>Shop</a></li>
-                <li><a class="hover:bg-primary" href='{% url "blog" %}' >Blog</a></li>
-                <li><a class="hover:bg-primary" href='#' >Contact</a></li>
-                </ul>
+          <div class="navbar-start">
+            <div class="dropdown">
+              <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4 6h16M4 12h8m-8 6h16" />
+                </svg>
               </div>
-              <a class="btn btn-ghost text-3xl font-bold hover:bg-white" href='{% url "home" %}'>Hasan <span class="text-primary ">Zone</span></a>
-            </div>
-            <div class="navbar-center  hidden lg:flex">
-              <ul class="menu menu-horizontal text-base font-medioum px-1">
-                <li><a class="hover:bg-primary" href="{% url "home" %}">Home</a></li>
-                <li><a class="hover:bg-primary" href="{% url "shop" %}">Shop</a></li>
-                {% comment %} {% if user.is_authenticated %}
-                <li><a class="hover:bg-primary" href="{% url "showcart" %}">Cart</a></li>
-                {% endif %} {% endcomment %}
+              <ul
+                tabindex="0"
+                class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                <li><a></a></li>
                 <li>
-                  <details class="hover:bg-primary">
-                    <summary >Pages</summary>
-                    <ul class="p-2 relative">
-                        <div class="absolute inset-0 bg-white/60 backdrop-blur-lg rounded-lg z-0"></div>
-                        {% if user.is_authenticated %}
-                        <li class="relative z-10"><a href="{% url "showcart" %}">Cart</a></li>
-                        <li class="relative z-10"><a href="{% url "order" %}">Order</a></li>
-                        {% endif %}
-                      </ul>                      
-                  </details>
+                  <a>pages</a>
+                  <ul class="p-2">
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url "showcart" %}">Cart</a></li>
+                    <li><a href="{% url "order" %}">Order</a></li>
+                    {% endif %}
+                  </ul>
                 </li>
-                <li><a class="hover:bg-primary" href='{% url "blog" %}' >Blog</a></li>
-                {% if user.is_authenticated %}
-                <li><a class="hover:bg-primary" href='#' >Contact</a></li>
-                {% endif %}
+                <li><a class="hover:bg-primary" href='{% url "home" %}'>Home</a></li>
+                <li><a class="hover:bg-primary" href='{% url "shop" %}'>Shop</a></li>
+                <li><a class="hover:bg-primary" href='{% url "blog" %}'>Blog</a></li>
+                <li><a class="hover:bg-primary" href='#'>Contact</a></li>
               </ul>
             </div>
-            <div class="navbar-end">
+            <a class="btn btn-ghost text-3xl font-bold hover:bg-white" href='{% url "home" %}'>Hasan <span class="text-primary ">Zone</span></a>
+          </div>
+      
+          <!-- Desktop Search Bar -->
+          <div class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal text-base font-medioum px-1">
+              <li><a class="hover:bg-primary" href="{% url "home" %}">Home</a></li>
+              <li><a class="hover:bg-primary" href="{% url "shop" %}">Shop</a></li>
+              <li>
+                <details class="hover:bg-primary">
+                  <summary>Pages</summary>
+                  <ul class="p-2 relative">
+                    <div class="absolute inset-0 bg-white/60 backdrop-blur-lg rounded-lg z-0"></div>
+                    {% if user.is_authenticated %}
+                    <li class="relative z-10"><a href="{% url "showcart" %}">Cart</a></li>
+                    <li class="relative z-10"><a href="{% url "order" %}">Order</a></li>
+                    {% endif %}
+                  </ul>
+                </details>
+              </li>
+              <li><a class="hover:bg-primary" href='{% url "blog" %}'>Blog</a></li>
               {% if user.is_authenticated %}
-              
-                  {% if request.path == '/profile/' %}
-                      <a class="btn bg-yellow-300 hover:bg-red-300" href="{% url 'logout' %}">
-                          <span><i class="fa-solid fa-user"></i> <span>Logout</span></span>
-                      </a>
-                  {% else %}
-                      <a class="btn bg-primary hover:bg-primary" href="{% url 'profile' %}">
-                          <span><i class="fa-solid fa-user"></i> <span>Profile</span></span>
-                      </a>
-                  {% endif %}
-              {% else %}
-                  <a class="btn bg-primary hover:bg-primary" href="{% url 'login' %}">
-                      <span><i class="fa-solid fa-user"></i> <span>Login</span></span>
-                  </a>
+              <li><a class="hover:bg-primary" href='#'>Contact</a></li>
               {% endif %}
+            </ul>
           </div>
-          
-          
+      
+          <!-- Search form for desktop -->
+          <div class="navbar-center hidden lg:flex">
+            <form action="#" method="get" class="flex items-center">
+              <input type="text" name="query" placeholder="Search..." class="input input-bordered w-full max-w-xs" />
+              <button type="submit" class="btn bg-primary hover:bg-primary ml-2">Search</button>
+            </form>
           </div>
-    </nav>
+      
+          <!-- Mobile search button -->
+          <div class="navbar-end lg:hidden">
+            <button tabindex="0" class="btn btn-ghost" id="mobile-search-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M18 10a8 8 0 11-16 0 8 8 0 0116 0z" />
+              </svg>
+            </button>
+          </div>
+      
+          <!-- Mobile search bar (appears when clicking search icon) -->
+          <div class="navbar-center lg:hidden" id="mobile-search" style="display: none;">
+            <form action="#" method="get" class="flex items-center w-full">
+              <input type="text" name="query" placeholder="Search..." class="input input-bordered w-full" />
+              <button type="submit" class="btn bg-primary hover:bg-primary ml-2">Search</button>
+            </form>
+          </div>
+      
+          <div class="navbar-end">
+            {% if user.is_authenticated %}
+            {% if request.path == '/profile/' %}
+            <a class="btn bg-yellow-300 hover:bg-red-300" href="{% url 'logout' %}">
+              <span><i class="fa-solid fa-user"></i> <span>Logout</span></span>
+            </a>
+            {% else %}
+            <a class="btn bg-primary hover:bg-primary" href="{% url 'profile' %}">
+              <span><i class="fa-solid fa-user"></i> <span>Profile</span></span>
+            </a>
+            {% endif %}
+            {% else %}
+            <a class="btn bg-primary hover:bg-primary" href="{% url 'login' %}">
+              <span><i class="fa-solid fa-user"></i> <span>Login</span></span>
+            </a>
+            {% endif %}
+          </div>
+        </div>
+      </nav>
     {% comment %} nav end {% endcomment %}
 
 
