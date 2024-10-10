@@ -1,56 +1,56 @@
-console.log('inside scripts.js')
-document.addEventListener("DOMContentLoaded", function () {
-  const container = document.getElementById("carousel-container");
-  const prevBtn1 = document.getElementById("prevBtn");
-  const Btn = document.getElementById("nextBtn");
+// console.log('inside scripts.js')
+// document.addEventListener("DOMContentLoaded", function () {
+//   const container = document.getElementById("carousel-container");
+//   const prevBtn1 = document.getElementById("prevBtn");
+//   const Btn = document.getElementById("nextBtn");
 
-  let index = 0;
-  const item = container.querySelector(".flex-shrink-0");
-  if (item != null) {
-    let itemWidth = item.offsetWidth;
-    const totalItems = container.children.length;
+//   let index = 0;
+//   const item = container.querySelector(".flex-shrink-0");
+//   if (item != null) {
+//     let itemWidth = item.offsetWidth;
+//     const totalItems = container.children.length;
 
-    function updateCarousel() {
-      container.style.transform = `translateX(-${index * itemWidth}px)`;
-    }
+//     function updateCarousel() {
+//       container.style.transform = `translateX(-${index * itemWidth}px)`;
+//     }
 
-    prevBtn1.addEventListener("click", () => {
-      index = index > 0 ? index - 1 : totalItems - 1;
-      updateCarousel();
-    });
+//     prevBtn1.addEventListener("click", () => {
+//       index = index > 0 ? index - 1 : totalItems - 1;
+//       updateCarousel();
+//     });
 
-    Btn.addEventListener("click", () => {
-      index = index < totalItems - 1 ? index + 1 : 0;
-      updateCarousel();
-    });
-  }
-});
+//     Btn.addEventListener("click", () => {
+//       index = index < totalItems - 1 ? index + 1 : 0;
+//       updateCarousel();
+//     });
+//   }
+// });
 
-const container = document.getElementById("carousel-container");
-const prevBtn = document.getElementById('prevBtn');
-const nextBtn = document.getElementById('nextBtn');
-const items = container.children.length;
-let currentIndex = 0;
+// const container = document.getElementById("carousel-container");
+// const prevBtn = document.getElementById('prevBtn');
+// const nextBtn = document.getElementById('nextBtn');
+// const items = container.children.length;
+// let currentIndex = 0;
 
-function updateCarousel() {
-  const itemWidth = container.children[0].offsetWidth;
-  const offset = -currentIndex * itemWidth;
-  container.style.transform = `translateX(${offset}px)`;
-}
+// function updateCarousel() {
+//   const itemWidth = container.children[0].offsetWidth;
+//   const offset = -currentIndex * itemWidth;
+//   container.style.transform = `translateX(${offset}px)`;
+// }
 
-nextBtn.addEventListener("click", () => {
-  if (currentIndex < items - 1) {
-    currentIndex++;
-    updateCarousel();
-  }
-});
+// nextBtn.addEventListener("click", () => {
+//   if (currentIndex < items - 1) {
+//     currentIndex++;
+//     updateCarousel();
+//   }
+// });
 
-prevBtn.addEventListener("click", () => {
-  if (currentIndex > 0) {
-    currentIndex--;
-    updateCarousel();
-  }
-});
+// prevBtn.addEventListener("click", () => {
+//   if (currentIndex > 0) {
+//     currentIndex--;
+//     updateCarousel();
+//   }
+// });
 
 window.addEventListener("resize", updateCarousel);
 

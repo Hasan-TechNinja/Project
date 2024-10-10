@@ -21,7 +21,7 @@
 
     <!-- Blog Content -->
     <div class="prose prose-lg max-w-none text-gray-700 leading-relaxed mb-12">
-        <p>{{ blog.content|striptags }}</p>
+        <p class='text-sm md:text-lg'>{{ blog.content|striptags }}</p>
 
         <h2>Section Heading</h2>
         <p>Nam tristique, libero id bibendum viverra, orci dui sodales sapien, vel euismod nisi est sit amet sapien. Quisque vehicula tincidunt justo at suscipit. Aenean commodo ultrices imperdiet. Aenean eget ligula ut velit vehicula vestibulum vitae ac lacus.</p>
@@ -58,7 +58,7 @@
     <div class="bg-gray-100 p-6 rounded-lg shadow-md mb-12 flex items-center">
         <img class="w-16 h-16 rounded-full object-cover" src="https://via.placeholder.com/150" alt="Author">
         <div class="ml-4">
-            <h4 class="text-lg font-semibold text-gray-800">Author Name</h4>
+            <h4 class="text-lg font-semibold text-gray-800">Author Name {{ blog.auther }}</h4>
             <p class="text-gray-600">A brief bio about the author, providing readers with some background on the writer of the blog.</p>
         </div>
     </div>
