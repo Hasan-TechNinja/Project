@@ -76,12 +76,17 @@
                     <li><a href="{% url "showcart" %}">Cart</a></li>
                     <li><a href="{% url "order" %}">Order</a></li>
                     {% endif %}
+                    
                   </ul>
                 </li>
                 <li><a class="hover:bg-primary" href='{% url "home" %}'>Home</a></li>
                 <li><a class="hover:bg-primary" href='{% url "shop" %}'>Shop</a></li>
                 <li><a class="hover:bg-primary" href='{% url "blog" %}'>Blog</a></li>
                 <li><a class="hover:bg-primary" href='#'>Contact</a></li>
+                <li class='flex space-x-2 flex-row'>
+                  <input type="search" class='w-24'>
+                  <button class='btn bg-primary'>Search</button>
+                </li>
               </ul>
             </div>
             <a class="btn btn-ghost text-3xl font-bold hover:bg-white" href='{% url "home" %}'>Hasan <span class="text-primary ">Zone</span></a>
@@ -101,9 +106,6 @@
                       <li class="relative z-10"><a href="{% url "showcart" %}">Cart</a></li>
                       <li class="relative z-10"><a href="{% url "order" %}">Order</a></li>
                       {% endif %}
-                      <li>
-                        <input type="search">
-                      </li>
                   </ul>
               </details>
               
@@ -115,28 +117,66 @@
             </ul>
           </div>
       
-          <!-- Search form for desktop -->
-          <div class="navbar-center hidden lg:flex">
-            <form action="#" method="get" class="flex items-center">
-                <!-- Text search input -->
-                <input type="text" name="query" placeholder="Search..." class="input input-bordered w-full max-w-xs" />
-                
-                <!-- Voice input button -->
-                <button type="button" class="btn bg-gray-50 hover:bg-primary ml-2">
-                    <i class="fas fa-microphone"></i>
-                </button>
-                
-                <!-- Image input button -->
-                <label for="image-search" class="btn bg-gray-50 hover:bg-primary ml-2 cursor-pointer">
-                    <i class="fas fa-camera"></i>
-                    <input type="file" id="image-search" name="image_search" accept="image/*" class="hidden" />
-                </label>
-                
-                <!-- Submit search button -->
-                <button type="submit" class="btn bg-primary hover:bg-primary ml-2">Search</button>
-            </form>
-          </div>  
-      
+<!-- Search form for desktop -->
+<div class="navbar-center hidden lg:flex">
+  <form action="#" method="get" class="flex items-center space-x-2">
+    <!-- Text search input -->
+    <input type="text" id="search-query" name="query" placeholder="Search..." class="input input-bordered w-full max-w-xs" />
+    
+    <!-- Voice input button -->
+    <button type="button" id="voice-search-btn" class="btn bg-gray-50 hover:bg-primary">
+      <i class="fas fa-microphone"></i>
+    </button>
+    
+    <!-- Image input button -->
+    <label for="image-search" class="btn bg-gray-50 hover:bg-primary cursor-pointer">
+      <i class="fas fa-camera"></i>
+      <input type="file" id="image-search" name="image_search" accept="image/*" class="hidden" />
+    </label>
+    
+    <!-- Submit search button -->
+    <button type="submit" class="btn bg-primary hover:bg-primary">Search</button>
+  </form>
+</div>
+
+<!-- JavaScript for voice recognition -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const voiceSearchBtn = document.getElementById('voice-search-btn');
+    const searchQueryInput = document.getElementById('search-query');
+
+    // Check if the browser supports speech recognition
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      const recognition = new SpeechRecognition();
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.lang = 'en-US';  // Set language
+
+      voiceSearchBtn.addEventListener('click', function (event) {
+        event.preventDefault();  // Prevent form submission when clicking mic button
+        recognition.start();  // Start listening to voice
+      });
+
+      recognition.onresult = function (event) {
+        const speechResult = event.results[0][0].transcript;  // Get the recognized text
+        searchQueryInput.value = speechResult;  // Put the result into the input field
+      };
+
+      recognition.onspeechend = function () {
+        recognition.stop();  // Stop recognition when speech ends
+      };
+
+      recognition.onerror = function (event) {
+        console.error('Speech recognition error: ' + event.error);
+      };
+    } else {
+      console.warn('Speech recognition not supported in this browser.');
+      voiceSearchBtn.disabled = true;  // Disable the mic button if not supported
+    }
+  });
+</script>
+
           <!-- Mobile search button -->
           {% comment %} <div class="navbar-end lg:hidden">
             <button tabindex="0" class="btn btn-ghost" id="mobile-search-btn">
@@ -242,7 +282,9 @@
     {% comment %} footer end {% endcomment %}
 
 
-
+{% load static %}
+<script src="{% static 'js/scripts.js' %}"></script>
+    
    
 </body>
 </html>

@@ -312,3 +312,10 @@ def OrderView(request):
         'total':total
     }
     return render(request, 'order.html', context)
+
+
+def your_search_view(request):
+    query = request.GET.get('query', '')  # Get the voice or typed input
+    # Now you can process the query as needed, e.g., perform a search
+    print(query)
+    return render(request, 'your_template.html', {'query': query})
