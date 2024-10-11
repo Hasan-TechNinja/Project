@@ -117,34 +117,48 @@
             </ul>
           </div>
       
-<!-- Search form for desktop -->
-<div class="navbar-center hidden lg:flex">
-  <form action="{% url 'search' %}" method="GET" class="flex items-center space-x-2">
-    <!-- Text search input (required) -->
-    <input type="text" id="search-query" name="query" placeholder="Search..." class="input input-bordered w-full max-w-xs" required />
-    
-    <!-- Voice input button -->
-    <button type="button" id="voice-search-btn" class="btn bg-gray-50 hover:bg-primary">
-      <i class="fas fa-microphone"></i>
-    </button>
-    
-    <!-- Image input button -->
-    <label for="image-search" class="btn bg-gray-50 hover:bg-primary cursor-pointer">
-      <i class="fas fa-camera"></i>
-      <input type="file" id="image-search" name="image_search" accept="image/*" class="hidden" />
-    </label>
-    
-    <!-- Submit search button -->
-    <button type="submit" class="btn bg-primary hover:bg-primary">Search</button>
-</form>
+      <!-- Search form for desktop -->
+      <div class="navbar-center hidden lg:flex">
+        <form action="{% url 'search' %}" method="GET" class="flex items-center space-x-2">
+          <!-- Text search input (required) -->
+          <input type="text" id="search-query" name="query" placeholder="Search..." class="input input-bordered w-full max-w-xs" required />
+          
+          <!-- Voice input button -->
+          <button type="button" id="voice-search-btn" class="btn bg-gray-50 hover:bg-primary">
+            <i class="fas fa-microphone"></i>
+          </button>
+          
+          <!-- Image input button -->
+          <label for="image-search" class="btn bg-gray-50 hover:bg-primary cursor-pointer">
+            <i class="fas fa-camera"></i>
+            <input type="file" id="image-search" name="image_search" accept="image/*" class="hidden" />
+          </label>
+          
+          <!-- Submit search button -->
+          <button type="submit" class="btn bg-primary hover:bg-primary">Search</button>
+        </form>
+
+        <!-- Voice Search Popup Modal -->
+        <div id="voice-search-popup" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-50">
+          <div class="bg-white p-8 rounded-lg text-center">
+            <div class="text-lg font-semibold">Listening...</div>
+            <div class="mt-4">
+              <i class="fas fa-microphone fa-3x text-primary animate-pulse"></i>
+            </div>
+            <div class="mt-4 text-sm text-gray-500">Speak now and your search will begin.</div>
+          </div>
+        </div>
+
 
 </div>
 
-<!-- JavaScript for voice recognition -->
+<!-- JavaScript for voice recognition with auto-submit -->
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const voiceSearchBtn = document.getElementById('voice-search-btn');
     const searchQueryInput = document.getElementById('search-query');
+    const searchForm = searchQueryInput.closest('form');  // Get the form element
+    const voiceSearchPopup = document.getElementById('voice-search-popup');  // Get the popup element
 
     // Check if the browser supports speech recognition
     if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
@@ -156,6 +170,7 @@
 
       voiceSearchBtn.addEventListener('click', function (event) {
         event.preventDefault();  // Prevent form submission when clicking mic button
+        voiceSearchPopup.classList.remove('hidden');  // Show the popup
         recognition.start();  // Start listening to voice
       });
 
@@ -164,22 +179,33 @@
         // Capitalize the first letter
         speechResult = speechResult.charAt(0).toUpperCase() + speechResult.slice(1);
         searchQueryInput.value = speechResult;  // Put the result into the input field
+
+        // Hide the popup after voice input is done
+        voiceSearchPopup.classList.add('hidden');
+
+        // Add a 2-second delay before submitting the form
+        setTimeout(function() {
+          searchForm.submit();  // Automatically submit the form
+        }, 2000);  // 2000 milliseconds = 2 seconds
       };
 
       recognition.onspeechend = function () {
         recognition.stop();  // Stop recognition when speech ends
+        voiceSearchPopup.classList.add('hidden');  // Hide the popup
       };
 
       recognition.onerror = function (event) {
         console.error('Speech recognition error: ' + event.error);
+        voiceSearchPopup.classList.add('hidden');  // Hide the popup if there's an error
       };
     } else {
       console.warn('Speech recognition not supported in this browser.');
       voiceSearchBtn.disabled = true;  // Disable the mic button if not supported
     }
   });
-  
 </script>
+
+
 
           <!-- Mobile search button -->
           {% comment %} <div class="navbar-end lg:hidden">
