@@ -3,19 +3,19 @@
 {% block title %}Search{% endblock title %} 
 {% block content %}
 
-<div>
+<div class='my-10'>
+
+  {% if product %} 
   <div>
-    <div
-      class="w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      {% if product %} {% for product in product %}
+    <div class="w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-center">
+      {% for product in product %}
       <div
         class="card card-compact bg-base-100 shadow-xl border my-3 transition-transform transform hover:-translate-y-1 hover:shadow-xl">
         <figure>
           <img
             src="{{ product.image.url }}"
             alt="{{ product.name }}"
-            class="h-56 w-64 object-cover rounded-md"
-          />
+            class="h-56 w-64 object-cover rounded-md"/>
         </figure>
         <div class="card-body">
           <div
@@ -44,11 +44,12 @@
       {% endfor %}
     </div>
   </div>
-  <div class=''>
-    {% else %}
+  {% else %}
+  <div class='mx-auto container flex justify-center'>
     <!-- Fallback image if no products found -->
-    <div class="fixed-size">
-      <img src="{% static 'img/cart.jpg' %}" class="img-fluid rounded w-full" alt="No products available"/>
+    <div class="fixed-size my-28">
+      <img src="{% static 'img/ProductEmpty.jpg' %}" class="img-fluid rounded-3xl size-80" alt="No products available"/>
+      {% comment %} <h2 class="text-2xl font-bold text-center">Product not found!</h2> {% endcomment %}
     </div>
     {% endif %}
   </div>

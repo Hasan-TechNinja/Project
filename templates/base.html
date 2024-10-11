@@ -160,7 +160,9 @@
       });
 
       recognition.onresult = function (event) {
-        const speechResult = event.results[0][0].transcript;  // Get the recognized text
+        let speechResult = event.results[0][0].transcript;  // Get the recognized text
+        // Capitalize the first letter
+        speechResult = speechResult.charAt(0).toUpperCase() + speechResult.slice(1);
         searchQueryInput.value = speechResult;  // Put the result into the input field
       };
 
@@ -176,6 +178,7 @@
       voiceSearchBtn.disabled = true;  // Disable the mic button if not supported
     }
   });
+  
 </script>
 
           <!-- Mobile search button -->
