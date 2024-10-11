@@ -119,9 +119,9 @@
       
 <!-- Search form for desktop -->
 <div class="navbar-center hidden lg:flex">
-  <form action="#" method="get" class="flex items-center space-x-2">
-    <!-- Text search input -->
-    <input type="text" id="search-query" name="query" placeholder="Search..." class="input input-bordered w-full max-w-xs" />
+  <form action="{% url 'search' %}" method="GET" class="flex items-center space-x-2">
+    <!-- Text search input (required) -->
+    <input type="text" id="search-query" name="query" placeholder="Search..." class="input input-bordered w-full max-w-xs" required />
     
     <!-- Voice input button -->
     <button type="button" id="voice-search-btn" class="btn bg-gray-50 hover:bg-primary">
@@ -136,7 +136,8 @@
     
     <!-- Submit search button -->
     <button type="submit" class="btn bg-primary hover:bg-primary">Search</button>
-  </form>
+</form>
+
 </div>
 
 <!-- JavaScript for voice recognition -->

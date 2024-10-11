@@ -19,6 +19,7 @@ urlpatterns = [
     path('blog/', views.BlogView, name='blog'),
     path('blogdetails/<int:pk>', views.BlogDetails.as_view(), name='blogdetails'),
     path('order/', views.OrderView, name='order'),
+    path('search/', views.search, name='search'),
 
     
 ]

@@ -314,8 +314,17 @@ def OrderView(request):
     return render(request, 'order.html', context)
 
 
-def your_search_view(request):
-    query = request.GET.get('query', '')  # Get the voice or typed input
-    # Now you can process the query as needed, e.g., perform a search
-    print(query)
-    return render(request, 'your_template.html', {'query': query})
+
+def search(request):
+    if request.method=='GET':
+        # query=request.GET.get('quary')
+        query = request.GET.get('query')
+
+        print(query)
+        if query:
+            product=Product.objects.filter(name=query)
+            print(product)
+            return render(request,'search.html',{'product':product})
+        
+        else:
+            return render(request,'search.html')
