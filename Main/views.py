@@ -7,6 +7,8 @@ from . models import Product, Departments, Cart, BlogPost, Billing_Details, Home
 from . forms import BillingDetailsForm
 from django.contrib.auth import authenticate
 from django.utils.html import strip_tags
+from django.db.models import Q
+
 
 # Create your views here.
 
@@ -314,17 +316,13 @@ def OrderView(request):
     return render(request, 'order.html', context)
 
 
-
 def search(request):
-    if request.method=='GET':
-        # query=request.GET.get('quary')
+    if request.method == 'GET':
         query = request.GET.get('query')
-
-        print(query)
         if query:
-            product=Product.objects.filter(name=query)
-            print(product)
-            return render(request,'search.html',{'product':product})
-        
+            product = Product.objects.filter(
+                Q(name__icontains=query) | Q(department__name__icontains=query)
+            )
+            return render(request, 'search.html', {'product': product})
         else:
-            return render(request,'search.html')
+            return render(request, 'search.html')

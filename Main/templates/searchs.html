@@ -1,0 +1,50 @@
+{% extends "base.html" %} 
+{% load static %} 
+{% block title %} Search Item {% endblock title %} 
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-sm-12">
+            <div class="row">
+                {% if product %}
+                    {% for product in product %}
+                        <div class="col-sm-4 mb-4">
+                            <div class="card shadow-lg hover:shadow-xl transition-shadow duration-300">
+                                <!-- Product image with link to details -->
+                                <a href="{% url 'product_details' product.id %}">
+                                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img-top rounded-t-lg object-cover h-64 w-full" />
+                                </a>
+                                <div class="card-body p-4">
+                                    <!-- Flex layout for title and price -->
+                                    <div class='flex justify-between items-center'>
+                                        <h2 class="card-title text-lg font-semibold text-gray-800">{{ product.name }}</h2>
+                                        <div class="flex flex-col text-right">
+                                            {% if product.discount_price %}
+                                                <span class="text-xl font-bold text-primary">{{ product.discount_price }} Tk</span>
+                                                <span class="text-sm text-red-500 line-through">{{ product.selling_price }} Tk</span>
+                                            {% else %}
+                                                <span class="text-xl font-bold text-gray-700">{{ product.selling_price }} Tk</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <!-- Short description -->
+                                    <p class="text-sm text-gray-600 mt-2">{{ product.description|truncatechars:80 }}</p>
+                                    <!-- Buy Now button -->
+                                    <div class="card-actions justify-end mt-4">
+                                        <a href="{% url 'product_details' product.id %}" class="btn bg-primary text-white hover:bg-blue-700 transition-all duration-200">Buy Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <!-- Fallback image if no products found -->
+                    <div class="fixed-size">
+                        <img src="{% static 'img/cart.jpg' %}" class="img-fluid rounded w-full" alt="No products available">
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
