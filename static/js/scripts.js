@@ -52,25 +52,24 @@
 //   }
 // });
 
-window.addEventListener("resize", updateCarousel);
-
-document
-  .getElementById("toggle-departments")
-  .addEventListener("click", function () {
-    console.log("clicked");
+document.getElementById("toggle-departments").addEventListener("click", function () {
     var departmentList = document.getElementById("departments-list");
     var chevronIcon = document.getElementById("chevron-icon");
 
+    // Toggle the 'hidden' class to show or hide the list
     departmentList.classList.toggle("hidden");
 
+    // Switch between 'fa-chevron-down' and 'fa-chevron-up'
     if (chevronIcon.classList.contains("fa-chevron-down")) {
-      chevronIcon.classList.remove("fa-chevron-down");
-      chevronIcon.classList.add("fa-chevron-up");
+        chevronIcon.classList.remove("fa-chevron-down");
+        chevronIcon.classList.add("fa-chevron-up");
     } else {
-      chevronIcon.classList.remove("fa-chevron-up");
-      chevronIcon.classList.add("fa-chevron-down");
+        chevronIcon.classList.remove("fa-chevron-up");
+        chevronIcon.classList.add("fa-chevron-down");
     }
-  });
+});
+
+
 
 const carouselContainer = document.getElementById("carousel-container");
 const prevBtn2 = document.getElementById("prevBtn");

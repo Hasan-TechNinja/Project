@@ -93,16 +93,20 @@
               <li><a class="hover:bg-primary" href="{% url "home" %}">Home</a></li>
               <li><a class="hover:bg-primary" href="{% url "shop" %}">Shop</a></li>
               <li>
-                <details class="hover:bg-primary">
+                <details class="hover:bg-primary relative z-20">
                   <summary>Pages</summary>
                   <ul class="p-2 relative">
-                    <div class="absolute inset-0 bg-white/60 backdrop-blur-lg rounded-lg z-0"></div>
-                    {% if user.is_authenticated %}
-                    <li class="relative z-10"><a href="{% url "showcart" %}">Cart</a></li>
-                    <li class="relative z-10"><a href="{% url "order" %}">Order</a></li>
-                    {% endif %}
+                      <div class="absolute inset-0 bg-white/60 backdrop-blur-lg rounded-lg z-0"></div>
+                      {% if user.is_authenticated %}
+                      <li class="relative z-10"><a href="{% url "showcart" %}">Cart</a></li>
+                      <li class="relative z-10"><a href="{% url "order" %}">Order</a></li>
+                      {% endif %}
+                      <li>
+                        <input type="search">
+                      </li>
                   </ul>
-                </details>
+              </details>
+              
               </li>
               <li><a class="hover:bg-primary" href='{% url "blog" %}'>Blog</a></li>
               {% if user.is_authenticated %}
@@ -114,19 +118,33 @@
           <!-- Search form for desktop -->
           <div class="navbar-center hidden lg:flex">
             <form action="#" method="get" class="flex items-center">
-              <input type="text" name="query" placeholder="Search..." class="input input-bordered w-full max-w-xs" />
-              <button type="submit" class="btn bg-primary hover:bg-primary ml-2">Search</button>
+                <!-- Text search input -->
+                <input type="text" name="query" placeholder="Search..." class="input input-bordered w-full max-w-xs" />
+                
+                <!-- Voice input button -->
+                <button type="button" class="btn bg-gray-50 hover:bg-primary ml-2">
+                    <i class="fas fa-microphone"></i>
+                </button>
+                
+                <!-- Image input button -->
+                <label for="image-search" class="btn bg-gray-50 hover:bg-primary ml-2 cursor-pointer">
+                    <i class="fas fa-camera"></i>
+                    <input type="file" id="image-search" name="image_search" accept="image/*" class="hidden" />
+                </label>
+                
+                <!-- Submit search button -->
+                <button type="submit" class="btn bg-primary hover:bg-primary ml-2">Search</button>
             </form>
-          </div>
+          </div>  
       
           <!-- Mobile search button -->
-          <div class="navbar-end lg:hidden">
+          {% comment %} <div class="navbar-end lg:hidden">
             <button tabindex="0" class="btn btn-ghost" id="mobile-search-btn">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M18 10a8 8 0 11-16 0 8 8 0 0116 0z" />
               </svg>
             </button>
-          </div>
+          </div> {% endcomment %}
       
           <!-- Mobile search bar (appears when clicking search icon) -->
           <div class="navbar-center lg:hidden" id="mobile-search" style="display: none;">
