@@ -306,7 +306,7 @@ def OrderView(request):
         if p.product:  # Check if product exists before calculating
             p.linetotal = p.quantity * p.product.discount_price  # Calculate line total
             subtotal += p.linetotal  # Add to subtotal
-    address = f"{order.first().state}, {order.first().thana}, {order.first().district}, {order.first().division}, {order.first().country}"
+    address = f"{order.first().street}, {order.first().thana}, {order.first().district}, {order.first().division}, {order.first().country}"
     context = {
         'order': order,
         'subtotal': subtotal,

@@ -96,7 +96,7 @@ class Billing_DetailsAdmin(admin.ModelAdmin):
         'division',
         'district',
         'thana',
-        'Street',
+        'street',
         'zip_code',
         'phone',
         'second_phone',
