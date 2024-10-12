@@ -96,10 +96,12 @@ class Billing_DetailsAdmin(admin.ModelAdmin):
         'division',
         'district',
         'thana',
-        'state',
+        'Street',
         'zip_code',
         'phone',
         'second_phone',
+        'order_note',
+        'datetime',
         'email'
     )
 

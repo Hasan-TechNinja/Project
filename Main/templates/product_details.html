@@ -107,7 +107,7 @@
 
     <!-- Related Product Section -->
     {% if rproduct %}
-    <div class="mt-12">
+    <div class="my-12">
         <h3 class="text-3xl font-bold text-center">Related Product</h3>
         <div class="border-b-4 border-green-500 mx-auto w-16 mt-2 mb-10"></div>
 
@@ -123,7 +123,7 @@
           {% endfor %}   {% endcomment %}
 
           {% for product in rproduct %}
-          <div class="card card-compact bg-base-100 shadow-xl border my-3 transition-transform transform hover:-translate-y-1 hover:shadow-xl">
+          <div class="card card-compact bg-base-100 shadow-xl border transition-transform transform hover:-translate-y-1 hover:shadow-xl">
             <figure>
                 <img
                     src="{{ product.image.url }}"

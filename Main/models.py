@@ -89,9 +89,11 @@ class Billing_Details(models.Model):
     division = models.CharField(max_length=255)
     district = models.CharField(max_length=100)
     thana = models.CharField(max_length=100)
-    state = models.CharField(max_length=100)
+    Street = models.CharField(max_length=100, blank=True, null=True)
     zip_code = models.CharField(max_length=20, blank=True, null=True)
     phone = models.CharField(max_length=25)
+    datetime = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    order_note = models.CharField(max_length=200, blank=True, null=True)
     second_phone = models.CharField(max_length=25, blank=True, null=True)
     email = models.EmailField(blank=True, null=True)
 

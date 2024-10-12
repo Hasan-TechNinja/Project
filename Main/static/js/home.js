@@ -46,4 +46,3 @@ document.addEventListener("DOMContentLoaded", function () {
     showSlide(currentIndex);
     autoScroll();
   });
-  

@@ -15,11 +15,14 @@ def Profile(request):
     if profile.first_name:
         name = str(profile.first_name + ' ' + profile.last_name)
 
+    address = Billing_Details.objects.filter(user=user).order_by('-id')[0:3]
+
     context = {
         'profile': profile,
         'name': name,
         'cart': cart,
-        'order':order
+        'order':order,
+        'address':address
     }
     return render(request, 'profile.html', context)
 

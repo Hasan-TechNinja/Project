@@ -4,7 +4,7 @@ from .models import Billing_Details, Review
 class BillingDetailsForm(forms.ModelForm):
     class Meta:
         model = Billing_Details
-        fields = ['first_name', 'last_name', 'country', 'division', 'district', 'thana', 'state', 'zip_code', 'phone', 'second_phone', 'email']
+        fields = ['first_name', 'last_name', 'country', 'division', 'district', 'thana', 'Street', 'zip_code', 'phone', 'second_phone', 'email', 'order_note']
 
         widgets = {
             'first_name': forms.TextInput(attrs={'class': 'mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500', 'placeholder': 'First Name'}),
@@ -15,7 +15,8 @@ class BillingDetailsForm(forms.ModelForm):
             # 'quantity': forms.TextInput(attrs={'class': 'mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500', 'placeholder': 'Quantity'}),
             'district': forms.TextInput(attrs={'class': 'mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500', 'placeholder': 'District'}),
             'thana': forms.TextInput(attrs={'class': 'mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500', 'placeholder': 'Thana'}),
-            'state': forms.TextInput(attrs={'class': 'mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500', 'placeholder': 'State'}),
+            'order_note': forms.TextInput(attrs={'class': 'mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500', 'placeholder': 'Thana'}),
+            'Street': forms.TextInput(attrs={'class': 'mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500', 'placeholder': 'State'}),
             'zip_code': forms.TextInput(attrs={'class': 'mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500', 'placeholder': 'Zip Code'}),
             'phone': forms.TextInput(attrs={'class': 'mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500', 'placeholder': 'Phone'}),
             'second_phone': forms.TextInput(attrs={'class': 'mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500', 'placeholder': 'Second Phone (optional)'}),
