@@ -44,7 +44,7 @@
         {% for cart in cart %}
         <div class="flex justify-between border-b pb-2">
           <span class="text-gray-600">{{cart.product.name}}</span>
-          <span class="font-medium">{{cart.product.selling_price}}</span>
+          <span class="font-medium">{{cart.linetotal}}</span>
         </div>
         {% endfor %}
       </div>

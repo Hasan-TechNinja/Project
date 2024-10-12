@@ -10,28 +10,52 @@
             <thead class="bg-gray-200">
                 <tr>
                     <th class="py-2 px-4 text-left">Product</th>
-                    <th class="py-2 px-4 text-left">Quantity</th>
-                    <th class="py-2 px-4 text-left">Price</th>
-                    <th class="py-2 px-4 text-left">Total</th>
+                    <th class="py-2 px-4 text-center">Quantity</th>
+                    <th class="py-2 px-4 text-center">Price</th>
+                    <th class="py-2 px-4 text-center">Total</th>
+                    <th class="py-2 px-4 text-center">Status</th>
+
                 </tr>
             </thead>
             <tbody>
                 {% for item in order %}
                 <tr class="border-b">
-                    <td class="py-3 px-4">
+                    <!-- Product Info -->
+                    <td class="py-3 px-2 sm:px-4">
                         <div class="flex items-center">
-                            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="w-16 h-16 object-cover mr-2 sm:mr-4">
-                            <div>
+                            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="w-14 h-14 sm:w-16 sm:h-16 object-cover mr-2 sm:mr-4">
+                            <div class="text-sm sm:text-base">
                                 <p class="font-semibold">{{ item.product.name }}</p>
                             </div>
                         </div>
                     </td>
-                    <td class="py-3 px-4">{{ item.quantity }}</td>
-                    <td class="py-3 px-4">{{ item.product.discount_price }} Tk</td>
-                    <td class="py-3 px-4">{{ item.linetotal|floatformat:2 }} Tk</td>
+            
+                    <!-- Quantity -->
+                    <td class="py-3 px-2 sm:px-4 text-center text-sm sm:text-base">
+                        {{ item.quantity }}
+                    </td>
+            
+                    <!-- Price -->
+                    <td class="py-3 px-2 sm:px-4 text-center text-sm sm:text-base">
+                        {{ item.product.discount_price }} Tk
+                    </td>
+            
+                    <!-- Line Total -->
+                    <td class="py-3 px-2 sm:px-4 text-center text-sm sm:text-base">
+                        {{ item.linetotal|floatformat:2 }} Tk
+                    </td>
+            
+                    <!-- Actions -->
+                    <td class="py-3 px-2 sm:px-4 text-sm sm:text-base">
+                        <ul class="flex flex-col space-y-1 md:flex-row md:justify-evenly md:space-y-0 text-center">
+                            <li><button class="btn bg-primary">Delivery</button></li>
+                            <li><button class="btn bg-red-400 text-white">Order Cancel</button></li>
+                        </ul>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
+            
         </table>
     </div>
 
