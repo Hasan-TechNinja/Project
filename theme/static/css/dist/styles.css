@@ -1712,12 +1712,12 @@ select {
   z-index: 20;
 }
 
-.z-\[1\] {
-  z-index: 1;
-}
-
 .z-50 {
   z-index: 50;
+}
+
+.z-\[1\] {
+  z-index: 1;
 }
 
 .m-2 {
@@ -1777,11 +1777,6 @@ select {
 .my-4 {
   margin-top: 1rem;
   margin-bottom: 1rem;
-}
-
-.my-5 {
-  margin-top: 1.25rem;
-  margin-bottom: 1.25rem;
 }
 
 .my-7 {
@@ -1880,6 +1875,14 @@ select {
 
 .mt-7 {
   margin-top: 1.75rem;
+}
+
+.mt-10 {
+  margin-top: 2.5rem;
+}
+
+.mb-9 {
+  margin-bottom: 2.25rem;
 }
 
 .block {
@@ -2075,6 +2078,18 @@ select {
   width: 100%;
 }
 
+.w-2 {
+  width: 0.5rem;
+}
+
+.w-2\/4 {
+  width: 50%;
+}
+
+.w-screen {
+  width: 100vw;
+}
+
 .min-w-full {
   min-width: 100%;
 }
@@ -2173,6 +2188,10 @@ select {
   flex-wrap: wrap;
 }
 
+.place-items-center {
+  place-items: center;
+}
+
 .content-start {
   align-content: flex-start;
 }
@@ -2183,6 +2202,10 @@ select {
 
 .items-center {
   align-items: center;
+}
+
+.items-baseline {
+  align-items: baseline;
 }
 
 .justify-end {
@@ -2334,11 +2357,6 @@ select {
 .rounded-t {
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
-}
-
-.rounded-t-lg {
-  border-top-left-radius: 0.5rem;
-  border-top-right-radius: 0.5rem;
 }
 
 .border {
@@ -2594,6 +2612,18 @@ select {
 
 .p-8 {
   padding: 2rem;
+}
+
+.p-10 {
+  padding: 2.5rem;
+}
+
+.p-32 {
+  padding: 8rem;
+}
+
+.p-20 {
+  padding: 5rem;
 }
 
 .px-1 {
@@ -2941,12 +2971,6 @@ select {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-.transition-all {
-  transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
