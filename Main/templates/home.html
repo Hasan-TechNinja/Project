@@ -342,6 +342,56 @@
   </div>
 </div>
 
+
+
+{% comment %} Tranding product {% endcomment %}
+<section class="py-12 bg-gray-100">
+    <div class="container mx-auto">
+        <!-- Section Header -->
+        <div class="text-center mb-8">
+            <h2 class="text-3xl font-bold text-gray-800">Trending Now</h2>
+            <p class="text-gray-600 mt-2">Check out these popular products that everyone’s talking about!</p>
+        </div>
+
+        <!-- Trending Products Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Single Product Card -->
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                <img class="w-full h-48 object-cover" src="https://via.placeholder.com/300" alt="Product Image">
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold text-gray-800">Product Name</h3>
+                    <p class="text-gray-500 mt-2">Short product description goes here.</p>
+                    <div class="flex items-center justify-between mt-4">
+                        <span class="text-xl font-bold text-gray-800">$29.99</span>
+                        <a href="#" class="bg-red-500 text-white text-sm font-semibold px-4 py-2 rounded hover:bg-red-600 transition duration-300">
+                            View Details
+                        </a>
+                    </div>
+                </div>
+                <div class="bg-red-500 text-white text-xs font-bold uppercase tracking-wide text-center py-2">Hot Item</div>
+            </div>
+
+            <!-- Repeat the Product Card structure for each product -->
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                <img class="w-full h-48 object-cover" src="https://via.placeholder.com/300" alt="Product Image">
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold text-gray-800">Product Name</h3>
+                    <p class="text-gray-500 mt-2">Short product description goes here.</p>
+                    <div class="flex items-center justify-between mt-4">
+                        <span class="text-xl font-bold text-gray-800">$39.99</span>
+                        <a href="#" class="bg-red-500 text-white text-sm font-semibold px-4 py-2 rounded hover:bg-red-600 transition duration-300">
+                            View Details
+                        </a>
+                    </div>
+                </div>
+                <div class="bg-red-500 text-white text-xs font-bold uppercase tracking-wide text-center py-2">Trending Now</div>
+            </div>
+
+            <!-- Add more product cards as needed -->
+        </div>
+    </div>
+</section>
+
 {% comment %} blog start {% endcomment %}
 
 <div class="container mx-auto py-10">
@@ -374,27 +424,5 @@
  <!-- Then load OwlCarousel script -->
  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
  
-<script>
-    $(document).ready(function(){
-        $('.owl-carousel').owlCarousel({
-            loop: true,
-            margin: 10,
-            nav: true,
-            autoplay: true,         // Enables autoplay
-			autoplayTimeout: 3000,  // Sets the delay between transitions (in milliseconds)
-			autoplayHoverPause: true,
-            responsive: {
-                0: {
-                    items: 1
-                },
-                600: {
-                    items: 3
-                },
-                1000: {
-                    items: 5
-                }
-            }
-        });
-    });
-</script>
+ <script src="{% static "js/carousel.js" %}">
 {% endblock content %}  

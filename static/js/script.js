@@ -48,6 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
 console.log('Print something')
 
 document.addEventListener("DOMContentLoaded", function () {
+  
   const voiceSearchBtn = document.getElementById('voice-search-btn');
   const searchQueryInput = document.getElementById('search-query');
   const searchForm = searchQueryInput.closest('form');  // Get the form element
@@ -55,6 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Check if the browser supports speech recognition
   if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+    
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     const recognition = new SpeechRecognition();
     recognition.continuous = false;
@@ -62,9 +64,13 @@ document.addEventListener("DOMContentLoaded", function () {
     recognition.lang = 'en-US';  // Set language
 
     voiceSearchBtn.addEventListener('click', function (event) {
+      console.log('Print something')
       event.preventDefault();  // Prevent form submission when clicking mic button
-      voiceSearchPopup.classList.remove('hidden');  // Show the popup
+      voiceSearchPopup.classList.remove("hidden");  // Show the popup
+      voiceSearchPopup.classList.add("flex", "items-center", "justify-center")
+      console.log(voiceSearchPopup.classList);
       recognition.start();  // Start listening to voice
+
     });
 
     recognition.onresult = function (event) {
@@ -75,6 +81,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Hide the popup after voice input is done
       voiceSearchPopup.classList.add('hidden');
+      voiceSearchPopup.classList.remove("flex");
+      voiceSearchPopup.classList.remove("items-center");
+      voiceSearchPopup.classList.remove("justify-center");
 
       // Add a 2-second delay before submitting the form
       setTimeout(function() {
