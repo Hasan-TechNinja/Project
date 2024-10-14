@@ -14,4 +14,4 @@ class ProfileModel(models.Model):
     image = models.ImageField(default='/static/img/default.webp', upload_to='Profile', blank=True, null=True)
 
     def __str__(self):
-        return f'{self.name}'
+        return f'{self.first_name} {self.last_name}'

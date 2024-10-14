@@ -9,16 +9,17 @@
             <h1 class="text-5xl font-bold text-text_col">Featured Products</h1>
       
             <!-- Departments List -->
-            <ul class="flex justify-center gap-7 font-medium my-7">
-              {% for department in departments %}
-                <li>
-                  <a href="{% url 'department_detail' department.id %}" class=''>
-                    <img class='size-16 rounded-lg' src="{{ department.image.url }}" alt="">
-                    {{ department.name }}
-                  </a>
-                </li>
-              {% endfor %}
-            </ul>
+            <ul class="flex flex-wrap justify-center gap-7 font-medium my-7">
+                {% for department in departments %}
+                  <li>
+                    <a href="{% url 'department_detail' department.id %}" class=''>
+                      <img class='w-16 h-16 rounded-lg object-cover hover:ring' src="{{ department.image.url }}" alt="">
+                      {{ department.name }}
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+              
         </div>
       
         <!-- If related products exist, display them -->

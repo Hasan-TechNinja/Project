@@ -76,29 +76,55 @@ class ProductDetails(View):
 
 
 
-@login_required(login_url='login')
-def AddToCart(request):
-    if request.user.is_authenticated:
-        user = request.user
-        product_id = request.GET.get("prod_id")
-        product_quantity = int(request.GET.get("product_quantity", 1)) 
-        product = Product.objects.get(id=product_id)
+# @login_required(login_url='login')
+# def AddToCart(request):
+#     if request.user.is_authenticated:
+#         user = request.user
+#         product_id = request.GET.get("prod_id")
+#         product_quantity = int(request.GET.get("product_quantity", 1)) 
+#         product = Product.objects.get(id=product_id)
 
        
-        try:
-            cart_item = Cart.objects.get(user=user, product=product)
-            cart_item.quantity = product_quantity
-            cart_item.save()
+#         try:
+#             cart_item = Cart.objects.get(user=user, product=product, p_id = product_id)
+#             cart_item.quantity = product_quantity
+#             cart_item.save()
         
-        except Cart.DoesNotExist:
-            Cart.objects.create(user=user, product=product, quantity=product_quantity)
+#         except Cart.DoesNotExist:
+#             Cart.objects.create(user=user, product=product, quantity=product_quantity)
 
        
-        return redirect("/cart")
+#         return redirect("/cart")
     
    
-    return redirect("/authentication/login/")
+#     return redirect("/authentication/login/")
 
+
+@login_required(login_url='login')
+def AddToCart(request):
+    user = request.user
+
+    product_id = request.GET.get("prod_id")
+    product_quantity = int(request.GET.get("product_quantity", 1))
+
+    if not product_id:
+        return redirect("/some_error_page")
+
+    product = get_object_or_404(Product, id=product_id)
+
+    cart_item, created = Cart.objects.get_or_create(
+        user=user,
+        product=product,
+        p_id=product_id,
+        defaults={'quantity': product_quantity}
+    )
+
+    if not created:
+        cart_item.quantity = product_quantity
+        cart_item.save()
+
+
+    return redirect("/cart")
 
 
 @login_required(login_url='login')
@@ -215,32 +241,33 @@ class BlogDetails(View):
         return render(request, 'blogdetails.html', context)
 
 
-
 @login_required
 def checkout(request):
     cart = Cart.objects.filter(user=request.user)
-    
+    print('check the form')
     if request.method == 'POST':
         form = BillingDetailsForm(request.POST)
-        
+
         if form.is_valid():
+            print('form is valid')
             first_name = request.POST.get('first_name')
             last_name = request.POST.get('last_name')
             country = request.POST.get('country')
             division = request.POST.get('division')
             district = request.POST.get('district')
             thana = request.POST.get('thana')
-            state = request.POST.get('state')
+            street = request.POST.get('street')
             zip_code = request.POST.get('zip_code')
             phone = request.POST.get('phone')
             second_phone = request.POST.get('second_phone')
             email = request.POST.get('email')
             user = request.user
 
-            # Iterate through the cart and save billing details
             for c in cart:
                 product = c.product  # Get the product from the cart item
+
                 if product.stock >= c.quantity:
+                   
                     # Save billing details
                     Billing_Details.objects.create(
                         user=user,
@@ -250,14 +277,16 @@ def checkout(request):
                         division=division,
                         district=district,
                         thana=thana,
-                        state=state,
+                        street=street,
                         zip_code=zip_code,
                         phone=phone,
                         second_phone=second_phone,
                         email=email,
                         product=product,
                         quantity=c.quantity,
+                        p_id = c.p_id,
                     )
+                
 
                     # Decrease product stock
                     product.stock -= c.quantity
@@ -267,9 +296,10 @@ def checkout(request):
                         product.stock = 0  # Set stock to 0 if it's less than 1
 
                     product.save()  # Save the updated product stock
-
+                    
                     # Remove the item from the cart after placing the order
                     c.delete()
+                    
 
                 else:
                     # Handle insufficient stock, show an error message (optional)
@@ -295,6 +325,87 @@ def checkout(request):
         'cart': cart
     }
     return render(request, 'checkout.html', context)
+
+# @login_required
+# def checkout(request):
+#     cart = Cart.objects.filter(user=request.user)
+    
+#     if request.method == 'POST':
+#         form = BillingDetailsForm(request.POST)
+        
+#         if form.is_valid():
+#             first_name = request.POST.get('first_name')
+#             last_name = request.POST.get('last_name')
+#             country = request.POST.get('country')
+#             division = request.POST.get('division')
+#             district = request.POST.get('district')
+#             thana = request.POST.get('thana')
+#             street = request.POST.get('street')
+#             zip_code = request.POST.get('zip_code')
+#             phone = request.POST.get('phone')
+#             second_phone = request.POST.get('second_phone')
+#             email = request.POST.get('email')
+#             user = request.user
+
+#             # Iterate through the cart and save billing details
+#             for c in cart:
+#                 product = c.product  # Get the product from the cart item
+#                 if product.stock >= c.quantity:
+#                     # Save billing details
+#                     Billing_Details.objects.create(
+#                         user=user,
+#                         p_id = c.p_id,
+#                         first_name=first_name,
+#                         last_name=last_name,
+#                         country=country,
+#                         division=division,
+#                         district=district,
+#                         thana=thana,
+#                         street=street,
+#                         zip_code=zip_code,
+#                         phone=phone,
+#                         second_phone=second_phone,
+#                         email=email,
+#                         product=product,
+#                         quantity=c.quantity,
+#                     )
+
+#                     # Decrease product stock
+#                     product.stock -= c.quantity
+
+#                     # If stock is below 1, set stock to 0 and optionally mark product as "out of stock"
+#                     if product.stock < 1:
+#                         product.stock = 0  # Set stock to 0 if it's less than 1
+
+#                     product.save()  # Save the updated product stock
+
+#                     # Remove the item from the cart after placing the order
+#                     c.delete()
+
+#                 else:
+#                     # Handle insufficient stock, show an error message (optional)
+#                     return render(request, 'checkout.html', {
+#                         'form': form,
+#                         'cart': cart,
+#                         'error': f'Not enough stock for {product.name}. Only {product.stock} left.'
+#                     })
+
+#             # After processing all items, redirect to home
+#             return redirect('home')
+
+#         else:
+#             # Handle form errors
+#             context = {'form': form}
+#             return render(request, 'checkout.html', context)
+
+#     else:
+#         form = BillingDetailsForm()
+
+#     context = {
+#         'form': form,
+#         'cart': cart
+#     }
+#     return render(request, 'checkout.html', context)
 
 
 # def OrderView(request):
@@ -371,7 +482,7 @@ def DeliveryView(request, order_id):
     return redirect('order')
 
 
-
+#for history product
 def Purchase(request):
     user = request.user
     purchase = Delivery.objects.filter(user = user)

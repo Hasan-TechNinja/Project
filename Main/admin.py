@@ -57,7 +57,7 @@ admin.site.register(Size, SizeAdmin)
 
 class CartAdmin(admin.ModelAdmin):
     list_display = (
-        'id', 'user', 'product','quantity',
+        'id', 'user', 'p_id', 'product','quantity',
     )
 
 admin.site.register(Cart, CartAdmin)
@@ -88,6 +88,7 @@ class Billing_DetailsAdmin(admin.ModelAdmin):
     list_display = (
         'id',
         'user',
+        'p_id',
         'first_name',
         'last_name',
         'product',

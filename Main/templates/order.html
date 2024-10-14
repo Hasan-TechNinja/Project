@@ -53,7 +53,7 @@
                                 <form action="{% url 'delivery' item.id %}" method="POST">
                                     {% csrf_token %}
                                     <li>
-                                        <button type="submit" class="btn bg-primary hover:bg-green-300 text-white">Delivery</button>
+                                        <button type="submit" class="btn bg-primary hover:bg-green-500 text-black">Delivery</button>
                                     </li>
                                 </form>
 
@@ -61,7 +61,7 @@
                                 <form action="{% url 'cancel_order' item.id %}" method="POST">
                                     {% csrf_token %}
                                     <li>
-                                        <button type="submit" class="btn bg-red-400 hover:bg-red-500 text-white">Order Cancel</button>
+                                        <button type="submit" class="btn bg-red-400 hover:bg-red-500 text-black">Order Cancel</button>
                                     </li>
                                 </form>
                             {% else %}
