@@ -19,12 +19,14 @@ class HomeView(View):
         departments = Departments.objects.all()
         blog = BlogPost.objects.all()[0:3:-1]
         Carousel = HomeCarousel.objects.all()
+        latest_product = Product.objects.all().order_by('-id')[:4]
         
         context = {
             'products': products,
             'departments': departments,
             'blog':blog,
-            'Carousel':Carousel
+            'Carousel':Carousel,
+            'latest':latest_product
         }
         return render(request, 'home.html', context) 
     

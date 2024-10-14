@@ -47,12 +47,11 @@
                     <td class="py-3 px-2 sm:px-4 text-sm sm:text-base">
                         <ul class="flex flex-col space-y-1 md:flex-row md:justify-evenly md:space-y-0 text-center">
                             <!-- Details -->
-                            <form action="{% url 'product_details' item.id %}" method="POST">
-                                {% csrf_token %}
+                            <a href="#">
                                 <li>
-                                    <button type="submit" class="btn bg-primary hover:bg-green-300 text-white">Details</button>
+                                    <button type="submit" class="btn bg-blue-500 hover:bg-blue-600 text-white">Review</button>
                                 </li>
-                            </form>
+                            </a>
                         </ul>
                     </td>
                 </tr>
