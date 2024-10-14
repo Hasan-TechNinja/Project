@@ -104,7 +104,26 @@ class Billing_Details(models.Model):
         return self.product.selling_price * self.quantity
     
 
+class Delivery(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
+    product=models.ForeignKey(Product, on_delete=models.CASCADE, blank=True, null= True)
+    quantity=models.PositiveIntegerField(default=1)
+    country = CountryField(blank_label='(select country)')
+    division = models.CharField(max_length=255)
+    district = models.CharField(max_length=100)
+    thana = models.CharField(max_length=100)
+    street = models.CharField(max_length=100, blank=True, null=True)
+    zip_code = models.CharField(max_length=20, blank=True, null=True)
+    phone = models.CharField(max_length=25)
+    order_note = models.CharField(max_length=200, blank=True, null=True)
+    datetime = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    second_phone = models.CharField(max_length=25, blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
 
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}, order"
 
 
 class BlogPost(models.Model):

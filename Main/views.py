@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views import View
-from . models import Product, Departments, Cart, BlogPost, Billing_Details, HomeCarousel
+from . models import Product, Departments, Cart, BlogPost, Billing_Details, HomeCarousel, Delivery
 from . forms import BillingDetailsForm
 from django.contrib.auth import authenticate
 from django.utils.html import strip_tags
@@ -294,26 +294,120 @@ def checkout(request):
     return render(request, 'checkout.html', context)
 
 
+# def OrderView(request):
+#     order = Billing_Details.objects.filter(user=request.user)
+#     order_product = [p for p in order]
+#     total = len(order)
+#     subtotal = 0  # Initialize the subtotal variable
+
+#     for p in order_product:
+#         if p.product:  # Check if product exists before calculating
+#             p.linetotal = p.quantity * p.product.discount_price  # Calculate line total
+#             subtotal += p.linetotal  # Add to subtotal
+#     address = f"{order.first().street}, {order.first().thana}, {order.first().district}, {order.first().division}, {order.first().country}"
+#     context = {
+#         'order': order,
+#         'subtotal': subtotal,
+#         'address': address,
+#         'total':total
+#     }
+#     return render(request, 'order.html', context)
 
 
 def OrderView(request):
-    order = Billing_Details.objects.filter(user=request.user)
-    order_product = [p for p in order]
-    total = len(order)
+    orders = Billing_Details.objects.filter(user=request.user)
+    total = orders.count()
     subtotal = 0  # Initialize the subtotal variable
 
-    for p in order_product:
-        if p.product:  # Check if product exists before calculating
-            p.linetotal = p.quantity * p.product.discount_price  # Calculate line total
-            subtotal += p.linetotal  # Add to subtotal
-    address = f"{order.first().street}, {order.first().thana}, {order.first().district}, {order.first().division}, {order.first().country}"
+    for order in orders:
+        if order.product:  # Check if product exists before calculating
+            order.linetotal = order.quantity * order.product.discount_price  # Calculate line total
+            subtotal += order.linetotal  # Add to subtotal
+
+    # Check if there are orders before attempting to access their attributes
+    if orders.exists():
+        address = f"{orders.first().street}, {orders.first().thana}, {orders.first().district}, {orders.first().division}, {orders.first().country}"
+    else:
+        address = ""
+
     context = {
-        'order': order,
+        'order': orders,  # Passing all the orders for this user
         'subtotal': subtotal,
         'address': address,
-        'total':total
+        'total': total
     }
     return render(request, 'order.html', context)
+
+
+
+# def DeliveryView(request, order_id):
+#     # Get the order object by its ID
+#     order = get_object_or_404(Billing_Details, id=order_id, user=request.user)
+
+
+#     Delivery.objects.create(
+#         user=order.user,
+#         first_name = order.first_name,
+#         last_name = order.last_name,
+#         product=order.product,
+#         quantity=order.quantity,
+#         country = order.country,
+#         division = order.division,
+#         district = order.district,
+#         thana = order.thana,
+#         street = order.street,
+#         zip_code = order.zip_code,
+#         phone = order.phone,
+#         order_note = order.order_note,
+#         datetime = order.datetime,
+#         second_phone = order.second_phone,
+#         email = order.email
+#     )
+
+#     order.delete()
+
+#     return redirect('orders')
+
+
+def DeliveryView(request, order_id):
+    # Get the order object by its ID
+    order = get_object_or_404(Billing_Details, id=order_id, user=request.user)
+
+    # Create a new Delivery record
+    Delivery.objects.create(
+        user=order.user,
+        first_name=order.first_name,
+        last_name=order.last_name,
+        product=order.product,
+        quantity=order.quantity,
+        country=order.country,
+        division=order.division,
+        district=order.district,
+        thana=order.thana,
+        street=order.street,
+        zip_code=order.zip_code,
+        phone=order.phone,
+        order_note=order.order_note,
+        datetime=order.datetime,
+        second_phone=order.second_phone,
+        email=order.email
+    )
+
+    # Delete the order from Billing_Details
+    order.delete()
+
+    # Redirect to the orders page
+    return redirect('order')  # Make sure 'order' matches the URL pattern in your urls.py
+
+
+
+# In your views.py
+
+def cancel_order(request, order_id):
+    order = get_object_or_404(Billing_Details, id=order_id, user=request.user)
+    order.delete()
+    return redirect('orders_page')
+
 
 
 def search(request):
