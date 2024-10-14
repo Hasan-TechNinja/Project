@@ -22,6 +22,7 @@ urlpatterns = [
     path('orders/', views.OrderView, name='orders_page'),
     path('order/<int:order_id>/deliver/', views.DeliveryView, name='delivery'),
     path('order/<int:order_id>/cancel/', views.cancel_order, name='cancel_order'),
+    path('purchase/', views.Purchase, name='purchase'),
     path('search/', views.search, name='search'),
 
     

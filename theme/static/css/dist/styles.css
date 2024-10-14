@@ -1909,14 +1909,14 @@ select {
   display: none;
 }
 
-.size-80 {
-  width: 20rem;
-  height: 20rem;
-}
-
 .size-16 {
   width: 4rem;
   height: 4rem;
+}
+
+.size-80 {
+  width: 20rem;
+  height: 20rem;
 }
 
 .h-10 {

@@ -1,6 +1,5 @@
 {% extends "base.html" %}
-{% block title %} Order Details {% endblock title %}
-
+{% block title %}Purchase History{% endblock title %}
 {% block content %}
 <div class="container mx-auto my-10 h-screen">
     <!-- Order Items -->
@@ -17,7 +16,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for item in order %}
+                {% for item in purchase %}
                 <tr class="border-b">
                     <!-- Product Info -->
                     <td class="py-3 px-2 sm:px-4">
@@ -47,26 +46,13 @@
                     <!-- Actions -->
                     <td class="py-3 px-2 sm:px-4 text-sm sm:text-base">
                         <ul class="flex flex-col space-y-1 md:flex-row md:justify-evenly md:space-y-0 text-center">
-                            <!-- Only render the form if order.id exists -->
-                            {% if item.id %}
-                                <!-- Delivery button -->
-                                <form action="{% url 'delivery' item.id %}" method="POST">
-                                    {% csrf_token %}
-                                    <li>
-                                        <button type="submit" class="btn bg-primary hover:bg-green-300 text-white">Delivery</button>
-                                    </li>
-                                </form>
-
-                                <!-- Order Cancel button -->
-                                <form action="{% url 'cancel_order' item.id %}" method="POST">
-                                    {% csrf_token %}
-                                    <li>
-                                        <button type="submit" class="btn bg-red-400 hover:bg-red-500 text-white">Order Cancel</button>
-                                    </li>
-                                </form>
-                            {% else %}
-                                <li class="text-red-500">Order ID not available</li>
-                            {% endif %}
+                            <!-- Details -->
+                            <form action="{% url 'product_details' item.id %}" method="POST">
+                                {% csrf_token %}
+                                <li>
+                                    <button type="submit" class="btn bg-primary hover:bg-green-300 text-white">Details</button>
+                                </li>
+                            </form>
                         </ul>
                     </td>
                 </tr>
