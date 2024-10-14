@@ -193,6 +193,9 @@
         </div>
       </nav>
     {% comment %} nav end {% endcomment %}
+     
+    <script src="{% static "js/script.js" %}"></script>
+
 
 
     {% block content %}{% endblock content %}
@@ -259,11 +262,6 @@
         <p class="text-center bg-gray-700 text-white py-2">© 2024 [Store Name]. All Rights Reserved.</p>
     </footer>
     {% comment %} footer end {% endcomment %}
-
-
-{% load static %}
-<script src="{% static 'js/script.js' %}"></script>
-    
-   
+  
 </body>
 </html>

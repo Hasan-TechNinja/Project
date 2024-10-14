@@ -12,7 +12,8 @@
             <ul class="flex justify-center gap-7 font-medium my-7">
               {% for department in departments %}
                 <li>
-                  <a href="{% url 'department_detail' department.id %}" class='hover:underline hover:text-blue-600'>
+                  <a href="{% url 'department_detail' department.id %}" class=''>
+                    <img class='size-16 rounded-lg' src="{{ department.image.url }}" alt="">
                     {{ department.name }}
                   </a>
                 </li>
@@ -53,9 +54,9 @@
             {% endfor %}
         </div>
         {% else %}
-        <div class="text-center py-16">
-            <h2 class="text-2xl font-bold text-gray-600">No products available for this department.</h2>
-        </div>
+            <div class="text-center py-16">
+                <h2 class="text-2xl font-bold text-gray-600">No products available for this department.</h2>
+            </div>
         {% endif %}
 </div>
   

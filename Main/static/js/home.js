@@ -1,3 +1,6 @@
+console.log('inside home js')
+
+
 document.addEventListener("DOMContentLoaded", function () {
     const carouselItems = document.querySelectorAll(".carousel-item");
     let currentIndex = 0;
@@ -46,3 +49,23 @@ document.addEventListener("DOMContentLoaded", function () {
     showSlide(currentIndex);
     autoScroll();
   });
+
+
+// All department name show
+
+  document.getElementById("toggle-departments").addEventListener("click", function () {
+    var departmentList = document.getElementById("departments-list");
+    var chevronIcon = document.getElementById("chevron-icon");
+
+    // Toggle the 'hidden' class to show or hide the list
+    departmentList.classList.toggle("hidden");
+
+    // Switch between 'fa-chevron-down' and 'fa-chevron-up'
+    if (chevronIcon.classList.contains("fa-chevron-down")) {
+        chevronIcon.classList.remove("fa-chevron-down");
+        chevronIcon.classList.add("fa-chevron-up");
+    } else {
+        chevronIcon.classList.remove("fa-chevron-up");
+        chevronIcon.classList.add("fa-chevron-down");
+    }
+});
