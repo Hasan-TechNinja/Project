@@ -303,19 +303,19 @@ def checkout(request):
 
                 else:
                     # Handle insufficient stock, show an error message (optional)
-                    return render(request, 'checkout.html', {
+                    return render(request, 'checkouts.html', {
                         'form': form,
                         'cart': cart,
                         'error': f'Not enough stock for {product.name}. Only {product.stock} left.'
                     })
 
             # After processing all items, redirect to home
-            return redirect('payment')
+            return redirect('profile')
 
         else:
             # Handle form errors
             context = {'form': form}
-            return render(request, 'checkout.html', context)
+            return render(request, 'checkouts.html', context)
 
     else:
         form = BillingDetailsForm()
@@ -324,7 +324,7 @@ def checkout(request):
         'form': form,
         'cart': cart
     }
-    return render(request, 'checkout.html', context)
+    return render(request, 'checkouts.html', context)
 
 # @login_required
 # def checkout(request):

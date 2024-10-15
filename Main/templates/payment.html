@@ -24,34 +24,79 @@
                     </div>
                 </div>
 
-                <!-- Payment Form Section -->
-                <h2 class="text-2xl font-semibold mb-3">Payment Details</h2>
+                <!-- Payment Method Section -->
+                <h2 class="text-2xl font-semibold mb-3">Choose Payment Method</h2>
                 <form action="/process_payment" method="POST" class="space-y-6">
+                    {% csrf_token %}
 
-                    <!-- Credit Card Number -->
-                    <div>
-                        <label for="card_number" class="block text-sm font-medium text-gray-700">Card Number</label>
-                        <input type="text" id="card_number" name="card_number" 
-                               class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                               placeholder="1234 5678 9012 3456" required>
+                    <!-- Payment Method Radio Buttons -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700">Payment Method</label>
+                        <div class="mt-2">
+                            <div class="flex items-center mb-4">
+                                <input id="credit-card" name="payment_method" type="radio" value="credit_card" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300" required>
+                                <label for="credit-card" class="ml-3 block text-sm font-medium text-gray-700">Credit/Debit Card</label>
+                            </div>
+                            <div class="flex items-center mb-4">
+                                <input id="mobile-banking" name="payment_method" type="radio" value="mobile_banking" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300" required>
+                                <label for="mobile-banking" class="ml-3 block text-sm font-medium text-gray-700">Mobile Banking</label>
+                            </div>
+                            <div class="flex items-center mb-4">
+                                <input id="cash-on-delivery" name="payment_method" type="radio" value="cash_on_delivery" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300" required>
+                                <label for="cash-on-delivery" class="ml-3 block text-sm font-medium text-gray-700">Cash on Delivery</label>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Expiry Date and CVV -->
-                    <div class="flex space-x-4">
-                        <!-- Expiry Date -->
-                        <div class="w-1/2">
-                            <label for="expiry_date" class="block text-sm font-medium text-gray-700">Expiry Date</label>
-                            <input type="text" id="expiry_date" name="expiry_date" 
+                    <!-- Credit Card Payment Section (Shown conditionally with JavaScript) -->
+                    <div id="credit-card-details" class="hidden">
+                        <!-- Credit Card Number -->
+                        <div>
+                            <label for="card_number" class="block text-sm font-medium text-gray-700">Card Number</label>
+                            <input type="text" id="card_number" name="card_number"
                                    class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                                   placeholder="MM/YY" required>
+                                   placeholder="1234 5678 9012 3456">
                         </div>
 
-                        <!-- CVV -->
-                        <div class="w-1/2">
-                            <label for="cvv" class="block text-sm font-medium text-gray-700">CVV</label>
-                            <input type="text" id="cvv" name="cvv" 
+                        <!-- Expiry Date and CVV -->
+                        <div class="flex space-x-4">
+                            <!-- Expiry Date -->
+                            <div class="w-1/2">
+                                <label for="expiry_date" class="block text-sm font-medium text-gray-700">Expiry Date</label>
+                                <input type="text" id="expiry_date" name="expiry_date"
+                                       class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                                       placeholder="MM/YY">
+                            </div>
+
+                            <!-- CVV -->
+                            <div class="w-1/2">
+                                <label for="cvv" class="block text-sm font-medium text-gray-700">CVV</label>
+                                <input type="text" id="cvv" name="cvv"
+                                       class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                                       placeholder="123">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Banking Payment Section (Shown conditionally with JavaScript) -->
+                    <div id="mobile-banking-details" class="hidden">
+                        <!-- Select Mobile Banking Service -->
+                        <div class="mt-4">
+                            <label for="mobile_service" class="block text-sm font-medium text-gray-700">Mobile Banking Service</label>
+                            <select id="mobile_service" name="mobile_service"
+                                    class="mt-1 block w-full pl-3 pr-10 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                                <option value="bkash">bKash</option>
+                                <option value="nagad">Nagad</option>
+                                <option value="rocket">Rocket</option>
+                            </select>
+                        </div>
+
+                        <!-- Transaction ID -->
+                        <div class="mt-4">
+                            <label for="transaction_id" class="block text-sm font-medium text-gray-700">Transaction ID</label>
+                            <input type="text" id="transaction_id" name="transaction_id"
                                    class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                                   placeholder="123" required>
+                                   placeholder="Enter your transaction ID">
                         </div>
                     </div>
 
@@ -66,7 +111,7 @@
 
                     <!-- Payment Button -->
                     <div class="mt-6">
-                        <button type="submit" class="w-full bg-indigo-600 text-white p-3 rounded-md font-semibold text-lg hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-500">
+                        <button id="pay-now-button" type="submit" class="w-full bg-indigo-600 text-white p-3 rounded-md font-semibold text-lg hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-500">
                             Pay Now
                         </button>
                     </div>
@@ -75,4 +120,41 @@
         </div>
     </div>
 </div>
+
+<script>
+    // Show or hide payment details based on selected payment method and update the button text
+    document.addEventListener('DOMContentLoaded', function () {
+        const creditCardRadio = document.getElementById('credit-card');
+        const cashOnDeliveryRadio = document.getElementById('cash-on-delivery');
+        const mobileBankingRadio = document.getElementById('mobile-banking');
+        const creditCardDetails = document.getElementById('credit-card-details');
+        const mobileBankingDetails = document.getElementById('mobile-banking-details');
+        const payNowButton = document.getElementById('pay-now-button');
+
+        creditCardRadio.addEventListener('change', function () {
+            if (creditCardRadio.checked) {
+                creditCardDetails.classList.remove('hidden');
+                mobileBankingDetails.classList.add('hidden');
+                payNowButton.textContent = "Pay Now";
+            }
+        });
+
+        cashOnDeliveryRadio.addEventListener('change', function () {
+            if (cashOnDeliveryRadio.checked) {
+                creditCardDetails.classList.add('hidden');
+                mobileBankingDetails.classList.add('hidden');
+                payNowButton.textContent = "Confirm Order";
+            }
+        });
+
+        mobileBankingRadio.addEventListener('change', function () {
+            if (mobileBankingRadio.checked) {
+                creditCardDetails.classList.add('hidden');
+                mobileBankingDetails.classList.remove('hidden');
+                payNowButton.textContent = "Pay Now";
+            }
+        });
+    });
+</script>
+
 {% endblock content %}
