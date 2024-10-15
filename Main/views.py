@@ -232,14 +232,17 @@ def BlogView(request):
 
 class BlogDetails(View):
     def get(self, request, pk):
-        Blog = get_object_or_404(BlogPost, pk=pk)
-        category = Blog.category
-        print(category)
+        blog = get_object_or_404(BlogPost, pk=pk)
+        category = blog.category  # Assuming the BlogPost model has a 'category' field
+        suggest = BlogPost.objects.filter(category=category).exclude(pk=pk)  # Exclude the current blog from suggestions
+        
         context = {
-            'blog':Blog
+            'blog': blog,
+            'suggest': suggest,
         }
         return render(request, 'blogdetails.html', context)
-
+    
+    
 
 @login_required
 def checkout(request):

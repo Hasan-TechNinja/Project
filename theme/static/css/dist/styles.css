@@ -2729,20 +2729,20 @@ select {
   padding-bottom: 1rem;
 }
 
-.pl-4 {
-  padding-left: 1rem;
-}
-
-.pt-2 {
-  padding-top: 0.5rem;
-}
-
 .pl-3 {
   padding-left: 0.75rem;
 }
 
+.pl-4 {
+  padding-left: 1rem;
+}
+
 .pr-10 {
   padding-right: 2.5rem;
+}
+
+.pt-2 {
+  padding-top: 0.5rem;
 }
 
 .pt-4 {
@@ -2918,6 +2918,11 @@ select {
   color: rgb(22 163 74 / var(--tw-text-opacity));
 }
 
+.text-indigo-600 {
+  --tw-text-opacity: 1;
+  color: rgb(79 70 229 / var(--tw-text-opacity));
+}
+
 .text-red-500 {
   --tw-text-opacity: 1;
   color: rgb(239 68 68 / var(--tw-text-opacity));
@@ -2946,11 +2951,6 @@ select {
 .text-yellow-500 {
   --tw-text-opacity: 1;
   color: rgb(234 179 8 / var(--tw-text-opacity));
-}
-
-.text-indigo-600 {
-  --tw-text-opacity: 1;
-  color: rgb(79 70 229 / var(--tw-text-opacity));
 }
 
 .line-through {
