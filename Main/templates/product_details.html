@@ -46,7 +46,7 @@
               <!-- Star rating can be added using icons or emojis -->
               ☆☆☆☆☆
             </div>
-            <span class="text-sm text-gray-600">(0 reviews)</span>
+            <span class="text-sm text-gray-600">(0 review)</span>
           </a>
           {% endif %}
 
@@ -173,6 +173,10 @@
           <div class="mb-6 border-b pb-4">
               <p class="font-semibold text-indigo-600">{{ review.user.username }}</p>
               <p class="text-sm text-gray-500">Reviewed on {{ review.created_at|date:"F d, Y" }}</p>
+              <div class="flex space-x-1 text-yellow-500">
+                <!-- Star rating can be added using icons or emojis -->
+                ★★★★☆
+              </div>
               <div class="flex items-center mb-2">
                   {% for star in review.get_star_range %}
                       <svg class="w-5 h-5 text-yellow-400 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -186,7 +190,8 @@
     {% else %}
         <p class="text-gray-500">No reviews yet. Be the first to review this product!</p>
     {% endif %}
-</div>
+  </div>
+
 </div>
 </div>
 

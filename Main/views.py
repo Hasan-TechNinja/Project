@@ -66,6 +66,7 @@ class ProductDetails(View):
 
         review = Review.objects.filter(product = product)
         review_quantity = len(review)
+        # star = review.rating()
 
         context = {
             'product': product,
