@@ -64,11 +64,16 @@ class ProductDetails(View):
         
         related_products = Product.objects.filter(department=product.department).exclude(pk=pk)
 
+        review = Review.objects.filter(product = product)
+        review_quantity = len(review)
+
         context = {
             'product': product,
             'stoke':stoke,
             'rproduct':related_products,
             'department_description':department_description,
+            'review':review,
+            'review_quantity':review_quantity,
             
 
         }
