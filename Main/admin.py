@@ -158,6 +158,7 @@ admin.site.register(HomeCarousel, HomeCarouselAdmin)
 class ReviewAdmin(admin.ModelAdmin):
     list_display = (
         'product',
+        'p_id',
         'user',
         'rating',
         'comment',

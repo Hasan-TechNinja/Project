@@ -31,5 +31,6 @@ class ReviewForm(forms.ModelForm):
         fields = ['rating', 'comment']
         widgets = {
             'rating': forms.TextInput(attrs={'class': 'mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500', 'placeholder': 'Rating'}),
-            'comment': forms.TextInput(attrs={'class': 'mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500', 'placeholder': 'Comment'}),
+            'comment': forms.Textarea(attrs={'class': 'mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500','placeholder': 'Comment','rows': 5,})
+
         }

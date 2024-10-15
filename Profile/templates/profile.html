@@ -19,10 +19,15 @@
             <p class='text-start'> {{ profile.contact }}</p>
             <p class='text-start'>Join: {{ profile.created }}</p>
 
-            <div class='flex justify-between md:justify-around mt-3'>
-                <a href="{% url "editprofile" %}"><button class='btn bg-blue-500 hover:bg-blue-600 text-white'>Edit Profile</button></a>
-                <a href="#"><button class='btn bg-blue-500 hover:bg-blue-600 text-white'>Delete Profile</button></a>
-                <a href="{% url "password_change" %}"><button class='btn bg-blue-500 hover:bg-blue-600 text-white'>Change Password</button></a>
+            <div class='flex md:justify-around mt-3'>
+                <div>
+                    <a href="{% url "editprofile" %}"><button class='btn bg-blue-500 hover:bg-blue-600 text-white'>Edit Profile</button></a>
+                    <a href="{% url "password_change" %}"><button class='btn bg-blue-500 hover:bg-blue-600 text-white'>Change Password</button></a>
+                </div>
+                <div>
+                    <a href="{% url "logout" %}"><button class='btn bg-yellow-400 hover:bg-red-300 text-black'>Logout</button></a>
+                    <a href="#"><button class='btn bg-red-500 hover:bg-red-700 text-white'>Delete Profile</button></a>
+                </div>
             </div>
         </div>
         {% comment %} profile information end {% endcomment %}
@@ -104,8 +109,42 @@
         </div>
     </div>
 
-    <div>
-        <div class='bg-white p-4 mx-2 my-1 rounded-md shadow-md'>
+    <div class='md:flex bg-gray-100 p-5'>
+        <div class='bg-white p-4 mx-2 my-1 rounded-md shadow-md md:w-1/2'>
+            <h2 class='text-xl font-bold mb-2'>Purchase History</h2>
+            <hr class='mb-2'>
+            <div class="space-y-2">
+                {% if purchase %}
+                {% for purchase in purchase|slice:":3" %}
+                <div class='flex justify-between items-center border-b pb-2 shadow-md'>
+                    <img class='h-14 w-14 rounded-md' src="{{ purchase.product.image.url }}" alt="Product Image">
+                    <div class='flex-1 px-4'>
+                        <p class="font-medium text-gray-900">{{ purchase.product.name }}</p>
+                        <p class='text-gray-500 text-sm'>Price: <span class='text-green-500 font-semibold'>TK {{ purchase.product.discount_price }}</span></p>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <tbody>
+                    <tr>
+                        <td colspan="100%">
+                            <div class="flex justify-center py-10">
+                                <div class="flex flex-col justify-center items-center">
+                                    <img src="{% static 'img/cart.jpg' %}" alt="Empty Cart" class="w-40 h-40 mb-4 md:w-38 md:h-38">
+                                    <h2 class="text-xl font-semibold text-gray-700">Empty</h2>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                {% endif %}
+            </div>
+            <div class='mt-3'>
+                <a href="{% url "purchase" %}"><button class='w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition font-semibold'>View Purchase history</button></a>
+            </div>
+        </div>
+
+        <div class='bg-white p-4 mx-2 my-1 rounded-md shadow-md md:w-1/2'>
             <h2 class='text-xl font-bold mb-2'>Purchase History</h2>
             <hr class='mb-2'>
             <div class="space-y-2">

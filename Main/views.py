@@ -3,8 +3,8 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views import View
-from . models import Product, Departments, Cart, BlogPost, Billing_Details, HomeCarousel, Delivery
-from . forms import BillingDetailsForm
+from . models import Product, Departments, Cart, BlogPost, Billing_Details, HomeCarousel, Delivery, Review
+from . forms import BillingDetailsForm, ReviewForm
 from django.contrib.auth import authenticate
 from django.utils.html import strip_tags
 from django.db.models import Q
@@ -496,6 +496,46 @@ def Purchase(request):
     return render(request, 'purchase.html', context)
 
 
+# class ProductReviewView(View):
+#     def get(self, request, p_id):
+#         product = get_object_or_404(Product, id=p_id)
+#         form = ReviewForm()
+#         return render(request, 'product_review.html', {'form': form, 'product': product})
+
+#     def post(self, request, p_id):
+#         product = get_object_or_404(Product, id=p_id)
+#         form = ReviewForm(request.POST)
+#         if form.is_valid():
+#             review = form.save(commit=False)
+#             review.product = product
+#             review.user = request.user
+#             review.save()
+#             return redirect('purchase')  # Redirect to purchase page after review submission
+#         return render(request, 'review.html', {'form': form, 'product': product})
+class ProductReviewView(View):
+    def get(self, request, p_id):
+        product = get_object_or_404(Product, id=p_id)
+        form = ReviewForm()
+        review = Review.objects.filter(product=product)
+        context = {
+            'form':form,
+            'product':product,
+            'review':review,
+        }
+        return render(request, 'product_review.html',context)
+
+    def post(self, request, p_id):
+        product = get_object_or_404(Product, id=p_id)
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.product = product
+            review.p_id = p_id  # Add p_id to the review instance
+            review.user = request.user
+            review.save()
+            return redirect('purchase')  # Redirect to the purchase page after review submission
+        return render(request, 'product_review.html', {'form': form, 'product': product})
+
 
 def cancel_order(request, order_id):
 
@@ -526,5 +566,11 @@ def search(request):
             return render(request, 'search.html')
         
 
-def payment(request):
-    return render(request, 'payment.html')
+
+def ProductReview(request):
+    form = ReviewForm()
+
+    context = {
+        'form':form,
+    }
+    return render(request, 'product_review.html', context)

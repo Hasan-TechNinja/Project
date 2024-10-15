@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Product Review{% endblock title %}
+{% block content %}
+
+<div class="container mx-auto py-8 px-4">
+    <!-- Product Details Section -->
+    <div class="flex flex-col md:flex-row items-center mb-8">
+        <div class="md:w-1/3">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-full rounded-lg shadow-lg">
+        </div>
+        <div class="md:w-2/3 md:ml-8 text-center md:text-left">
+            <h1 class="text-3xl font-bold mb-4">{{ product.name }}</h1>
+            <p class="text-gray-700 mb-2">Brand: <span class="font-semibold">{{ product.brand.name }}</span></p>
+            <p class="text-gray-700 mb-2">Price: <span class="font-semibold">${{ product.selling_price }}</span></p>
+            <p class="text-gray-700 mb-2">Category: <span class="font-semibold">{{ product.category.name }}</span></p>
+        </div>
+    </div>
+
+    <!-- Review Form Section -->
+    <div class="bg-white p-6 rounded-lg shadow-lg mb-8">
+        <h2 class="text-2xl font-semibold mb-6">Write a Review</h2>
+
+        <form action="{% url 'review' product.id %}" method="POST" class="space-y-4">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="mb-4">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.errors %}
+                        <p class="text-red-500 text-sm mt-1">{{ field.errors }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg">
+                Submit Review
+            </button>
+        </form>
+    </div>
+
+    <!-- Display Existing Reviews Section -->
+    <div class="bg-white p-6 rounded-lg shadow-lg">
+        <h2 class="text-2xl font-semibold mb-6">Customer Reviews</h2>
+
+        {% if review %}
+            {% for review in review %}
+                <div class="mb-6 border-b pb-4">
+                    <p class="font-semibold text-gray-800">{{ review.user.username }}</p>
+                    <p class="text-sm text-gray-500">Reviewed on {{ review.created_at|date:"F d, Y" }}</p>
+                    <div class="flex items-center mb-2">
+                        {% for star in review.get_star_range %}
+                            <svg class="w-5 h-5 text-yellow-400 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M12 .587l3.668 7.451L24 9.75l-6 5.835 1.415 8.233L12 18.999l-7.415 4.819L6 15.585 0 9.75l8.332-1.712L12 .587z"/>
+                            </svg>
+                        {% endfor %}
+                    </div>
+                    <p class="text-gray-700">{{ review.comment }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="text-gray-500">No reviews yet. Be the first to review this product!</p>
+        {% endif %}
+    </div>
+
+</div>
+
+{% endblock content %}
