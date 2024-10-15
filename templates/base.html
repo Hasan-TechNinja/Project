@@ -73,6 +73,7 @@
                     {% if user.is_authenticated %}
                     <li><a href="{% url "showcart" %}">Cart</a></li>
                     <li><a href="{% url "order" %}">Order</a></li>
+                    <li><a href="{% url "payment" %}">Payment</a></li>
                     {% endif %}
                     
                   </ul>
@@ -103,6 +104,7 @@
                       {% if user.is_authenticated %}
                       <li class="relative z-10"><a href="{% url "showcart" %}">Cart</a></li>
                       <li class="relative z-10"><a href="{% url "order" %}">Order</a></li>
+                      <li class="relative z-10"><a href="{% url "payment" %}">Payment</a></li>
                       {% endif %}
                   </ul>
               </details>

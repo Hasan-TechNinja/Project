@@ -310,7 +310,7 @@ def checkout(request):
                     })
 
             # After processing all items, redirect to home
-            return redirect('home')
+            return redirect('payment')
 
         else:
             # Handle form errors
@@ -461,6 +461,7 @@ def DeliveryView(request, order_id):
     # Create a new Delivery record
     Delivery.objects.create(
         user=order.user,
+        p_id = order.p_id,
         first_name=order.first_name,
         last_name=order.last_name,
         product=order.product,
@@ -485,7 +486,7 @@ def DeliveryView(request, order_id):
 #for history product
 def Purchase(request):
     user = request.user
-    purchase = Delivery.objects.filter(user = user)
+    purchase = Delivery.objects.filter(user = user).order_by('-id')
     context = {
         'purchase':purchase
     }
@@ -520,3 +521,7 @@ def search(request):
             return render(request, 'search.html', {'product': product})
         else:
             return render(request, 'search.html')
+        
+
+def payment(request):
+    return render(request, 'payment.html')

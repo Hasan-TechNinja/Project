@@ -108,6 +108,7 @@ class Billing_Details(models.Model):
 
 class Delivery(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    p_id = models.CharField(max_length=100,null=True, blank=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     product=models.ForeignKey(Product, on_delete=models.CASCADE, blank=True, null= True)

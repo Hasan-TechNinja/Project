@@ -16,7 +16,7 @@ def Profile(request):
         name = str(profile.first_name + ' ' + profile.last_name)
 
     address = Delivery.objects.filter(user=user).order_by('-id')[0:3]
-    purchase = Delivery.objects.filter(user = user)
+    purchase = Delivery.objects.filter(user = user).order_by('-id')
 
     context = {
         'profile': profile,

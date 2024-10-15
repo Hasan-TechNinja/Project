@@ -113,6 +113,7 @@ class DeliveryAdmin(admin.ModelAdmin):
     list_display = (
         'id',
         'user',
+        'p_id',
         'first_name',
         'last_name',
         'product',
