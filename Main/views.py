@@ -502,45 +502,51 @@ def Purchase(request):
     return render(request, 'purchase.html', context)
 
 
-# class ProductReviewView(View):
-#     def get(self, request, p_id):
-#         product = get_object_or_404(Product, id=p_id)
-#         form = ReviewForm()
-#         return render(request, 'product_review.html', {'form': form, 'product': product})
 
-#     def post(self, request, p_id):
-#         product = get_object_or_404(Product, id=p_id)
-#         form = ReviewForm(request.POST)
-#         if form.is_valid():
-#             review = form.save(commit=False)
-#             review.product = product
-#             review.user = request.user
-#             review.save()
-#             return redirect('purchase')  # Redirect to purchase page after review submission
-#         return render(request, 'review.html', {'form': form, 'product': product})
+
 class ProductReviewView(View):
     def get(self, request, p_id):
         product = get_object_or_404(Product, id=p_id)
-        form = ReviewForm()
-        review = Review.objects.filter(product=product)
+
+        # Check if the user has already reviewed this product
+        try:
+            review = Review.objects.get(product=product, user=request.user)
+            form = ReviewForm(instance=review) # Pre-fill the form with existing review
+        except Review.DoesNotExist:
+            form = ReviewForm()  # Blank form if no review exists
+
+        # Get all reviews for the product (optional, to display existing reviews)
+        reviews = Review.objects.filter(product=product)
+
         context = {
-            'form':form,
-            'product':product,
-            'review':review,
+            'form': form,
+            'product': product,
+            'reviews': reviews,
         }
-        return render(request, 'product_review.html',context)
+        return render(request, 'product_review.html', context)
 
     def post(self, request, p_id):
         product = get_object_or_404(Product, id=p_id)
-        form = ReviewForm(request.POST)
+
+        # Check if the user has already reviewed this product
+        try:
+            review = Review.objects.get(product=product, user=request.user)
+            form = ReviewForm(request.POST, instance=review)  # Update the existing review
+        except Review.DoesNotExist:
+            form = ReviewForm(request.POST)  # Create a new review if none exists
+
         if form.is_valid():
             review = form.save(commit=False)
             review.product = product
             review.p_id = p_id  # Add p_id to the review instance
             review.user = request.user
             review.save()
+
             return redirect('purchase')  # Redirect to the purchase page after review submission
-        return render(request, 'product_review.html', {'form': form, 'product': product})
+
+        # On form error, re-render the form with existing data
+        reviews = Review.objects.filter(product=product)  # Reload reviews
+        return render(request, 'product_review.html', {'form': form, 'product': product, 'reviews': reviews})
 
 
 def cancel_order(request, order_id):
@@ -573,10 +579,10 @@ def search(request):
         
 
 
-def ProductReview(request):
-    form = ReviewForm()
+# def ProductReview(request):
+#     form = ReviewForm()
 
-    context = {
-        'form':form,
-    }
-    return render(request, 'product_review.html', context)
+#     context = {
+#         'form':form,
+#     }
+#     return render(request, 'product_review.html', context)

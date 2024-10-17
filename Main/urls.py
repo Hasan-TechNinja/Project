@@ -24,7 +24,7 @@ urlpatterns = [
     path('order/<int:order_id>/cancel/', views.cancel_order, name='cancel_order'),
     path('purchase/', views.Purchase, name='purchase'),
     path('search/', views.search, name='search'),
-    path('review/', views.ProductReview, name='review'),
+    # path('review/', views.ProductReview, name='review'),
     path('review/<str:p_id>/', views.ProductReviewView.as_view(), name='review'),
 
     

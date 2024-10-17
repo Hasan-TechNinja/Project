@@ -19,7 +19,13 @@
 
     <!-- Review Form Section -->
     <div class="bg-white p-6 rounded-lg shadow-lg mb-8">
-        <h2 class="text-2xl font-semibold mb-6">Write a Review</h2>
+        <h2 class="text-2xl font-semibold mb-6">
+            {% if form.instance.id %}
+                Update Your Review
+            {% else %}
+                Write a Review
+            {% endif %}
+        </h2>
 
         <form action="{% url 'review' product.id %}" method="POST" class="space-y-4">
             {% csrf_token %}
@@ -33,7 +39,11 @@
                 </div>
             {% endfor %}
             <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg">
-                Submit Review
+                {% if form.instance.id %}
+                    Update Review
+                {% else %}
+                    Submit Review
+                {% endif %}
             </button>
         </form>
     </div>
@@ -42,10 +52,10 @@
     <div class="bg-white p-6 rounded-lg shadow-lg">
         <h2 class="text-2xl font-semibold mb-6">Customer Reviews</h2>
 
-        {% if review %}
-            {% for review in review %}
+        {% if reviews %}
+            {% for review in reviews %}
                 <div class="mb-6 border-b pb-4">
-                    <p class="font-semibold text-gray-800">{{ review.user.username }}</p>
+                    <p class="font-semibold text-indigo-600">{{ review.user.username }}</p>
                     <p class="text-sm text-gray-500">Reviewed on {{ review.created_at|date:"F d, Y" }}</p>
                     <div class="flex items-center mb-2">
                         {% for star in review.get_star_range %}
@@ -61,7 +71,6 @@
             <p class="text-gray-500">No reviews yet. Be the first to review this product!</p>
         {% endif %}
     </div>
-
 </div>
 
 {% endblock content %}
