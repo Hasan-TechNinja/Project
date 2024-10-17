@@ -495,11 +495,19 @@ def DeliveryView(request, order_id):
 #for history product
 def Purchase(request):
     user = request.user
-    purchase = Delivery.objects.filter(user = user).order_by('-id')
-    context = {
-        'purchase':purchase
-    }
-    return render(request, 'purchase.html', context)
+    purchase = Delivery.objects.filter(user=user).order_by('-id')  # Filter purchases by user
+
+    # Initialize subtotal
+    subtotal = 0
+
+    # Iterate through purchases and calculate subtotal
+    for p in purchase:
+        p.linetotal = p.quantity * p.product.discount_price   # Calculate line total for each purchase
+        subtotal += p.linetotal  # Add to subtotal
+
+    # Render the template with purchases and subtotal
+    return render(request, "purchase.html", {'purchase': purchase, 'subtotal': subtotal})
+
 
 
 

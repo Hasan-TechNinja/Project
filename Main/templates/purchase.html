@@ -59,19 +59,10 @@
             </tbody>
         </table>
     </div>
- 
-    <!-- Order Info -->
-    <h1 class="text-3xl font-bold mb-5 text-center sm:text-left">Order Details</h1>
-    <div class="bg-gray-100 p-5 rounded-lg shadow mb-10">
-        <h2 class="text-xl font-semibold text-center sm:text-left">Order #{{ order.first.id }}</h2>
-        <p class="text-gray-600 text-center sm:text-left">Placed on: {{ address }}</p>
-        <p class="text-gray-600 text-center sm:text-left">Total Items: {{ total }} Products</p>
-        <p class="text-gray-600 text-center sm:text-left">Status: {% if order.first.is_paid %} Paid {% else %} Not Paid {% endif %}</p>
-    </div>
 
     <!-- Total Price -->
     <div class="text-right mt-5">
-        <h3 class="text-xl font-bold">Order Total: {{ subtotal }} Tk</h3>
+        <h3 class="text-xl font-bold">Order Total: {{ subtotal|floatformat:2 }} Tk</h3>
     </div>
 </div>
 

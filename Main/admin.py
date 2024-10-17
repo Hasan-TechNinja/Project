@@ -3,12 +3,14 @@ from . models import Product, Departments, Category, Size, Cart, BlogPost, Billi
 
 # Register your models here.
 
+
 class ProductAdmin(admin.ModelAdmin):
     list_display = (
         'id', 
         'name', 
         'description', 
         'selling_price', 
+        'discount_percentage',
         'discount_price', 
         'stock',
         'image',
@@ -24,6 +26,8 @@ class ProductAdmin(admin.ModelAdmin):
     )
 
 admin.site.register(Product, ProductAdmin)
+
+
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = (
