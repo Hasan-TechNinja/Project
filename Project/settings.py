@@ -176,6 +176,14 @@ MEDIA_ROOT = BASE_DIR / 'media'  # This is where uploaded media files will be st
 # MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+# settings.py
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # For Gmail or another provider
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'hasan15-14654@diu.edu.bd'  # Your email
+EMAIL_HOST_PASSWORD = 'pbat jdqq sfbg qpuz'  # Your email password or app-specific password
 
 
 # Default primary key field type

@@ -1,15 +1,32 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.models import User
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
-from . forms import CustomAuthenticationForm, CustomUserCreationForm
+from . forms import CustomAuthenticationForm, CustomUserCreationForm, EmailVerificationForm, CustomPasswordChangeForm
 from django.contrib import messages
 from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
 from django.urls import reverse_lazy
-from .forms import CustomPasswordChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from .models import EmailVerification
 
 # Create your views here.
+
+
+# def RegistrationView(request):
+#     if request.method == 'POST':
+#         form = CustomUserCreationForm(request.POST)
+#         if form.is_valid():
+#             user = form.save()
+#             login(request, user)
+#             return redirect('home')
+#     else:
+#         form = CustomUserCreationForm()
+
+#     context = {
+#         'form':form
+#     }
+#     return render(request, 'registration.html', context)
+
 
 
 def RegistrationView(request):
@@ -17,15 +34,48 @@ def RegistrationView(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request, user)
-            return redirect('home')
+
+            # Save the verification code in EmailVerification model
+            verification = EmailVerification(user=user, code=form.email_verification_code)
+            verification.save()
+
+            return redirect('verify_email')  # Redirect to email verification page
     else:
         form = CustomUserCreationForm()
 
     context = {
-        'form':form
+        'form': form
     }
     return render(request, 'registration.html', context)
+
+
+
+def VerifyEmailView(request):
+    if request.method == 'POST':
+        form = EmailVerificationForm(request.POST)
+        if form.is_valid():
+            code = form.cleaned_data['code']
+            verification = get_object_or_404(EmailVerification, code=code)
+
+            # Activate the user's account
+            verification.user.is_active = True
+            verification.user.save()
+
+            # Delete the verification record after successful verification
+            verification.delete()
+
+            # login(request, verification.user)  # Log the user in after verification
+            return redirect('login')
+    else:
+        form = EmailVerificationForm()
+
+    context = {
+        'form': form
+    }
+    return render(request, 'verify_email.html', context)
+
+
+
 
 
 
@@ -46,6 +96,7 @@ def LoginView(request):
         'form':form
     }
     return render(request, 'login.html', context)
+
 
 
 class CustomPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
