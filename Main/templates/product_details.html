@@ -51,9 +51,12 @@
           {% endif %}
 
         </div>
+        {% if product.discount_percentage %}
         <p class="text-2xl font-semibold text-green-600 mt-2">{{ product.discount_price }}Tk</p>  
         <span class="text-sm text-red-500 line-through">{{ product.selling_price }} Tk</span>
-  
+        {% else %}
+        <span class="text-2xl font-semibold text-green-600 mt-2">{{ product.selling_price }} Tk</span>
+        {% endif %}
         <p class="mt-4 text-gray-700">
           {{ product.description }}
         </p>
@@ -69,13 +72,20 @@
           {% comment %} <button class="bg-gray-800 text-white px-6 py-2 rounded-lg hover:bg-gray-900">
             <a href="{% url "addtocart" %}">Add to Cart</a>
           </button> {% endcomment %}
-
+          
+          {% if stoke > 0 %}
           <form action="/addtocart" class='d-inline'>
             {% csrf_token %}
             <input type="hidden" name="prod_id" value="{{product.id}}" id="prod_id">
             <input type="hidden" name="product_quantity" id="product_quantity" value="1">
             <button type="submit" class = "bg-gray-800 text-white px-6 py-2 rounded-lg hover:bg-gray-900">Add to Cart</button>
         </form>
+        {% else %}
+        <form action="" class='d-inline'>
+          {% csrf_token %}
+          <button type="button" class = "bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-gray-900">Stoke out</button>
+      </form>
+        {% endif %}
 
           <button class="text-gray-500 hover:text-gray-800">
             {% comment %} ♥ {% endcomment %}
@@ -88,6 +98,9 @@
           <li><strong>Availability:</strong> {{ stoke }}</li>
           <li><strong>Shipping:</strong> 01 day shipping. <span class="text-red-500">Free pickup today</span></li>
           <li><strong>Brand: </strong><a class='hover:underline hover:text-blue-700' href="#">{{ product.brand }}</a></li>
+          {% if product.discount_percentage > 0 %}
+          <li><strong>Discount: <a class='text-red-600'>{{ product.discount_percentage }}% OFF</a></strong></li>
+          {% endif %}
         </ul>
         <!-- Social Media Sharing -->
         <div class="mt-4 flex space-x-4">
@@ -117,6 +130,36 @@
         <p class="mt-4 text-gray-600 text-start">{{ department_description }}</p>
       </div>
     </div>
+
+
+    <!-- Display Existing Reviews Section -->
+  <div class="bg-gray-100 p-6 rounded-lg shadow-lg mt-7">
+    <h2 id='review' class="text-2xl font-semibold mb-1">Customer Reviews</h2>
+    <hr class='mb-5'>
+    {% if review %}
+        {% for review in review %}
+          <div class="mb-6 border-b pb-4">
+              <p class="font-semibold text-indigo-600">{{ review.user.username }}</p>
+              <p class="text-sm text-gray-500">Reviewed on {{ review.created_at|date:"F d, Y" }}</p>
+              <div class="flex space-x-1 text-yellow-500">
+                <!-- Star rating can be added using icons or emojis -->
+                ★★★★☆
+              </div>
+              <div class="flex items-center mb-2">
+                  {% for star in review.get_star_range %}
+                      <svg class="w-5 h-5 text-yellow-400 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                          <path d="M12 .587l3.668 7.451L24 9.75l-6 5.835 1.415 8.233L12 18.999l-7.415 4.819L6 15.585 0 9.75l8.332-1.712L12 .587z"/>
+                      </svg>
+                  {% endfor %}
+              </div>
+              <p class="text-gray-800">{{ review.comment }}</p>
+          </div>
+        {% endfor %}
+    {% else %}
+        <p class="text-gray-500">No reviews yet. Be the first to review this product!</p>
+    {% endif %}
+  </div>
+
 
     <!-- Related Product Section -->
     {% if rproduct %}
@@ -164,33 +207,6 @@
 {% endif %}
 
 <div>
-  <!-- Display Existing Reviews Section -->
-  <div class="bg-gray-100 p-6 rounded-lg shadow-lg mt-7">
-    <h2 id='review' class="text-2xl font-semibold mb-1">Customer Reviews</h2>
-    <hr class='mb-5'>
-    {% if review %}
-        {% for review in review %}
-          <div class="mb-6 border-b pb-4">
-              <p class="font-semibold text-indigo-600">{{ review.user.username }}</p>
-              <p class="text-sm text-gray-500">Reviewed on {{ review.created_at|date:"F d, Y" }}</p>
-              <div class="flex space-x-1 text-yellow-500">
-                <!-- Star rating can be added using icons or emojis -->
-                ★★★★☆
-              </div>
-              <div class="flex items-center mb-2">
-                  {% for star in review.get_star_range %}
-                      <svg class="w-5 h-5 text-yellow-400 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                          <path d="M12 .587l3.668 7.451L24 9.75l-6 5.835 1.415 8.233L12 18.999l-7.415 4.819L6 15.585 0 9.75l8.332-1.712L12 .587z"/>
-                      </svg>
-                  {% endfor %}
-              </div>
-              <p class="text-gray-800">{{ review.comment }}</p>
-          </div>
-        {% endfor %}
-    {% else %}
-        <p class="text-gray-500">No reviews yet. Be the first to review this product!</p>
-    {% endif %}
-  </div>
 
 </div>
 </div>

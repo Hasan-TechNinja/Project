@@ -147,30 +147,40 @@
 {% comment %} show product {% endcomment %}
 <div class="w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
     {% for product in products %}
-    <div class="card card-compact bg-base-100 shadow-xl border my-3 transition-transform transform hover:-translate-y-1 hover:shadow-xl">
+    <div class="relative card card-compact bg-base-100 shadow-xl border my-3 transition-transform transform hover:-translate-y-1 hover:shadow-xl">
+        <!-- Discount badge -->
+        {% if product.discount_percentage > 0 %}
+        <span class="absolute top-0 right-0 bg-red-500 text-white text-sm font-bold px-2 py-1 rounded-tr-lg rounded-bl-lg z-10">
+            {{ product.discount_percentage }}% OFF
+        </span>
+        {% endif %}
+
         <figure>
             <img
                 src="{{ product.image.url }}"
                 alt="{{ product.name }}"
                 class="h-56 w-full object-cover rounded-md" />
         </figure>
+
         <div class="card-body">
             <div class='flex justify-between sm:flex-row sm:justify-between items-center'>
                 <h2 class="card-title text-xl font-semibold">{{ product.name }}</h2>
                 
                 <div class="flex flex-col text-right">
-                    {% if product.discount_price %}
+                    {% if product.discount_percentage > 0 %}
                         <!-- Discounted price -->
-                        <span class="text-xl font-semibold">{{ product.discount_price }} Tk</span>
+                        <span class="text-xl font-semibold text-green-600">{{ product.discount_price }} Tk</span>
                         <!-- Main price crossed out, smaller font -->
                         <span class="text-sm text-red-500 line-through">{{ product.selling_price }} Tk</span>
                     {% else %}
                         <!-- Only main price (no discount) -->
-                        <span class="text-xl font-semibold">{{ product.selling_price }} Tk</span>
+                        <span class="text-xl font-semibold text-green-600">{{ product.selling_price }} Tk</span>
                     {% endif %}
                 </div>
             </div>
+
             <p class="mt-2">{{ product.description|truncatechars:80 }}</p>
+
             <div class="card-actions justify-end mt-4">
                 <a href="{% url 'product_details' product.id %}" class="btn bg-primary">Buy Now</a>
             </div>

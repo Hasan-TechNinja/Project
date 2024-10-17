@@ -35,14 +35,14 @@
                         <h2 class="card-title text-xl font-semibold">{{ product.name }}</h2>
         
                         <div class="flex flex-col text-right">
-                            {% if product.discount_price %}
+                            {% if product.discount_percentage > 0 %}
                                 <!-- Discounted price -->
-                                <span class="text-xl font-semibold">{{ product.discount_price }} Tk</span>
+                                <span class="text-xl font-semibold text-green-600">{{ product.discount_price }} Tk</span>
                                 <!-- Main price crossed out, smaller font -->
-                                <span class="text-sm text-gray-500 line-through">{{ product.selling_price }} Tk</span>
+                                <span class="text-sm text-red-500 line-through">{{ product.selling_price }} Tk</span>
                             {% else %}
                                 <!-- Only main price (no discount) -->
-                                <span class="text-xl font-semibold">{{ product.selling_price }} Tk</span>
+                                <span class="text-xl font-semibold text-green-600">{{ product.selling_price }} Tk</span>
                             {% endif %}
                         </div>
                     </div>
