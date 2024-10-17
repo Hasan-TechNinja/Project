@@ -47,7 +47,7 @@ class Product(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
     selling_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
-    discount_percentage = models.DecimalField(max_digits=10,default=0.00, decimal_places=2)
+    discount_percentage = models.IntegerField(max_length=10,default=0)
     discount_price = models.DecimalField(max_digits=10, decimal_places=1, default=0)
     stock = models.PositiveIntegerField(default=0)
     image = models.ImageField(upload_to='products/', blank=True, null=True)
