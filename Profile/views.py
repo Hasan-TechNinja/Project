@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import ProfileModel
-from Main.models import Cart, Delivery, Billing_Details
+from Main.models import Cart, Delivery, Billing_Details, WishList
 from django.shortcuts import redirect
 from .forms import ProfileForm
 
@@ -11,12 +11,14 @@ def Profile(request):
     profile = get_object_or_404(ProfileModel, user = user)
     cart = Cart.objects.filter(user = user).order_by('-id')
     order = Billing_Details.objects.filter(user = user).order_by('-id')[0:3]
+
     name = 'Your Name'
     if profile.first_name:
         name = str(profile.first_name + ' ' + profile.last_name)
 
     address = Delivery.objects.filter(user=user).order_by('-id')[0:3]
     purchase = Delivery.objects.filter(user = user).order_by('-id')
+    wishlist = WishList.objects.filter(user = user)
 
     context = {
         'profile': profile,
@@ -25,6 +27,7 @@ def Profile(request):
         'order':order,
         'address':address,
         'purchase':purchase,
+        'wishlist':wishlist,
     }
     return render(request, 'profile.html', context)
 
