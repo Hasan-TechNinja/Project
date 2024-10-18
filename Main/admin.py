@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import Product, Departments, Category, Size, Cart, BlogPost, Billing_Details, Delivery, Brand, HomeCarousel, Review
+from . models import Product, Departments, Category, Size, Cart, BlogPost, Billing_Details, Delivery, Brand, HomeCarousel, Review, WishList
 
 # Register your models here.
 
@@ -170,3 +170,12 @@ class ReviewAdmin(admin.ModelAdmin):
         'updated_at'
     )
 admin.site.register(Review, ReviewAdmin)
+
+
+
+class WishListAdmin(admin.ModelAdmin):
+    list_display = (
+        'user',
+        'product',
+    )
+admin.site.register(WishList, WishListAdmin)

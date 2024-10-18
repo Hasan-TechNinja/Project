@@ -114,7 +114,7 @@ class CustomUserCreationForm(forms.ModelForm):
 
 
 class EmailVerificationForm(forms.Form):
-    code = forms.CharField(max_length=6, label='Verification Code')
+    code = forms.CharField(label='Verification Code')
 
     code = forms.CharField(
         widget=forms.TextInput(attrs={

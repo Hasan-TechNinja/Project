@@ -51,7 +51,7 @@ INSTALLED_APPS = [
 ]
 
 TAILWIND_APP_NAME = 'theme'
-NPM_BIN_PATH = "/usr/bin/npm"  # Adjust this path according to your system
+NPM_BIN_PATH = "/usr/bin/npm"
 
 
 INTERNAL_IPS = [
@@ -170,20 +170,15 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]
 
-MEDIA_URL = '/media/'  # This is the URL prefix for media files
-MEDIA_ROOT = BASE_DIR / 'media'  # This is where uploaded media files will be stored
-
-# MEDIA_ROOT = os.path.join(BASE_DIR,'media')
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
-# settings.py
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'  # For Gmail or another provider
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'hasan15-14654@diu.edu.bd'  # Your email
-EMAIL_HOST_PASSWORD = 'pbat jdqq sfbg qpuz'  # Your email password or app-specific password
+EMAIL_HOST_USER = 'hasan15-14654@diu.edu.bd'
+EMAIL_HOST_PASSWORD = 'pbat jdqq sfbg qpuz'
 
 
 # Default primary key field type

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Wishlist{% endblock title %}
+{% block content %}
+
+<div class="container mx-auto px-4 py-6">
+    <h2 class="text-3xl font-bold mb-6">Your Wishlist</h2>
+
+    {% if data %}
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {% for item in data %}
+        <div class="relative card card-compact bg-base-100 shadow-xl border transition-transform transform hover:-translate-y-1 hover:shadow-2xl">
+            
+            <!-- Wishlist Icon (for removing) -->
+            <button data-product-id="{{ item.product.id }}" class="absolute top-2 right-2 z-20 text-gray-500 hover:text-red-500 transition-all remove-wishlist-btn">
+                <a href="{% url "remove_from_wishlist" item.product.id %}"><i class="fas fa-heart text-red-500"></i></a>
+            </button>
+
+            <!-- Product Image -->
+            <figure>
+                <a href="{% url 'product_details' item.product.id %}">
+                    <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="h-56 w-full object-cover rounded-md">
+                </a>
+            </figure>
+
+            <div class="card-body">
+                <h3 class="card-title text-xl font-semibold text-gray-800">
+                    <a href="{% url 'product_details' item.product.id %}" class="hover:text-primary">{{ item.product.name }}</a>
+                </h3>
+                
+                <div class="mt-2 flex justify-between items-center">
+                    <!-- Product Price -->
+                    <div>
+                        {% if item.product.discount_percentage > 0 %}
+                        <span class="text-lg font-bold text-green-600">{{ item.product.discount_price }} Tk</span>
+                        <span class="text-sm text-red-500 line-through">{{ item.product.selling_price }} Tk</span>
+                        {% else %}
+                        <span class="text-lg font-bold text-green-600">{{ item.product.selling_price }} Tk</span>
+                        {% endif %}
+                    </div>
+
+                    <!-- Buy Now Button -->
+                    <a href="{% url 'product_details' item.product.id %}" class="btn bg-primary hover:bg-primary-dark text-white">Buy Now</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="text-lg text-gray-500 text-center">You have no items in your wishlist.</p>
+    {% endif %}
+</div>
+
+{% endblock content %}

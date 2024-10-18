@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views import View
-from . models import Product, Departments, Cart, BlogPost, Billing_Details, HomeCarousel, Delivery, Review
+from . models import Product, Departments, Cart, BlogPost, Billing_Details, HomeCarousel, Delivery, Review, WishList
 from . forms import BillingDetailsForm, ReviewForm
 from django.contrib.auth import authenticate
 from django.utils.html import strip_tags
@@ -21,12 +21,18 @@ class HomeView(View):
         Carousel = HomeCarousel.objects.all()
         latest_product = Product.objects.all().order_by('-id')[:4]
         
+        wishlist = []
+        if request.user.is_authenticated:
+            wishlist = WishList.objects.filter(user=request.user).values_list('product', flat=True)
+
+        
         context = {
             'products': products,
             'departments': departments,
             'blog':blog,
             'Carousel':Carousel,
-            'latest':latest_product
+            'latest':latest_product,
+            'wishlist':wishlist
         }
         return render(request, 'home.html', context) 
     
@@ -586,11 +592,29 @@ def search(request):
             return render(request, 'search.html')
         
 
+def add_to_wishlist(request, product_id):
+    user = request.user
+    product = get_object_or_404(Product, id = product_id)
+    wishlist_item, created = WishList.objects.get_or_create(user = user, product = product)
+    if created:
+        pass
+    else:
+        pass
+    return redirect('wishlist')
 
-# def ProductReview(request):
-#     form = ReviewForm()
 
-#     context = {
-#         'form':form,
-#     }
-#     return render(request, 'product_review.html', context)
+def wishlist_view(request):
+    user = request.user
+    data = WishList.objects.filter(user = user)
+    context = {
+        'data':data
+    }
+    return render(request, 'wishlist.html', context)
+
+def remove_from_wishlist(request, product_id):
+    user = request.user
+    product = get_object_or_404(Product, id = product_id)
+    wishlist_item = WishList.objects.filter(user = user, product = product).first()
+    if wishlist_item:
+        wishlist_item.delete()
+    return redirect('wishlist')
