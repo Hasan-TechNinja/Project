@@ -6,7 +6,7 @@
 <div class="container mx-auto p-6">
     <div class="flex justify-between items-center border-b pb-4">
         <h2 class="text-2xl font-bold">Cart</h2>
-        <button class="px-4 py-2 btn bg-primary rounded hover:bg-primary"><a href="{% url "home" %}">Continue Shopping</a></button>
+        <button class="px-4 py-2 btn bg-primary rounded hover:bg-primary"><a href="{% url 'home' %}">Continue Shopping</a></button>
     </div>
 
     <div class="mt-6">
@@ -51,7 +51,7 @@
     </div>
 
     <div class="mt-6 flex justify-between">
-        <button class="px-4 py-2 btn bg-primary hover:bg-primary rounded"><a href="{% url "home" %}">Continue Shopping</a></button>
+        <button class="px-4 py-2 btn bg-primary hover:bg-primary rounded"><a href="{% url 'home' %}">Continue Shopping</a></button>
     </div>
 </div>
 
@@ -61,11 +61,21 @@
         <!-- Discount Codes Section -->
         <div class="bg-gray-200 p-6 rounded-lg shadow-md mb-8">
             <h2 class="text-xl font-semibold mb-4">Discount Codes</h2>
-            <form action="" method = 'POST' class='md:flex md:justify-between'>
+    
+            <!-- Coupon Form -->
+            <form method="POST" class="flex items-center">
                 {% csrf_token %}
-                {{ form }}
-                <button type="submit" class='bg-blue-600 text-sm md:text-lg text-white md:px-4 md:py-1 rounded-md ml-2 p-2 hover:bg-blue-700 transition mt-3'>Apply coupon</button>
+                <input type="text" name="coupon_code" class="border border-gray-300 rounded-lg px-4 py-2 w-full sm:w-2/3" placeholder="Enter your coupon code" required>
+                <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg ml-2 hover:bg-blue-700 transition">APPLY COUPON</button>
             </form>
+    
+            <!-- Coupon feedback (optional) -->
+            {% if coupon %}
+                <p class="mt-4 text-green-600">Coupon "{{ coupon.code }}" applied successfully! Discount: {{ discount_amount }} Tk.</p>
+                <p class="text-lg font-semibold">Total after discount: {{ total_after_discount }} Tk</p>
+            {% elif coupon == None and request.method == 'POST' %}
+                <p class="mt-4 text-red-600">Invalid or expired coupon code. Please try again.</p>
+            {% endif %}
         </div>
     </div>
     
@@ -96,7 +106,7 @@
 
             {% if cart %}
             <button class="bg-green-500 text-white px-6 py-3 rounded-lg w-full mt-4 hover:bg-green-600 transition">
-                <a href="{% url 'checkout' %}" class='text-sm md:text-lg'>PROCEED TO CHECKOUT</a>
+                <a href="{% url 'checkout' %}">PROCEED TO CHECKOUT</a>
             </button>
             {% endif %}
         </div>

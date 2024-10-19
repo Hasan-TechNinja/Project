@@ -5,7 +5,6 @@
 
 <div class="py-12 px-6 container mx-auto">
 
-  <!-- Flexbox layout for md and lg devices, stacked on mobile -->
   <div class="md:flex md:space-x-8">
 
     <!-- Checkout Form Section -->
@@ -19,11 +18,10 @@
         {% for field in form %}
         <div class="space-y-2">
           <label for="{{ field.id_for_label }}" class="block text-sm font-semibold text-gray-700">{{ field.label }}</label>
-          {{ field }}  <!-- This automatically includes the class attributes from the form -->
+          {{ field }}  
 
-          <!-- Display error message if exists -->
           {% if field.errors %}
-          <p class="text-red-500 text-sm">{{ field.errors|striptags }}</p>  <!-- Display errors without HTML tags -->
+          <p class="text-red-500 text-sm">{{ field.errors|striptags }}</p>
           {% endif %}
         </div>
         {% endfor %}
@@ -40,13 +38,32 @@
           <span class="font-bold text-lg">Price</span>
         </div>
         
-        <!-- Loop through cart items -->
         {% for cart in cart %}
         <div class="flex justify-between border-b pb-2">
           <span class="text-gray-600">{{cart.product.name}}</span>
           <span class="font-medium">{{cart.linetotal}}</span>
         </div>
         {% endfor %}
+      </div>
+
+      <!-- Subtotal, Discount, and Total -->
+      <div class="space-y-4 mb-6">
+        <div class="flex justify-between border-b pb-2">
+          <span class="text-gray-600 font-bold">Subtotal</span>
+          <span class="font-bold">{{ subtotal }}</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="text-gray-600 font-bold">Discount</span>
+          <span class="font-bold">{{ discount }}%</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="text-gray-600 font-bold">Discount Amount</span>
+          <span class="font-bold">{{ discount_amount }}</span>
+        </div>
+        <div class="flex justify-between border-b pb-2">
+          <span class="text-gray-600 font-bold">Total After Discount</span>
+          <span class="font-bold">{{ total_after_discount }}</span>
+        </div>
       </div>
 
       <div class="mb-6 space-y-2">

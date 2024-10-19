@@ -3,8 +3,8 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views import View
-from . models import Product, Departments, Cart, BlogPost, Billing_Details, HomeCarousel, Delivery, Review, WishList
-from . forms import BillingDetailsForm, ReviewForm
+from . models import Product, Departments, Cart, BlogPost, Billing_Details, HomeCarousel, Delivery, Review, WishList, Coupon
+from . forms import BillingDetailsForm, ReviewForm, CouponForm
 from django.contrib.auth import authenticate
 from django.utils.html import strip_tags
 from django.db.models import Q
@@ -139,27 +139,82 @@ def AddToCart(request):
     return redirect("/cart")
 
 
+# @login_required(login_url='login')
+# def ShowCart(request):
+#     if request.user.is_authenticated:
+#         user = request.user
+#         cart = Cart.objects.filter(user=user).order_by('-id')
+        
+#         subtotal = 0 
+#         cart_product = [p for p in cart] 
+
+#         if cart_product: 
+            
+#             for p in cart_product:
+#                 p.linetotal = p.quantity * p.product.selling_price  
+#                 subtotal += p.linetotal  
+
+#             return render(request, "addtocart.html", {'cart': cart, 'subtotal': subtotal}
+#             )
+#         else:
+#             return render(request, 'addtocart.html', {'cart': cart, 'subtotal': subtotal})
+        
+#     return redirect('/cart')
+
 @login_required(login_url='login')
 def ShowCart(request):
-    if request.user.is_authenticated:
-        user = request.user
-        cart = Cart.objects.filter(user=user).order_by('-id')
-        
-        subtotal = 0 
-        cart_product = [p for p in cart] 
+    user = request.user
+    cart = Cart.objects.filter(user=user).order_by('-id')
 
-        if cart_product: 
-            
-            for p in cart_product:
-                p.linetotal = p.quantity * p.product.selling_price  
-                subtotal += p.linetotal  
+    subtotal = 0 
+    cart_product = [p for p in cart] 
 
-            return render(request, "addtocart.html", {'cart': cart, 'subtotal': subtotal}
-            )
-        else:
-            return render(request, 'addtocart.html', {'cart': cart, 'subtotal': subtotal})
-        
-    return redirect('/cart')
+    # Calculate cart subtotal
+    if cart_product: 
+        for p in cart_product:
+            p.linetotal = p.quantity * p.product.selling_price  
+            subtotal += p.linetotal  
+    
+    # Initialize discount-related variables
+    coupon = None
+    discount = 0
+    discount_amount = 0
+    total_after_discount = subtotal
+    
+    if request.method == 'POST':
+        form = CouponForm(request.POST)
+        if form.is_valid():
+            coupon_code = form.cleaned_data.get('code')
+            print('Couupon code is: ', coupon_code)
+            try:
+                coupon = Coupon.objects.get(code=coupon_code, active=True)
+                
+                # Check if the coupon is valid and applicable
+                if coupon.is_valid() and subtotal > 0:
+                    discount = coupon.discount
+                    discount_amount = (subtotal * discount) / 100
+                    total_after_discount = subtotal - discount_amount
+                    print('total after discount: ', total_after_discount)
+                else:
+                    coupon = None  
+            except Coupon.DoesNotExist:
+                coupon = None 
+    else:
+        form = CouponForm()
+
+    context = {
+        'form':form,
+        'cart': cart,
+        'subtotal': subtotal,
+        'coupon': coupon,
+        'discount': discount,
+        'discount_amount': discount_amount,
+        'total_after_discount': total_after_discount
+    }
+
+    return render(request, 'addtocart.html', context)
+
+
 
 
 
@@ -200,59 +255,6 @@ def delete_cart_item(request, cart_id):
     cart_item = get_object_or_404(Cart, id=cart_id, user=request.user)
     cart_item.delete()
     return redirect('showcart')
-
-
-
-class DepartmentsView(View, LoginRequiredMixin):
-    def get(self, request, pk=None):
-        departments = Departments.objects.all()
- 
-        department_id = request.GET.get('department_id') or pk
-        
-        if department_id:
-            # Get the department by 'department_id' or 'pk'
-            department = get_object_or_404(Departments, pk=department_id)
-            
-            # Fetch related products for the selected department
-            related_products = Product.objects.filter(department=department)
-
-            context = {
-                'department': department,   
-                'rproduct': related_products, 
-                'departments': departments,
-            }
-        else:
-
-            context = {
-                'departments': departments,
-            }
-
-        return render(request, 'departments.html', context)
-
-
-
-    
-def BlogView(request):
-    data = BlogPost.objects.all()
-
-    context = {
-        'data':data
-    }
-    return render(request, 'blog.html', context)
-
-
-
-class BlogDetails(View):
-    def get(self, request, pk):
-        blog = get_object_or_404(BlogPost, pk=pk)
-        category = blog.category  # Assuming the BlogPost model has a 'category' field
-        suggest = BlogPost.objects.filter(category=category).exclude(pk=pk)  # Exclude the current blog from suggestions
-        
-        context = {
-            'blog': blog,
-            'suggest': suggest,
-        }
-        return render(request, 'blogdetails.html', context)
     
     
 
@@ -279,11 +281,11 @@ def checkout(request):
             user = request.user
 
             for c in cart:
-                product = c.product  # Get the product from the cart item
+                product = c.product
 
                 if product.stock >= c.quantity:
                    
-                    # Save billing details
+                   
                     Billing_Details.objects.create(
                         user=user,
                         first_name=first_name,
@@ -303,32 +305,32 @@ def checkout(request):
                     )
                 
 
-                    # Decrease product stock
+                    
                     product.stock -= c.quantity
 
-                    # If stock is below 1, set stock to 0 and optionally mark product as "out of stock"
+                   
                     if product.stock < 1:
-                        product.stock = 0  # Set stock to 0 if it's less than 1
+                        product.stock = 0  
 
-                    product.save()  # Save the updated product stock
+                    product.save()  
                     
-                    # Remove the item from the cart after placing the order
+                    
                     c.delete()
                     
 
                 else:
-                    # Handle insufficient stock, show an error message (optional)
+                    
                     return render(request, 'checkouts.html', {
                         'form': form,
                         'cart': cart,
                         'error': f'Not enough stock for {product.name}. Only {product.stock} left.'
                     })
 
-            # After processing all items, redirect to home
+            
             return redirect('profile')
 
         else:
-            # Handle form errors
+
             context = {'form': form}
             return render(request, 'checkouts.html', context)
 
@@ -577,6 +579,58 @@ def cancel_order(request, order_id):
     messages.success(request, "Your order has been successfully canceled.")
 
     return redirect('orders_page')
+
+
+class DepartmentsView(View, LoginRequiredMixin):
+    def get(self, request, pk=None):
+        departments = Departments.objects.all()
+ 
+        department_id = request.GET.get('department_id') or pk
+        
+        if department_id:
+            # Get the department by 'department_id' or 'pk'
+            department = get_object_or_404(Departments, pk=department_id)
+            
+            # Fetch related products for the selected department
+            related_products = Product.objects.filter(department=department)
+
+            context = {
+                'department': department,   
+                'rproduct': related_products, 
+                'departments': departments,
+            }
+        else:
+
+            context = {
+                'departments': departments,
+            }
+
+        return render(request, 'departments.html', context)
+
+
+
+    
+def BlogView(request):
+    data = BlogPost.objects.all()
+
+    context = {
+        'data':data
+    }
+    return render(request, 'blog.html', context)
+
+
+
+class BlogDetails(View):
+    def get(self, request, pk):
+        blog = get_object_or_404(BlogPost, pk=pk)
+        category = blog.category  # Assuming the BlogPost model has a 'category' field
+        suggest = BlogPost.objects.filter(category=category).exclude(pk=pk)  # Exclude the current blog from suggestions
+        
+        context = {
+            'blog': blog,
+            'suggest': suggest,
+        }
+        return render(request, 'blogdetails.html', context)
 
 
 

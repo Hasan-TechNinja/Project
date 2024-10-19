@@ -167,6 +167,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+# settings.py
+
+TIME_ZONE = 'Asia/Dhaka'  # Set this to your local timezone
+USE_TZ = True  # Make sure this is set to True
+
+
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]
 

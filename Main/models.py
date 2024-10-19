@@ -206,3 +206,17 @@ class WishList(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.product.name}"
+    
+class Coupon(models.Model):
+    code = models.CharField(max_length=15, unique=True)
+    discount = models.DecimalField(max_digits=6, decimal_places=2, help_text="Discount in percentage (e.g.., 10 for 10%)")
+    valid_from = models.DateTimeField()
+    valid_to = models.DateTimeField()
+    active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.code
+
+    def is_valid(self):
+        now = timezone.now()
+        return self.active and self.valid_from <= now <= self.valid_to

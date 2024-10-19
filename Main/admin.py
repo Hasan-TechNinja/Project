@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import Product, Departments, Category, Size, Cart, BlogPost, Billing_Details, Delivery, Brand, HomeCarousel, Review, WishList
+from . models import Product, Departments, Category, Size, Cart, BlogPost, Billing_Details, Delivery, Brand, HomeCarousel, Review, WishList, Coupon
 
 # Register your models here.
 
@@ -179,3 +179,15 @@ class WishListAdmin(admin.ModelAdmin):
         'product',
     )
 admin.site.register(WishList, WishListAdmin)
+
+
+
+class CouponAdmin(admin.ModelAdmin):
+    list_display = (
+        'code',
+        'discount',
+        'valid_from',
+        'valid_to',
+        'active'
+    )
+admin.site.register(Coupon, CouponAdmin)
