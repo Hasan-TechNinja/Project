@@ -61,7 +61,7 @@ admin.site.register(Size, SizeAdmin)
 
 class CartAdmin(admin.ModelAdmin):
     list_display = (
-        'id', 'user', 'p_id', 'product','quantity',
+        'id', 'user', 'p_id', 'product','quantity', 'created_at'
     )
 
 admin.site.register(Cart, CartAdmin)

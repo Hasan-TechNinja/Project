@@ -21,12 +21,12 @@
 
             <div class='flex md:justify-around mt-3'>
                 <div>
-                    <a href="{% url "editprofile" %}"><button class='btn bg-blue-500 hover:bg-blue-600 text-white'>Edit Profile</button></a>
-                    <a href="{% url "password_change" %}"><button class='btn bg-blue-500 hover:bg-blue-600 text-white'>Change Password</button></a>
+                    <a href="{% url "editprofile" %}"><button class='md:btn rounded-md p-1 my-1 text-sm bg-blue-500 hover:bg-blue-600 text-white md:p-2 md:text-lg'>Edit Profile</button></a>
+                    <a href="{% url "password_change" %}"><button class='md:btn rounded-md p-1 my-1 text-sm bg-blue-500 hover:bg-blue-600 text-white md:p-2 md:text-lg'>Change Password</button></a>
                 </div>
                 <div>
-                    <a href="{% url "logout" %}"><button class='btn bg-yellow-400 hover:bg-red-300 text-black'>Logout</button></a>
-                    <a href="#"><button class='btn bg-red-500 hover:bg-red-700 text-white'>Delete Profile</button></a>
+                    <a href="{% url "logout" %}"><button class='md:btn rounded-md p-1 my-1 text-sm bg-yellow-600 hover:bg-red-500 text-white md:p-2 md:text-lg'>Logout</button></a>
+                    <a href="#"><button class='md:btn rounded-md p-1 my-1 text-sm bg-red-500 hover:bg-red-700 text-white md:p-2 md:text-lg'>Delete Profile</button></a>
                 </div>
             </div>
         </div>
@@ -107,7 +107,7 @@
 
     <div class='md:flex bg-gray-100 p-5'>
         <div class='bg-white p-4 mx-2 my-1 rounded-md shadow-md md:w-1/2'>
-            <h2 class='text-xl font-bold mb-2'>Purchase History</h2>
+            <h2 class='text-xl font-bold mb-2'>Wish list</h2>
             <hr class='mb-2'>
             <div class="space-y-2">
                 {% if wishlist %}
