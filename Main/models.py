@@ -4,6 +4,7 @@ from django_countries.fields import CountryField
 from tinymce.models import HTMLField
 from django.utils import timezone
 from django.utils.text import slugify
+from decimal import Decimal
 
 # Create your models here.
 
@@ -42,6 +43,16 @@ class Brand(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Supplier(models.Model):
+    name = models.CharField(max_length=255)
+    contact_info = models.TextField(blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
+    phone = models.CharField(max_length=20, blank=True, null=True)
+    address = models.CharField(max_length=255, blank=True, null=True)
+
+    def __str__(self):
+        return self.name
 
 class Product(models.Model):
     name = models.CharField(max_length=255)
@@ -58,7 +69,9 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, related_name='products', null=True)
-    # Shipping = models.CharField(max_length=50)
+    shipping_time = models.CharField(max_length=50, choices=[('1','1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5'), ('6', '6'), ('7', '7'), ('8', '8'), ('9', '9'), ('10', '10')], default='3')
+    supplier = models.ForeignKey(Supplier, on_delete=models.SET_NULL, null=True, blank=True)
+    product_video = models.URLField(blank=True)
     department = models.ForeignKey(Departments, on_delete=models.CASCADE, related_name='products')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
     size = models.ForeignKey(Size, on_delete=models.CASCADE, related_name='products', blank=True, null=True)
@@ -66,10 +79,20 @@ class Product(models.Model):
     def __str__(self):
         return self.name
     
+    # def save(self, *args, **kwargs):
+    #     """Calculate discount price based on discount percentage before saving the product."""
+    #     if self.discount_percentage > 0:
+    #         self.discount_price = self.selling_price * (1 - self.discount_percentage / 100)
+    #     else:
+    #         self.discount_price = self.selling_price
+    #     super(Product, self).save(*args, **kwargs)
+
     def save(self, *args, **kwargs):
-        """Calculate discount price based on discount percentage before saving the product."""
+    # Calculate discount price based on discount percentage before saving the product.
         if self.discount_percentage > 0:
-            self.discount_price = self.selling_price * (1 - self.discount_percentage / 100)
+            # Ensure the discount calculation uses Decimal to avoid type mismatch
+            discount_factor = Decimal(self.discount_percentage) / Decimal(100)
+            self.discount_price = self.selling_price * (1 - discount_factor)
         else:
             self.discount_price = self.selling_price
         super(Product, self).save(*args, **kwargs)

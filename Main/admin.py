@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import Product, Departments, Category, Size, Cart, BlogPost, Billing_Details, Delivery, Brand, HomeCarousel, Review, WishList, Coupon
+from . models import Product, Departments, Category, Size, Cart, BlogPost, Billing_Details, Delivery, Brand, HomeCarousel, Review, WishList, Coupon, Supplier
 
 # Register your models here.
 
@@ -20,6 +20,9 @@ class ProductAdmin(admin.ModelAdmin):
         'image4',
         'created_at', 
         'updated_at', 
+        'shipping_time',
+        'supplier',
+        'product_video',
         'department', 
         'category', 
         'size'
@@ -191,3 +194,13 @@ class CouponAdmin(admin.ModelAdmin):
         'active'
     )
 admin.site.register(Coupon, CouponAdmin)
+
+class SupplierAdmin(admin.ModelAdmin):
+    list_display = (
+        'name',
+        'contact_info',
+        'email',
+        'phone',
+        'address'
+    )
+admin.site.register(Supplier, SupplierAdmin)
