@@ -2010,10 +2010,6 @@ select {
   height: 100vh;
 }
 
-.h-80 {
-  height: 20rem;
-}
-
 .min-h-screen {
   min-height: 100vh;
 }
@@ -2106,10 +2102,6 @@ select {
   width: 100%;
 }
 
-.w-screen {
-  width: 100vw;
-}
-
 .min-w-full {
   min-width: 100%;
 }
@@ -2132,10 +2124,6 @@ select {
 
 .max-w-xs {
   max-width: 20rem;
-}
-
-.max-w-3xl {
-  max-width: 48rem;
 }
 
 .flex-1 {

@@ -73,15 +73,8 @@ class ProductDetails(View):
         review = Review.objects.filter(product = product)
         review_quantity = len(review)
         
-        # video_url = product.product_video.replace('https://youtu.be/', 'https://www.youtube.com/embed/')
-        # if '?si=' in video_url:
-        #     video_url = video_url.split('?si=')[0]  # Remove URL parameters
-        # else:
-        #     video_url = False
-        # Generate video embed URL
         product_video = product.product_video
 
-        # Initialize product_video_embed as an empty string
         product_video_embed = ""
 
         if product_video:  # Only proceed if there's a product_video

@@ -37,21 +37,21 @@
       <!-- Image Section -->
       <div>
         <div class="relative bg-white rounded-lg shadow-md p-4 border">
-          <img src="{{ product.image.url }}" alt="Guava" class="w-full rounded-lg object-cover">
+          <img id = 'product-main-img' src="{{ product.image.url }}" alt="Guava" class="w-full rounded-lg object-cover">
         </div>
         <!-- Thumbnail Images -->
         <div class="grid grid-cols-4 gap-4 mt-4">
           {% if product.image1 %}
-              <img src="{{ product.image1.url }}" alt="Thumbnail" class="w-full rounded-lg object-cover">
+              <img class='product-sub-image' src="{{ product.image1.url }}" alt="Thumbnail" class="w-full rounded-lg object-cover">
           {% endif %}
           {% if product.image2 %}
-              <img src="{{ product.image2.url }}" alt="Thumbnail" class="w-full rounded-lg object-cover">
+              <img class='product-sub-image' src="{{ product.image2.url }}" alt="Thumbnail" class="w-full rounded-lg object-cover">
           {% endif %}
           {% if product.image3 %}
-              <img src="{{ product.image3.url }}" alt="Thumbnail" class="w-full rounded-lg object-cover">
+              <img class='product-sub-image' src="{{ product.image3.url }}" alt="Thumbnail" class="w-full rounded-lg object-cover">
           {% endif %}
           {% if product.image4 %}
-              <img src="{{ product.image4.url }}" alt="Thumbnail" class="w-full rounded-lg object-cover">
+              <img class='product-sub-image' src="{{ product.image4.url }}" alt="Thumbnail" class="w-full rounded-lg object-cover">
           {% endif %}
       </div>
       
@@ -270,4 +270,5 @@
 </div>
 </div>
 
+<script src="{% static "js/prod_details.js" %}"></script>
 {% endblock content %}

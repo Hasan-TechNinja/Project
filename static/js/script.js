@@ -1,4 +1,3 @@
-console.log('inside base scripts.js')
 
 // Search functionality
 
@@ -7,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const searchInput = document.getElementById("search-input");
   const searchButton = document.getElementById("search-button");
 
+try{
   searchForm.addEventListener("submit", function (e) {
     e.preventDefault();
     const query = searchInput.value.trim();
@@ -17,10 +17,20 @@ document.addEventListener("DOMContentLoaded", function () {
       alert("Please enter a search term");
     }
   });
+}
+catch(e){
 
+}
+
+try{
   searchButton.addEventListener("click", function () {
     searchForm.submit();
   });
+}
+catch(e){
+
+}
+
 });
 
 
