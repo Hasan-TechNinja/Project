@@ -30,6 +30,9 @@
                     </form>
                 </li>   
                 {% endfor %}
+                <li class="shadow-md text-center bg-green-600 hover:bg-green-700 text-white p-2 rounded-lg mt-4">
+                    <a href="#tranding">Tranding now</a>
+                </li>
             </ul>
         </div>
     </div>
@@ -351,52 +354,39 @@
 
 
 {% comment %} Tranding product {% endcomment %}
-<section class="py-12">
+<section class="py-12" id='tranding'>   
     <div class="container mx-auto">
         <!-- Section Header -->
         <div class="text-center mb-8">
             <h2 class="text-3xl font-bold text-gray-800">Trending Now</h2>
             <p class="text-gray-600 mt-2">Check out these popular products that everyone’s talking about!</p>
         </div>
-
+        {% if top %}
         <!-- Trending Products Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <!-- Single Product Card -->
+            <!-- Loop through top trending products dynamically -->
+            {% for product in top %}
             <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                <img class="w-full h-48 object-cover" src="https://via.placeholder.com/300" alt="Product Image">
+                <img class="w-full h-48 object-cover" src="{{ product.image.url }}" alt="{{ product.name }}">
                 <div class="p-4">
-                    <h3 class="text-lg font-semibold text-gray-800">Product Name</h3>
-                    <p class="text-gray-500 mt-2">Short product description goes here.</p>
+                    <h3 class="text-lg font-semibold text-gray-800">{{ product.name }}</h3>
+                    <p class="text-gray-500 mt-2">{{ product.description|truncatewords:10 }}</p>
                     <div class="flex items-center justify-between mt-4">
-                        <span class="text-xl font-bold text-gray-800">$29.99</span>
-                        <a href="#" class="bg-red-500 text-white text-sm font-semibold px-4 py-2 rounded hover:bg-red-600 transition duration-300">
-                            View Details
-                        </a>
-                    </div>
-                </div>
-                <div class="bg-red-500 text-white text-xs font-bold uppercase tracking-wide text-center py-2">Hot Item</div>
-            </div>
-
-            <!-- Repeat the Product Card structure for each product -->
-            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                <img class="w-full h-48 object-cover" src="https://via.placeholder.com/300" alt="Product Image">
-                <div class="p-4">
-                    <h3 class="text-lg font-semibold text-gray-800">Product Name</h3>
-                    <p class="text-gray-500 mt-2">Short product description goes here.</p>
-                    <div class="flex items-center justify-between mt-4">
-                        <span class="text-xl font-bold text-gray-800">$39.99</span>
-                        <a href="#" class="bg-red-500 text-white text-sm font-semibold px-4 py-2 rounded hover:bg-red-600 transition duration-300">
+                        <span class="text-xl font-bold text-gray-800">TK {{ product.discount_price }}</span>
+                        <a href="{% url 'product_details' product.id %}" class="bg-red-500 text-white text-sm font-semibold px-4 py-2 rounded hover:bg-red-600 transition duration-300">
                             View Details
                         </a>
                     </div>
                 </div>
                 <div class="bg-red-500 text-white text-xs font-bold uppercase tracking-wide text-center py-2">Trending Now</div>
             </div>
-
-            <!-- Add more product cards as needed -->
+            {% endfor %}
+            <!-- End of product card loop -->
         </div>
+        {% endif %}
     </div>
 </section>
+
 
 {% comment %} blog start {% endcomment %}
 

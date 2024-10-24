@@ -229,11 +229,11 @@
                 <div>
                     <h4 class="font-bold mb-2">Useful Links</h4>
                     <ul>
-                        <li><a href="#">Shop Now</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">My Account</a></li>
-                        <li><a href="#">Track Order</a></li>
-                        <li><a href="#">Shipping & Returns</a></li>
+                        <li><a href="{% url "shop" %}">Shop Now</a></li>
+                        <li><a href="{% url "blog" %}">Blog</a></li>
+                        <li><a href="{% url "profile" %}">My Account</a></li>
+                        <li><a href="{% url "orders_page" %}">Track Order</a></li>
+                        <li><a href="{% url "order" %}">Shipping & Returns</a></li>
                     </ul>
                 </div>
     

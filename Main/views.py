@@ -9,6 +9,9 @@ from django.contrib.auth import authenticate
 from django.utils.html import strip_tags
 from django.db.models import Q
 from django.contrib import messages
+from django.db.models import F
+from django.utils import timezone
+from datetime import timedelta
 
 
 # Create your views here.
@@ -25,14 +28,21 @@ class HomeView(View):
         if request.user.is_authenticated:
             wishlist = WishList.objects.filter(user=request.user).values_list('product', flat=True)
 
+        # top_selling_products = Product.objects.all().order_by('-selles')[:16]
+        current_date = timezone.now()
+        fifteen_days_ago = current_date - timedelta(days=15)
         
+        # Get top 16 trending products based on `selles` in the last 15 days
+        trending_products = Product.objects.filter(updated_at__gte=fifteen_days_ago).order_by('-selles')[:8]
+
         context = {
             'products': products,
             'departments': departments,
             'blog':blog,
             'Carousel':Carousel,
             'latest':latest_product,
-            'wishlist':wishlist
+            'wishlist':wishlist,
+            'top':trending_products
         }
         return render(request, 'home.html', context) 
     
@@ -118,7 +128,6 @@ class ProductDetails(View):
    
 #     return redirect("/authentication/login/")
 
-
 @login_required(login_url='login')
 def AddToCart(request):
     user = request.user
@@ -131,10 +140,13 @@ def AddToCart(request):
 
     product = get_object_or_404(Product, id=product_id)
 
+    product.selles += 1
+    product.save()
+
     cart_item, created = Cart.objects.get_or_create(
         user=user,
         product=product,
-        p_id=product_id,
+        p_id=str(product_id),
         defaults={'quantity': product_quantity}
     )
 
@@ -142,8 +154,34 @@ def AddToCart(request):
         cart_item.quantity = product_quantity
         cart_item.save()
 
-
     return redirect("/cart")
+
+
+# @login_required(login_url='login')
+# def AddToCart(request):
+#     user = request.user
+
+#     product_id = request.GET.get("prod_id")
+#     product_quantity = int(request.GET.get("product_quantity", 1))
+
+#     if not product_id:
+#         return redirect("/some_error_page")
+
+#     product = get_object_or_404(Product, id=product_id)
+
+#     cart_item, created = Cart.objects.get_or_create(
+#         user=user,
+#         product=product,
+#         p_id=product_id,
+#         defaults={'quantity': product_quantity}
+#     )
+
+#     if not created:
+#         cart_item.quantity = product_quantity
+#         cart_item.save()
+
+
+#     return redirect("/cart")
 
 
 @login_required(login_url='login')
