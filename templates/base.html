@@ -212,17 +212,21 @@
                 <!-- About Us Section -->
                 <div>
                     <h4 class="font-bold mb-2">About Us</h4>
-                    <p>At [Store Name], we aim to provide the best products with a seamless online shopping experience.</p>
+                    {% for about in about %}
+                    <p>{{ about.about|truncatechars:60 }}</p>
+                    {% endfor %}
                 </div>
     
                 <!-- Customer Support Section -->
                 <div>
+                  {% for about in about %}
                     <h4 class="font-bold mb-2">Customer Support</h4>
                     <ul>
-                        <li>Contact Us: <a href="mailto:email@example.com">email@example.com</a></li>
-                        <li>Call Us: +880-XXXX-XXXX</li>
+                        <li>Contact Us: <a class='text-sm' href="mailto:email@example.com">{{ about.email }}</a></li>
+                        <li>Call Us: +880 {{ about.contact }}</li>
                         <li><a href="#">FAQs</a></li>
                     </ul>
+                    {% endfor %}
                 </div>
     
                 <!-- Useful Links Section -->
@@ -243,8 +247,8 @@
                     <ul>
                       {% for social in social %}
                         <div class='flex'>
-                          <img class='h-8 w-12' src="{{ social.logo.url }}" alt="">
-                          <li><a class='text-sm' href="{{ social.url }}">{{ social.name }}</a></li>
+                          <img class='h-6 w-10' src="{{ social.logo.url }}" alt="">
+                          <li><a class='text-sm' href="{{ social.link }}" target="_blank" rel="noopener noreferrer">{{ social.name }}</a></li>
                         </div>
                       {% endfor %}
                     </ul>
@@ -254,10 +258,13 @@
                 <div>
                     <h4 class="font-bold mb-2">Payment Methods</h4>
                     <ul class='flex space-x-4'>
-                        <li>Bkash</li>
-                        <li>Rocket</li>
-                        <li>Nagad</li>
-                        <li>Bank</li>
+                      {% for payment in payment %}
+
+                        <div>
+                          <li><img class='h-7 w-12 rounded-lg' src="{{ payment.logo.url }}" alt=""></li>
+                          <li>{{ payment.name }}</li>
+                        </div>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>
