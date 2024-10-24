@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{% endblock title %}
+{% block content %}
+<div>
+    <!-- faq.html -->
+    <section class="py-12 h-screen">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-gray-800 text-center mb-8">Frequently Asked Questions</h2>
+            <div class="bg-white shadow-md rounded-lg p-6">
+                {% for faq in faqs %}
+                <div class="mb-4 my-4 bg-gray-100 rounded p-2">
+                    <h3 class="text-xl font-semibold text-blue-800 cursor-pointer faq-question" data-faq-id="{{ forloop.counter }}">Q. {{ faq.question }}</h3>
+                    <p class="text-gray-600 mt-2 faq-answer hidden" id="faq-answer-{{ forloop.counter }}">A: {{ faq.answer }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Include your JavaScript here -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const questions = document.querySelectorAll('.faq-question');
+        const answers = document.querySelectorAll('.faq-answer');
+
+        questions.forEach((question, index) => {
+            question.addEventListener('click', function() {
+                // Hide all answers
+                answers.forEach(answer => answer.classList.add('hidden'));
+
+                // Toggle the clicked answer
+                const answer = document.getElementById('faq-answer-' + (index + 1));
+                answer.classList.toggle('hidden');
+            });
+        });
+    });
+</script>
+{% endblock content %}

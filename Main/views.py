@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views import View
-from . models import Product, Departments, Cart, BlogPost, Billing_Details, HomeCarousel, Delivery, Review, WishList, Coupon, Social, PaymentMethod, About
+from . models import Product, Departments, Cart, BlogPost, Billing_Details, HomeCarousel, Delivery, Review, WishList, Coupon, Social, PaymentMethod, About, FAQ
 from . forms import BillingDetailsForm, ReviewForm, CouponForm
 from django.contrib.auth import authenticate
 from django.utils.html import strip_tags
@@ -740,3 +740,8 @@ def remove_from_wishlist(request, product_id):
     if wishlist_item:
         wishlist_item.delete()
     return redirect('wishlist')
+
+
+def faq_view(request):
+    faqs = FAQ.objects.all()
+    return render(request, 'faq.html', {'faqs': faqs})

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import Product, Departments, Category, Size, Cart, BlogPost, Billing_Details, Delivery, Brand, HomeCarousel, Review, WishList, Coupon, About, Social, PaymentMethod
+from . models import Product, Departments, Category, Size, Cart, BlogPost, Billing_Details, Delivery, Brand, HomeCarousel, Review, WishList, Coupon, About, Social, PaymentMethod, FAQ
 
 # Register your models here.
 
@@ -234,3 +234,13 @@ class PaymentMethodAdmin(admin.ModelAdmin):
         'logo'
     )
 admin.site.register(PaymentMethod, PaymentMethodAdmin)
+
+
+class FAQAdmin(admin.ModelAdmin):
+    list_display = (
+        'question',
+        'answer',
+        'created_at'
+    )
+    search_fields = ('question',)
+admin.site.register(FAQ, FAQAdmin)

@@ -224,7 +224,7 @@
                     <ul>
                         <li>Contact Us: <a class='text-sm' href="mailto:email@example.com">{{ about.email }}</a></li>
                         <li>Call Us: +880 {{ about.contact }}</li>
-                        <li><a href="#">FAQs</a></li>
+                        <li><a href="{% url "faq" %}">FAQs</a></li>
                     </ul>
                     {% endfor %}
                 </div>
