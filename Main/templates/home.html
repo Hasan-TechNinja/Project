@@ -30,7 +30,7 @@
                     </form>
                 </li>   
                 {% endfor %}
-                <li class="shadow-md text-center bg-green-600 hover:bg-green-700 text-white p-2 rounded-lg mt-4">
+                <li class="shadow-md text-center bg-green-500 hover:bg-green-600 text-white p-2 rounded-lg mt-4">
                     <a href="#tranding">Tranding now</a>
                 </li>
             </ul>
@@ -354,38 +354,86 @@
 
 
 {% comment %} Tranding product {% endcomment %}
-<section class="py-12" id='tranding'>   
+<section class="py-12 bg-gray-50" id="tranding">
     <div class="container mx-auto">
         <!-- Section Header -->
-        <div class="text-center mb-8">
-            <h2 class="text-3xl font-bold text-gray-800">Trending Now</h2>
-            <p class="text-gray-600 mt-2">Check out these popular products that everyone’s talking about!</p>
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold text-gray-800">Trending Now</h2>
+            <p class="text-lg text-gray-600 mt-4">Explore the top products that are in high demand right now!</p>
         </div>
+        
         {% if top %}
         <!-- Trending Products Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
             <!-- Loop through top trending products dynamically -->
             {% for product in top %}
-            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                <img class="w-full h-48 object-cover" src="{{ product.image.url }}" alt="{{ product.name }}">
-                <div class="p-4">
+            <div class="relative bg-white rounded-lg shadow-lg overflow-hidden border transition-transform transform hover:-translate-y-2 hover:shadow-2xl my-2">
+                
+                <!-- Discount badge -->
+                {% if product.discount_percentage > 0 %}
+                <span class="absolute top-2 left-2 bg-red-600 text-white text-sm font-bold px-2 py-1 rounded-tr-lg rounded-bl-lg z-10">
+                    {{ product.discount_percentage }}% OFF
+                </span>
+                {% endif %}
+
+                <!-- Wishlist functionality -->
+                {% if request.user.is_authenticated %}
+                <a href="{% url 'add_to_wishlist' product.id %}" class="absolute top-2 right-2 z-20 wishlist-btn text-gray-400 hover:text-red-500 transition-all">
+                    {% if product.id in wishlist %}
+                    <i class="fas fa-heart text-red-500"></i> <!-- Already in wishlist -->
+                    {% else %}
+                    <i class="far fa-heart"></i> <!-- Not in wishlist -->
+                    {% endif %}
+                </a>
+                {% endif %}
+
+                <!-- Product Image -->
+                <figure class="w-full h-56">
+                    <img
+                        src="{{ product.image.url }}"
+                        alt="{{ product.name }}"
+                        class="w-full h-full object-cover" />
+                </figure>
+
+                <!-- Product Details -->
+                <div class="p-5">
                     <h3 class="text-lg font-semibold text-gray-800">{{ product.name }}</h3>
-                    <p class="text-gray-500 mt-2">{{ product.description|truncatewords:10 }}</p>
-                    <div class="flex items-center justify-between mt-4">
-                        <span class="text-xl font-bold text-gray-800">TK {{ product.discount_price }}</span>
-                        <a href="{% url 'product_details' product.id %}" class="bg-red-500 text-white text-sm font-semibold px-4 py-2 rounded hover:bg-red-600 transition duration-300">
-                            View Details
+                    
+                    <div class="flex items-center justify-between mt-2">
+                        <!-- Pricing Details -->
+                        {% if product.discount_percentage > 0 %}
+                            <div>
+                                <span class="text-xl font-bold text-green-600">TK {{ product.discount_price }}</span>
+                                <span class="text-sm text-red-500 line-through ml-2">TK {{ product.selling_price }}</span>
+                            </div>
+                        {% else %}
+                            <span class="text-xl font-bold text-gray-800">TK {{ product.selling_price }}</span>
+                        {% endif %}
+                    </div>
+
+                    <!-- Product Description -->
+                    <p class="text-gray-600 mt-3">{{ product.description|truncatechars:70 }}</p>
+
+                    <!-- Call to action -->
+                    <div class="mt-5">
+                        <a href="{% url 'product_details' product.id %}" class="bg-red-500 text-white text-center w-2/6 block py-2 rounded-md hover:bg-red-600 transition duration-300">
+                            Buy Now
                         </a>
                     </div>
                 </div>
-                <div class="bg-red-500 text-white text-xs font-bold uppercase tracking-wide text-center py-2">Trending Now</div>
+
+                <!-- Trending Badge -->
+                <div class="bg-red-500 text-center py-1">
+                    <p class="text-white text-sm font-semibold">Trending Now</p>
+                </div>
             </div>
             {% endfor %}
-            <!-- End of product card loop -->
         </div>
         {% endif %}
     </div>
 </section>
+
+
 
 
 {% comment %} blog start {% endcomment %}

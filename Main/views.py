@@ -1,5 +1,4 @@
-from django.shortcuts import render, redirect
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views import View
@@ -51,12 +50,12 @@ class ShopView(View):
     def get(self, request, pk=None):
         departments = Departments.objects.all()
         if pk:
-            # Fetch products that belong to the selected department
+        
             selected_department = get_object_or_404(Departments, pk=pk)
-            products = Product.objects.filter(department=selected_department)  # Adjust this line as per your model
+            products = Product.objects.filter(department=selected_department)
         else:
-            # If no department is selected, show all products or handle as needed
-            products = Product.objects.all()  # Show all products (or handle empty state)
+           
+            products = Product.objects.all()
         
         context = {
             'department': departments,
@@ -327,10 +326,7 @@ def checkout(request):
 
             for c in cart:
                 product = c.product
-
-                if product.stock >= c.quantity:
-                   
-                   
+                if product.stock >= c.quantity:                   
                     Billing_Details.objects.create(
                         user=user,
                         first_name=first_name,
@@ -348,21 +344,15 @@ def checkout(request):
                         quantity=c.quantity,
                         p_id = c.p_id,
                     )
-                
-
-                    
+            
                     product.stock -= c.quantity
 
-                   
                     if product.stock < 1:
                         product.stock = 0  
 
-                    product.save()  
-                    
-                    
+                    product.save()                  
                     c.delete()
                     
-
                 else:
                     
                     return render(request, 'checkouts.html', {
@@ -370,8 +360,7 @@ def checkout(request):
                         'cart': cart,
                         'error': f'Not enough stock for {product.name}. Only {product.stock} left.'
                     })
-
-            
+                
             return redirect('profile')
 
         else:
@@ -686,6 +675,7 @@ class BlogDetails(View):
         blog.save()
 
         # Increment the view for an user at a time
+
         # session_key = f'viewed_blog_{blog.pk}'
         # if not request.session.get(session_key):
         #     blog.views += 1
@@ -702,8 +692,6 @@ class BlogDetails(View):
             'suggest': suggest,
         }
         return render(request, 'blogdetails.html', context)
-
-
 
 
 
@@ -737,6 +725,7 @@ def wishlist_view(request):
         'data':data
     }
     return render(request, 'wishlist.html', context)
+
 
 def remove_from_wishlist(request, product_id):
     user = request.user
