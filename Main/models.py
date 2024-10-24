@@ -144,7 +144,7 @@ class Delivery(models.Model):
     p_id = models.CharField(max_length=100,null=True, blank=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    product=models.ForeignKey(Product, on_delete=models.CASCADE, blank=True, null= True)
+    product=models.ForeignKey(Product, on_delete=models.CASCADE, related_name='delivery', blank=True, null= True)
     quantity=models.PositiveIntegerField(default=1)
     country = CountryField(blank_label='(select country)')
     division = models.CharField(max_length=255)

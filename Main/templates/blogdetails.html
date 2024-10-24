@@ -11,7 +11,8 @@
     <!-- Blog Title & Metadata -->
     <div class="mb-8 text-center">
         <h1 class="text-4xl font-bold text-gray-800 mb-4">{{ blog.title }}</h1>
-        <p class="text-gray-500">Published on <span class="font-semibold">{{ blog.publish_date }}</span> | by <span class="font-semibold">{{ blog.author.username }}</span></p>
+        <p class="text-gray-500">Published on <span class="font-semibold">{{ blog.publish_date }}</span> | by <span class="font-semibold">{{ blog.author.username }}</span> | <span class="font-semibold">Views: {{ blog.views }}</span></p>
+        
     </div>
 
     <!-- Blog Cover Image -->
@@ -45,14 +46,14 @@
     </div>
 
     <!-- Tags Section -->
-    <div class="mb-12">
+    {% comment %} <div class="mb-12">
         <h3 class="text-lg font-semibold text-gray-800 mb-4">Tags:</h3>
         <div>
             <span class="inline-block bg-gray-100 text-gray-500 text-sm px-3 py-1 rounded-full mr-2">E-commerce</span>
             <span class="inline-block bg-gray-100 text-gray-500 text-sm px-3 py-1 rounded-full mr-2">Shopping</span>
             <span class="inline-block bg-gray-100 text-gray-500 text-sm px-3 py-1 rounded-full mr-2">Trends</span>
         </div>
-    </div>
+    </div> {% endcomment %}
 
     <!-- Author Info -->
     <div class="bg-gray-100 p-6 rounded-lg shadow-md mb-12 flex items-center">

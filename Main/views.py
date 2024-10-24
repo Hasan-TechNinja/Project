@@ -146,80 +146,80 @@ def AddToCart(request):
     return redirect("/cart")
 
 
-# @login_required(login_url='login')
-# def ShowCart(request):
-#     if request.user.is_authenticated:
-#         user = request.user
-#         cart = Cart.objects.filter(user=user).order_by('-id')
-        
-#         subtotal = 0 
-#         cart_product = [p for p in cart] 
-
-#         if cart_product: 
-            
-#             for p in cart_product:
-#                 p.linetotal = p.quantity * p.product.selling_price  
-#                 subtotal += p.linetotal  
-
-#             return render(request, "addtocart.html", {'cart': cart, 'subtotal': subtotal}
-#             )
-#         else:
-#             return render(request, 'addtocart.html', {'cart': cart, 'subtotal': subtotal})
-        
-#     return redirect('/cart')
-
 @login_required(login_url='login')
 def ShowCart(request):
-    user = request.user
-    cart = Cart.objects.filter(user=user).order_by('-id')
+    if request.user.is_authenticated:
+        user = request.user
+        cart = Cart.objects.filter(user=user).order_by('-id')
+        
+        subtotal = 0 
+        cart_product = [p for p in cart] 
 
-    subtotal = 0 
-    cart_product = [p for p in cart] 
+        if cart_product: 
+            
+            for p in cart_product:
+                p.linetotal = p.quantity * p.product.selling_price  
+                subtotal += p.linetotal  
 
-    # Calculate cart subtotal
-    if cart_product: 
-        for p in cart_product:
-            p.linetotal = p.quantity * p.product.selling_price  
-            subtotal += p.linetotal  
+            return render(request, "addtocart.html", {'cart': cart, 'subtotal': subtotal}
+            )
+        else:
+            return render(request, 'addtocart.html', {'cart': cart, 'subtotal': subtotal})
+        
+    return redirect('/cart')
+
+# @login_required(login_url='login')
+# def ShowCart(request):
+#     user = request.user
+#     cart = Cart.objects.filter(user=user).order_by('-id')
+
+#     subtotal = 0 
+#     cart_product = [p for p in cart] 
+
+#     # Calculate cart subtotal
+#     if cart_product: 
+#         for p in cart_product:
+#             p.linetotal = p.quantity * p.product.selling_price  
+#             subtotal += p.linetotal  
     
-    # Initialize discount-related variables
-    coupon = None
-    discount = 0
-    discount_amount = 0
-    total_after_discount = subtotal
+#     # Initialize discount-related variables
+#     coupon = None
+#     discount = 0
+#     discount_amount = 0
+#     total_after_discount = subtotal
     
-    if request.method == 'POST':
-        form = CouponForm(request.POST)
-        if form.is_valid():
-            coupon_code = form.cleaned_data.get('code')
-            print('Couupon code is: ', coupon_code)
-            try:
-                coupon = Coupon.objects.get(code=coupon_code, active=True)
+#     if request.method == 'POST':
+#         form = CouponForm(request.POST)
+#         if form.is_valid():
+#             coupon_code = form.cleaned_data.get('code')
+#             print('Couupon code is: ', coupon_code)
+#             try:
+#                 coupon = Coupon.objects.get(code=coupon_code, active=True)
                 
-                # Check if the coupon is valid and applicable
-                if coupon.is_valid() and subtotal > 0:
-                    discount = coupon.discount
-                    discount_amount = (subtotal * discount) / 100
-                    total_after_discount = subtotal - discount_amount
-                    print('total after discount: ', total_after_discount)
-                else:
-                    coupon = None  
-            except Coupon.DoesNotExist:
-                coupon = None 
-    else:
-        form = CouponForm()
+#                 # Check if the coupon is valid and applicable
+#                 if coupon.is_valid() and subtotal > 0:
+#                     discount = coupon.discount
+#                     discount_amount = (subtotal * discount) / 100
+#                     total_after_discount = subtotal - discount_amount
+#                     print('total after discount: ', total_after_discount)
+#                 else:
+#                     coupon = None  
+#             except Coupon.DoesNotExist:
+#                 coupon = None 
+#     else:
+#         form = CouponForm()
 
-    context = {
-        'form':form,
-        'cart': cart,
-        'subtotal': subtotal,
-        'coupon': coupon,
-        'discount': discount,
-        'discount_amount': discount_amount,
-        'total_after_discount': total_after_discount
-    }
+#     context = {
+#         'form':form,
+#         'cart': cart,
+#         'subtotal': subtotal,
+#         'coupon': coupon,
+#         'discount': discount,
+#         'discount_amount': discount_amount,
+#         'total_after_discount': total_after_discount
+#     }
 
-    return render(request, 'addtocart.html', context)
+#     return render(request, 'addtocart.html', context)
 
 
 
@@ -627,17 +627,45 @@ def BlogView(request):
 
 
 
+# class BlogDetails(View):
+#     def get(self, request, pk):
+#         blog = get_object_or_404(BlogPost, pk=pk)
+#         category = blog.category  # Assuming the BlogPost model has a 'category' field
+#         suggest = BlogPost.objects.filter(category=category).exclude(pk=pk)  # Exclude the current blog from suggestions
+        
+#         context = {
+#             'blog': blog,
+#             'suggest': suggest,
+#         }
+#         return render(request, 'blogdetails.html', context)
+
 class BlogDetails(View):
     def get(self, request, pk):
         blog = get_object_or_404(BlogPost, pk=pk)
+
+        # Increment the view count on every visit
+        blog.views += 1
+        blog.save()
+
+        # Increment the view for an user at a time
+        # session_key = f'viewed_blog_{blog.pk}'
+        # if not request.session.get(session_key):
+        #     blog.views += 1
+        #     blog.save()
+        #     request.session[session_key] = True  # Mark this post as viewed
+
+
+        # Get related blog posts by category, excluding the current blog post
         category = blog.category  # Assuming the BlogPost model has a 'category' field
-        suggest = BlogPost.objects.filter(category=category).exclude(pk=pk)  # Exclude the current blog from suggestions
-        
+        suggest = BlogPost.objects.filter(category=category).exclude(pk=pk)
+
         context = {
             'blog': blog,
             'suggest': suggest,
         }
         return render(request, 'blogdetails.html', context)
+
+
 
 
 
