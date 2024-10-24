@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views import View
-from . models import Product, Departments, Cart, BlogPost, Billing_Details, HomeCarousel, Delivery, Review, WishList, Coupon
+from . models import Product, Departments, Cart, BlogPost, Billing_Details, HomeCarousel, Delivery, Review, WishList, Coupon, Social
 from . forms import BillingDetailsForm, ReviewForm, CouponForm
 from django.contrib.auth import authenticate
 from django.utils.html import strip_tags
@@ -22,6 +22,7 @@ class HomeView(View):
         blog = BlogPost.objects.all()[0:3:-1]
         Carousel = HomeCarousel.objects.all()
         latest_product = Product.objects.all().order_by('-id')[:4]
+        social = Social.objects.all()
         
         wishlist = []
         if request.user.is_authenticated:
@@ -41,7 +42,8 @@ class HomeView(View):
             'Carousel':Carousel,
             'latest':latest_product,
             'wishlist':wishlist,
-            'top':trending_products
+            'top':trending_products,
+            'social':social
         }
         return render(request, 'home.html', context) 
     

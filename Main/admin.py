@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import Product, Departments, Category, Size, Cart, BlogPost, Billing_Details, Delivery, Brand, HomeCarousel, Review, WishList, Coupon
+from . models import Product, Departments, Category, Size, Cart, BlogPost, Billing_Details, Delivery, Brand, HomeCarousel, Review, WishList, Coupon, About, Social, PaymentMethod
 
 # Register your models here.
 
@@ -194,3 +194,43 @@ class CouponAdmin(admin.ModelAdmin):
         'active'
     )
 admin.site.register(Coupon, CouponAdmin)
+
+
+class AboutAdmin(admin.ModelAdmin):
+    list_display = (
+        'name',
+        'about',
+        'description',
+        'contact',
+        'email',
+        'mission_statement',
+        'vision',
+        'address',
+        'logo',
+        'banner',
+        'year_established',
+        'support_contact',
+        'operating_hours',
+        'map_location',
+        'testimonials',
+        'team_info'
+    )
+admin.site.register(About, AboutAdmin)
+
+
+class SocialAdmin(admin.ModelAdmin):
+    list_display = (
+        'name',
+        'link',
+        'logo'
+    )
+admin.site.register(Social, SocialAdmin)
+
+
+class PaymentMethodAdmin(admin.ModelAdmin):
+    list_display = (
+        'name',
+        'link',
+        'logo'
+    )
+admin.site.register(PaymentMethod, PaymentMethodAdmin)

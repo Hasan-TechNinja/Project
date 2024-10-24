@@ -235,3 +235,41 @@ class Coupon(models.Model):
     def is_valid(self):
         now = timezone.now()
         return self.active and self.valid_from <= now <= self.valid_to
+    
+
+class About(models.Model):
+    name = models.CharField(max_length=100)
+    about = models.CharField(max_length=300)
+    description = models.TextField()
+    contact = models.CharField(max_length=100)
+    email = models.EmailField(max_length=100)
+    mission_statement = models.CharField(max_length=255, blank=True)
+    vision = models.CharField(max_length=255, blank=True)
+    address = models.CharField(max_length=255, blank=True)
+    logo = models.ImageField(upload_to='Project/', blank=True)
+    banner = models.ImageField(upload_to='Project/')
+    year_established = models.PositiveIntegerField(blank=True, null=True)
+    support_contact = models.CharField(max_length=100, blank=True)
+    operating_hours = models.CharField(max_length=100, blank=True)
+    map_location = models.URLField(max_length=200, blank=True)
+    testimonials = models.TextField(blank=True)
+    team_info = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.name
+
+class Social(models.Model):
+    name = models.CharField(max_length=100)
+    link = models.CharField(max_length=400)
+    logo = models.ImageField(upload_to='Project')
+
+    def __str__(self):
+        return self.name
+    
+class PaymentMethod(models.Model):
+    name = models.CharField(max_length=100)
+    link = models.CharField(max_length=400)
+    logo = models.ImageField(upload_to='Project')
+
+    def __str__(self):
+        return self.name

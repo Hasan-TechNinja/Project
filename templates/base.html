@@ -241,11 +241,12 @@
                 <div>
                     <h4 class="font-bold mb-2">Follow Us</h4>
                     <ul>
-                        <li><a href="#">Facebook</a></li>
-                        <li><a href="#">Instagram</a></li>
-                        <li><a href="#">LinkedIn</a></li>
-                        <li><a href="#">X (Twitter)</a></li>
-                        <li><a href="#">YouTube</a></li>
+                      {% for social in social %}
+                        <div class='flex'>
+                          <img class='h-8 w-12' src="{{ social.logo.url }}" alt="">
+                          <li><a class='text-sm' href="{{ social.url }}">{{ social.name }}</a></li>
+                        </div>
+                      {% endfor %}
                     </ul>
                 </div>
     
