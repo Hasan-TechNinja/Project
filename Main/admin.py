@@ -198,7 +198,8 @@ admin.site.register(Coupon, CouponAdmin)
 
 class AboutAdmin(admin.ModelAdmin):
     list_display = (
-        'name',
+        'first_name',
+        'last_name',
         'about',
         'description',
         'contact',

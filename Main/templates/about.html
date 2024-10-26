@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}About{% endblock title %}
+{% block content %}
+    <!-- Main Content -->
+    <main class="container mx-auto py-12 px-6">
+        <!-- Welcome Section -->
+        <section class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-800 mb-4">Welcome to YourBrand</h1>
+            <p class="text-lg text-gray-600">Bringing the finest products directly to your doorstep with exceptional quality and service.</p>
+        </section>
+
+        <!-- Mission & Vision Section -->
+        <section class="bg-white p-8 rounded-lg shadow-md mb-12">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-4">Our Mission & Vision</h2>
+            <p class="text-gray-600 mb-2"><strong>Mission:</strong> Provide exceptional products that enhance our customers' lives while committing to sustainability and innovation.</p>
+            <p class="text-gray-600"><strong>Vision:</strong> To lead in quality, value, and customer satisfaction, enriching our community along the way.</p>
+        </section>
+
+        <!-- Founder's Message -->
+        <section class="bg-gray-50 p-8 rounded-lg shadow-md mb-12">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-4">Message from Our Founder</h2>
+            <p class="text-gray-600 italic">"Thank you for being part of our journey. We are dedicated to providing you with an experience that is personal, valuable, and memorable." – John Doe, Founder</p>
+        </section>
+
+        <!-- Core Values -->
+        <section class="bg-white p-8 rounded-lg shadow-md mb-12">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-4">Our Core Values</h2>
+            <ul class="list-disc list-inside text-gray-600 space-y-2">
+                <li>Quality</li>
+                <li>Sustainability</li>
+                <li>Innovation</li>
+                <li>Customer Focus</li>
+            </ul>
+        </section>
+
+        <!-- Unique Selling Points -->
+        <section class="bg-gray-50 p-8 rounded-lg shadow-md mb-12">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-4">What Makes Us Different</h2>
+            <p class="text-gray-600">Our products are crafted with premium materials and designed to ensure durability, comfort, and style.</p>
+        </section>
+
+        <!-- Team Section -->
+        <section class="bg-white p-8 rounded-lg shadow-md mb-12">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-4">Meet Our Team</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <img src="team1.jpg" alt="Team Member" class="w-32 h-32 mx-auto rounded-full mb-4">
+                    <h3 class="text-xl font-semibold">Jane Smith</h3>
+                    <p class="text-gray-600">Chief Operating Officer</p>
+                </div>
+                <div class="text-center">
+                    <img src="team2.jpg" alt="Team Member" class="w-32 h-32 mx-auto rounded-full mb-4">
+                    <h3 class="text-xl font-semibold">Mark Johnson</h3>
+                    <p class="text-gray-600">Head of Marketing</p>
+                </div>
+                <!-- Add more team members as needed -->
+            </div>
+        </section>
+
+        <!-- Customer Testimonials -->
+        <section class="bg-gray-50 p-8 rounded-lg shadow-md mb-12">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-4">What Our Customers Say</h2>
+            <blockquote class="text-gray-600 italic mb-4">"I've been a loyal customer for years because of the quality and customer service!" – Jane D.</blockquote>
+            <blockquote class="text-gray-600 italic">"Their commitment to sustainability is inspiring, and the products never disappoint!" – Mike T.</blockquote>
+        </section>
+
+        <!-- Sustainability Efforts -->
+        <section class="bg-white p-8 rounded-lg shadow-md mb-12">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-4">Sustainability & Responsibility</h2>
+            <p class="text-gray-600">We’re committed to the environment, ensuring all our packaging is 100% recyclable and materials are sourced responsibly.</p>
+        </section>
+
+        <!-- Milestones Section -->
+        <section class="bg-gray-50 p-8 rounded-lg shadow-md mb-12">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-4">Our Journey</h2>
+            <ul class="list-disc list-inside text-gray-600 space-y-2">
+                <li>Founded in 2010</li>
+                <li>Reached 100,000 customers in 2015</li>
+                <li>Opened new headquarters in 2020</li>
+            </ul>
+        </section>
+
+        <!-- Contact Information -->
+        <section class="bg-white p-8 rounded-lg shadow-md mb-12">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-4">Contact Us</h2>
+            <p class="text-gray-600"><strong>Email:</strong> support@yourbrand.com</p>
+            <p class="text-gray-600"><strong>Phone:</strong> +1 (555) 123-4567</p>
+            <p class="text-gray-600"><strong>Address:</strong> 123 Business Road, City, Country</p>
+            <p class="text-gray-600"><strong>Operating Hours:</strong> Mon-Fri, 9 AM - 5 PM</p>
+        </section>
+    </main>
+    {% endblock content %}
+
+</body>
+</html>

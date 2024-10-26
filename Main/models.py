@@ -238,7 +238,8 @@ class Coupon(models.Model):
     
 
 class About(models.Model):
-    name = models.CharField(max_length=100)
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100, blank=True)
     about = models.CharField(max_length=300)
     description = models.TextField()
     contact = models.CharField(max_length=100)
@@ -256,7 +257,7 @@ class About(models.Model):
     team_info = models.TextField(blank=True)
 
     def __str__(self):
-        return self.name
+        return f"{self.first_name} {self.last_name}"
 
 class Social(models.Model):
     name = models.CharField(max_length=100)

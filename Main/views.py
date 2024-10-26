@@ -22,9 +22,9 @@ class HomeView(View):
         blog = BlogPost.objects.all()[0:3:-1]
         Carousel = HomeCarousel.objects.all()
         latest_product = Product.objects.all().order_by('-id')[:4]
-        social = Social.objects.all()
-        payment_method = PaymentMethod.objects.all()
-        about = About.objects.all()
+        
+        
+        # about = About.objects.all()
         
         wishlist = []
         if request.user.is_authenticated:
@@ -45,12 +45,24 @@ class HomeView(View):
             'latest':latest_product,
             'wishlist':wishlist,
             'top':trending_products,
-            'social':social,
-            'payment':payment_method,
-            'about':about
+            
+            
+            # 'about':about
         }
         return render(request, 'home.html', context) 
+
+
+def AboutView(request):
+    about = About.objects.first()
+
+    print('Inside base html file --------------------')
+
+    context = {
+        'about':about
+    }
+    return render(request, 'about.html', context)
     
+
 
 class ShopView(View):
     def get(self, request, pk=None):

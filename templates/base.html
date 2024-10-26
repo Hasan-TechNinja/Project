@@ -52,12 +52,7 @@
           <div class="navbar-start">
             <div class="dropdown">
               <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -88,7 +83,8 @@
                 </li>
               </ul>
             </div>
-            <a class="btn btn-ghost text-3xl font-bold hover:bg-white" href='{% url "home" %}'>Hasan <span class="text-primary ">Zone</span></a>
+            {% comment %} <a class="btn btn-ghost text-3xl font-bold hover:bg-white" href='{% url "home" %}'>Hasan <span class="text-primary ">Zone</span></a> {% endcomment %}
+            <a class="btn btn-ghost text-3xl font-bold hover:bg-white" href='{% url "home" %}'>{{ about.first_name }} <span class="text-primary ">{{ about.last_name }}</span></a>
           </div>
       
           <!-- Desktop Search Bar -->
@@ -208,36 +204,37 @@
       
     <footer>
         <div style="background-color: rgba(14, 18, 61, 1.0);" class="text-white p-6">
-            <div class="container mx-auto grid grid-cols-1 md:grid-cols-5 gap-6">
+            <div class="container mx-auto grid grid-cols-1 md:grid-cols-5 gap-6 text-sm">
                 <!-- About Us Section -->
                 <div>
-                    <h4 class="font-bold mb-2">About Us</h4>
-                    {% for about in about %}
-                    <p>{{ about.about|truncatechars:60 }}</p>
-                    {% endfor %}
+                    <h4 class="font-bold mb-2"><a class='hover:text-blue-400' href="{% url "about" %}">About Us</a></h4>
+                    
+                    <p class='text-yellow-300 '>{{ about.about|truncatechars:60 }}</p>
+                    <p>{{ about.description | truncatechars:150 }}</p>
+                    
                 </div>
     
                 <!-- Customer Support Section -->
                 <div>
-                  {% for about in about %}
+                 
                     <h4 class="font-bold mb-2">Customer Support</h4>
                     <ul>
-                        <li>Contact Us: <a class='text-sm' href="mailto:email@example.com">{{ about.email }}</a></li>
-                        <li>Call Us: +880 {{ about.contact }}</li>
-                        <li><a href="{% url "faq" %}">FAQs</a></li>
+                        <li>Contact Us: <a class='text-sm hover:underline' href="mailto:email@example.com">{{ about.email }}</a></li>
+                        <li class=''>Call Us: +880 {{ about.contact }}</li>
+                        <li><a class='hover:text-yellow-400' href="{% url "faq" %}">FAQs</a></li>
                     </ul>
-                    {% endfor %}
+                   
                 </div>
     
                 <!-- Useful Links Section -->
                 <div>
                     <h4 class="font-bold mb-2">Useful Links</h4>
-                    <ul>
-                        <li><a href="{% url "shop" %}">Shop Now</a></li>
-                        <li><a href="{% url "blog" %}">Blog</a></li>
-                        <li><a href="{% url "profile" %}">My Account</a></li>
-                        <li><a href="{% url "orders_page" %}">Track Order</a></li>
-                        <li><a href="{% url "order" %}">Shipping & Returns</a></li>
+                    <ul class='text-blue-400'>
+                        <li><a class='hover:underline' href="{% url "shop" %}">Shop Now</a></li>
+                        <li><a class='hover:underline' href="{% url "blog" %}">Blog</a></li>
+                        <li><a class='hover:underline' href="{% url "profile" %}">My Account</a></li>
+                        <li><a class='hover:underline' href="{% url "orders_page" %}">Track Order</a></li>
+                        <li><a class='hover:underline' href="{% url "order" %}">Shipping & Returns</a></li>
                     </ul>
                 </div>
     
@@ -248,7 +245,7 @@
                       {% for social in social %}
                         <div class='flex'>
                           <img class='h-6 w-10' src="{{ social.logo.url }}" alt="">
-                          <li><a class='text-sm' href="{{ social.link }}" target="_blank" rel="noopener noreferrer">{{ social.name }}</a></li>
+                          <li><a class='hover:text-blue-400' href="{{ social.link }}" target="_blank" rel="noopener noreferrer">{{ social.name }}</a></li>
                         </div>
                       {% endfor %}
                     </ul>
@@ -269,7 +266,7 @@
                 </div>
             </div>
         </div>
-        <p class="text-center bg-gray-700 text-white py-2">© 2024 [Store Name]. All Rights Reserved.</p>
+        <p class="text-center bg-gray-700 text-white py-2 text-sm">© {{ year }} {{ about.first_name }} {{ about.last_name }}. All Rights Reserved.</p>
     </footer>
     {% comment %} footer end {% endcomment %}
   
