@@ -135,7 +135,8 @@ class DeliveryAdmin(admin.ModelAdmin):
         'second_phone',
         'order_note',
         'datetime',
-        'email'
+        'email',
+        'delivery_charge'
     )
 
 admin.site.register(Delivery, DeliveryAdmin)

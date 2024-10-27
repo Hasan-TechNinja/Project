@@ -5,9 +5,9 @@
 
 <div class="container mx-auto p-4 lg:p-6">
     <div class="flex justify-between items-center border-b pb-4">
-        <h2 class="text-xl lg:text-2xl font-bold">Cart</h2>
+        <h2 class="text-xl lg:text-2xl font-bold text-gray-800">Cart</h2>
         <button class="px-3 py-2 bg-primary rounded hover:bg-primary">
-            <a href="{% url "home" %}" class="text-sm lg:text-base">Continue Shopping</a>
+            <a href="{% url "home" %}" class="text-sm lg:text-base text-white">Continue Shopping</a>
         </button>
     </div>
 
@@ -15,30 +15,43 @@
         {% if cart %}
             <div class="space-y-4">
                 {% for cart_item in cart %}
-                    <div class="flex flex-col lg:flex-row items-center border rounded-lg shadow-lg p-4 space-y-4 lg:space-y-0 lg:space-x-4">
+                    <div class="relative flex flex-col lg:flex-row items-center border rounded-lg shadow-lg p-4 space-y-4 lg:space-y-0 lg:space-x-4">
+                        
+                        <!-- Discount badge -->
+                        {% if cart_item.product.discount_percentage > 0 %}
+                            <span class="absolute top-2 left-2 bg-red-600 text-white text-sm font-bold px-2 py-1 rounded-tr-lg rounded-bl-lg z-10">
+                                {{ cart_item.product.discount_percentage }}% OFF
+                            </span>
+                        {% endif %}
+
                         <!-- Product Image and Name -->
                         <div class="flex items-center justify-center lg:w-1/2 w-full">
-                            <img class="w-16 h-16 md:w-24 md:h-24 lg:w-36 lg:h-36 object-cover mr-4 rounded-lg" src="{{ cart_item.product.image.url }}" alt="{{ cart_item.product.name }}">
-                            <span class="text-sm md:text-base lg:text-lg">{{ cart_item.product.name }}</span>
+                            <a href="{% url 'product_details' cart_item.product.id %}" class="flex items-center">
+                                <img class="w-16 h-16 md:w-24 md:h-24 lg:w-36 lg:h-36 object-cover mr-4 rounded-lg" src="{{ cart_item.product.image.url }}" alt="{{ cart_item.product.name }}">
+                                <span class="text-sm md:text-base lg:text-lg text-gray-700 font-semibold hover:underline">{{ cart_item.product.name }}</span>
+                            </a>
                         </div>
-    
-                        <!-- Product Price -->
-                        <div class="lg:w-1/6 w-full text-sm md:text-base lg:text-lg text-center lg:text-left">Price:
-                            {{ cart_item.product.selling_price }} Tk
+
+                        <!-- Product Price and Discount -->
+                        <div class="lg:w-1/6 w-full text-sm md:text-base lg:text-lg text-center lg:text-left">
+                            <p class="text-gray-800">Price: {{ cart_item.product.selling_price }} Tk</p>
+                            {% if cart_item.product.discount_price < cart_item.product.original_price %}
+                                <p class="text-red-500 text-xs">Discount: {{ cart_item.product.discount_percentage }}%</p>
+                            {% endif %}
                         </div>
-    
+
                         <!-- Quantity with buttons -->
                         <div class="flex items-center lg:w-1/6 w-full justify-center lg:justify-start">
                             <button class="px-2 py-1 bg-gray-200 text-xs md:text-sm"><a href="{% url 'decrease_cart_quantity' cart_item.product.id %}">-</a></button>
                             <input type="text" value="{{ cart_item.quantity }}" class="mx-2 w-10 text-center border-gray-300 rounded text-xs md:text-sm lg:text-base" readonly>
                             <button class="px-2 py-1 bg-gray-200 text-xs md:text-sm"><a href="{% url 'increase_cart_quantity' cart_item.product.id %}">+</a></button>
                         </div>
-    
+
                         <!-- Total Price -->
-                        <div class="lg:w-1/6 w-full text-sm md:text-base lg:text-lg text-center lg:text-left">Total: 
-                            {{ cart_item.linetotal }} Tk
+                        <div class="lg:w-1/6 w-full text-sm md:text-base lg:text-lg text-center lg:text-left">
+                            <p class="text-gray-800 font-medium">Total: {{ cart_item.linetotal }} Tk</p>
                         </div>
-    
+
                         <!-- Remove Button -->
                         <div class="lg:w-1/6 w-full text-center lg:text-left">
                             <button class="text-gray-500 text-sm md:text-base lg:text-lg"><a href="{% url 'delete_cart_item' cart_item.id %}">✖</a></button>
@@ -57,47 +70,21 @@
     </div>
 
     <div class="mt-6 flex justify-between">
-        <button class="px-4 py-2 btn bg-primary hover:bg-primary rounded w-full lg:w-auto">
-            <a href="{% url "home" %}" class="text-sm lg:text-base">Continue Shopping</a>
+        <button class="px-4 py-2 bg-primary hover:bg-primary rounded w-full lg:w-auto">
+            <a href="{% url "home" %}" class="text-sm lg:text-base text-white">Continue Shopping</a>
         </button>
     </div>
 </div>
 
 <div class="container mx-auto px-4 py-8 lg:flex lg:space-x-8 lg:justify-end">
-    <!-- Left Column: Discount Codes -->
-    {% comment %} <div class="lg:w-1/2 w-full">
-        <div class="bg-gray-200 p-4 lg:p-6 rounded-lg shadow-md mb-8">
-            <h2 class="text-lg lg:text-xl font-semibold mb-4">Discount Codes</h2>
-            <form action="" method="POST" class="md:flex md:justify-between">
-                {% csrf_token %}
-                {{ form }}
-                <button type="submit" class="bg-blue-600 text-white px-4 py-2 md:px-4 md:py-1 text-sm md:text-base rounded-md hover:bg-blue-700 transition mt-2 md:mt-0">
-                    Apply coupon
-                </button>
-            </form>
-        </div>
-    </div> {% endcomment %}
-
     <!-- Right Column: Cart Total -->
     <div class="lg:w-1/3 w-full">
         <div class="bg-gray-200 p-4 lg:p-6 rounded-lg shadow-md">
-            <h2 class="text-lg lg:text-xl font-semibold mb-4">Cart Total</h2>
+            <h2 class="text-lg lg:text-xl font-semibold mb-4 text-gray-800">Cart Total</h2>
             <div class="border-t border-gray-200 py-4">
                 <div class="flex justify-between mb-2">
-                    <span class="font-medium">Subtotal:</span>
-                    <span>{{ subtotal }} Tk</span>
-                </div>
-
-                {% if discount_amount > 0 %}
-                <div class="flex justify-between mb-2 text-green-600">
-                    <span class="font-medium">Discount:</span>
-                    <span>-{{ discount_amount }} Tk</span>
-                </div>
-                {% endif %}
-                
-                <div class="flex justify-between mb-4">
-                    <span class="font-medium">Total:</span>
-                    <span>{{ total_after_discount }} Tk</span>
+                    <span class="font-medium text-gray-800">Total:</span>
+                    <span class="text-gray-800">{{ subtotal }} Tk</span>
                 </div>
             </div>
 

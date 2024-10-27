@@ -323,7 +323,18 @@ def delete_cart_item(request, cart_id):
 @login_required
 def checkout(request):
     cart = Cart.objects.filter(user=request.user)
-    print('check the form')
+    # cart_product = [p for p in cart]
+    # subtotal = sum([p.quantity * p.product.discount_price for p in cart_product])
+
+    subtotal = 0 
+    cart_product = [p for p in cart] 
+
+    if cart_product: 
+        
+        for p in cart_product:
+            p.linetotal = p.quantity * p.product.selling_price  
+            subtotal += p.linetotal
+
     if request.method == 'POST':
         form = BillingDetailsForm(request.POST)
 
@@ -391,9 +402,11 @@ def checkout(request):
 
     context = {
         'form': form,
-        'cart': cart
+        'cart': cart,
+        'subtotal':subtotal
     }
     return render(request, 'checkouts.html', context)
+
 
 # @login_required
 # def checkout(request):
