@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views import View
 from . models import Product, Departments, Cart, BlogPost, Billing_Details, HomeCarousel, Delivery, Review, WishList, Coupon, Social, PaymentMethod, About, FAQ
-from . forms import BillingDetailsForm, ReviewForm, CouponForm
+from . forms import BillingDetailsForm, ReviewForm
 from django.contrib.auth import authenticate
 from django.utils.html import strip_tags
 from django.db.models import Q
@@ -22,10 +22,7 @@ class HomeView(View):
         blog = BlogPost.objects.all()[0:3:-1]
         Carousel = HomeCarousel.objects.all()
         latest_product = Product.objects.all().order_by('-id')[:4]
-        
-        
-        # about = About.objects.all()
-        
+
         wishlist = []
         if request.user.is_authenticated:
             wishlist = WishList.objects.filter(user=request.user).values_list('product', flat=True)
@@ -54,8 +51,6 @@ class HomeView(View):
 
 def AboutView(request):
     about = About.objects.first()
-
-    print('Inside base html file --------------------')
 
     context = {
         'about':about
@@ -323,8 +318,6 @@ def delete_cart_item(request, cart_id):
 @login_required
 def checkout(request):
     cart = Cart.objects.filter(user=request.user)
-    # cart_product = [p for p in cart]
-    # subtotal = sum([p.quantity * p.product.discount_price for p in cart_product])
 
     subtotal = 0 
     cart_product = [p for p in cart] 

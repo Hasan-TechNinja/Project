@@ -149,7 +149,7 @@ class Delivery(models.Model):
     datetime = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     second_phone = models.CharField(max_length=25, blank=True, null=True)
     email = models.EmailField(blank=True, null=True)
-    delivery_charge = models.DecimalField(max_digits=10, decimal_places=2, default=50.00)  # Add delivery charge
+    delivery_charge = models.DecimalField(max_digits=10, decimal_places=2, default=100.00)  # Add delivery charge
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}, order"

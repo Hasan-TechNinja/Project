@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}Blog{% endblock title %}
 {% block content %}
 
@@ -12,7 +13,7 @@
     <!-- Featured Post Section -->
     <div class="mb-12">
         <div class="relative bg-gray-100 rounded-lg overflow-hidden shadow-lg">
-            <img src="https://via.placeholder.com/1200x600" alt="Featured Post" class="w-full h-96 object-cover">
+            <img src="{% static "img/blog.jpeg" %}" alt="Featured Post" class="w-full h-96 object-cover">
             <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-start p-8">
                 <span class="bg-yellow-400 text-white px-3 py-1 rounded-lg font-semibold">Category</span>
                 <h2 class="text-white text-4xl mt-4 font-bold">Featured Blog Post Title</h2>
@@ -45,14 +46,13 @@
                 <!-- Post Excerpt -->
                 <p class="mt-2 text-gray-600">{{ blog.content|truncatechars:200 |safe }}</p>
                 <!-- Tags Section -->
-                <div class="mt-4">
-                    <span class="inline-block bg-gray-100 text-gray-500 text-sm px-2 py-1 rounded mr-2">{{ blog.tags }}</span>
-                    <span class="inline-block bg-gray-100 text-gray-500 text-sm px-2 py-1 rounded mr-2">Tag2</span>
-                </div>
+                
                 <!-- Author Info & Read More -->
                 <div class="mt-6 flex items-center justify-between">
                     <div class="flex items-center">
-                        <img class="w-10 h-10 rounded-full object-cover" src="https://via.placeholder.com/50" alt="Author">
+                        {% comment %} <img class="w-10 h-10 rounded-full object-cover" src="https://via.placeholder.com/50" alt="Author"> {% endcomment %}
+                        <i class="fas fa-user"></i>
+
                         <div class="ml-3">
                             <p class="text-sm font-medium text-gray-700">{{ blog.author }}</p>
                         </div>
