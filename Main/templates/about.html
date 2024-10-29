@@ -87,18 +87,57 @@
         </div>
     </section>
 
-    <!-- Contact Information with Interactive Map Link -->
-    <section class="bg-gray-50 p-8 rounded-lg shadow-md mb-12">
-        <h2 class="text-3xl font-semibold text-gray-800 mb-4">Contact Us</h2>
-        <p class="text-gray-600"><strong>Email:</strong> {{ about.email }}</p>
-        <p class="text-gray-600"><strong>Phone:</strong> {{ about.contact }}</p>
-        <p class="text-gray-600"><strong>Support Contact:</strong> {{ about.support_contact }}</p>
-        <p class="text-gray-600"><strong>Address:</strong> {{ about.address }}</p>
-        <p class="text-gray-600"><strong>Operating Hours:</strong> {{ about.operating_hours }}</p>
-        {% if about.map_location %}
-            <a href="{{ about.map_location }}" target="_blank" class="text-blue-600 underline hover:text-blue-800 transition duration-300">View on Map</a>
-        {% endif %}
+    <section class="bg-white p-10 rounded-lg shadow-lg mb-12">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Contact Us</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Contact Details -->
+            <div class="space-y-4">
+                <div class="flex items-center">
+                    <svg class="w-6 h-6 text-blue-600 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14v6m-6-6v6a6 6 0 0012 0v-6" />
+                    </svg>
+                    <p class="text-gray-600"><strong>Email:</strong> {{ about.email }}</p>
+                </div>
+                <div class="flex items-center">
+                    <svg class="w-6 h-6 text-green-600 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h3M3 14h3M3 18h3M8 5h6M8 19h6M13 7l2-2m0 0l4 4m-4-4v5a2 2 0 002 2h5" />
+                    </svg>
+                    <p class="text-gray-600"><strong>Phone:</strong> {{ about.contact }}</p>
+                </div>
+                <div class="flex items-center">
+                    <svg class="w-6 h-6 text-yellow-500 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16.72 8a2 2 0 110-4 2 2 0 010 4zm1.41 3.1a3.9 3.9 0 012.83 4.7L19.6 20.88a3 3 0 01-3.6 2.07 3 3 0 01-2.07-3.6l1.36-5.02a3.9 3.9 0 014.7-2.83zm-2.83-4.9A1.1 1.1 0 1016.9 8a1.1 1.1 0 00-1.1-1.1zm-7.7.28L4.32 15.78a2.5 2.5 0 001.82 4.18H9a2 2 0 002-2v-5.5L8 8.5zm4.95-1.41L9 4a2 2 0 00-2.6 1.05l-1.96 3.92L3 14.5v.56h5.34A5.5 5.5 0 0111 12.13V9l1.5-.5h3.1L13.95 7zm.55 6h-1m-1 2h-2.5a2 2 0 00-2 2v5.1a1.9 1.9 0 001.9 1.9h2.1a1.9 1.9 0 001.9-1.9v-5.1a2 2 0 00-2-2zm0-6h-2m-4 4H3.42" />
+                    </svg>
+                    <p class="text-gray-600"><strong>Support Contact:</strong> {{ about.support_contact }}</p>
+                </div>
+                <div class="flex items-center">
+                    <svg class="w-6 h-6 text-purple-600 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v8h2v6h14v-6h2V7a2 2 0 00-2-2H5a2 2 0 00-2 2z" />
+                    </svg>
+                    <p class="text-gray-600"><strong>Address:</strong> {{ about.address }}</p>
+                </div>
+                <div class="flex items-center">
+                    <svg class="w-6 h-6 text-teal-600 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 11h16v2H4z" />
+                    </svg>
+                    <p class="text-gray-600"><strong>Operating Hours:</strong> {{ about.operating_hours }}</p>
+                </div>
+            </div>
+            <!-- Map Link -->
+            <div class="flex justify-center items-center">
+                {% if about.map_location %}
+                    <a href="{{ about.map_location }}" target="_blank" class="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-300">
+                        <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 10l-6 6-3-3-6 6" />
+                        </svg>
+                        View on Map
+                    </a>
+                {% endif %}
+            </div>
+        </div>
     </section>
+    
 
 </main>
 

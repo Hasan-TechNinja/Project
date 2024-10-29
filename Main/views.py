@@ -21,7 +21,7 @@ class HomeView(View):
         departments = Departments.objects.all()
         blog = BlogPost.objects.all()[0:3:-1]
         Carousel = HomeCarousel.objects.all()
-        latest_product = Product.objects.all().order_by('-id')[:4]
+        latest_product = Product.objects.all().order_by('-id')
 
         wishlist = []
         if request.user.is_authenticated:
@@ -34,6 +34,9 @@ class HomeView(View):
         # Get top 16 trending products based on `selles` in the last 15 days
         trending_products = Product.objects.filter(updated_at__gte=fifteen_days_ago).order_by('-selles')[:8]
 
+        review_product = Review.objects.all()
+        
+
         context = {
             'products': products,
             'departments': departments,
@@ -42,6 +45,7 @@ class HomeView(View):
             'latest':latest_product,
             'wishlist':wishlist,
             'top':trending_products,
+            'review':review_product
             
             
             # 'about':about
@@ -49,13 +53,19 @@ class HomeView(View):
         return render(request, 'home.html', context) 
 
 
+from django.shortcuts import render
+from .models import About, ProfileModel
+
 def AboutView(request):
     about = About.objects.first()
+    team_members = about.team_members.all()  # Get the related team members
 
     context = {
-        'about':about
+        'about': about,
+        'team_members': team_members  # Pass the team members to the context
     }
     return render(request, 'about.html', context)
+
     
 
 

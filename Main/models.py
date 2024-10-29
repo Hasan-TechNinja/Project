@@ -5,6 +5,7 @@ from tinymce.models import HTMLField
 from django.utils import timezone
 from django.utils.text import slugify
 from decimal import Decimal
+from Profile.models import ProfileModel
 
 # Create your models here.
 
@@ -257,6 +258,7 @@ class About(models.Model):
     map_location = models.URLField(max_length=200, blank=True)
     testimonials = models.TextField(blank=True)
     team_info = models.TextField(blank=True)
+    team_members = models.ManyToManyField(ProfileModel, blank=True, related_name='about_pages')
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
