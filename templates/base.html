@@ -51,38 +51,60 @@
         <div class="navbar bg-white">
           <div class="navbar-start">
             <div class="dropdown">
+              <!-- Hamburger Menu Button -->
               <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M4 6h16M4 12h8m-8 6h16" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
                 </svg>
               </div>
-              <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                <li><a></a></li>
-                <li>
-                  <a>pages</a>
-                  <ul class="p-2">
-                    {% if user.is_authenticated %}
-                    <li><a href="{% url "showcart" %}">Cart</a></li>
-                    <li><a href="{% url "order" %}">Order</a></li>
-    
-                    {% endif %}
+              
+              <!-- Dropdown Content -->
+              <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-64 p-4 shadow-lg">
+                <!-- Navigation Links -->
+                <li><a class="hover:bg-primary" href="{% url 'home' %}">Home</a></li>
+                <li><a class="hover:bg-primary" href="{% url 'shop' %}">Shop</a></li>
+                <li><a class="hover:bg-primary" href="{% url 'blog' %}">Blog</a></li>
+                <li><a class="hover:bg-primary" href="#">Contact</a></li>
+                
+                <!-- Search and Actions -->
+                <li class="flex flex-col space-y-2 mt-3">
+                  <form action="{% url 'search' %}" method="GET" class="flex space-x-2 items-center">
+                    <!-- Text Input for Search -->
+                    <input type="text" id="search-query" name="query" placeholder="Search..." class="input input-bordered w-full" required />
+                    <button type="submit" class="btn bg-primary text-white">
+                      Search
+                    </button>
+                  </form>
+            
+                  <!-- Action Buttons -->
+                  <div class="flex space-x-2 justify-center mt-2">
+                    <!-- Voice Search Button -->
+                    <button type="button" id="voice-search-btn" class="btn bg-gray-100 hover:bg-primary text-gray-700">
+                      <i class="fas fa-microphone"></i>
+                    </button>
                     
-                  </ul>
-                </li>
-                <li><a class="hover:bg-primary" href='{% url "home" %}'>Home</a></li>
-                <li><a class="hover:bg-primary" href='{% url "shop" %}'>Shop</a></li>
-                <li><a class="hover:bg-primary" href='{% url "blog" %}'>Blog</a></li>
-                <li><a class="hover:bg-primary" href='#'>Contact</a></li>
-                <li class='flex space-x-2 flex-row'>
-                  <input type="search" class='w-24'>
-                  <button class='btn bg-primary'>Search</button>
+                    <!-- Voice Search Popup Modal -->
+                    <div id="voice-search-popup" class="fixed inset-0 hidden items-center justify-center bg-black bg-opacity-50 z-50">
+                      <div class="bg-white p-8 rounded-lg text-center">
+                        <div class="text-lg font-semibold">Listening...</div>
+                        <div class="mt-4">
+                          <i class="fas fa-microphone fa-3x text-primary animate-pulse"></i>
+                        </div>
+                        <div class="mt-4 text-sm text-gray-500">Speak now and your search will begin.</div>
+                      </div>
+                    </div>
+            
+                    <!-- Image Search Button -->
+                    <label for="image-search" class="btn bg-gray-100 hover:bg-primary text-gray-700 cursor-pointer">
+                      <i class="fas fa-camera"></i>
+                      <input type="file" id="image-search" name="image_search" accept="image/*" class="hidden" />
+                    </label>
+                  </div>
                 </li>
               </ul>
             </div>
+            
+
             {% comment %} <a class="btn btn-ghost text-3xl font-bold hover:bg-white" href='{% url "home" %}'>Hasan <span class="text-primary ">Zone</span></a> {% endcomment %}
             <a class="btn btn-ghost text-3xl font-bold hover:bg-white" href='{% url "home" %}'>{{ about.first_name }} <span class="text-primary ">{{ about.last_name }}</span></a>
           </div>
