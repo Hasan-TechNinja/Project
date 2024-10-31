@@ -2,13 +2,25 @@ from .models import About, Social, PaymentMethod, Cart
 from Profile.models import ProfileModel
 from datetime import datetime
 
+
 def about_context(request):
     about = About.objects.first()
     year = datetime.now().year
     social = Social.objects.all()
     payment_method = PaymentMethod.objects.all()
-    profile = ProfileModel.objects.filter(user=request.user).first() if request.user.is_authenticated else None
-    cart = Cart.objects.filter(user = request.user)
-    cart_item = len(cart)
+    profile = None
+    cart_item = 0
 
-    return {'about': about, 'year': year, 'social':social, 'payment':payment_method, 'profile':profile, 'cart_item':cart_item}
+    if request.user.is_authenticated:
+        profile = ProfileModel.objects.filter(user=request.user).first()
+        cart = Cart.objects.filter(user=request.user)
+        cart_item = cart.count()
+
+    return {
+        'about': about,
+        'year': year,
+        'social': social,
+        'payment': payment_method,
+        'profile': profile,
+        'cart_item': cart_item,
+    }

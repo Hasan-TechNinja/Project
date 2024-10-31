@@ -53,8 +53,6 @@ class HomeView(View):
         return render(request, 'home.html', context) 
 
 
-from django.shortcuts import render
-from .models import About, ProfileModel
 
 def AboutView(request):
     about = About.objects.first()

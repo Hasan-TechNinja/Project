@@ -7,30 +7,31 @@
     <!-- Hero Section with Parallax Background -->
     <section class="relative overflow-hidden bg-cover bg-center h-96 flex items-center justify-center mb-12 rounded-md" style="background-image: url({{ about.banner.url }});">
         <div class="absolute inset-0 bg-gray-900 opacity-60"></div>
-        <h1 class="relative z-10 text-5xl font-bold text-white">{{ about.first_name }} {{ about.last_name }} - About Us</h1>
+        <h1 class="relative z-10 text-2xl md:text-5xl font-bold text-white">{{ about.first_name }} {{ about.last_name }} - About Us</h1>
     </section>
 
     <!-- Mission & Vision with Icon and Hover Effects -->
-    <section class="flex flex-col md:flex-row gap-8 mb-12">
-        <div class="bg-white p-8 rounded-lg shadow-md w-full hover:shadow-lg transition-shadow duration-300 ease-in-out transform hover:scale-105">
-            <h2 class="text-3xl font-semibold text-gray-800 mb-4 flex items-center">
-                <i class="fas fa-bullseye text-blue-600 mr-2"></i> Our Mission
-            </h2>
-            <p class="text-gray-600">{{ about.mission_statement }}</p>
-        </div>
-        <div class="bg-white p-8 rounded-lg shadow-md w-full hover:shadow-lg transition-shadow duration-300 ease-in-out transform hover:scale-105">
-            <h2 class="text-3xl font-semibold text-gray-800 mb-4 flex items-center">
-                <i class="fas fa-eye text-green-600 mr-2"></i> Our Vision
-            </h2>
-            <p class="text-gray-600">{{ about.vision }}</p>
-        </div>
-    </section>
+<section class="flex flex-col md:flex-row gap-4 md:gap-8 mb-12 px-2 md:px-4">
+    <div class="bg-white p-6 md:p-8 rounded-lg shadow-md w-full hover:shadow-lg transition-shadow duration-300 ease-in-out transform hover:scale-105">
+        <h2 class="text-2xl md:text-3xl font-semibold text-gray-800 mb-2 md:mb-4 flex items-center">
+            <i class="fas fa-bullseye text-blue-600 mr-2"></i> Our Mission
+        </h2>
+        <p class="text-gray-600 text-sm md:text-base">{{ about.mission_statement }}</p>
+    </div>
+    <div class="bg-white p-6 md:p-8 rounded-lg shadow-md w-full hover:shadow-lg transition-shadow duration-300 ease-in-out transform hover:scale-105">
+        <h2 class="text-2xl md:text-3xl font-semibold text-gray-800 mb-2 md:mb-4 flex items-center">
+            <i class="fas fa-eye text-green-600 mr-2"></i> Our Vision
+        </h2>
+        <p class="text-gray-600 text-sm md:text-base">{{ about.vision }}</p>
+    </div>
+</section>
 
-    <!-- About Section with Smooth Entrance Animation -->
-    <section class="bg-gray-50 p-8 rounded-lg shadow-md mb-12 animate-fadeIn">
-        <h2 class="text-3xl font-semibold text-gray-800 mb-4">Who We Are</h2>
-        <p class="text-gray-600">{{ about.description }}</p>
-    </section>
+<!-- About Section with Smooth Entrance Animation -->
+<section class="bg-gray-50 p-6 md:p-8 rounded-lg shadow-md mb-12 animate-fadeIn mx-4 md:mx-0 px-2 md:px-4">
+    <h2 class="text-2xl md:text-3xl font-semibold text-gray-800 mb-2 md:mb-4">Who We Are</h2>
+    <p class="text-gray-600 text-sm md:text-base">{{ about.description }}</p>
+</section>
+
 
     <!-- Core Values with Icon Grid -->
     <section class="bg-white p-8 rounded-lg shadow-md mb-12">
