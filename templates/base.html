@@ -222,40 +222,41 @@
           
             <div class="dropdown relative flex items-cente rounded p-1 px-2">
                 <!-- Profile Picture (visible on all screens) -->
-                <div tabindex="0" class="flex items-center cursor-pointer space-x-2">
-                    <img class="w-10 h-10 rounded-full object-cover ring ring-primary border-2" src="{{ profile.image.url }}" alt="{{ profile.first_name }}'s profile picture" />
-                    <!-- User's First Name (visible only on desktop) -->
-                    <span class="hidden lg:block font-medium text-gray-800">{{ profile.first_name }}</span>
-                </div>
-                <!-- Dropdown Menu -->
-                <ul tabindex="0" class="dropdown-content menu p-4 shadow-lg bg-white rounded-lg border border-gray-200 w-52 mt-2 z-50">
-                    <li class="hover:bg-gray-100 rounded-lg transition duration-200">
-                        <a class="py-2 px-4 flex items-center" href="{% url 'showcart' %}">
-                            <i class="fas fa-shopping-cart mr-2"></i> Cart
-                        </a>
-                    </li>
-                    <li class="hover:bg-gray-100 rounded-lg transition duration-200">
-                        <a class="py-2 px-4 flex items-center" href="{% url 'wishlist' %}">
-                            <i class="fas fa-heart mr-2"></i> Wishlist
-                        </a>
-                    </li>
-                    <li class="hover:bg-gray-100 rounded-lg transition duration-200">
-                        <a class="py-2 px-4 flex items-center" href="{% url 'profile' %}">
-                            <i class="fas fa-user mr-2"></i> Profile
-                        </a>
-                    </li>
-                    <li class="hover:bg-gray-100 rounded-lg transition duration-200">
-                        <a class="py-2 px-4 flex items-center" href="{% url 'order' %}">
-                            <i class="fas fa-box mr-2"></i> Order
-                        </a>
-                    </li>
-                    <li class="hover:bg-gray-100 rounded-lg transition duration-200">
-                        <a class="py-2 px-4 flex items-center text-red-600" href="{% url 'logout' %}">
-                            <i class="fas fa-sign-out-alt mr-2"></i> Logout
-                        </a>
-                    </li>
-                </ul>
-            </div>
+                <div tabindex="0" class="relative flex items-center cursor-pointer space-x-2">
+                  <img class="w-10 h-10 rounded-full object-cover ring ring-primary border-2" src="{{ profile.image.url }}" alt="{{ profile.first_name }}'s profile picture" />
+                  <!-- User's First Name (visible only on desktop) -->
+                  <span class="hidden lg:block font-medium text-gray-800">{{ profile.first_name }}</span>
+              
+                  <!-- Dropdown Menu -->
+                  <ul tabindex="0" class="dropdown-content absolute -left-full top-full mt-2 menu p-4 shadow-lg bg-white rounded-lg border border-gray-200 w-52 z-50">
+                      <li class="hover:bg-gray-100 rounded-lg transition duration-200">
+                          <a class="py-2 px-4 flex items-center" href="{% url 'showcart' %}">
+                              <i class="fas fa-shopping-cart mr-2"></i> Cart
+                          </a>
+                      </li>
+                      <li class="hover:bg-gray-100 rounded-lg transition duration-200">
+                          <a class="py-2 px-4 flex items-center" href="{% url 'wishlist' %}">
+                              <i class="fas fa-heart mr-2"></i> Wishlist
+                          </a>
+                      </li>
+                      <li class="hover:bg-gray-100 rounded-lg transition duration-200">
+                          <a class="py-2 px-4 flex items-center" href="{% url 'profile' %}">
+                              <i class="fas fa-user mr-2"></i> Profile
+                          </a>
+                      </li>
+                      <li class="hover:bg-gray-100 rounded-lg transition duration-200">
+                          <a class="py-2 px-4 flex items-center" href="{% url 'order' %}">
+                              <i class="fas fa-box mr-2"></i> Order
+                          </a>
+                      </li>
+                      <li class="hover:bg-gray-100 rounded-lg transition duration-200">
+                          <a class="py-2 px-4 flex items-center text-red-600" href="{% url 'logout' %}">
+                              <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                          </a>
+                      </li>
+                  </ul>
+              </div>
+                                                        
             {% else %}
             <a class="btn bg-primary hover:bg-primary" href="{% url 'login' %}">
                 <span><i class="fa-solid fa-user"></i> <span>Login</span></span>
