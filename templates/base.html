@@ -36,7 +36,7 @@
             },
         }
     </script> 
-    <title>{% block title %}{% endblock title %} | Hasan</title>
+    <title>{% block title %}{% endblock title %} | {{ about.first_name }}</title>
     
     {% comment %} backgroundImage: {
         form_img: "url('{% static "img/bg.avif" %}')",
@@ -142,7 +142,7 @@
           <input type="text" id="search-query" name="query" placeholder="Search..." class="input input-bordered w-full max-w-xs" required />
           
           <!-- Voice input button -->
-          <button type="button" id="voice-search-btn" class="btn bg-gray-50 hover:bg-primary">
+          <button type="button" id="voice-search-btn" class="btn bg-gray-100 hover:bg-primary text-gray-700">
             <i class="fas fa-microphone"></i>
           </button>
           
