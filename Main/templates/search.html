@@ -4,6 +4,15 @@
 {% block content %}
 
 <div class='my-10 min-h-screen'>
+  <!-- Search Header -->
+  <div class="container mx-auto py-4 text-center">
+    <h1 class="text-3xl font-bold mb-2">Search Results</h1>
+    {% if product %}
+      <p class="text-gray-600">{{ product|length }} results found for "{{ query }}"</p>
+    {% else %}
+      <p class="text-gray-600">No results found for "{{ query }}"</p>
+    {% endif %}
+  </div>
 
   {% if product %} 
   <div class='container mx-auto'>
