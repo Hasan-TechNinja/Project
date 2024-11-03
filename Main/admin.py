@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import Product, Departments, Category, Size, Cart, BlogPost, Billing_Details, Delivery, Brand, HomeCarousel, Review, WishList, Coupon, About, Social, PaymentMethod, FAQ
+from . models import Product, Departments, Category, Size, Cart, BlogPost, Billing_Details, Delivery, Brand, HomeCarousel, Review, WishList, Coupon, About, Social, PaymentMethod, FAQ, SpecialOffer
 
 # Register your models here.
 
@@ -246,3 +246,33 @@ class FAQAdmin(admin.ModelAdmin):
     )
     search_fields = ('question',)
 admin.site.register(FAQ, FAQAdmin)
+
+
+
+class SpecialOfferModelAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'title',
+        'discount_percentage',
+        'start_date',
+        'end_date',
+        'active',
+        'banner',
+        'products_list',
+    )
+
+    def formfield_for_manytomany(self, db_field, request, **kwargs):
+        if db_field.name == "products":
+            # Filter products with stock greater than zero
+            kwargs["queryset"] = Product.objects.filter(stock__gt=0)
+        return super().formfield_for_manytomany(db_field, request, **kwargs)
+
+    # Method to display selected products in a readable format
+    def products_list(self, obj):
+        return ", ".join([product.name for product in obj.products.all()])
+    products_list.short_description = "Products"
+
+    # Optional: Add filter_horizontal for a more user-friendly selection widget
+    filter_horizontal = ('products',)
+
+admin.site.register(SpecialOffer, SpecialOfferModelAdmin)

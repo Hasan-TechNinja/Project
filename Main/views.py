@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views import View
-from . models import Product, Departments, Cart, BlogPost, Billing_Details, HomeCarousel, Delivery, Review, WishList, Coupon, Social, PaymentMethod, About, FAQ
+from . models import Product, Departments, Cart, BlogPost, Billing_Details, HomeCarousel, Delivery, Review, WishList, Coupon, Social, PaymentMethod, About, FAQ, SpecialOffer
 from . forms import BillingDetailsForm, ReviewForm
 from django.contrib.auth import authenticate
 from django.utils.html import strip_tags
@@ -20,7 +20,6 @@ class HomeView(View):
         products = Product.objects.all()[:12:-1]
         departments = Departments.objects.all()
         blog = BlogPost.objects.all()[0:3:-1]
-        Carousel = HomeCarousel.objects.all()
         latest_product = Product.objects.all().order_by('-id')
 
         wishlist = []
@@ -31,26 +30,11 @@ class HomeView(View):
         current_date = timezone.now()
         fifteen_days_ago = current_date - timedelta(days=15)
         
-        # Get top 16 trending products based on `selles` in the last 15 days
+        # Get top 8 trending products based on `selles` in the last 15 days
         trending_products = Product.objects.filter(updated_at__gte=fifteen_days_ago).order_by('-selles')[:8]
 
         review_product = Review.objects.all()
         
-
-        # # Just For You feature based on similar categories
-        # just_for_you = []
-        # if request.user.is_authenticated:
-        
-        #     cart_categories = Cart.objects.filter(user=request.user).values_list('product__category', flat=True)
-        #     delivery_categories = Delivery.objects.filter(user=request.user).values_list('product__category', flat=True)
-        #     review_categories = Review.objects.filter(user=request.user).values_list('product__category', flat=True)
-        #     wishlist_categories = WishList.objects.filter(user=request.user).values_list('product__category', flat=True)
-
-        #     all_categories = set(cart_categories) | set(delivery_categories) | set(review_categories) | set(wishlist_categories)
-
-        #     just_for_you = Product.objects.filter(category__in=all_categories).exclude(Q(cart__user=request.user) | Q(delivery__user=request.user) | Q(reviews__user=request.user) | Q(wishlist__user=request.user)).distinct()[:16]
-
-        # Just For You feature based on similar categories
         just_for_you = []
         if request.user.is_authenticated:
             cart_categories = Cart.objects.filter(user=request.user).values_list('product__category', flat=True)
@@ -69,33 +53,52 @@ class HomeView(View):
                 Q(wishlist__user=request.user)
             ).distinct()
 
-        
+            offers = SpecialOffer.objects.filter(active=True).order_by('-start_date')  # Adjust order if needed
+            
 
         context = {
             'products': products,
             'departments': departments,
             'blog':blog,
-            'Carousel':Carousel,
             'latest':latest_product,
             'wishlist':wishlist,
             'top':trending_products,
             'review':review_product,
             'just_for_you': just_for_you,
+            'offers': offers,
             
-            
-            # 'about':about
         }
         return render(request, 'home.html', context) 
 
 
 
+def offer_details(request, offer_id):
+
+    offer = get_object_or_404(SpecialOffer, id=offer_id)
+    products = offer.products.all()
+    
+    discounted_products = []
+    for product in products:
+        discounted_price = offer.get_discounted_price(product)
+        discounted_products.append({
+            'product': product,
+            'discounted_price': discounted_price,
+        })
+
+    return render(request, 'offer_details.html', {
+        'offer': offer,
+        'discounted_products': discounted_products,
+    })
+
+
+
 def AboutView(request):
     about = About.objects.first()
-    team_members = about.team_members.all()  # Get the related team members
+    team_members = about.team_members.all() 
 
     context = {
         'about': about,
-        'team_members': team_members  # Pass the team members to the context
+        'team_members': team_members
     }
     return render(request, 'about.html', context)
 

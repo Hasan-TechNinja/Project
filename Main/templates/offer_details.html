@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Offer Details{% endblock title %}
+{% block content %}
+
+<div>
+    <div class="container mx-auto p-4">
+        <h1 class="text-2xl font-bold">{{ offer.title }}</h1>
+        <p class="text-gray-700">{{ offer.description }}</p>
+        <p class="mt-2">Discount Percentage: {{ offer.discount_percentage }}%</p>
+        <p>Active From: {{ offer.start_date|date:"D, d M Y" }} to {{ offer.end_date|date:"D, d M Y" }}</p>
+
+        {% if offer.banner %}
+            <img src="{{ offer.banner.url }}" alt="{{ offer.title }} banner" class="w-full h-64 object-cover rounded-lg mt-4">
+        {% else %}
+            <p class="text-red-600">No banner available for this offer.</p>
+        {% endif %}
+
+        <h2 class="text-xl font-semibold mt-6">Products in this Offer:</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+            {% for item in discounted_products %}
+            <div class="border rounded-lg p-4">
+                <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="w-full h-48 object-cover rounded-md">
+                <h3 class="font-bold mt-2">{{ item.product.name }}</h3>
+                <p>Price: <span class="line-through text-red-500">{{ item.product.selling_price|floatformat:2 }}</span></p>
+                {% if item.discounted_price < item.product.selling_price %}
+                    <p>Discounted Price: <span class="font-bold text-green-600">{{ item.discounted_price|floatformat:2 }}</span></p>
+                {% endif %}
+                <p>Stock: {{ item.product.stock }} available</p>
+            </div>
+            {% empty %}
+            <p>No products available for this offer.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

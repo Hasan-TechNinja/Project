@@ -287,3 +287,32 @@ class FAQ(models.Model):
 
     def __str__(self):
         return self.question
+    
+
+
+class SpecialOffer(models.Model):
+    products = models.ManyToManyField(Product, related_name="special_offers")
+    title = models.CharField(max_length=200)
+    description = models.TextField(blank=True, null=True)
+    discount_percentage = models.PositiveIntegerField()
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
+    active = models.BooleanField(default=True)
+    banner = models.ImageField(upload_to='Offer')
+
+    def __str__(self):
+        return self.title
+
+    def is_active(self):
+        """Check if the offer is currently active based on date."""
+        now = timezone.now()
+        return self.active and self.start_date <= now <= self.end_date
+
+    def get_discounted_price(self, product):
+        """
+        Calculate the discounted price for a specific product in this offer.
+        """
+        if self.discount_percentage > 0 and product.selling_price:
+            discount_factor = Decimal(self.discount_percentage) / Decimal(100)
+            return product.selling_price * (1 - discount_factor)
+        return product.selling_price
