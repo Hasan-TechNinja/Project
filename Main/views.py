@@ -37,6 +37,40 @@ class HomeView(View):
         review_product = Review.objects.all()
         
 
+        # # Just For You feature based on similar categories
+        # just_for_you = []
+        # if request.user.is_authenticated:
+        
+        #     cart_categories = Cart.objects.filter(user=request.user).values_list('product__category', flat=True)
+        #     delivery_categories = Delivery.objects.filter(user=request.user).values_list('product__category', flat=True)
+        #     review_categories = Review.objects.filter(user=request.user).values_list('product__category', flat=True)
+        #     wishlist_categories = WishList.objects.filter(user=request.user).values_list('product__category', flat=True)
+
+        #     all_categories = set(cart_categories) | set(delivery_categories) | set(review_categories) | set(wishlist_categories)
+
+        #     just_for_you = Product.objects.filter(category__in=all_categories).exclude(Q(cart__user=request.user) | Q(delivery__user=request.user) | Q(reviews__user=request.user) | Q(wishlist__user=request.user)).distinct()[:16]
+
+        # Just For You feature based on similar categories
+        just_for_you = []
+        if request.user.is_authenticated:
+            cart_categories = Cart.objects.filter(user=request.user).values_list('product__category', flat=True)
+            delivery_categories = Delivery.objects.filter(user=request.user).values_list('product__category', flat=True)
+            review_categories = Review.objects.filter(user=request.user).values_list('product__category', flat=True)
+            wishlist_categories = WishList.objects.filter(user=request.user).values_list('product__category', flat=True)
+
+            all_categories = set(cart_categories) | set(delivery_categories) | set(review_categories) | set(wishlist_categories)
+
+            just_for_you = Product.objects.filter(
+                category__in=all_categories
+            ).exclude(
+                Q(cart__user=request.user) |
+                Q(delivery__user=request.user) |
+                Q(reviews__user=request.user) |
+                Q(wishlist__user=request.user)
+            ).distinct()
+
+        
+
         context = {
             'products': products,
             'departments': departments,
@@ -45,7 +79,8 @@ class HomeView(View):
             'latest':latest_product,
             'wishlist':wishlist,
             'top':trending_products,
-            'review':review_product
+            'review':review_product,
+            'just_for_you': just_for_you,
             
             
             # 'about':about
