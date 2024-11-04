@@ -17,12 +17,12 @@
                 {% for cart_item in cart %}
                     <div class="relative flex flex-col lg:flex-row items-center border rounded-lg shadow-lg p-4 space-y-4 lg:space-y-0 lg:space-x-4">
                         
-                        <!-- Discount badge -->
+                        {% comment %} <!-- Discount badge -->
                         {% if cart_item.product.discount_percentage > 0 %}
                             <span class="absolute top-2 left-2 bg-red-600 text-white text-sm font-bold px-2 py-1 rounded-tr-lg rounded-bl-lg z-10">
                                 {{ cart_item.product.discount_percentage }}% OFF
                             </span>
-                        {% endif %}
+                        {% endif %} {% endcomment %}
 
                         <!-- Product Image and Name -->
                         <div class="flex items-center justify-center lg:w-1/2 w-full">

@@ -94,7 +94,7 @@ class Cart(models.Model):
         return f"{self.user.username}"
     
     def linetotal(self):
-        return self.product.selling_price * self.quantity
+        return self.product.discount_price * self.quantity
     
 
 

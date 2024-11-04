@@ -53,7 +53,7 @@ class HomeView(View):
                 Q(wishlist__user=request.user)
             ).distinct()
 
-            offers = SpecialOffer.objects.filter(active=True).order_by('-start_date')  # Adjust order if needed
+        offers = SpecialOffer.objects.filter(active=True).order_by('-start_date')  # Adjust order if needed
             
 
         context = {
@@ -90,42 +90,42 @@ def offer_details(request, offer_id):
         'discounted_products': discounted_products,
     })
 
-class OfferProductDetails(View):
-    def get(self, request, pk):
-        product = get_object_or_404(Product, pk=pk)
-        quantity = product.stock
-        if quantity < 1:
-            stoke = "Stoke out!"
-        else:
-            stoke = quantity
+# class OfferProductDetails(View):
+#     def get(self, request, pk):
+#         product = get_object_or_404(Product, pk=pk)
+#         quantity = product.stock
+#         if quantity < 1:
+#             stoke = "Stoke out!"
+#         else:
+#             stoke = quantity
 
-        department_description = product.department.description
-        all = Product.objects.all()
+#         department_description = product.department.description
+#         all = Product.objects.all()
         
-        related_products = Product.objects.filter(department=product.department).exclude(pk=pk)
+#         related_products = Product.objects.filter(department=product.department).exclude(pk=pk)
 
-        review = Review.objects.filter(product = product)
-        review_quantity = len(review)
+#         review = Review.objects.filter(product = product)
+#         review_quantity = len(review)
         
-        product_video = product.product_video
+#         product_video = product.product_video
 
-        product_video_embed = ""
+#         product_video_embed = ""
 
-        if product_video:  # Only proceed if there's a product_video
-            product_video_embed = product_video.replace('https://youtu.be/', 'https://www.youtube.com/embed/')
-            if '?si=' in product_video_embed:
-                product_video_embed = product_video_embed.split('?si=')[0]  # Remove URL parameters
+#         if product_video:  # Only proceed if there's a product_video
+#             product_video_embed = product_video.replace('https://youtu.be/', 'https://www.youtube.com/embed/')
+#             if '?si=' in product_video_embed:
+#                 product_video_embed = product_video_embed.split('?si=')[0]  # Remove URL parameters
 
-        context = {
-            'product': product,
-            'stoke': stoke,
-            'rproduct': related_products,
-            'department_description': department_description,
-            'review': review,
-            'review_quantity': review_quantity,
-            'product_video_embed': product_video_embed if product_video_embed else None,  # Use None if empty
-        }
-        return render(request, 'product_details.html', context)
+#         context = {
+#             'product': product,
+#             'stoke': stoke,
+#             'rproduct': related_products,
+#             'department_description': department_description,
+#             'review': review,
+#             'review_quantity': review_quantity,
+#             'product_video_embed': product_video_embed if product_video_embed else None,  # Use None if empty
+#         }
+#         return render(request, 'product_details.html', context)
 
 
 
@@ -291,7 +291,10 @@ def ShowCart(request):
         if cart_product: 
             
             for p in cart_product:
-                p.linetotal = p.quantity * p.product.selling_price  
+                if p.product.SpecialOffer_price > 0:
+                    p.linetotal = p.quantity * p.product.SpecialOffer_price
+                else:
+                    p.linetotal = p.quantity * p.product.discount_price
                 subtotal += p.linetotal  
 
             return render(request, "addtocart.html", {'cart': cart, 'subtotal': subtotal}
@@ -300,6 +303,7 @@ def ShowCart(request):
             return render(request, 'addtocart.html', {'cart': cart, 'subtotal': subtotal})
         
     return redirect('/cart')
+
 
 # @login_required(login_url='login')
 # def ShowCart(request):
@@ -408,7 +412,10 @@ def checkout(request):
     if cart_product: 
         
         for p in cart_product:
-            p.linetotal = p.quantity * p.product.selling_price  
+            if p.product.SpecialOffer_price > 0:
+                p.linetotal = p.quantity * p.product.SpecialOffer_price
+            else:
+                p.linetotal = p.quantity * p.product.discount_price  
             subtotal += p.linetotal
 
     if request.method == 'POST':
@@ -593,7 +600,10 @@ def OrderView(request):
 
     for order in orders:
         if order.product:
-            order.linetotal = order.quantity * order.product.discount_price
+            if order.product.SpecialOffer_price > 0:
+                order.linetotal = order.quantity * order.product.SpecialOffer_price
+            else:
+                order.linetotal = order.quantity * order.product.discount_price
             subtotal += order.linetotal  # Add to subtotal
 
     # Check if there are orders before attempting to access their attributes
@@ -651,6 +661,7 @@ def Purchase(request):
 
     # Iterate through purchases and calculate subtotal
     for p in purchase:
+        
         p.linetotal = p.quantity * p.product.discount_price   # Calculate line total for each purchase
         subtotal += p.linetotal  # Add to subtotal
 
