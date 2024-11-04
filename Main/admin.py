@@ -12,6 +12,7 @@ class ProductAdmin(admin.ModelAdmin):
         'selling_price', 
         'discount_percentage',
         'discount_price', 
+        'SpecialOffer_price',
         'stock',
         'image',
         'image1',

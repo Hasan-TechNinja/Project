@@ -90,6 +90,43 @@ def offer_details(request, offer_id):
         'discounted_products': discounted_products,
     })
 
+class OfferProductDetails(View):
+    def get(self, request, pk):
+        product = get_object_or_404(Product, pk=pk)
+        quantity = product.stock
+        if quantity < 1:
+            stoke = "Stoke out!"
+        else:
+            stoke = quantity
+
+        department_description = product.department.description
+        all = Product.objects.all()
+        
+        related_products = Product.objects.filter(department=product.department).exclude(pk=pk)
+
+        review = Review.objects.filter(product = product)
+        review_quantity = len(review)
+        
+        product_video = product.product_video
+
+        product_video_embed = ""
+
+        if product_video:  # Only proceed if there's a product_video
+            product_video_embed = product_video.replace('https://youtu.be/', 'https://www.youtube.com/embed/')
+            if '?si=' in product_video_embed:
+                product_video_embed = product_video_embed.split('?si=')[0]  # Remove URL parameters
+
+        context = {
+            'product': product,
+            'stoke': stoke,
+            'rproduct': related_products,
+            'department_description': department_description,
+            'review': review,
+            'review_quantity': review_quantity,
+            'product_video_embed': product_video_embed if product_video_embed else None,  # Use None if empty
+        }
+        return render(request, 'product_details.html', context)
+
 
 
 def AboutView(request):

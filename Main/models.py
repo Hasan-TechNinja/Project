@@ -52,6 +52,7 @@ class Product(models.Model):
     selling_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     discount_percentage = models.IntegerField(default=0)
     discount_price = models.DecimalField(max_digits=10, decimal_places=1, default=0)
+    SpecialOffer_price = models.DecimalField(max_digits=10, decimal_places=1, default=0)
     stock = models.PositiveIntegerField(default=0)
     image = models.ImageField(upload_to='products/', blank=True, null=True)
     image1 = models.ImageField(upload_to='products/', blank=True, null=True)
@@ -70,14 +71,6 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
-    
-    # def save(self, *args, **kwargs):
-    #     """Calculate discount price based on discount percentage before saving the product."""
-    #     if self.discount_percentage > 0:
-    #         self.discount_price = self.selling_price * (1 - self.discount_percentage / 100)
-    #     else:
-    #         self.discount_price = self.selling_price
-    #     super(Product, self).save(*args, **kwargs)
 
     def save(self, *args, **kwargs):
     # Calculate discount price based on discount percentage before saving the product.

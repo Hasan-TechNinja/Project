@@ -32,5 +32,8 @@ urlpatterns = [
     path('wishlist/remove/<int:product_id>', views.remove_from_wishlist, name='remove_from_wishlist'),
     path('faq/', views.faq_view, name='faq'),
     path('special-offers/<int:offer_id>/', views.offer_details, name='offer_details'),
+    # path('offer-product-details/', views.OfferProductDetails.as_view(), name='offerPdetails'),
+    path('offer-product-details/<int:pk>/', views.OfferProductDetails.as_view(), name='offerPdetails'),
+
 
 ]
