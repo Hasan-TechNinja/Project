@@ -88,7 +88,7 @@ def LoginView(request):
             messages.success(request, f"Welcome back, {user.username}!")
             return redirect('home')
         else:
-            messages.error(request, "Invalid username or password.")
+            messages.error(request, "Login failed. Please check your username and password.")
     else:
         form = CustomAuthenticationForm()
 

@@ -2,46 +2,50 @@
 {% load static %}
 {% block title %}Login{% endblock title %}
 {% block content %}
-    
-{% comment %} <body class="bg-gray-100 flex items-center justify-center min-h-screen"> {% endcomment %}
- 
+
 <div class='min-h-screen'>
     <div class="container mx-auto mt-10 max-w-md shadow-lg bg-gray-100">
         <div class="bg-gray-100 shadow-lg rounded-lg p-6">
             <h2 class="text-3xl font-semibold text-gray-700 text-center mb-6">Login</h2>
             <hr class='bg-black mb-4'>
-            
+
             <form method="POST" novalidate>
                 {% csrf_token %}
+
+                <!-- Display form-wide errors -->
+                {% if form.non_field_errors %}
+                    <div class="text-red-500 text-sm mb-4">
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                <!-- Loop through each form field and display individual errors -->
                 {% for field in form %}
                     <div class="mb-4">
                         <label for="{{ field.id_for_label }}" class="block text-gray-600 font-medium mb-2">{{ field.label }}</label>
                         {{ field }}
                         {% if field.errors %}
                             <div class="text-red-500 text-sm mt-1">
-                                {{ field.errors }}
+                                {{ field.errors|join:", " }}
                             </div>
                         {% endif %}
                     </div>
                 {% endfor %}
-                
+
                 <button type="submit" class="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Login</button>
             </form>
-    
+
             <div class="text-center mt-4">
                 <a href="#" class="text-red-600 hover:underline">Forgot your password?</a>
             </div>
             <hr class='border'>
-            <!-- New Section: Create New Account -->
+            
             <div class="text-center mt-4 lg:flex lg:space-x-3">
-                <p class="text-gray-600">Don't have an account--></p>
+                <p class="text-gray-600">Don't have an account? </p>
                 <a href="{% url 'registration' %}" class="text-blue-600 hover:underline">Create a new account</a>
             </div>
         </div>
     </div>
 </div>
-
-    
-{% comment %} </body> {% endcomment %}
 
 {% endblock content %}
