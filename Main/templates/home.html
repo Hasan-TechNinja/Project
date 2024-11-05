@@ -356,31 +356,27 @@
 
 
 {% comment %} show product end {% endcomment %}
-
-<div class="container mx-auto w-10/12 grid gap-4 my-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
-    <div class="flex flex-col sm:flex-row items-center bg-amber-200 p-6 space-x-0 sm:space-x-4 md:space-x-8 lg:space-x-20">
-        <div class="flex-shrink-0 mb-4 sm:mb-0">
-            <img src="./image/j3.png" alt="Summer Fruit" class="w-full h-40 object-cover md:w-40 lg:w-40">
-        </div>
-        <div class="flex flex-col items-start">
-            <h1 class="text-xl sm:text-2xl font-bold mb-2">Summer Fruit</h1>
-            <p class="text-gray-600 mb-4 text-sm sm:text-base">100% Pure Natural Fruit Juice</p>
-            <button class="bg-red-500 text-white py-2 px-4 rounded">Shop Now</button>
-        </div>
+<div>
+    <div class="mx-auto w-full mt-8">
+        <h2 class="text-center text-2xl md:text-3xl font-extrabold text-gray-800 mb-4 relative">
+            Special Discount
+            <span class="block w-24 h-1 bg-red-500 mx-auto mt-2"></span>
+        </h2>
     </div>
+    <div class="container mx-auto w-11/12 grid gap-6 my-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 ">
+        {% for offer in offers|slice:":2" %}
+            <div class="relative flex flex-col items-start justify-end bg-cover bg-center text-white rounded-lg shadow-lg h-56"
+                 style="background-image: url('{{ offer.banner.url }}');">
+                <div class="bg-black bg-opacity-60 p-4 md:p-5 rounded-b-lg w-full">
+                    <h1 class="text-xl md:text-2xl font-bold mb-2">{{ offer.title }}</h1>
+                    <p class="text-gray-300 mb-3 text-sm md:text-base">{{ offer.discount_percentage }}% Pure Natural Fruit Juice</p>
+                    <a href="{% url 'offer_details' offer.id %}" class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded transition duration-300 ease-in-out">Shop Now</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>  
+</div>
 
-    <div class="flex flex-col sm:flex-row items-center bg-red-200 p-6 space-x-0 sm:space-x-4 md:space-x-8 lg:space-x-20">
-        <div class="flex-shrink-0 mb-4 sm:mb-0">
-            <img src="./image/j3.png" alt="Dried & Drink Fruits" class="w-full h-40 object-cover md:w-48 lg:w-48">
-        </div>
-        <div class="flex flex-col items-start">
-            <h1 class="text-xl sm:text-2xl font-bold mb-2">Dried & Drink Fruits</h1>
-            <p class="text-gray-600 mb-4 text-sm sm:text-base">With 25% Off All Teas</p>
-            <button class="bg-red-500 text-white py-2 px-4 rounded">Shop Now</button>
-        </div>
-    </div>
-</div>
-</div>
     
 </div>
 
