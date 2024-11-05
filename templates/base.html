@@ -14,7 +14,7 @@
     <!-- fontawoseome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
    
-     <script>
+    <script>
         tailwind.config = {
             theme: {
                 extend: {
@@ -45,279 +45,268 @@
 
 
 </head>
+
 <body class='bg-white'>
     {% comment %} nav start {% endcomment %}
-    <nav class="lg:w-11/12 text-text_col mx-auto">
-        <div class="navbar bg-white">
-          <div class="navbar-start">
-            <div class="dropdown">
-              <!-- Hamburger Menu Button -->
-              <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
-                </svg>
-              </div>
+<nav class="lg:w-11/12 text-text_col mx-auto">
+    <div class="navbar bg-white">
+      <div class="navbar-start">
+
+        <div class="dropdown">
+          <!-- Hamburger Menu Button -->
+          <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
+            </svg>
+          </div>
               
-              <!-- Dropdown Content -->
-              <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-64 p-4 shadow-lg">
-                <!-- Navigation Links -->
-                <li><a class="hover:bg-primary" href="{% url 'home' %}">Home</a></li>
-                <li><a class="hover:bg-primary" href="{% url 'shop' %}">Shop</a></li>
-                <li><a class="hover:bg-primary" href="{% url 'blog' %}">Blog</a></li>
-                <li><a class="hover:bg-primary" href="#">Contact</a></li>
-                
-                <!-- Search and Actions -->
-                <li class="flex flex-col space-y-2 mt-3">
-                  <form action="{% url 'search' %}" method="GET" class="flex space-x-2 items-center">
-                    <!-- Text Input for Search -->
-                    <input type="text" id="search-query" name="query" placeholder="Search..." class="input input-bordered w-full" required />
-                    <button type="submit" class="btn bg-primary text-white">
-                      Search
-                    </button>
-                  </form>
-            
-                  <!-- Action Buttons -->
-                  <div class="flex space-x-2 justify-center mt-2">
-                    <!-- Voice Search Button -->
-                    <button type="button" id="voice-search-btn" class="btn bg-gray-100 hover:bg-primary text-gray-700">
-                      <i class="fas fa-microphone"></i>
-                    </button>
-                    
-                    <!-- Voice Search Popup Modal -->
-                    <div id="voice-search-popup" class="fixed inset-0 hidden items-center justify-center bg-black bg-opacity-50 z-50">
-                      <div class="bg-white p-8 rounded-lg text-center">
-                        <div class="text-lg font-semibold">Listening...</div>
-                        <div class="mt-4">
-                          <i class="fas fa-microphone fa-3x text-primary animate-pulse"></i>
-                        </div>
-                        <div class="mt-4 text-sm text-gray-500">Speak now and your search will begin.</div>
-                      </div>
-                    </div>
-            
-                    <!-- Image Search Button -->
-                    <label for="image-search" class="btn bg-gray-100 hover:bg-primary text-gray-700 cursor-pointer">
-                      <i class="fas fa-camera"></i>
-                      <input type="file" id="image-search" name="image_search" accept="image/*" class="hidden" />
-                    </label>
+          <!-- Dropdown Content -->
+          <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-64 p-4 shadow-lg">
+            <!-- Navigation Links -->
+            <li><a class="hover:bg-primary" href="{% url 'home' %}">Home</a></li>
+            <li><a class="hover:bg-primary" href="{% url 'shop' %}">Shop</a></li>
+            <li><a class="hover:bg-primary" href="{% url 'blog' %}">Blog</a></li>
+            <li><a class="hover:bg-primary" href="#">Contact</a></li>
+          
+            <!-- Search and Actions -->
+            <li class="flex flex-col space-y-2 mt-3">
+              <form action="{% url 'search' %}" method="GET" class="flex space-x-2 items-center">
+                <!-- Text Input for Search -->
+                <input type="text" id="search-query" name="query" placeholder="Search..." class="input input-bordered w-full" required />
+                <button type="submit" class="btn bg-primary text-white">
+                  Search
+                </button>
+              </form>
+      
+            <!-- Action Buttons -->
+            <div class="flex space-x-2 justify-center mt-2">
+              <!-- Voice Search Button -->
+              <button type="button" id="voice-search-btn" class="btn bg-gray-100 hover:bg-primary text-gray-700">
+                <i class="fas fa-microphone"></i>
+              </button>
+              
+              <!-- Voice Search Popup Modal -->
+              <div id="voice-search-popup" class="fixed inset-0 hidden items-center justify-center bg-black bg-opacity-50 z-50">
+                <div class="bg-white p-8 rounded-lg text-center">
+                  <div class="text-lg font-semibold">Listening...</div>
+                  <div class="mt-4">
+                    <i class="fas fa-microphone fa-3x text-primary animate-pulse"></i>
                   </div>
-                </li>
-              </ul>
-            </div>
-            
-
-            {% comment %} <a class="btn btn-ghost text-3xl font-bold hover:bg-white" href='{% url "home" %}'>Hasan <span class="text-primary ">Zone</span></a> {% endcomment %}
-            <a class="btn btn-ghost text-3xl font-bold hover:bg-white" href='{% url "home" %}'>{{ about.first_name }} <span class="text-primary ">{{ about.last_name }}</span></a>
-          </div>
+                  <div class="mt-4 text-sm text-gray-500">Speak now and your search will begin.</div>
+                </div>
+              </div>
       
-          <!-- Desktop Search Bar -->
-          <div class="navbar-center hidden lg:flex">
-            <ul class="menu menu-horizontal text-base font-medioum px-1">
-              <li><a class="hover:bg-primary" href="{% url "home" %}">Home</a></li>
-              <li><a class="hover:bg-primary" href="{% url "shop" %}">Shop</a></li>
-              <li>
-                {% comment %} <details class="hover:bg-primary relative z-20">
-                  <summary>Pages</summary>
-                  <ul class="p-2 relative">
-                      <div class="absolute inset-0 bg-white/60 backdrop-blur-lg rounded-lg z-0"></div>
-                      {% if user.is_authenticated %}
-                      <li class="relative z-10"><a href="{% url "showcart" %}">Cart</a></li>
-                      <li class="relative z-10"><a href="{% url "order" %}">Order</a></li>
-                
-                      {% endif %}
-                  </ul>
-              </details> {% endcomment %}
-              
-              </li>
-              <li><a class="hover:bg-primary" href='{% url "blog" %}'>Blog</a></li>
-              {% if user.is_authenticated %}
-              <li><a class="hover:bg-primary" href='#'>Contact</a></li>
-              {% endif %}
-            </ul>
-          </div>
-      
-      <!-- Search form for desktop -->
-      <div class="navbar-center hidden lg:flex">
-        <form action="{% url 'search' %}" method="GET" class="flex items-center space-x-2">
-          <!-- Text search input (required) -->
-          <input type="text" id="search-query" name="query" placeholder="Search..." class="input input-bordered w-full max-w-xs" required />
-          
-          <!-- Voice input button -->
-          <button type="button" id="voice-search-btn" class="btn bg-gray-100 hover:bg-primary text-gray-700">
-            <i class="fas fa-microphone"></i>
-          </button>
-          
-          <!-- Image input button -->
-          <label for="image-search" class="btn bg-gray-50 hover:bg-primary cursor-pointer">
-            <i class="fas fa-camera"></i>
-            <input type="file" id="image-search" name="image_search" accept="image/*" class="hidden" />
-          </label>
-          
-          <!-- Submit search button -->
-          <button type="submit" class="btn bg-primary hover:bg-primary">Search</button>
-        </form>
-
-        <!-- Voice Search Popup Modal -->
-        <div id="voice-search-popup" class="fixed inset-0 flex hidden items-center justify-center bg-black bg-opacity-50 z-50">
-          <div class="bg-white p-8 rounded-lg text-center">
-            <div class="text-lg font-semibold">Listening...</div>
-            <div class="mt-4">
-              <i class="fas fa-microphone fa-3x text-primary animate-pulse"></i>
+              <!-- Image Search Button -->
+              <label for="image-search" class="btn bg-gray-100 hover:bg-primary text-gray-700 cursor-pointer">
+                <i class="fas fa-camera"></i>
+                <input type="file" id="image-search" name="image_search" accept="image/*" class="hidden" />
+              </label>
             </div>
-            <div class="mt-4 text-sm text-gray-500">Speak now and your search will begin.</div>
+          </li>
+        </ul>
+      </div>            
+
+      {% comment %} <a class="btn btn-ghost text-3xl font-bold hover:bg-white" href='{% url "home" %}'>Hasan <span class="text-primary ">Zone</span></a> {% endcomment %}
+      <a class="btn btn-ghost text-3xl font-bold hover:bg-white" href='{% url "home" %}'>{{ about.first_name }} <span class="text-primary ">{{ about.last_name }}</span></a>
+    </div>
+      
+    <!-- Desktop Search Bar -->
+    <div class="navbar-center hidden lg:flex">
+      <ul class="menu menu-horizontal text-base font-medioum px-1">
+        <li><a class="hover:bg-primary" href="{% url "home" %}">Home</a></li>
+        <li><a class="hover:bg-primary" href="{% url "shop" %}">Shop</a></li>
+        <li>                
+        </li>
+        <li><a class="hover:bg-primary" href='{% url "blog" %}'>Blog</a></li>
+        {% if user.is_authenticated %}
+        <li><a class="hover:bg-primary" href='#'>Contact</a></li>
+        {% endif %}
+      </ul>
+    </div>
+      
+    <!-- Search form for desktop -->
+    <div class="navbar-center hidden lg:flex">
+      <form action="{% url 'search' %}" method="GET" class="flex items-center space-x-2">
+        <!-- Text search input (required) -->
+        <input type="text" id="search-query" name="query" placeholder="Search..." class="input input-bordered w-full max-w-xs" required />
+        
+        <!-- Voice input button -->
+        <button type="button" id="voice-search-btn" class="btn bg-gray-100 hover:bg-primary text-gray-700">
+          <i class="fas fa-microphone"></i>
+        </button>
+        
+        <!-- Image input button -->
+        <label for="image-search" class="btn bg-gray-50 hover:bg-primary cursor-pointer">
+          <i class="fas fa-camera"></i>
+          <input type="file" id="image-search" name="image_search" accept="image/*" class="hidden" />
+        </label>
+        
+        <!-- Submit search button -->
+        <button type="submit" class="btn bg-primary hover:bg-primary">Search</button>
+      </form>
+
+      <!-- Voice Search Popup Modal -->
+      <div id="voice-search-popup" class="fixed inset-0 flex hidden items-center justify-center bg-black bg-opacity-50 z-50">
+        <div class="bg-white p-8 rounded-lg text-center">
+          <div class="text-lg font-semibold">Listening...</div>
+          <div class="mt-4">
+            <i class="fas fa-microphone fa-3x text-primary animate-pulse"></i>
           </div>
+          <div class="mt-4 text-sm text-gray-500">Speak now and your search will begin.</div>
         </div>
+      </div>
 </div>
       
-          <!-- Mobile search bar (appears when clicking search icon) -->
-          <div class="navbar-center lg:hidden" id="mobile-search" style="display: none;">
-            <form action="#" method="get" class="flex items-center w-full">
-              <input type="text" name="query" placeholder="Search..." class="input input-bordered w-full" />
-              <button type="submit" class="btn bg-primary hover:bg-primary ml-2">Search</button>
-            </form>
-          </div>
+      <!-- Mobile search bar (appears when clicking search icon) -->
+      <div class="navbar-center lg:hidden" id="mobile-search" style="display: none;">
+        <form action="#" method="get" class="flex items-center w-full">
+          <input type="text" name="query" placeholder="Search..." class="input input-bordered w-full" />
+          <button type="submit" class="btn bg-primary hover:bg-primary ml-2">Search</button>
+        </form>
+      </div>
 
-          <div class="navbar-end">
-            {% if user.is_authenticated %}
-            <div class="relative mx-5 hidden lg:flex">
-              <!-- Cart Icon -->
-              <a href="{% url 'showcart' %}" class="text-gray-600 hover:text-gray-800">
-                  <i class="fas fa-shopping-cart text-xl"></i>
-              </a>
-              <!-- Cart Quantity Badge -->
-              <span class="absolute top-0 right-0 -mt-1 -mr-2 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-                  {{ cart_item }}
-              </span>
-          </div>
+      <div class="navbar-end">
+        {% if user.is_authenticated %}
+        <div class="relative mx-5 hidden lg:flex">
+          <!-- Cart Icon -->
+          <a href="{% url 'showcart' %}" class="text-gray-600 hover:text-gray-800">
+              <i class="fas fa-shopping-cart text-xl"></i>
+          </a>
+          <!-- Cart Quantity Badge -->
+          <span class="absolute top-0 right-0 -mt-1 -mr-2 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+              {{ cart_item }}
+          </span>
+      </div>
+      
           
-          
-            <div class="dropdown relative flex items-cente rounded p-1 px-2">
-                <!-- Profile Picture (visible on all screens) -->
-                <!-- Dropdown Trigger -->
-                <div tabindex="0" class="relative flex items-center cursor-pointer space-x-2">
-                  <img class="w-10 h-10 rounded-full object-cover ring ring-primary border-2" src="{{ profile.image.url }}" alt="{{ profile.first_name }}'s profile picture" />
-                  <!-- User's First Name (visible only on desktop) -->
-                  <span class="hidden lg:block font-medium text-gray-800">{{ profile.first_name }}</span>
+  <div class="dropdown relative flex items-cente rounded p-1 px-2">
+      <!-- Profile Picture (visible on all screens) -->
+      <!-- Dropdown Trigger -->
+      <div tabindex="0" class="relative flex items-center cursor-pointer space-x-2">
+        <img class="w-10 h-10 rounded-full object-cover ring ring-primary border-2" src="{{ profile.image.url }}" alt="{{ profile.first_name }}'s profile picture" />
+        <!-- User's First Name (visible only on desktop) -->
+        <span class="hidden lg:block font-medium text-gray-800">{{ profile.first_name }}</span>
 
-                  <!-- Dropdown Menu -->
-                  <ul tabindex="0" class="dropdown-content absolute top-full mt-2 menu p-4 shadow-lg bg-white rounded-lg border border-gray-200 w-52 z-50 lg:-right-0 lg:top-full lg:mt-2"
-                      style="right: 0;">
-                      <!-- Align dropdown to the right side of the screen on both desktop and mobile -->
-                      <li class="hover:bg-gray-100 rounded-lg transition duration-200">
-                          <a class="py-2 px-4 flex items-center" href="{% url 'showcart' %}">
-                              <i class="fas fa-shopping-cart mr-2"></i> Cart
-                          </a>
-                      </li>
-                      <li class="hover:bg-gray-100 rounded-lg transition duration-200">
-                          <a class="py-2 px-4 flex items-center" href="{% url 'wishlist' %}">
-                              <i class="fas fa-heart mr-2"></i> Wishlist
-                          </a>
-                      </li>
-                      <li class="hover:bg-gray-100 rounded-lg transition duration-200">
-                          <a class="py-2 px-4 flex items-center" href="{% url 'profile' %}">
-                              <i class="fas fa-user mr-2"></i> Profile
-                          </a>
-                      </li>
-                      <li class="hover:bg-gray-100 rounded-lg transition duration-200">
-                          <a class="py-2 px-4 flex items-center" href="{% url 'order' %}">
-                              <i class="fas fa-box mr-2"></i> Order
-                          </a>
-                      </li>
-                      <li class="hover:bg-gray-100 rounded-lg transition duration-200">
-                          <a class="py-2 px-4 flex items-center text-red-600" href="{% url 'logout' %}">
-                              <i class="fas fa-sign-out-alt mr-2"></i> Logout
-                          </a>
-                      </li>
-                  </ul>
-                </div>
+        <!-- Dropdown Menu -->
+        <ul tabindex="0" class="dropdown-content absolute top-full mt-2 menu p-4 shadow-lg bg-white rounded-lg border border-gray-200 w-52 z-50 lg:-right-0 lg:top-full lg:mt-2"
+            style="right: 0;">
+            <!-- Align dropdown to the right side of the screen on both desktop and mobile -->
+            <li class="hover:bg-gray-100 rounded-lg transition duration-200">
+                <a class="py-2 px-4 flex items-center" href="{% url 'showcart' %}">
+                    <i class="fas fa-shopping-cart mr-2"></i> Cart
+                </a>
+            </li>
+            <li class="hover:bg-gray-100 rounded-lg transition duration-200">
+                <a class="py-2 px-4 flex items-center" href="{% url 'wishlist' %}">
+                    <i class="fas fa-heart mr-2"></i> Wishlist
+                </a>
+            </li>
+            <li class="hover:bg-gray-100 rounded-lg transition duration-200">
+                <a class="py-2 px-4 flex items-center" href="{% url 'profile' %}">
+                    <i class="fas fa-user mr-2"></i> Profile
+                </a>
+            </li>
+            <li class="hover:bg-gray-100 rounded-lg transition duration-200">
+                <a class="py-2 px-4 flex items-center" href="{% url 'order' %}">
+                    <i class="fas fa-box mr-2"></i> Order
+                </a>
+            </li>
+            <li class="hover:bg-gray-100 rounded-lg transition duration-200">
+                <a class="py-2 px-4 flex items-center text-red-600" href="{% url 'logout' %}">
+                    <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                </a>
+            </li>
+        </ul>
+      </div>
 
-            {% else %}
-            <a class="btn bg-primary hover:bg-primary" href="{% url 'login' %}">
-                <span><i class="fa-solid fa-user"></i> <span>Login</span></span>
-            </a>
-            {% endif %}
-        </div>
-        
-        </div>
-      </nav>
-    {% comment %} nav end {% endcomment %}
+    {% else %}
+    <a class="btn bg-primary hover:bg-primary" href="{% url 'login' %}">
+        <span><i class="fa-solid fa-user"></i> <span>Login</span></span>
+    </a>
+    {% endif %}
+  </div>
+
+  </div>
+</nav>
+{% comment %} nav end {% endcomment %}
      
-    <script src="{% static "js/script.js" %}"></script>
+<script src="{% static "js/script.js" %}"></script>
 
 
 
-    {% block content %}{% endblock content %}
+{% block content %}{% endblock content %}
 
 
-    {% comment %} footer start {% endcomment %}
+{% comment %} footer start {% endcomment %}
 
       
-    <footer>
-        <div style="background-color: rgba(14, 18, 61, 1.0);" class="text-white p-6">
-            <div class="container mx-auto grid grid-cols-1 md:grid-cols-5 gap-6 text-sm">
-                <!-- About Us Section -->
-                <div>
-                    <h4 class="font-bold mb-2"><a class='hover:text-blue-400' href="{% url "about" %}">About Us</a></h4>
-                    
-                    <p class='text-yellow-300 '>{{ about.about|truncatechars:60 }}</p>
-                    <p>{{ about.description | truncatechars:150 }}</p>
-                    
-                </div>
-    
-                <!-- Customer Support Section -->
-                <div>
-                 
-                    <h4 class="font-bold mb-2">Customer Support</h4>
-                    <ul>
-                        <li>Contact Us: <a class='text-sm hover:underline' href="mailto:email@example.com">{{ about.email }}</a></li>
-                        <li class=''>Call Us: +880 {{ about.contact }}</li>
-                        <li><a class='hover:text-yellow-400' href="{% url "faq" %}">FAQs</a></li>
-                    </ul>
-                   
-                </div>
-    
-                <!-- Useful Links Section -->
-                <div>
-                    <h4 class="font-bold mb-2">Useful Links</h4>
-                    <ul class='text-blue-400'>
-                        <li><a class='hover:underline' href="{% url "shop" %}">Shop Now</a></li>
-                        <li><a class='hover:underline' href="{% url "blog" %}">Blog</a></li>
-                        <li><a class='hover:underline' href="{% url "profile" %}">My Account</a></li>
-                        <li><a class='hover:underline' href="{% url "orders_page" %}">Track Order</a></li>
-                        <li><a class='hover:underline' href="{% url "order" %}">Shipping & Returns</a></li>
-                    </ul>
-                </div>
-    
-                <!-- Social Media Section -->
-                <div>
-                    <h4 class="font-bold mb-2">Follow Us</h4>
-                    <ul>
-                      {% for social in social %}
-                        <div class='flex'>
-                          <img class='h-6 w-10' src="{{ social.logo.url }}" alt="">
-                          <li><a class='hover:text-blue-400' href="{{ social.link }}" target="_blank" rel="noopener noreferrer">{{ social.name }}</a></li>
-                        </div>
-                      {% endfor %}
-                    </ul>
-                </div>
-    
-                <!-- Payment Methods Section -->
-                <div>
-                    <h4 class="font-bold mb-2">Payment Methods</h4>
-                    <ul class='flex space-x-4'>
-                      {% for payment in payment %}
+<footer>
+  <div style="background-color: rgba(14, 18, 61, 1.0);" class="text-white p-6">
+      <div class="container mx-auto grid grid-cols-1 md:grid-cols-5 gap-6 text-sm">
+          <!-- About Us Section -->
+          <div>
+              <h4 class="font-bold mb-2"><a class='hover:text-blue-400' href="{% url "about" %}">About Us</a></h4>
+              
+              <p class='text-yellow-300 '>{{ about.about|truncatechars:60 }}</p>
+              <p>{{ about.description | truncatechars:150 }}</p>
+              
+          </div>
 
-                        <div>
-                          <li><img class='h-7 w-12 rounded-lg' src="{{ payment.logo.url }}" alt=""></li>
-                          <li>{{ payment.name }}</li>
-                        </div>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <p class="text-center bg-gray-700 text-white py-2 text-sm">© {{ year }} {{ about.first_name }} {{ about.last_name }}. All Rights Reserved.</p>
-    </footer>
-    {% comment %} footer end {% endcomment %}
+          <!-- Customer Support Section -->
+          <div>
+            
+              <h4 class="font-bold mb-2">Customer Support</h4>
+              <ul>
+                  <li>Contact Us: <a class='text-sm hover:underline' href="mailto:email@example.com">{{ about.email }}</a></li>
+                  <li class=''>Call Us: +880 {{ about.contact }}</li>
+                  <li><a class='hover:text-yellow-400' href="{% url "faq" %}">FAQs</a></li>
+              </ul>
+              
+          </div>
+
+          <!-- Useful Links Section -->
+          <div>
+              <h4 class="font-bold mb-2">Useful Links</h4>
+              <ul class='text-blue-400'>
+                  <li><a class='hover:underline' href="{% url "shop" %}">Shop Now</a></li>
+                  <li><a class='hover:underline' href="{% url "blog" %}">Blog</a></li>
+                  <li><a class='hover:underline' href="{% url "profile" %}">My Account</a></li>
+                  <li><a class='hover:underline' href="{% url "orders_page" %}">Track Order</a></li>
+                  <li><a class='hover:underline' href="{% url "order" %}">Shipping & Returns</a></li>
+              </ul>
+          </div>
+
+          <!-- Social Media Section -->
+          <div>
+              <h4 class="font-bold mb-2">Follow Us</h4>
+              <ul>
+                {% for social in social %}
+                  <div class='flex'>
+                    <img class='h-6 w-10' src="{{ social.logo.url }}" alt="">
+                    <li><a class='hover:text-blue-400' href="{{ social.link }}" target="_blank" rel="noopener noreferrer">{{ social.name }}</a></li>
+                  </div>
+                {% endfor %}
+              </ul>
+          </div>
+
+          <!-- Payment Methods Section -->
+          <div>
+              <h4 class="font-bold mb-2">Payment Methods</h4>
+              <ul class='flex space-x-4'>
+                {% for payment in payment %}
+
+                  <div>
+                    <li><img class='h-7 w-12 rounded-lg' src="{{ payment.logo.url }}" alt=""></li>
+                    <li>{{ payment.name }}</li>
+                  </div>
+                  {% endfor %}
+              </ul>
+          </div>
+      </div>
+  </div>
+  <p class="text-center bg-gray-700 text-white py-2 text-sm">© {{ year }} {{ about.first_name }} {{ about.last_name }}. All Rights Reserved.</p>
+</footer>
+{% comment %} footer end {% endcomment %}
   
 </body>
 </html>
