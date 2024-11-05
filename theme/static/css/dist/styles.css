@@ -3798,6 +3798,14 @@ select {
 }
 
 @media (min-width: 1024px) {
+  .lg\:-right-0 {
+    right: -0px;
+  }
+
+  .lg\:top-full {
+    top: 100%;
+  }
+
   .lg\:col-span-2 {
     grid-column: span 2 / span 2;
   }
@@ -3808,6 +3816,10 @@ select {
 
   .lg\:mt-6 {
     margin-top: 1.5rem;
+  }
+
+  .lg\:mt-2 {
+    margin-top: 0.5rem;
   }
 
   .lg\:block {

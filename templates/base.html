@@ -166,19 +166,7 @@
             <div class="mt-4 text-sm text-gray-500">Speak now and your search will begin.</div>
           </div>
         </div>
-
 </div>
-
-
-
-          <!-- Mobile search button -->
-          {% comment %} <div class="navbar-end lg:hidden">
-            <button tabindex="0" class="btn btn-ghost" id="mobile-search-btn">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M18 10a8 8 0 11-16 0 8 8 0 0116 0z" />
-              </svg>
-            </button>
-          </div> {% endcomment %}
       
           <!-- Mobile search bar (appears when clicking search icon) -->
           <div class="navbar-center lg:hidden" id="mobile-search" style="display: none;">
@@ -187,24 +175,6 @@
               <button type="submit" class="btn bg-primary hover:bg-primary ml-2">Search</button>
             </form>
           </div>
-      
-          {% comment %} <div class="navbar-end">
-            {% if user.is_authenticated %}
-            {% if request.path == '/profile/' %}
-            <a class="btn bg-yellow-300 hover:bg-red-300" href="{% url 'logout' %}">
-              <span><i class="fa-solid fa-user"></i> <span>Logout</span></span>
-            </a>
-            {% else %}
-            <a class="btn bg-primary hover:bg-primary" href="{% url 'profile' %}">
-              <span><i class="fa-solid fa-user"></i> <span>Profile</span></span>
-            </a>
-            {% endif %}
-            {% else %}
-            <a class="btn bg-primary hover:bg-primary" href="{% url 'login' %}">
-              <span><i class="fa-solid fa-user"></i> <span>Login</span></span>
-            </a>
-            {% endif %}
-          </div> {% endcomment %}
 
           <div class="navbar-end">
             {% if user.is_authenticated %}
@@ -222,13 +192,16 @@
           
             <div class="dropdown relative flex items-cente rounded p-1 px-2">
                 <!-- Profile Picture (visible on all screens) -->
+                <!-- Dropdown Trigger -->
                 <div tabindex="0" class="relative flex items-center cursor-pointer space-x-2">
                   <img class="w-10 h-10 rounded-full object-cover ring ring-primary border-2" src="{{ profile.image.url }}" alt="{{ profile.first_name }}'s profile picture" />
                   <!-- User's First Name (visible only on desktop) -->
                   <span class="hidden lg:block font-medium text-gray-800">{{ profile.first_name }}</span>
-              
+
                   <!-- Dropdown Menu -->
-                  <ul tabindex="0" class="dropdown-content absolute -left-full top-full mt-2 menu p-4 shadow-lg bg-white rounded-lg border border-gray-200 w-52 z-50">
+                  <ul tabindex="0" class="dropdown-content absolute top-full mt-2 menu p-4 shadow-lg bg-white rounded-lg border border-gray-200 w-52 z-50 lg:-right-0 lg:top-full lg:mt-2"
+                      style="right: 0;">
+                      <!-- Align dropdown to the right side of the screen on both desktop and mobile -->
                       <li class="hover:bg-gray-100 rounded-lg transition duration-200">
                           <a class="py-2 px-4 flex items-center" href="{% url 'showcart' %}">
                               <i class="fas fa-shopping-cart mr-2"></i> Cart
@@ -255,8 +228,8 @@
                           </a>
                       </li>
                   </ul>
-              </div>
-                                                        
+                </div>
+
             {% else %}
             <a class="btn bg-primary hover:bg-primary" href="{% url 'login' %}">
                 <span><i class="fa-solid fa-user"></i> <span>Login</span></span>
