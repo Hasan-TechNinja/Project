@@ -167,6 +167,7 @@ class BlogPost(models.Model):
     views = models.IntegerField(default=0)
     meta_title = models.CharField(max_length=70, blank=True)
     meta_description = models.CharField(max_length=160, blank=True)
+    video = models.URLField(blank=True)
     comments_enabled = models.BooleanField(default=True)
 
     def save(self, *args, **kwargs):

@@ -84,43 +84,6 @@ def offer_details(request, offer_id):
         'discounted_products': discounted_products,
     })
 
-# class OfferProductDetails(View):
-#     def get(self, request, pk):
-#         product = get_object_or_404(Product, pk=pk)
-#         quantity = product.stock
-#         if quantity < 1:
-#             stoke = "Stoke out!"
-#         else:
-#             stoke = quantity
-
-#         department_description = product.department.description
-#         all = Product.objects.all()
-        
-#         related_products = Product.objects.filter(department=product.department).exclude(pk=pk)
-
-#         review = Review.objects.filter(product = product)
-#         review_quantity = len(review)
-        
-#         product_video = product.product_video
-
-#         product_video_embed = ""
-
-#         if product_video:  # Only proceed if there's a product_video
-#             product_video_embed = product_video.replace('https://youtu.be/', 'https://www.youtube.com/embed/')
-#             if '?si=' in product_video_embed:
-#                 product_video_embed = product_video_embed.split('?si=')[0]  # Remove URL parameters
-
-#         context = {
-#             'product': product,
-#             'stoke': stoke,
-#             'rproduct': related_products,
-#             'department_description': department_description,
-#             'review': review,
-#             'review_quantity': review_quantity,
-#             'product_video_embed': product_video_embed if product_video_embed else None,  # Use None if empty
-#         }
-#         return render(request, 'product_details.html', context)
-
 
 
 def AboutView(request):
@@ -778,32 +741,38 @@ def BlogView(request):
 #         }
 #         return render(request, 'blogdetails.html', context)
 
+
 class BlogDetails(View):
     def get(self, request, pk):
+        # Retrieve the specific blog post using the primary key (pk)
         blog = get_object_or_404(BlogPost, pk=pk)
 
         # Increment the view count on every visit
-        blog.views += 1
-        blog.save()
+        session_key = f'viewed_blog_{blog.pk}'
 
-        # Increment the view for an user at a time
-
-        # session_key = f'viewed_blog_{blog.pk}'
-        # if not request.session.get(session_key):
-        #     blog.views += 1
-        #     blog.save()
-        #     request.session[session_key] = True  # Mark this post as viewed
-
+        # Check if the user has already viewed the blog in the current session
+        if not request.session.get(session_key):
+            blog.views += 1  # Increment the view count
+            blog.save()  # Save the updated view count
+            request.session[session_key] = True  # Mark this post as viewed in this session
 
         # Get related blog posts by category, excluding the current blog post
         category = blog.category  # Assuming the BlogPost model has a 'category' field
         suggest = BlogPost.objects.filter(category=category).exclude(pk=pk)
+
+        # Prepare video embed URL if available
+        blog.video_embed = ""
+        if blog.video:  # Assuming there's a video field in BlogPost
+            blog.video_embed = blog.video.replace('https://youtu.be/', 'https://www.youtube.com/embed/')
+            if '?si=' in blog.video_embed:
+                blog.video_embed = blog.video_embed.split('?si=')[0]  # Clean up the URL
 
         context = {
             'blog': blog,
             'suggest': suggest,
         }
         return render(request, 'blogdetails.html', context)
+
 
 
 

@@ -76,7 +76,7 @@ class BlogPostAdmin(admin.ModelAdmin):
         'title',
         'slug',
         'author',
-        'content',
+        # 'content',
         'featured_image',
         # 'tags',
         'category',
