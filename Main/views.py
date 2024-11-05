@@ -44,16 +44,10 @@ class HomeView(View):
 
             all_categories = set(cart_categories) | set(delivery_categories) | set(review_categories) | set(wishlist_categories)
 
-            just_for_you = Product.objects.filter(
-                category__in=all_categories
-            ).exclude(
-                Q(cart__user=request.user) |
-                Q(delivery__user=request.user) |
-                Q(reviews__user=request.user) |
-                Q(wishlist__user=request.user)
-            ).distinct()
+            # just_for_you = Product.objects.filter(category__in=all_categories).exclude(Q(cart__user=request.user) | Q(delivery__user=request.user) | Q(reviews__user=request.user) | Q(wishlist__user=request.user)).distinct()
+            just_for_you = Product.objects.filter(category__in=all_categories, stock__gt=0).exclude(Q(cart__user=request.user) | Q(delivery__user=request.user) | Q(reviews__user=request.user) | Q(wishlist__user=request.user)).distinct()
 
-        offers = SpecialOffer.objects.filter(active=True).order_by('-start_date')  # Adjust order if needed
+        offers = SpecialOffer.objects.filter(active=True).order_by('-start_date')
             
 
         context = {
