@@ -21,11 +21,13 @@
                 <tr class="border-b">
                     <!-- Product Info -->
                     <td class="py-3 px-2 sm:px-4">
-                        <div class="flex items-center">
-                            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="w-14 h-14 sm:w-16 sm:h-16 object-cover mr-2 sm:mr-4">
-                            <div class="text-sm sm:text-base">
+                        <div class="">
+                            <a class="flex items-center" href="{% url "product_details" item.p_id %}">
+                                <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="w-14 h-14 sm:w-16 sm:h-16 md:h-24 md:w-28 object-cover mr-2 sm:mr-4 rounded-md">
+                                <div class="text-sm sm:text-base">
                                 <p class="font-semibold">{{ item.product.name }}</p>
                             </div>
+                            </a>
                         </div>
                     </td>
 

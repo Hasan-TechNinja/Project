@@ -3470,6 +3470,10 @@ select {
     padding: 1.5rem;
   }
 
+  .sm\:p-5 {
+    padding: 1.25rem;
+  }
+
   .sm\:px-4 {
     padding-left: 1rem;
     padding-right: 1rem;
@@ -3489,6 +3493,10 @@ select {
     text-align: left;
   }
 
+  .sm\:text-right {
+    text-align: right;
+  }
+
   .sm\:text-3xl {
     font-size: 1.875rem;
     line-height: 2.25rem;
@@ -3497,6 +3505,21 @@ select {
   .sm\:text-base {
     font-size: 1rem;
     line-height: 1.5rem;
+  }
+
+  .sm\:text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  .sm\:text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+  .sm\:text-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
   }
 }
 
@@ -3515,6 +3538,10 @@ select {
 
   .md\:right-5 {
     right: 1.25rem;
+  }
+
+  .md\:z-20 {
+    z-index: 20;
   }
 
   .md\:mx-0 {
@@ -3570,6 +3597,14 @@ select {
     height: 24rem;
   }
 
+  .md\:h-2 {
+    height: 0.5rem;
+  }
+
+  .md\:h-20 {
+    height: 5rem;
+  }
+
   .md\:w-1\/2 {
     width: 50%;
   }
@@ -3608,6 +3643,14 @@ select {
 
   .md\:w-72 {
     width: 18rem;
+  }
+
+  .md\:w-20 {
+    width: 5rem;
+  }
+
+  .md\:w-28 {
+    width: 7rem;
   }
 
   .md\:max-w-2xl {
@@ -3674,6 +3717,12 @@ select {
     --tw-space-y-reverse: 0;
     margin-top: calc(0px * calc(1 - var(--tw-space-y-reverse)));
     margin-bottom: calc(0px * var(--tw-space-y-reverse));
+  }
+
+  .md\:space-x-1 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(0.25rem * var(--tw-space-x-reverse));
+    margin-left: calc(0.25rem * calc(1 - var(--tw-space-x-reverse)));
   }
 
   .md\:p-2 {
