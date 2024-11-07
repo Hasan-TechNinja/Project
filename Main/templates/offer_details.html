@@ -55,7 +55,7 @@
                 <div class="flex justify-between items-center">
                     {% if item.discounted_price < item.product.selling_price %}
                         <span class="text-xl font-bold text-green-600">{{ item.discounted_price|floatformat:2 }} Tk</span>
-                        <span class="text-sm text-gray-400 line-through">{{ item.product.selling_price|floatformat:2 }} Tk</span>
+                        <span class="text-sm text-red-600 line-through">{{ item.product.selling_price|floatformat:2 }} Tk</span>
                     {% else %}
                         <span class="text-xl font-bold text-green-600">{{ item.product.selling_price|floatformat:2 }} Tk</span>
                     {% endif %}

@@ -4,6 +4,12 @@ from .models import ProfileModel
 from Main.models import Cart, Delivery, Billing_Details, WishList
 from django.shortcuts import redirect
 from .forms import ProfileForm
+import json
+from django.contrib.auth import authenticate, login, logout
+from django.http import JsonResponse, HttpResponseRedirect
+from django.urls import reverse
+from django.contrib.auth.models import User
+
 
 @login_required(login_url='login')
 def Profile(request):
@@ -49,3 +55,27 @@ def EditProfile(request):
         'profile':profile
     }
     return render(request, 'editprofile.html', context)
+
+
+
+@login_required
+def confirm_delete_profile(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        password = data.get("password")
+        
+        # Check if the provided password is correct
+        user = authenticate(username=request.user.username, password=password)
+        if user:
+            # Password is correct; delete the user
+            request.user.delete()
+            logout(request)  # Log out the user after deletion
+            return JsonResponse({"success": True})
+        else:
+            # Password is incorrect
+            return JsonResponse({"success": False})
+    
+    return JsonResponse({"success": False}, status=400)
+
+def account_deleted(request):
+    return render(request, "account_deleted.html")  # Optional: Show a confirmation message

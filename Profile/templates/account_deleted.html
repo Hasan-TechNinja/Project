@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Account Deleted{% endblock title %}
+
+{% block content %}
+<div class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="bg-white shadow-lg rounded-lg p-6 md:p-10 text-center max-w-lg mx-4">
+        <h1 class="text-2xl md:text-3xl font-semibold text-gray-800 mb-4">Account Deleted Successfully</h1>
+        <p class="text-gray-600 text-base md:text-lg mb-6">
+            We're sorry to see you go! If you ever want to come back, you can always create a new account.
+        </p>
+        <a href="{% url 'home' %}" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:scale-105">
+            Return to Home
+        </a>
+    </div>
+</div>
+{% endblock content %}

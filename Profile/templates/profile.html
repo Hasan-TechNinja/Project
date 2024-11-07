@@ -2,6 +2,9 @@
 {% load static %}
 {% block title %}Profile{% endblock title %}
 {% block content %}
+<head>
+    <script href='{% static "js/scripts.js" %}'></script>
+</head>
 
 <div class='container mx-auto py-6'>
     <div class='bg-gray-100 flex flex-col md:flex-row justify-around my-2 md:py-5'>
@@ -26,7 +29,66 @@
                 </div>
                 <div>
                     <a href="{% url "logout" %}"><button class='md:btn rounded-md p-1 my-1 text-sm bg-yellow-600 hover:bg-red-500 text-white md:p-2 md:text-lg'>Logout</button></a>
-                    <a href="#"><button class='md:btn rounded-md p-1 my-1 text-sm bg-red-500 hover:bg-red-700 text-white md:p-2 md:text-lg'>Delete Profile</button></a>
+                    {% comment %} <a href="#"><button class='md:btn rounded-md p-1 my-1 text-sm bg-red-500 hover:bg-red-700 text-white md:p-2 md:text-lg'>Delete Profile</button></a> {% endcomment %}
+                    <!-- Delete Button -->
+                    <!-- Delete Button -->
+                    <button id="deleteProfileBtn" class="bg-red-500 text-white p-2 rounded">Delete Profile</button>
+
+                    <!-- Modal Popup -->
+                    <div id="deleteModal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
+                        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm">
+                            <h3 class="text-lg font-semibold mb-4">Confirm Profile Deletion</h3>
+                            <p class="mb-4">Please enter your password to confirm:</p>
+                            <input type="password" id="passwordInput" class="w-full p-2 border border-gray-300 rounded" placeholder="Password">
+                            <div class="mt-4 flex justify-end">
+                                <button id="cancelBtn" class="bg-gray-500 text-white p-2 rounded mr-2">Cancel</button>
+                                <button id="confirmDeleteBtn" class="bg-red-500 text-white p-2 rounded">Confirm Delete</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        const deleteProfileBtn = document.getElementById("deleteProfileBtn");
+                        const deleteModal = document.getElementById("deleteModal");
+                        const cancelBtn = document.getElementById("cancelBtn");
+                        const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
+                        const passwordInput = document.getElementById("passwordInput");
+
+                        // Open modal on Delete button click
+                        deleteProfileBtn.addEventListener("click", function () {
+                            deleteModal.classList.remove("hidden");
+                        });
+
+                        // Close modal on Cancel button click
+                        cancelBtn.addEventListener("click", function () {
+                            deleteModal.classList.add("hidden");
+                        });
+
+                        // Confirm delete action
+                        confirmDeleteBtn.addEventListener("click", function () {
+                            const password = passwordInput.value;
+                            
+                            fetch("{% url 'confirm_delete_profile' %}", {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json",
+                                    "X-CSRFToken": "{{ csrf_token }}",
+                                },
+                                body: JSON.stringify({ password: password }),
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    window.location.href = "{% url 'account_deleted' %}";  // Redirect to 'account_deleted' page after deletion
+                                } else {
+                                    alert("Incorrect password. Please try again.");
+                                }
+                            });
+                        });
+                    });
+                    </script>
+
                 </div>
             </div>
         </div>
