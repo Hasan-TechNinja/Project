@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views import View
 from . models import Product, Departments, Cart, BlogPost, Billing_Details, HomeCarousel, Delivery, Review, WishList, Coupon, Social, PaymentMethod, About, FAQ, SpecialOffer
-from . forms import BillingDetailsForm, ReviewForm
+from . forms import BillingDetailsForm, ReviewForm, ContactForm
 from django.contrib.auth import authenticate
 from django.utils.html import strip_tags
 from django.db.models import Q
@@ -11,6 +11,7 @@ from django.contrib import messages
 from django.db.models import F
 from django.utils import timezone
 from datetime import timedelta
+from django.core.mail import send_mail
 
 
 # Create your views here.
@@ -817,6 +818,28 @@ def remove_from_wishlist(request, product_id):
     return redirect('wishlist')
 
 
-def faq_view(request):
-    faqs = FAQ.objects.all()
-    return render(request, 'faq.html', {'faqs': faqs})
+# def ContactView(request):
+#     faqs = FAQ.objects.all()
+#     return render(request, 'faq.html', {'faqs': faqs})
+
+class ContactView(View):
+    def get(self, request):
+        faqs = FAQ.objects.all()
+        form = ContactForm()
+        return render(request, 'contact.html', {'faqs': faqs, 'form': form})
+    
+    def post(self, request):
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            send_mail(
+                subject="Customer Inquiry",
+                message=form.cleaned_data['message'],  # corrected 'messages' to 'message'
+                from_email=form.cleaned_data['email'],
+                recipient_list=['support@myshop.com'],
+            )
+            messages.success(request, 'Thank you for your message. We will get back to you soon.')
+            return redirect('contact')
+        else:
+            faqs = FAQ.objects.all()
+            return render(request, 'contact.html', {'form': form, 'faqs': faqs})

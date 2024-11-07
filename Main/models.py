@@ -282,6 +282,15 @@ class FAQ(models.Model):
     def __str__(self):
         return self.question
     
+class Contact(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    order_number = models.CharField(max_length=50, blank=True, null=True)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f"Contact from {self.name} - {self.email}"
 
 
 class SpecialOffer(models.Model):

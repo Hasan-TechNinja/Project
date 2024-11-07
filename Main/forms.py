@@ -1,5 +1,5 @@
 from django import forms
-from .models import Billing_Details, Review, Coupon
+from .models import Billing_Details, Review, Coupon, Contact
 
 class BillingDetailsForm(forms.ModelForm):
     class Meta:
@@ -42,3 +42,15 @@ class CouponForm(forms.Form):
             'placeholder': 'Enter your coupon code'
         })
     )
+
+
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        fields = ['name', 'email', 'order_number', 'message']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control block w-full px-4 py-2 border rounded-lg text-gray-800 placeholder-gray-400'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control block w-full px-4 py-2 border rounded-lg text-gray-800 placeholder-gray-400'}),
+            'order_number': forms.TextInput(attrs={'class': 'form-control block w-full px-4 py-2 border rounded-lg text-gray-800 placeholder-gray-400'}),
+            'message': forms.Textarea(attrs={'class': 'form-control block w-full px-4 py-2 border rounded-lg text-gray-800 placeholder-gray-400'}),
+        }

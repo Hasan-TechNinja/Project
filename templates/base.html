@@ -66,7 +66,7 @@
             <li><a class="hover:bg-primary" href="{% url 'home' %}">Home</a></li>
             <li><a class="hover:bg-primary" href="{% url 'shop' %}">Shop</a></li>
             <li><a class="hover:bg-primary" href="{% url 'blog' %}">Blog</a></li>
-            <li><a class="hover:bg-primary" href="#">Contact</a></li>
+            <li><a class="hover:bg-primary" href="{% url "contact" %}">Contact</a></li>
           
             <!-- Search and Actions -->
             <li class="flex flex-col space-y-2 mt-3">
@@ -117,9 +117,9 @@
         <li><a class="hover:bg-primary" href="{% url "shop" %}">Shop</a></li>
         <li>                
         </li>
-        <li><a class="hover:bg-primary" href='{% url "blog" %}'>Blog</a></li>
+        <li><a class="hover:bg-primary" href="{% url "blog" %}">Blog</a></li>
         {% if user.is_authenticated %}
-        <li><a class="hover:bg-primary" href='#'>Contact</a></li>
+        <li><a class="hover:bg-primary" href="{% url "contact" %}">Contact</a></li>
         {% endif %}
       </ul>
     </div>
@@ -259,7 +259,7 @@
               <ul>
                   <li>Contact Us: <a class='text-sm hover:underline' href="mailto:email@example.com">{{ about.email }}</a></li>
                   <li class=''>Call Us: +880 {{ about.contact }}</li>
-                  <li><a class='hover:text-yellow-400' href="{% url "faq" %}">FAQs</a></li>
+                  <li><a class='hover:text-yellow-400' href="{% url "contact" %}">FAQs</a></li>
               </ul>
               
           </div>

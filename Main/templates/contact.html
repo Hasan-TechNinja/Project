@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Contact{% endblock title %}
+
+{% block content %}
+<div>
+    <!-- faq.html -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto">
+            <h2 class=" text-xl md:text-3xl font-extrabold text-gray-900 text-center mb-12">Frequently Asked Questions</h2>
+            <div class="bg-white shadow-lg rounded-lg p-8 lg:w-3/4 mx-auto">
+                {% for faq in faqs %}
+                <div class="faq-item border-b border-gray-200 py-4">
+                    <div class="flex justify-between items-center cursor-pointer faq-question" data-faq-id="{{ forloop.counter }}">
+                        <h3 class="text-sm md:text-xl font-semibold text-gray-800 ">Q. {{ faq.question }}</h3>
+                        <span class="text-blue-500 text-sm md:text-lg transform transition-transform duration-300 faq-icon">&#x25BC;</span>
+                    </div>
+                    <p class="text-gray-600 mt-4 faq-answer hidden text-sm md:text-lg" id="faq-answer-{{ forloop.counter }}">
+                        A: {{ faq.answer }}
+                    </p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <div class="contact-page container mx-auto py-16 px-4 sm:px-6 lg:px-8">
+        <h1 class="text-xl md:text-3xl font-bold text-center mb-5 text-gray-800">Contact Us</h1>
+    
+        <!-- Contact Form -->
+        <div class="max-w-2/4 md:mx-auto bg-white p-8 rounded-lg shadow-lg">
+            <form method="post" action="{% url 'contact' %}" class="space-y-6">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                
+                <div>
+                    {{ form.name.label_tag }}
+                    {{ form.name }}
+                    {{ form.name.errors }}
+                </div>
+                <div>
+                    {{ form.email.label_tag }}
+                    {{ form.email }}
+                    {{ form.email.errors }}
+                </div>
+                <div>
+                    {{ form.order_number.label_tag }}
+                    {{ form.order_number }}
+                    {{ form.order_number.errors }}
+                </div>
+                <div>
+                    {{ form.message.label_tag }}
+                    {{ form.message }}
+                    {{ form.message.errors }}
+                </div>
+    
+                <button type="submit" class="bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg w-full hover:bg-blue-700 transition duration-150 ease-in-out">
+                    Send Message
+                </button>
+            </form>
+    
+            {% if messages %}
+                <div class="mt-6 text-center text-green-600">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    
+        <!-- Additional Contact Information -->
+        <div class="mt-16 text-center text-gray-700 space-y-4">
+            <p class="text-lg font-semibold">Email: <a href="mailto:support@yourshop.com" class="text-blue-600 hover:underline">{{ about.email }}</a></p>
+            <p class="text-lg font-semibold">Phone: <a href="tel:+12345678901" class="text-blue-600 hover:underline">{{ about.contact }}</a></p>
+            <p class="text-lg font-semibold">Follow us on:</p>
+            <div class="flex justify-center space-x-4 mt-2">
+                {% for social in social %}
+                <a href="{{ social.link }}" class="text-blue-600 hover:text-blue-800" target="blank" >{{ social.name }}</a>
+                {% endfor %}
+                {% comment %} <a href="#" class="text-blue-600 hover:text-blue-800">Twitter</a>
+                <a href="#" class="text-blue-600 hover:text-blue-800">Instagram</a> {% endcomment %}
+            </div>
+        </div>
+    </div>
+    </div>
+
+<!-- JavaScript for FAQ toggling -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const questions = document.querySelectorAll('.faq-question');
+        
+        questions.forEach((question) => {
+            question.addEventListener('click', function() {
+                const answer = question.nextElementSibling;
+                const icon = question.querySelector('.faq-icon');
+
+                // Toggle visibility of the answer
+                answer.classList.toggle('hidden');
+                
+                // Rotate the icon for expand/collapse effect
+                icon.classList.toggle('rotate-180');
+            });
+        });
+    });
+</script>
+
+<style>
+    .faq-item:hover {
+        background-color: #f9fafb;
+    }
+    .faq-answer {
+        transition: max-height 0.3s ease;
+    }
+    .rotate-180 {
+        transform: rotate(180deg);
+    }
+</style>
+{% endblock content %}

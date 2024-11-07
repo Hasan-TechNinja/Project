@@ -22,17 +22,16 @@
             <p class='text-start'> {{ profile.contact }}</p>
             <p class='text-start'>Join: {{ profile.created }}</p>
 
-            <div class='flex md:justify-around mt-3'>
+            <div class='flex justify-around mt-3'>
                 <div>
-                    <a href="{% url "editprofile" %}"><button class='md:btn rounded-md p-1 my-1 text-sm bg-blue-500 hover:bg-blue-600 text-white md:p-2 md:text-lg'>Edit Profile</button></a>
-                    <a href="{% url "password_change" %}"><button class='md:btn rounded-md p-1 my-1 text-sm bg-blue-500 hover:bg-blue-600 text-white md:p-2 md:text-lg'>Change Password</button></a>
+                    <a href="{% url "editprofile" %}"><button class='md:btn rounded-md p-1 my-1 text-sm bg-blue-500 hover:bg-blue-600 text-white md:p-2'>Edit Profile</button></a>
+                    <a href="{% url "password_change" %}"><button class='md:btn rounded-md p-1 my-1 text-sm bg-blue-500 hover:bg-blue-600 text-white md:p-2 '>Change Password</button></a>
                 </div>
                 <div>
-                    <a href="{% url "logout" %}"><button class='md:btn rounded-md p-1 my-1 text-sm bg-yellow-600 hover:bg-red-500 text-white md:p-2 md:text-lg'>Logout</button></a>
+                    <a href="{% url "logout" %}"><button class='md:btn rounded-md p-1 my-1 text-sm bg-yellow-600 hover:bg-red-500 text-white md:p-2'>Logout</button></a>
                     {% comment %} <a href="#"><button class='md:btn rounded-md p-1 my-1 text-sm bg-red-500 hover:bg-red-700 text-white md:p-2 md:text-lg'>Delete Profile</button></a> {% endcomment %}
                     <!-- Delete Button -->
-                    <!-- Delete Button -->
-                    <button id="deleteProfileBtn" class="bg-red-500 text-white p-2 rounded">Delete Profile</button>
+                    <button id="deleteProfileBtn" class="bg-red-500 text-white p-2 rounded text-sm">Delete Profile</button>
 
                     <!-- Modal Popup -->
                     <div id="deleteModal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
@@ -48,45 +47,45 @@
                     </div>
 
                     <script>
-                    document.addEventListener("DOMContentLoaded", function () {
-                        const deleteProfileBtn = document.getElementById("deleteProfileBtn");
-                        const deleteModal = document.getElementById("deleteModal");
-                        const cancelBtn = document.getElementById("cancelBtn");
-                        const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
-                        const passwordInput = document.getElementById("passwordInput");
+                        document.addEventListener("DOMContentLoaded", function () {
+                            const deleteProfileBtn = document.getElementById("deleteProfileBtn");
+                            const deleteModal = document.getElementById("deleteModal");
+                            const cancelBtn = document.getElementById("cancelBtn");
+                            const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
+                            const passwordInput = document.getElementById("passwordInput");
 
-                        // Open modal on Delete button click
-                        deleteProfileBtn.addEventListener("click", function () {
-                            deleteModal.classList.remove("hidden");
-                        });
+                            // Open modal on Delete button click
+                            deleteProfileBtn.addEventListener("click", function () {
+                                deleteModal.classList.remove("hidden");
+                            });
 
-                        // Close modal on Cancel button click
-                        cancelBtn.addEventListener("click", function () {
-                            deleteModal.classList.add("hidden");
-                        });
+                            // Close modal on Cancel button click
+                            cancelBtn.addEventListener("click", function () {
+                                deleteModal.classList.add("hidden");
+                            });
 
-                        // Confirm delete action
-                        confirmDeleteBtn.addEventListener("click", function () {
-                            const password = passwordInput.value;
-                            
-                            fetch("{% url 'confirm_delete_profile' %}", {
-                                method: "POST",
-                                headers: {
-                                    "Content-Type": "application/json",
-                                    "X-CSRFToken": "{{ csrf_token }}",
-                                },
-                                body: JSON.stringify({ password: password }),
-                            })
-                            .then(response => response.json())
-                            .then(data => {
-                                if (data.success) {
-                                    window.location.href = "{% url 'account_deleted' %}";  // Redirect to 'account_deleted' page after deletion
-                                } else {
-                                    alert("Incorrect password. Please try again.");
-                                }
+                            // Confirm delete action
+                            confirmDeleteBtn.addEventListener("click", function () {
+                                const password = passwordInput.value;
+                                
+                                fetch("{% url 'confirm_delete_profile' %}", {
+                                    method: "POST",
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                        "X-CSRFToken": "{{ csrf_token }}",
+                                    },
+                                    body: JSON.stringify({ password: password }),
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.success) {
+                                        window.location.href = "{% url 'account_deleted' %}";  // Redirect to 'account_deleted' page after deletion
+                                    } else {
+                                        alert("Incorrect password. Please try again.");
+                                    }
+                                });
                             });
                         });
-                    });
                     </script>
 
                 </div>
