@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import Product, Departments, Category, Size, Cart, BlogPost, Billing_Details, Delivery, Brand, HomeCarousel, Review, WishList, Coupon, About, Social, PaymentMethod, FAQ, SpecialOffer
+from . models import Product, Departments, Category, Size, Cart, BlogPost, Tag, Billing_Details, Delivery, Brand, HomeCarousel, Review, WishList, Coupon, About, Social, PaymentMethod, FAQ, SpecialOffer
 
 # Register your models here.
 
@@ -90,6 +90,13 @@ class BlogPostAdmin(admin.ModelAdmin):
         'comments_enabled'
     )
 admin.site.register(BlogPost, BlogPostAdmin)
+
+class TagAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'name'
+    )
+admin.site.register(Tag, TagAdmin)
 
 
 class Billing_DetailsAdmin(admin.ModelAdmin):

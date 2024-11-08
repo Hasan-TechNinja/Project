@@ -39,59 +39,67 @@
     </div>
 
     <!-- Blog Content -->
-    <div class="prose prose-lg max-w-none text-gray-700 leading-relaxed mb-12">
-        <p class='text-sm md:text-lg'>{{ blog.content|striptags }}</p>
+<div class="prose prose-lg max-w-none text-gray-700 leading-relaxed mb-12">
+    <!-- Display Excerpt if it exists -->
+    {% if blog.excerpt %}
+        <p class="text-sm md:text-lg italic text-gray-600 mb-6">{{ blog.excerpt }}</p>
+    {% endif %}
 
-        <h2>Section Heading</h2>
-        <p>Nam tristique, libero id bibendum viverra, orci dui sodales sapien, vel euismod nisi est sit amet sapien. Quisque vehicula tincidunt justo at suscipit. Aenean commodo ultrices imperdiet. Aenean eget ligula ut velit vehicula vestibulum vitae ac lacus.</p>
+    <!-- Display Blog Content -->
+    <p class="text-sm md:text-lg mb-4">{{ blog.content|striptags }}</p>
 
-        <blockquote class="border-l-4 border-blue-500 pl-4 italic text-gray-600">
-            "This is an important quote or statement related to the blog content, emphasizing a key point for readers."
-        </blockquote>
+    <!-- Section Headings -->
+    {% for section in blog.sections.all %}
+        <h2 class="text-2xl font-semibold mt-6 mb-4">{{ section.title }}</h2>
+        <p>{{ section.content }}</p>
+        {% if section.quote %}
+            <blockquote class="border-l-4 border-blue-500 pl-4 italic text-gray-600 my-4">
+                "{{ section.quote }}"
+            </blockquote>
+        {% endif %}
+    {% endfor %}
 
-        <p>Vivamus vehicula dapibus turpis, id feugiat eros viverra et. Cras non erat vitae diam egestas tincidunt. Curabitur luctus luctus nisi sit amet malesuada. Maecenas at erat euismod, gravida felis a, pharetra arcu. Pellentesque vel est a justo viverra euismod.</p>
-
-        <h3>Subsection Heading</h3>
-        <ul>
-            <li>Key point or list item 1</li>
-            <li>Key point or list item 2</li>
-            <li>Key point or list item 3</li>
-        </ul>
-
-        <p>Donec mattis consequat justo, non ultricies erat sagittis eget. Etiam facilisis erat eget felis luctus tristique. Nullam semper quam sed dolor euismod, et elementum lorem facilisis. Ut venenatis magna in luctus aliquet.</p>
-
-        <p>Aliquam vehicula consequat lacus, non faucibus felis laoreet a. Ut vel sem ex. Curabitur at gravida sapien. Integer ultrices pulvinar ex, at pharetra odio convallis a. Nunc ut risus finibus, iaculis orci ut, vestibulum felis.</p>
-    </div>
-
-    <!-- Author Info -->
-    <div class="bg-gray-100 p-6 rounded-lg shadow-md mb-12 flex items-center">
-        <i class="fas fa-user text-blue-500 text-3xl mr-4"></i> 
-        <div class="ml-4">
-            <h4 class="text-lg font-semibold text-gray-800">{{ blog.author.username }}</h4>
-            <p class="text-gray-600">A brief bio about the author, providing readers with some background on the writer of the blog.</p>
-        </div>
-    </div>
-
-    <!-- Related Posts Section -->
-    <div>
-        <h3 class="text-2xl font-bold text-gray-800 mb-6">Related Posts</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {% for post in suggest %}
-            <div class="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                <a href="{% url 'blogdetails' post.id %}">
-                    <img src="{{ post.featured_image.url }}" alt="Related Post 1" class="w-full h-48 object-cover">
-                </a>
-                <div class="p-6">
-                    <span class="bg-blue-100 text-blue-500 text-sm px-3 py-1 rounded">{{ post.category }}</span>
-                    <h2 class="text-2xl font-semibold text-gray-800 mt-4 hover:text-blue-600 transition">
-                        {{ post.title }}
-                    </h2>
-                    <p class="mt-2 text-gray-600">{{ post.content | truncatechars:200 | safe }}.</p>
-                </div>
-            </div>
+    <!-- Subsections -->
+    {% for subsection in blog.subsections.all %}
+        <h3 class="text-xl font-semibold mt-6 mb-4">{{ subsection.title }}</h3>
+        <ul class="list-disc ml-6 mb-6">
+            {% for item in subsection.items.all %}
+                <li>{{ item.content }}</li>
             {% endfor %}
-        </div>
+        </ul>
+        <p>{{ subsection.content }}</p>
+    {% endfor %}
+</div>
+
+<!-- Author Info -->
+<div class="bg-gray-100 p-6 rounded-lg shadow-md mb-12 flex items-center">
+    <i class="fas fa-user text-blue-500 text-3xl mr-4"></i>
+    <div class="ml-4">
+        <h4 class="text-lg font-semibold text-gray-800">{{ blog.author.username }}</h4>
+        <p class="text-gray-600">{{ blog.author.bio }}</p>
     </div>
+</div>
+
+<!-- Related Posts Section -->
+<div class="mb-12">
+    <h3 class="text-2xl font-bold text-gray-800 mb-6">Related Posts</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for post in related_posts %}
+        <div class="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
+            <a href="{% url 'blogdetails' post.id %}">
+                <img src="{{ post.featured_image.url }}" alt="Related Post" class="w-full h-48 object-cover">
+            </a>
+            <div class="p-6">
+                <span class="bg-blue-100 text-blue-500 text-sm px-3 py-1 rounded">{{ post.category.name }}</span>
+                <h2 class="text-2xl font-semibold text-gray-800 mt-4 hover:text-blue-600 transition">
+                    {{ post.title }}
+                </h2>
+                <p class="mt-2 text-gray-600">{{ post.excerpt|truncatechars:150|safe }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 </div>
 
 {% endblock content %}

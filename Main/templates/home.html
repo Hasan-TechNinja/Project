@@ -54,36 +54,47 @@
           </div>
       
           <div class="overflow-hidden relative h-64 md:h-96 rounded-lg shadow-lg">
-            <!-- Loop through slides -->
-            {% for offer in offers %}  <!-- Use 'offers' instead of 'Carousel' -->
-                <a href="{% url 'offer_details' offer.id %}">
-
-                <div class="carousel-item absolute inset-0 transition-opacity duration-700 ease-in-out{{ forloop.first|yesno:'opacity-100,opacity-0' }}">
-                    <img src="{{ offer.banner.url }}" class="w-full h-full object-cover" alt="{{ offer.title }}">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70 rounded-lg"></div>
-                    <div class="absolute bottom-5 left-5 md:left-10 md:bottom-10 text-white">
-                        <h5 class="text-xl md:text-2xl font-bold">{{ offer.title }}</h5>
-                        <p class="text-sm md:text-base">{{ offer.description }}</p>
+            <!-- Carousel items loop -->
+            {% for offer in offers %}
+                <a href="{% url 'offer_details' offer.id %}" id="slide-{{ forloop.counter }}" class="carousel-link">
+                    <div class="carousel-item absolute inset-0 transition-opacity duration-700 ease-in-out {{ forloop.first|yesno:'opacity-100,opacity-0' }} transform transition-all">
+                        <img src="{{ offer.banner.url }}" class="w-full h-full object-cover rounded-lg shadow-md" alt="{{ offer.title }}">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70 rounded-lg"></div>
+                        <div class="absolute bottom-5 left-5 md:left-10 md:bottom-10 text-white">
+                            <h5 class="text-xl md:text-2xl font-bold">{{ offer.title }}</h5>
+                            <p class="text-sm md:text-base">{{ offer.description }}</p>
+                        </div>
                     </div>
-                </div>
-            </a>
+                </a>
             {% endfor %}
-        </div>    
-        
-          <!-- Previous Button -->
-          <button class="absolute top-1/2 left-2 md:left-5 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 focus:outline-none" data-carousel-prev>
-            <span class="material-icons"><i class="fa-solid fa-arrow-left"></i></span>
-            <span class="sr-only">Previous</span>
-          </button>
-      
-          <!-- Next Button -->
-          <button class="absolute top-1/2 right-2 md:right-5 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 focus:outline-none" data-carousel-next>
-            <span class="material-icons"><i class="fa-solid fa-arrow-right"></i></span>
-            <span class="sr-only">Next</span>
-          </button>
         </div>
-        <!-- Carousel End -->
-      </div>
+        
+        <script>
+        
+        </script>
+        
+<style>
+.carousel-item {
+    transition: opacity 0.7s ease-in-out;
+}
+</style>
+
+            
+        
+    <!-- Previous Button -->
+    <button class="absolute top-1/2 left-2 md:left-5 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 focus:outline-none hidden" data-carousel-prev>
+        <span class="material-icons"><i class="fa-solid fa-arrow-left"></i></span>
+        <span class="sr-only">Previous</span>
+    </button>
+
+    <!-- Next Button -->
+    <button class="absolute top-1/2 right-2 md:right-5 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 focus:outline-none hidden" data-carousel-next>
+        <span class="material-icons"><i class="fa-solid fa-arrow-right"></i></span>
+        <span class="sr-only">Next</span>
+    </button>
+    </div>
+    <!-- Carousel End -->
+    </div>
       
 </div>
 

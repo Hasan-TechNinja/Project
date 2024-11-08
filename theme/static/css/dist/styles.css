@@ -1792,6 +1792,11 @@ select {
   margin-bottom: 0.75rem;
 }
 
+.my-4 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
 .my-5 {
   margin-top: 1.25rem;
   margin-bottom: 1.25rem;
@@ -1861,6 +1866,10 @@ select {
 
 .ml-4 {
   margin-left: 1rem;
+}
+
+.ml-6 {
+  margin-left: 1.5rem;
 }
 
 .mr-2 {
@@ -2219,6 +2228,10 @@ select {
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+.list-disc {
+  list-style-type: disc;
 }
 
 .appearance-none {
@@ -3806,11 +3819,6 @@ select {
   .md\:text-xs {
     font-size: 0.75rem;
     line-height: 1rem;
-  }
-
-  .md\:text-emerald-50 {
-    --tw-text-opacity: 1;
-    color: rgb(236 253 245 / var(--tw-text-opacity));
   }
 }
 
