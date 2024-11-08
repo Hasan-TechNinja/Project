@@ -122,6 +122,7 @@ class DeliveryAdmin(admin.ModelAdmin):
         'id',
         'user',
         'p_id',
+        'order_id',
         'first_name',
         'last_name',
         'product',

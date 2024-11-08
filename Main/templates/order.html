@@ -12,7 +12,7 @@
                     <th class="py-2 px-4 text-left">Product</th>
                     <th class="py-2 px-4 text-center">Quantity</th>
                     <th class="py-2 px-4 text-center">Price</th>
-                    <th class="py-2 px-4 text-center">Total</th>
+                    <th class="py-2 px-4 text-center">Final price</th>
                     <th class="py-2 px-4 text-center">Actions</th>
                 </tr>
             </thead>
@@ -22,7 +22,8 @@
                     <!-- Product Info -->
                     <td class="py-3 px-2 sm:px-4">
                         <div class="">
-                            <a class="flex items-center" href="{% url "product_details" item.p_id %}">
+                            <a class="flex items-center space-x-4" href="{% url "product_details" item.p_id %}">
+                                <p class='text-lg font-bold'>{{ item.id }}</p>
                                 <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="w-14 h-14 sm:w-16 sm:h-16 md:h-24 md:w-28 object-cover mr-2 sm:mr-4 rounded-md">
                                 <div class="text-sm sm:text-base">
                                 <p class="font-semibold">{{ item.product.name }}</p>
@@ -37,12 +38,12 @@
                     </td>
 
                     <!-- Price -->
-                    <td class="py-3 px-2 sm:px-4 text-center text-sm sm:text-base">
+                    <td class="py-3 px-2 sm:px-4 text-center text-sm sm:text-base text-red-600">
                         {{ item.product.discount_price }} Tk
                     </td>
 
                     <!-- Line Total -->
-                    <td class="py-3 px-2 sm:px-4 text-center text-sm sm:text-base">
+                    <td class="py-3 px-2 sm:px-4 text-center text-sm sm:text-base text-green-600">
                         {{ item.linetotal|floatformat:2 }} Tk
                     </td>
 
@@ -88,7 +89,7 @@
 
     <!-- Total Price -->
     <div class="text-right mt-5">
-        <h3 class="text-xl font-bold">Order Total: {{ subtotal }} Tk</h3>
+        <h3 class="text-xl font-bold text-green-600">Order Total: {{ subtotal }} Tk</h3>
     </div>
 </div>
 

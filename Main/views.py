@@ -588,6 +588,7 @@ def DeliveryView(request, order_id):
     Delivery.objects.create(
         user=order.user,
         p_id = order.p_id,
+        order_id = order.id,
         first_name=order.first_name,
         last_name=order.last_name,
         product=order.product,
@@ -822,24 +823,59 @@ def remove_from_wishlist(request, product_id):
 #     faqs = FAQ.objects.all()
 #     return render(request, 'faq.html', {'faqs': faqs})
 
+from django.conf import settings
+from django.core.mail import send_mail
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.views import View
+from .forms import ContactForm
+from .models import FAQ, About, Social
+
 class ContactView(View):
     def get(self, request):
         faqs = FAQ.objects.all()
         form = ContactForm()
-        return render(request, 'contact.html', {'faqs': faqs, 'form': form})
+        about = About.objects.all()
+        social = Social.objects.all()
+        context = {
+            'about': about,
+            'faqs': faqs,
+            'form': form,
+            'social': social
+        }
+        return render(request, 'contact.html', context)
     
     def post(self, request):
         form = ContactForm(request.POST)
         if form.is_valid():
-            form.save()
+            subject = "Customer Inquiry"
+            message_content = form.cleaned_data['message']
+            from_email = form.cleaned_data['email']
+            sender_name = form.cleaned_data['name']
+            recipient_list = ['hasantechninja@gmail.com']
+
+            message_body = f"Sender Name: {sender_name}\nSender Email: {from_email}\n\nMessage:\n{message_content}"
+
             send_mail(
-                subject="Customer Inquiry",
-                message=form.cleaned_data['message'],  # corrected 'messages' to 'message'
-                from_email=form.cleaned_data['email'],
-                recipient_list=['support@myshop.com'],
+                subject,
+                message_body,
+                settings.DEFAULT_FROM_EMAIL,
+                recipient_list,
+                fail_silently=False
             )
+            
+            form.save()
+
             messages.success(request, 'Thank you for your message. We will get back to you soon.')
             return redirect('contact')
-        else:
-            faqs = FAQ.objects.all()
-            return render(request, 'contact.html', {'form': form, 'faqs': faqs})
+        
+        # If form is invalid, re-render the page with form errors
+        faqs = FAQ.objects.all()
+        about = About.objects.all()
+        social = Social.objects.all()
+        return render(request, 'contact.html', {
+            'form': form, 
+            'faqs': faqs,
+            'about': about,
+            'social': social
+        })
