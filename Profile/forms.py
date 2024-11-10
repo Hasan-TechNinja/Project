@@ -6,7 +6,7 @@ class ProfileForm(ModelForm):
     class Meta:
         model = ProfileModel
         fields = '__all__'
-        exclude = ['user']
+        exclude = ['user', 'status']
 
     def __init__(self, *args, **kwargs):
         super(ProfileForm, self).__init__(*args, **kwargs)

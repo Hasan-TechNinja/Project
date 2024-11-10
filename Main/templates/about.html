@@ -57,22 +57,21 @@
     </section>
 
     <!-- Meet Our Team with Hover Effects and Grid Layout -->
-    <section class="bg-gray-50 p-8 rounded-lg shadow-md mb-12">
-        <h2 class="text-3xl font-semibold text-gray-800 mb-6 text-center">Meet Our Team</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-            <div class="text-center hover:shadow-lg transform hover:scale-105 transition-all duration-300">
-                <img src="{% static 'team1.jpg' %}" alt="Jane Smith" class="w-32 h-32 mx-auto rounded-full mb-4">
-                <h3 class="text-xl font-semibold text-gray-800">Jane Smith</h3>
-                <p class="text-gray-600">Chief Operating Officer</p>
+    <section class="bg-gray-50 p-8 rounded-lg shadow-lg mb-12">
+        <h2 class="text-3xl font-semibold text-gray-800 mb-8 text-center">Meet Our Team</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for profile in admin_profiles %}
+            <div class="text-center bg-white p-6 rounded-lg shadow-md hover:shadow-lg transform hover:scale-105 transition-transform duration-300">
+                <div class="w-32 h-32 mx-auto rounded-full overflow-hidden mb-4">
+                    <img src="{{ profile.image.url }}" alt="Profile Image" class="w-full h-full object-cover">
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800">{{ profile.first_name }}</h3>
+                <p class="text-gray-600 mt-2">{{ profile.status }}</p>
             </div>
-            <div class="text-center hover:shadow-lg transform hover:scale-105 transition-all duration-300">
-                <img src="{% static 'team2.jpg' %}" alt="Mark Johnson" class="w-32 h-32 mx-auto rounded-full mb-4">
-                <h3 class="text-xl font-semibold text-gray-800">Mark Johnson</h3>
-                <p class="text-gray-600">Head of Marketing</p>
-            </div>
-            <!-- Add more team members as needed -->
+            {% endfor %}
         </div>
     </section>
+    
 
     <!-- Testimonials with Carousel/Slider Animation -->
     <section class="bg-white p-8 rounded-lg shadow-md mb-12">

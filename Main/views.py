@@ -13,6 +13,7 @@ from django.utils import timezone
 from datetime import timedelta
 from django.core.mail import send_mail
 from django.conf import settings
+from Profile.models import ProfileModel
 
 
 
@@ -92,10 +93,13 @@ def offer_details(request, offer_id):
 def AboutView(request):
     about = About.objects.first()
     team_members = about.team_members.all() 
+    admin_profiles = ProfileModel.objects.filter(user__is_staff=True)
+    
 
     context = {
         'about': about,
-        'team_members': team_members
+        'team_members': team_members,
+        'admin_profiles': admin_profiles
     }
     return render(request, 'about.html', context)
 
@@ -857,3 +861,4 @@ class ContactView(View):
             'about': about,
             'social': social
         })
+
