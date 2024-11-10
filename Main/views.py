@@ -12,6 +12,8 @@ from django.db.models import F
 from django.utils import timezone
 from datetime import timedelta
 from django.core.mail import send_mail
+from django.conf import settings
+
 
 
 # Create your views here.
@@ -531,24 +533,6 @@ def checkout(request):
 #     return render(request, 'checkout.html', context)
 
 
-# def OrderView(request):
-#     order = Billing_Details.objects.filter(user=request.user)
-#     order_product = [p for p in order]
-#     total = len(order)
-#     subtotal = 0  # Initialize the subtotal variable
-
-#     for p in order_product:
-#         if p.product:  # Check if product exists before calculating
-#             p.linetotal = p.quantity * p.product.discount_price  # Calculate line total
-#             subtotal += p.linetotal  # Add to subtotal
-#     address = f"{order.first().street}, {order.first().thana}, {order.first().district}, {order.first().division}, {order.first().country}"
-#     context = {
-#         'order': order,
-#         'subtotal': subtotal,
-#         'address': address,
-#         'total':total
-#     }
-#     return render(request, 'order.html', context)
 
 
 def OrderView(request):
@@ -562,7 +546,7 @@ def OrderView(request):
                 order.linetotal = order.quantity * order.product.SpecialOffer_price
             else:
                 order.linetotal = order.quantity * order.product.discount_price
-            subtotal += order.linetotal  # Add to subtotal
+            subtotal += order.linetotal 
 
     # Check if there are orders before attempting to access their attributes
     if orders.exists():
@@ -823,13 +807,7 @@ def remove_from_wishlist(request, product_id):
 #     faqs = FAQ.objects.all()
 #     return render(request, 'faq.html', {'faqs': faqs})
 
-from django.conf import settings
-from django.core.mail import send_mail
-from django.shortcuts import render, redirect
-from django.contrib import messages
-from django.views import View
-from .forms import ContactForm
-from .models import FAQ, About, Social
+
 
 class ContactView(View):
     def get(self, request):
