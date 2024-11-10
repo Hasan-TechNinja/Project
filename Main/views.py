@@ -807,20 +807,13 @@ def remove_from_wishlist(request, product_id):
     return redirect('wishlist')
 
 
-# def ContactView(request):
-#     faqs = FAQ.objects.all()
-#     return render(request, 'faq.html', {'faqs': faqs})
-
-
 
 class ContactView(View):
     def get(self, request):
         faqs = FAQ.objects.all()
         form = ContactForm()
-        about = About.objects.all()
         social = Social.objects.all()
         context = {
-            'about': about,
             'faqs': faqs,
             'form': form,
             'social': social
@@ -853,12 +846,10 @@ class ContactView(View):
         
         # If form is invalid, re-render the page with form errors
         faqs = FAQ.objects.all()
-        about = About.objects.all()
+        # about = About.objects.all()
         social = Social.objects.all()
         return render(request, 'contact.html', {
             'form': form, 
             'faqs': faqs,
-            'about': about,
             'social': social
         })
-
