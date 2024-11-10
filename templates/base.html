@@ -72,7 +72,7 @@
             <li class="flex flex-col space-y-2 mt-3">
               <form action="{% url 'search' %}" method="GET" class="flex space-x-2 items-center">
                 <!-- Text Input for Search -->
-                <input type="text" id="search-query" name="query" placeholder="Search..." class="input input-bordered w-full" required />
+                <input type="text" id="search-query-mobile" name="query" placeholder="Search..." class="input input-bordered w-full" required />
                 <button type="submit" class="btn bg-primary text-white">
                   Search
                 </button>
@@ -81,12 +81,12 @@
             <!-- Action Buttons -->
             <div class="flex space-x-2 justify-center mt-2">
               <!-- Voice Search Button -->
-              <button type="button" id="voice-search-btn" class="btn bg-gray-100 hover:bg-primary text-gray-700">
+              <button type="button" id="" class="voice-search-btn btn bg-gray-100 hover:bg-primary text-gray-700">
                 <i class="fas fa-microphone"></i>
               </button>
               
               <!-- Voice Search Popup Modal -->
-              <div id="voice-search-popup" class="fixed inset-0 hidden items-center justify-center bg-black bg-opacity-50 z-50">
+              <div class="voice-search-popup fixed inset-0 hidden items-center justify-center bg-black bg-opacity-50 z-50">
                 <div class="bg-white p-8 rounded-lg text-center">
                   <div class="text-lg font-semibold">Listening...</div>
                   <div class="mt-4">
@@ -128,10 +128,10 @@
     <div class="navbar-center hidden lg:flex">
       <form action="{% url 'search' %}" method="GET" class="flex items-center space-x-2">
         <!-- Text search input (required) -->
-        <input type="text" id="search-query" name="query" placeholder="Search..." class="input input-bordered w-full max-w-xs" required />
+        <input type="text" id="search-query-full" name="query" placeholder="Search..." class="input input-bordered w-full max-w-xs" required />
         
         <!-- Voice input button -->
-        <button type="button" id="voice-search-btn" class="btn bg-gray-100 hover:bg-primary text-gray-700">
+        <button type="button" id="" class="voice-search-btn btn bg-gray-100 hover:bg-primary text-gray-700">
           <i class="fas fa-microphone"></i>
         </button>
         
@@ -146,7 +146,7 @@
       </form>
 
       <!-- Voice Search Popup Modal -->
-      <div id="voice-search-popup" class="fixed inset-0 flex hidden items-center justify-center bg-black bg-opacity-50 z-50">
+      <div class="voice-search-popup fixed inset-0 flex hidden items-center justify-center bg-black bg-opacity-50 z-50">
         <div class="bg-white p-8 rounded-lg text-center">
           <div class="text-lg font-semibold">Listening...</div>
           <div class="mt-4">

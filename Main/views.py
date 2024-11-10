@@ -846,7 +846,6 @@ class ContactView(View):
         
         # If form is invalid, re-render the page with form errors
         faqs = FAQ.objects.all()
-        # about = About.objects.all()
         social = Social.objects.all()
         return render(request, 'contact.html', {
             'form': form, 
