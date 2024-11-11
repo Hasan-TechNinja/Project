@@ -164,28 +164,6 @@ class ProductDetails(View):
 
 
 
-# @login_required(login_url='login')
-# def AddToCart(request):
-#     if request.user.is_authenticated:
-#         user = request.user
-#         product_id = request.GET.get("prod_id")
-#         product_quantity = int(request.GET.get("product_quantity", 1)) 
-#         product = Product.objects.get(id=product_id)
-
-       
-#         try:
-#             cart_item = Cart.objects.get(user=user, product=product, p_id = product_id)
-#             cart_item.quantity = product_quantity
-#             cart_item.save()
-        
-#         except Cart.DoesNotExist:
-#             Cart.objects.create(user=user, product=product, quantity=product_quantity)
-
-       
-#         return redirect("/cart")
-    
-   
-#     return redirect("/authentication/login/")
 
 @login_required(login_url='login')
 def AddToCart(request):
@@ -216,31 +194,6 @@ def AddToCart(request):
     return redirect("/cart")
 
 
-# @login_required(login_url='login')
-# def AddToCart(request):
-#     user = request.user
-
-#     product_id = request.GET.get("prod_id")
-#     product_quantity = int(request.GET.get("product_quantity", 1))
-
-#     if not product_id:
-#         return redirect("/some_error_page")
-
-#     product = get_object_or_404(Product, id=product_id)
-
-#     cart_item, created = Cart.objects.get_or_create(
-#         user=user,
-#         product=product,
-#         p_id=product_id,
-#         defaults={'quantity': product_quantity}
-#     )
-
-#     if not created:
-#         cart_item.quantity = product_quantity
-#         cart_item.save()
-
-
-#     return redirect("/cart")
 
 
 @login_required(login_url='login')
@@ -267,61 +220,6 @@ def ShowCart(request):
             return render(request, 'addtocart.html', {'cart': cart, 'subtotal': subtotal})
         
     return redirect('/cart')
-
-
-# @login_required(login_url='login')
-# def ShowCart(request):
-#     user = request.user
-#     cart = Cart.objects.filter(user=user).order_by('-id')
-
-#     subtotal = 0 
-#     cart_product = [p for p in cart] 
-
-#     # Calculate cart subtotal
-#     if cart_product: 
-#         for p in cart_product:
-#             p.linetotal = p.quantity * p.product.selling_price  
-#             subtotal += p.linetotal  
-    
-#     # Initialize discount-related variables
-#     coupon = None
-#     discount = 0
-#     discount_amount = 0
-#     total_after_discount = subtotal
-    
-#     if request.method == 'POST':
-#         form = CouponForm(request.POST)
-#         if form.is_valid():
-#             coupon_code = form.cleaned_data.get('code')
-#             print('Couupon code is: ', coupon_code)
-#             try:
-#                 coupon = Coupon.objects.get(code=coupon_code, active=True)
-                
-#                 # Check if the coupon is valid and applicable
-#                 if coupon.is_valid() and subtotal > 0:
-#                     discount = coupon.discount
-#                     discount_amount = (subtotal * discount) / 100
-#                     total_after_discount = subtotal - discount_amount
-#                     print('total after discount: ', total_after_discount)
-#                 else:
-#                     coupon = None  
-#             except Coupon.DoesNotExist:
-#                 coupon = None 
-#     else:
-#         form = CouponForm()
-
-#     context = {
-#         'form':form,
-#         'cart': cart,
-#         'subtotal': subtotal,
-#         'coupon': coupon,
-#         'discount': discount,
-#         'discount_amount': discount_amount,
-#         'total_after_discount': total_after_discount
-#     }
-
-#     return render(request, 'addtocart.html', context)
-
 
 
 
@@ -719,22 +617,10 @@ def BlogView(request):
 
 
 
-# class BlogDetails(View):
-#     def get(self, request, pk):
-#         blog = get_object_or_404(BlogPost, pk=pk)
-#         category = blog.category  # Assuming the BlogPost model has a 'category' field
-#         suggest = BlogPost.objects.filter(category=category).exclude(pk=pk)  # Exclude the current blog from suggestions
-        
-#         context = {
-#             'blog': blog,
-#             'suggest': suggest,
-#         }
-#         return render(request, 'blogdetails.html', context)
-
 
 class BlogDetails(View):
     def get(self, request, pk):
-        # Retrieve the specific blog post using the primary key (pk)
+        # Retrieve the specific blog post using the primary key
         blog = get_object_or_404(BlogPost, pk=pk)
 
         # Increment the view count on every visit

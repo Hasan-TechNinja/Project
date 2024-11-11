@@ -89,7 +89,7 @@
 
     <!-- Next Button -->
     <button class="absolute top-1/2 right-2 md:right-5 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 focus:outline-none hidden" data-carousel-next>
-        <span class="material-icons"><i class="fa-solid fa-arrow-right"></i></span>
+        <span class="material-icons"><i class="fa-solid fa-eye"></i></span>
         <span class="sr-only">Next</span>
     </button>
     </div>
@@ -401,16 +401,16 @@
             <h2 class="text-2xl font-bold text-gray-800">Latest Products</h2>
             <div class="space-x-2">
                 <button class="bg-gray-200 hover:bg-gray-300 p-3 rounded-full shadow-md transition duration-300">
-                    <i class="fa-solid fa-arrow-left text-gray-600"></i>
+                    <i class="fa-solid fa-eye text-gray-600"></i>
                 </button>
                 <button class="bg-gray-200 hover:bg-gray-300 p-3 rounded-full shadow-md transition duration-300">
-                    <i class="fa-solid fa-arrow-right text-gray-600"></i>
+                    <i class="fa-solid fa-eye text-gray-600"></i>
                 </button>
             </div>
         </div>
         
         <div class="grid gap-6">
-            {% for product in latest|slice:":4" %}
+            {% for product in latest|slice:":5" %}
             <a href="{% url 'product_details' product.id %}" class="block hover:shadow-lg rounded-lg transition-transform transform hover:scale-105 duration-300">
                 <div class="flex items-center bg-gray-50 p-4 rounded-lg">
                     <!-- Product Image -->
@@ -437,16 +437,16 @@
             <h2 class="text-2xl font-bold text-gray-800">Top Products</h2>
             <div class="space-x-2">
                 <button class="bg-gray-200 hover:bg-gray-300 p-3 rounded-full shadow-md transition duration-300">
-                    <i class="fa-solid fa-arrow-left text-gray-600"></i>
+                    <i class="fa-solid fa-eye text-gray-600"></i>
                 </button>
                 <button class="bg-gray-200 hover:bg-gray-300 p-3 rounded-full shadow-md transition duration-300">
-                    <i class="fa-solid fa-arrow-right text-gray-600"></i>
+                    <i class="fa-solid fa-eye text-gray-600"></i>
                 </button>
             </div>
         </div>
         
         <div class="grid gap-6">
-            {% for top in top|slice:":4" %}
+            {% for top in top|slice:":5" %}
             <a href="{% url 'product_details' top.id %}" class="block hover:shadow-lg rounded-lg transition-transform transform hover:scale-105 duration-300">
                 <div class="flex items-center bg-gray-50 p-4 rounded-lg">
                     <!-- Product Image -->
@@ -471,16 +471,16 @@
         <h2 class="text-2xl font-bold text-gray-800">Review Products</h2>
         <div class="space-x-2">
             <button class="bg-gray-200 hover:bg-gray-300 p-3 rounded-full shadow-md transition duration-300">
-                <i class="fa-solid fa-arrow-left text-gray-600"></i>
+                <i class="fa-solid fa-eye text-gray-600"></i>
             </button>
             <button class="bg-gray-200 hover:bg-gray-300 p-3 rounded-full shadow-md transition duration-300">
-                <i class="fa-solid fa-arrow-right text-gray-600"></i>
+                <i class="fa-solid fa-eye text-gray-600"></i>
             </button>
         </div>
     </div>
     
     <div class="grid gap-6">
-        {% for review in review|slice:":4" %}
+        {% for review in review|slice:":5" %}
         <a href="{% url 'product_details' review.product.id %}" class="block hover:shadow-lg rounded-lg transition-transform transform hover:scale-105 duration-300">
             <div class="flex items-center bg-gray-50 p-4 rounded-lg">
                 <!-- Product Image -->

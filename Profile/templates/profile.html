@@ -22,6 +22,44 @@
             <p class='text-start'> {{ profile.contact }}</p>
             <p class='text-start'>Join: {{ profile.created }}</p>
 
+            <!-- Social Media Links -->
+            <div class="flex justify-start space-x-4 mt-6 rounded-md p-1">
+                <div class='flex text-center justify-center items-center text-lg font-bold text-blue-500'>
+                    Social:
+                </div>
+                {% if profile.facebook %}
+                    <a href="{{ profile.facebook }}" target="_blank" class="text-blue-600 hover:text-blue-800">
+                        <i class="fab fa-facebook text-2xl"></i>
+                    </a>
+                {% endif %}
+                {% if profile.twitter %}
+                    <a href="{{ profile.twitter }}" target="_blank" class="text-blue-400 hover:text-blue-600">
+                        <i class="fab fa-twitter text-2xl"></i>
+                    </a>
+                {% endif %}
+                {% if profile.linkedin %}
+                    <a href="{{ profile.linkedin }}" target="_blank" class="text-blue-700 hover:text-blue-900">
+                        <i class="fab fa-linkedin-in text-2xl"></i>
+                    </a>
+                {% endif %}
+                {% if profile.instagram %}
+                    <a href="{{ profile.instagram }}" target="_blank" class="text-pink-500 hover:text-pink-700">
+                        <i class="fab fa-instagram text-2xl"></i>
+                    </a>
+                {% endif %}
+                {% if profile.whatsapp %}
+                    <a href="https://web.whatsapp.com/send?phone={{ profile.whatsapp }}" target="_blank" class="text-gray-700 hover:text-gray-900">
+                        <i class="fab fa-whatsapp text-2xl"></i>
+                    </a>
+                {% endif %}
+                
+                {% if profile.github %}
+                    <a href="{{ profile.github }}" target="_blank" class="text-gray-700 hover:text-gray-900">
+                        <i class="fab fa-github text-2xl"></i>
+                    </a>
+                {% endif %}
+            </div>
+
             <div class='flex justify-around mt-3'>
                 <div>
                     <a href="{% url "editprofile" %}"><button class='md:btn rounded-md p-1 my-1 text-sm bg-blue-500 hover:bg-blue-600 text-white md:p-2'>Edit Profile</button></a>
@@ -31,12 +69,12 @@
                     <a href="{% url "logout" %}"><button class='md:btn rounded-md p-1 my-1 text-sm bg-yellow-600 hover:bg-red-500 text-white md:p-2'>Logout</button></a>
                     {% comment %} <a href="#"><button class='md:btn rounded-md p-1 my-1 text-sm bg-red-500 hover:bg-red-700 text-white md:p-2 md:text-lg'>Delete Profile</button></a> {% endcomment %}
                     <!-- Delete Button -->
-                    <button id="deleteProfileBtn" class="bg-red-500 text-white p-2 rounded text-sm">Delete Profile</button>
+                    <button id="deleteProfileBtn" class="bg-red-500 text-white p-2 rounded text-sm">Delete Account</button>
 
                     <!-- Modal Popup -->
                     <div id="deleteModal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
                         <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm">
-                            <h3 class="text-lg font-semibold mb-4">Confirm Profile Deletion</h3>
+                            <h3 class="text-lg font-semibold mb-4 text-red-600">Confirm Account Deletion Permalently!</h3>
                             <p class="mb-4">Please enter your password to confirm:</p>
                             <input type="password" id="passwordInput" class="w-full p-2 border border-gray-300 rounded" placeholder="Password">
                             <div class="mt-4 flex justify-end">

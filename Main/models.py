@@ -185,7 +185,7 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
-
+# Unusable model HomeCarousel
 class HomeCarousel(models.Model):
     name = models.CharField(max_length=300, blank=True, null=True)
     title = models.CharField(max_length=100, blank=True, null=True)

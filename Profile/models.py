@@ -27,6 +27,13 @@ class ProfileModel(models.Model):
     contact = models.CharField(max_length=100, null=True, blank=True)
     created = models.DateTimeField(blank=True, null=True, auto_now_add=True)
     image = models.ImageField(default='/static/img/default.webp', upload_to='Profile', blank=True, null=True)
+    facebook = models.CharField(max_length=300, blank=True, null=True)
+    instagram = models.CharField(max_length=300, blank=True, null=True)
+    linkedin = models.CharField(max_length=300, blank=True, null=True)
+    twitter = models.CharField(max_length=300, blank=True, null=True)
+    whatsapp = models.CharField(max_length=200, blank=True, null=True)
+    # telegram = models.CharField(max_length=200, blank=True, null=True)
+    github = models.CharField(max_length=200, blank=True, null=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Staff')
 
     def __str__(self):
