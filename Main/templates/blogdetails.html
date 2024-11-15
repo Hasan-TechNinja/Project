@@ -46,7 +46,7 @@
     {% endif %}
 
     <!-- Display Blog Content -->
-    <p class="text-sm md:text-lg mb-4">{{ blog.content|striptags }}</p>
+    <p class="text-sm md:text-lg mb-4">{{ blog.content|safe }}</p>
 
     <!-- Section Headings -->
     {% for section in blog.sections.all %}

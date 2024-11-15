@@ -268,11 +268,14 @@
           <div>
               <h4 class="font-bold mb-2">Useful Links</h4>
               <ul class='text-blue-400'>
+                
                   <li><a class='hover:underline' href="{% url "shop" %}">Shop Now</a></li>
                   <li><a class='hover:underline' href="{% url "blog" %}">Blog</a></li>
                   <li><a class='hover:underline' href="{% url "profile" %}">My Account</a></li>
+                  {% if user.is_authenticated %}
                   <li><a class='hover:underline' href="{% url "orders_page" %}">Track Order</a></li>
                   <li><a class='hover:underline' href="{% url "order" %}">Shipping & Returns</a></li>
+                  {% endif %}
               </ul>
           </div>
 
