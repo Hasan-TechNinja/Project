@@ -713,9 +713,10 @@ class ContactView(View):
             message_content = form.cleaned_data['message']
             from_email = form.cleaned_data['email']
             sender_name = form.cleaned_data['name']
+            order_number = form.cleaned_data['order_number']
             recipient_list = ['hasantechninja@gmail.com']
 
-            message_body = f"Sender Name: {sender_name}\nSender Email: {from_email}\n\nMessage:\n{message_content}"
+            message_body = f"Sender Name: {sender_name}\nSender Email: {from_email}\nOrder Number: {order_number}\n\nMessage:\n{message_content}"
 
             send_mail(
                 subject,
