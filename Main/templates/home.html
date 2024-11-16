@@ -22,6 +22,7 @@
         <div class=''>
             <ul id="departments-list" class="divide-y divide-gray-200">
                 {% for department in departments %}
+                {% if department.status %}
                 <li class="hover:bg-gray-100 shadow-md">
                     <form action="/departments" class="mt-3 text-center">
                     {% comment %} <a href="{{ department.link }}" class="block py-3 px-4 text-gray-700 hover:text-gray-900">{{ department.name }}</a> {% endcomment %}
@@ -31,6 +32,7 @@
                         </button>
                     </form>
                 </li>   
+                {% endif %}
                 {% endfor %}
                 {% comment %} <li class="shadow-md text-center bg-green-500 hover:bg-green-600 text-white p-2 rounded-lg mt-4">
                     <a href="#tranding">Tranding now</a>
@@ -105,6 +107,7 @@
     <!-- Carousel Container -->
     <div id="" class="owl-carousel owl-theme container mx-auto my-8">
         {% for department in departments %}
+        {% if department.status %}
         {% comment %} w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-2 shrink-0 item {% endcomment %}
              <div class="">
                 <div class="bg-slate-100 p-4 rounded-2xl shadow-lg">
@@ -116,7 +119,8 @@
                         </button>
                     </form>
                 </div>
-            </div>            
+            </div>   
+            {% endif %}         
         {% endfor %}
     </div>
 
@@ -143,6 +147,7 @@
         <!-- Product Grid -->
         <div class="w-11/12 mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
             {% for product in just_for_you %}
+            {% if product.status %}
             <div class="relative bg-gray-50 rounded-lg shadow-md border transition-transform transform hover:-translate-y-1 hover:shadow-lg p-4">
                 
                 <!-- Discount Badge -->
@@ -200,6 +205,7 @@
                     </a>
                 </div>
             </div>
+            {% endif %}
             {% endfor %}
         </div>        
     </div>
@@ -223,6 +229,7 @@
         <div class="w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
             <!-- Loop through top trending products dynamically -->
             {% for product in top %}
+            {% if product.status %}
             <div class="relative bg-white rounded-lg shadow-lg overflow-hidden border transition-transform transform hover:-translate-y-1 hover:shadow-2xl my-2">
                 
                 <!-- Discount badge -->
@@ -283,6 +290,7 @@
                     <p class="text-white text-sm font-semibold">Trending Now</p>
                 </div>
             </div>
+            {% endif %}
             {% endfor %}
         </div>
         {% endif %}
@@ -296,6 +304,7 @@
         <h1 class="text-2xl md:text-4xl font-bold text-text_col">Featured Product</h1>
         <ul class="flex flex-wrap justify-center items-center gap-4">
             {% for department in departments %}
+            {% if department.status %}
             <li class="flex flex-col items-center py-3 mb-2">
                 <form action="/departments" method="get" class="mt-4">
                     <input type="hidden" name="department_id" value="{{ department.id }}">
@@ -304,6 +313,7 @@
                     </button>
                 </form>
             </li>
+            {% endif %}
             {% endfor %}
         </ul>
 
@@ -311,7 +321,9 @@
     
 {% comment %} show product {% endcomment %}
 <div class="w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    
     {% for product in products %}
+    {% if product.status %}
     <div class="relative card card-compact bg-base-100 shadow-xl border my-3 transition-transform transform hover:-translate-y-1 hover:shadow-xl">
         
         <!-- Discount badge -->
@@ -362,6 +374,7 @@
             </div>
         </div>
     </div>
+    {% endif %}
     {% endfor %}
 </div>
 
@@ -411,6 +424,7 @@
         
         <div class="grid gap-6">
             {% for product in latest|slice:":5" %}
+            {% if product.status %}
             <a href="{% url 'product_details' product.id %}" class="block hover:shadow-lg rounded-lg transition-transform transform hover:scale-105 duration-300">
                 <div class="flex items-center bg-gray-50 p-4 rounded-lg">
                     <!-- Product Image -->
@@ -424,6 +438,7 @@
                     </div>
                 </div>
             </a>
+            {% endif %}
             {% endfor %}
         </div>        
     </div>
@@ -447,6 +462,7 @@
         
         <div class="grid gap-6">
             {% for top in top|slice:":5" %}
+            {% if top.status %}
             <a href="{% url 'product_details' top.id %}" class="block hover:shadow-lg rounded-lg transition-transform transform hover:scale-105 duration-300">
                 <div class="flex items-center bg-gray-50 p-4 rounded-lg">
                     <!-- Product Image -->
@@ -460,6 +476,7 @@
                     </div>
                 </div>
             </a>
+            {% endif %}
             {% endfor %}
         </div>
     </div>    
@@ -481,6 +498,7 @@
     
     <div class="grid gap-6">
         {% for review in review|slice:":5" %}
+        {% if review.product.status %}
         <a href="{% url 'product_details' review.product.id %}" class="block hover:shadow-lg rounded-lg transition-transform transform hover:scale-105 duration-300">
             <div class="flex items-center bg-gray-50 p-4 rounded-lg">
                 <!-- Product Image -->
@@ -495,6 +513,7 @@
                 </div>
             </div>
         </a>
+        {% endif %}
         {% endfor %}
     </div>    
 </div>

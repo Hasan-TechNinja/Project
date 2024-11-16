@@ -21,10 +21,12 @@ from Profile.models import ProfileModel
 
 class HomeView(View):
     def get(self, request, *args, **kwargs):
-        products = Product.objects.all()[:12:-1]
+        # products = Product.objects.all(Departments.status == True)[:12:-1]
+        products = Product.objects.filter(department__status=True).order_by('-id')[:12]
         departments = Departments.objects.all()
         blog = BlogPost.objects.all()[0:3:-1]
-        latest_product = Product.objects.all().order_by('-id')
+        # latest_product = Product.objects.all().order_by('-id')
+        latest_product = Product.objects.filter(department__status = True).order_by('-id')
 
         wishlist = []
         if request.user.is_authenticated:
@@ -35,9 +37,11 @@ class HomeView(View):
         fifteen_days_ago = current_date - timedelta(days=15)
         
         # Get top 8 trending products based on `selles` in the last 15 days
-        trending_products = Product.objects.filter(updated_at__gte=fifteen_days_ago).order_by('-selles')[:8]
+        trending_products = Product.objects.filter(updated_at__gte=fifteen_days_ago, department__status = True).order_by('-selles')[:8]
 
-        review_product = Review.objects.all()
+        # review_product = Review.objects.all()
+        review_product = Review.objects.filter(product__department__status=True)
+
         
         just_for_you = []
         if request.user.is_authenticated:

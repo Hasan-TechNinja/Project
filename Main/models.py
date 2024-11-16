@@ -14,6 +14,7 @@ class Category(models.Model):
     name = models.CharField(max_length=100, blank=False, null=False)
     link = models.CharField(max_length=100, blank=True, null=True)
     image = models.ImageField(upload_to='Category logo', blank=True, null=True )
+    status = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name
@@ -24,6 +25,7 @@ class Departments(models.Model):
     description = models.TextField(blank= True, null=True)
     link = models.CharField(max_length=500)
     image = models.ImageField(upload_to='departments', blank=True, null=True)
+    status = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name
@@ -65,6 +67,7 @@ class Product(models.Model):
     shipping_time = models.CharField(max_length=50, choices=[('1','1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5'), ('6', '6'), ('7', '7'), ('8', '8'), ('9', '9'), ('10', '10')], default='3')
     selles = models.IntegerField(default=0)
     product_video = models.URLField(blank=True)
+    status = models.BooleanField(default=True)
     department = models.ForeignKey(Departments, on_delete=models.CASCADE, related_name='products')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
     size = models.ForeignKey(Size, on_delete=models.CASCADE, related_name='products', blank=True, null=True)

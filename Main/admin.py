@@ -24,10 +24,20 @@ class ProductAdmin(admin.ModelAdmin):
         'shipping_time',
         'selles',
         'product_video',
+        'status',
         'department', 
         'category', 
         'size'
     )
+    actions = ['Enable', 'Disable']
+
+    @admin.action(description="Enable")
+    def Enable(self, request, status):
+        status.update(status = "True")
+    
+    @admin.action(description="Disable")
+    def Disable(self, request, status):
+        status.update(status = "False")
 
 admin.site.register(Product, ProductAdmin)
 
@@ -38,8 +48,19 @@ class CategoryAdmin(admin.ModelAdmin):
         'id',
         'name',
         'link',
-        'image'
+        'image',
+        'status'
     )
+    actions = ['Enable', 'Disable']
+
+    @admin.action(description="Enable")
+    def Enable(self, request, status):
+        status.update(status = "True")
+    
+    @admin.action(description="Disable")
+    def Disable(self, request, status):
+        status.update(status = "False")
+
 admin.site.register(Category, CategoryAdmin)
 
 
@@ -49,8 +70,19 @@ class DepartmentsAdmin(admin.ModelAdmin):
         'name',
         'description',
         'link',
-        'image'
+        'image',
+        'status'
     )
+    actions = ['Enable', 'Disable']
+
+    @admin.action(description="Enable")
+    def Enable(self, request, status):
+        status.update(status = "True")
+
+    @admin.action(description="Disable")
+    def Disable(self, request, status):
+        status.update(status="False")
+
 admin.site.register(Departments, DepartmentsAdmin)
 
 
