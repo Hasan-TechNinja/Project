@@ -89,6 +89,16 @@ class BlogPostAdmin(admin.ModelAdmin):
         'meta_description',
         'comments_enabled'
     )
+    actions = ['Draft', 'Published']
+
+    @admin.action(description="Draft")
+    def Draft(self, request, status):
+        status.update(status = "False")
+
+    @admin.action(description="Published")
+    def Published(self, request, status):
+        status.update(status = "True")
+
 admin.site.register(BlogPost, BlogPostAdmin)
 
 class TagAdmin(admin.ModelAdmin):

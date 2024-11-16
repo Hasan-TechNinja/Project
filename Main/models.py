@@ -164,7 +164,7 @@ class BlogPost(models.Model):
     excerpt = models.CharField(max_length=500, blank=True)
     publish_date = models.DateTimeField(default=timezone.now)  # Default to now
     updated_at = models.DateTimeField(auto_now=True)
-    status = models.CharField(max_length=10, choices=[('draft', 'Draft'), ('published', 'Published')], default='draft')
+    status = models.BooleanField(default=True)
     views = models.IntegerField(default=0)
     meta_title = models.CharField(max_length=70, blank=True)
     meta_description = models.CharField(max_length=160, blank=True)
