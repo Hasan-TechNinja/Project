@@ -278,6 +278,7 @@ class PaymentMethod(models.Model):
 class FAQ(models.Model):
     question = models.CharField(max_length=255)
     answer = models.TextField()
+    status = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

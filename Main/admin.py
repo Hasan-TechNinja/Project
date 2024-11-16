@@ -249,11 +249,23 @@ admin.site.register(PaymentMethod, PaymentMethodAdmin)
 
 class FAQAdmin(admin.ModelAdmin):
     list_display = (
+        'id',
         'question',
         'answer',
+        'status',
         'created_at'
     )
     search_fields = ('question',)
+    actions = ['ShowFAQ', 'HideFAQ']
+
+    admin.action(description="Show FAQ")
+    def ShowFAQ(self, request, status):
+        status.update(status = "True")
+
+    admin.action(description="Hide FAQ")
+    def HideFAQ(self, request, status):
+        status.update(status = "False")
+
 admin.site.register(FAQ, FAQAdmin)
 
 

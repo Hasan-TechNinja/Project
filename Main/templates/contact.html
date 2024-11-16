@@ -10,6 +10,7 @@
             <h2 class=" text-xl md:text-3xl font-extrabold text-gray-900 text-center mb-12">Frequently Asked Questions</h2>
             <div class="bg-white shadow-lg rounded-lg p-8 lg:w-3/4 mx-auto">
                 {% for faq in faqs %}
+                {% if faq.status %}
                 <div class="faq-item border-b border-gray-200 py-4">
                     <div class="flex justify-between items-center cursor-pointer faq-question" data-faq-id="{{ forloop.counter }}">
                         <h3 class="text-sm md:text-xl font-semibold text-gray-800 ">Q. {{ faq.question }}</h3>
@@ -19,6 +20,7 @@
                         A: {{ faq.answer }}
                     </p>
                 </div>
+                {% endif %}
                 {% endfor %}
             </div>
         </div>

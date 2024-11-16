@@ -64,7 +64,7 @@
           <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-64 p-4 shadow-lg">
             <!-- Navigation Links -->
             <li><a class="hover:bg-primary" href="{% url 'home' %}">Home</a></li>
-            <li><a class="hover:bg-primary" href="{% url 'shop' %}">Shop</a></li>
+            {% comment %} <li><a class="hover:bg-primary" href="{% url 'shop' %}">Shop</a></li> {% endcomment %}
             <li><a class="hover:bg-primary" href="{% url 'blog' %}">Blog</a></li>
             <li><a class="hover:bg-primary" href="{% url "contact" %}">Contact</a></li>
           
@@ -114,7 +114,7 @@
     <div class="navbar-center hidden lg:flex">
       <ul class="menu menu-horizontal text-base font-medioum px-1">
         <li><a class="hover:bg-primary" href="{% url "home" %}">Home</a></li>
-        <li><a class="hover:bg-primary" href="{% url "shop" %}">Shop</a></li>
+        {% comment %} <li><a class="hover:bg-primary" href="{% url "shop" %}">Shop</a></li> {% endcomment %}
         <li>                
         </li>
         <li><a class="hover:bg-primary" href="{% url "blog" %}">Blog</a></li>
@@ -269,7 +269,7 @@
               <h4 class="font-bold mb-2">Useful Links</h4>
               <ul class='text-blue-400'>
                 
-                  <li><a class='hover:underline' href="{% url "shop" %}">Shop Now</a></li>
+                  {% comment %} <li><a class='hover:underline' href="{% url "shop" %}">Shop Now</a></li> {% endcomment %}
                   <li><a class='hover:underline' href="{% url "blog" %}">Blog</a></li>
                   <li><a class='hover:underline' href="{% url "profile" %}">My Account</a></li>
                   {% if user.is_authenticated %}
