@@ -58,6 +58,7 @@
           <div class="overflow-hidden relative h-64 md:h-96 rounded-lg shadow-lg">
             <!-- Carousel items loop -->
             {% for offer in offers %}
+                {% if offer.active %}
                 <a href="{% url 'offer_details' offer.id %}" id="slide-{{ forloop.counter }}" class="carousel-link">
                     <div class="carousel-item absolute inset-0 transition-opacity duration-700 ease-in-out {{ forloop.first|yesno:'opacity-100,opacity-0' }} transform transition-all">
                         <img src="{{ offer.banner.url }}" class="w-full h-full object-cover rounded-lg shadow-md" alt="{{ offer.title }}">
@@ -68,6 +69,7 @@
                         </div>
                     </div>
                 </a>
+                {% endif %}
             {% endfor %}
         </div>
         

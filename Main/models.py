@@ -324,3 +324,9 @@ class SpecialOffer(models.Model):
             discount_factor = Decimal(self.discount_percentage) / Decimal(100)
             return product.selling_price * (1 - discount_factor)
         return product.selling_price
+    
+    def save(self, *args, **kwargs):
+        if self.end_date < timezone.now():
+            self.active = False
+        super().save(*args, **kwargs)
+
