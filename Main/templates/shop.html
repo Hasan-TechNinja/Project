@@ -3,36 +3,55 @@
 {% block title %}Shop{% endblock title %}
 {% block content %}
 
-<div class="flex flex-wrap justify-center mx-auto space-x-2">
-    {% for department in department %}
-    <a href="#{{ department.link }}">
-        <div class="mx-auto text-center">
-            <img class="size-16 rounded-md" src="{{ department.image.url }}" alt="">
-            <p>{{ department.name }}</p>
+<div class="flex flex-wrap justify-center md:flex-nowrap gap-6">
+    <!-- Departments Section 1 -->
+    <div class="text-center flex-1 max-w-xs md:max-w-none">
+        <div class="font-bold text-2xl mb-4">Departments</div>
+        <div class="flex flex-wrap justify-center space-x-2 gap-4">
+            {% for department in department %}
+            <a href="#{{ department.link }}" class="flex flex-col items-center">
+                <img class="w-20 h-20 object-cover rounded-md mb-2" src="{{ department.image.url }}" alt="{{ department.name }}">
+                <p class="text-sm md:text-base">{{ department.name }}</p>
+            </a>
+            {% endfor %}
         </div>
-    </a>
-    {% endfor %}
+    </div>
+
+    {% comment %} <!-- Departments Section 2 -->
+    <div class="text-center flex-1 max-w-xs md:max-w-none">
+        <div class="font-bold text-2xl mb-4">Category</div>
+        <div class="flex flex-wrap justify-center space-x-2 gap-4">
+            {% for department in department %}
+            <a href="#{{ department.link }}" class="flex flex-col items-center">
+                <img class="w-20 h-20 object-cover rounded-md mb-2" src="{{ department.image.url }}" alt="{{ department.name }}">
+                <p class="text-sm md:text-base">{{ department.name }}</p>
+            </a>
+            {% endfor %}
+        </div>
+    </div> {% endcomment %}
 </div>
+
 
 {% for departments in department %}
 <div class="container mx-auto" id="{{ departments.link }}"> <!-- Ensure the ID matches the href -->
     <div class="w-11/12 mx-auto my-7 p-7">
         <!-- Department Badge -->
-        <div class="">
-            <div class="badge bg-primary text-white text-2xl py-3 px-6 font-bold text-center">
+        <div class="flex justify-center md:justify-start">
+            <div><img src="{{ departments.image }}" alt=""></div>
+            <div class="rounded bg-lime-700 text-white text-md font-bold py-2 px-3 text-center">
                 {{ departments.name }}
             </div>
         </div>
 
         <!-- Product Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-7 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 mt-7 gap-6">
             {% for product in products %}
                 {% if product.department.id == departments.id and product.status %}
-                <div class="relative card card-compact bg-base-100 shadow-lg border transition-transform transform hover:-translate-y-1 hover:shadow-xl">
+                <div class="relative card bg-base-100 shadow-md border rounded-lg overflow-hidden transition-transform transform hover:-translate-y-1 hover:shadow-md">
                     
                     <!-- Discount Badge -->
                     {% if product.discount_percentage > 0 %}
-                    <span class="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-tr-lg rounded-bl-lg z-10">
+                    <span class="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-tr-md rounded-bl-md z-10 shadow-md">
                         {{ product.discount_percentage }}% OFF
                     </span>
                     {% endif %}
@@ -51,30 +70,32 @@
                     <!-- Product Image -->
                     <figure>
                         <img src="{{ product.image.url }}" alt="{{ product.name }}" 
-                             class="h-56 w-full object-cover rounded-md" />
+                            class="h-48 w-full object-cover rounded-t-lg" />
                     </figure>
 
                     <!-- Product Details -->
-                    <div class="card-body">
+                    <div class="p-4">
+                        <h2 class="text-sm font-semibold text-gray-800 mb-1 truncate">{{ product.name }}</h2>
+                        
+                        <!-- Price Details -->
                         <div class="flex justify-between items-center">
-                            <h2 class="card-title text-lg font-semibold">{{ product.name }}</h2>
-                            
-                            <!-- Price Details -->
-                            <div class="text-right">
-                                {% if product.discount_percentage > 0 %}
-                                <span class="text-green-600 font-semibold">{{ product.discount_price }} Tk</span>
-                                <span class="text-sm text-red-500 line-through">{{ product.selling_price }} Tk</span>
-                                {% else %}
-                                <span class="text-green-600 font-semibold">{{ product.selling_price }} Tk</span>
-                                {% endif %}
+                            {% if product.discount_percentage > 0 %}
+                            <div>
+                                <span class="text-green-600 text-sm font-bold">{{ product.discount_price }} Tk</span>
+                                <span class="text-sm text-red-500 line-through ml-1">{{ product.selling_price }} Tk</span>
                             </div>
+                            {% else %}
+                            <div>
+                                <span class="text-green-600 text-sm font-bold">{{ product.selling_price }} Tk</span>
+                            </div>
+                            {% endif %}
                         </div>
 
-                        <p class="text-gray-600 text-sm mt-2">{{ product.description|truncatechars:80 }}</p>
+                        <p class="text-sm text-gray-500 mt-2 truncate">{{ product.description|truncatechars:60 }}</p>
 
-                        <!-- Action Buttons -->
-                        <div class="card-actions justify-end mt-4">
-                            <a href="{% url 'product_details' product.id %}" class="btn bg-primary text-white px-4 py-2 rounded-md">
+                        <!-- Action Button -->
+                        <div class="mt-4 text-center">
+                            <a href="{% url 'product_details' product.id %}" class=" bg-fuchsia-800 text-sm  text-white px-5 py-2 rounded-md hover:bg-fuchsia-900 transition">
                                 Buy Now
                             </a>
                         </div>
@@ -85,6 +106,13 @@
         </div>
     </div>
 </div>
+<button id="goToTop" 
+    class="hidden fixed bottom-4 right-4 bg-fuchsia-600 text-white p-3 rounded-full shadow-lg hover:bg-fuchsia-900 transition transform hover:scale-110">
+    <i class="fas fa-arrow-up text-lg"></i> <!-- Font Awesome arrow icon -->
+    <h2 class="font-bold">TOP</h2>
+</button>
+
+
 {% endfor %}
 
 <script>
@@ -97,6 +125,20 @@
                 targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         });
+    });
+
+    const goToTopButton = document.getElementById("goToTop");
+
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 300) { // Show after scrolling 300px
+            goToTopButton.classList.remove("hidden");
+        } else {
+            goToTopButton.classList.add("hidden");
+        }
+    });
+
+    goToTopButton.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
     });
 </script>
   
