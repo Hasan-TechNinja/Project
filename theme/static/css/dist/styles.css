@@ -1969,6 +1969,11 @@ select {
   height: 20rem;
 }
 
+.size-16 {
+  width: 4rem;
+  height: 4rem;
+}
+
 .h-1 {
   height: 0.25rem;
 }
@@ -2316,6 +2321,10 @@ select {
 
 .justify-around {
   justify-content: space-around;
+}
+
+.justify-evenly {
+  justify-content: space-evenly;
 }
 
 .gap-10 {
@@ -3823,14 +3832,6 @@ select {
 
   .md\:p-8 {
     padding: 2rem;
-  }
-
-  .md\:p-3 {
-    padding: 0.75rem;
-  }
-
-  .md\:p-1 {
-    padding: 0.25rem;
   }
 
   .md\:px-4 {
