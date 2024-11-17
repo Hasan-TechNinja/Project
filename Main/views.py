@@ -108,22 +108,27 @@ def AboutView(request):
     return render(request, 'about.html', context)
 
     
-
-
 class ShopView(View):
-    def get(self, request, pk=None):
+    def get(self, request):
+
         departments = Departments.objects.all()
-        if pk:
-        
-            selected_department = get_object_or_404(Departments, pk=pk)
-            products = Product.objects.filter(department=selected_department)
-        else:
-           
-            products = Product.objects.all()
-        
+        # Get the wishlist for the authenticated user
+        wishlist = []
+        if request.user.is_authenticated:
+            wishlist = WishList.objects.filter(user=request.user).values_list('product_id', flat=True)
+
+
+        departments_with_products = [
+            {
+                "department": department,
+                "products": Product.objects.filter(department=department).order_by('-id')[:18]
+            }
+            for department in departments
+        ]
+
         context = {
-            'department': departments,
-            'products': products
+            'departments_with_products': departments_with_products,
+            'wishlist': wishlist
         }
         return render(request, 'shop.html', context)
 

@@ -4,49 +4,41 @@
 {% block content %}
 
 <div class="flex flex-wrap justify-center md:flex-nowrap gap-6">
-    <!-- Departments Section 1 -->
+   <!-- Departments Section -->
     <div class="text-center flex-1 max-w-xs md:max-w-none">
+        <!-- Section Title -->
         <div class="font-bold text-2xl mb-4">Departments</div>
-        <div class="flex flex-wrap justify-center space-x-2 gap-1">
-            {% for department in department %}
-            <a href="#{{ department.link }}" class="flex flex-col items-center">
-                <img class="w-16 h-16 object-cover rounded-md mb-2 hover:ring" src="{{ department.image.url }}" alt="{{ department.name }}">
-                <p class="text-sm md:text-base">{{ department.name }}</p>
+        <!-- Department Links -->
+        <div class="flex flex-wrap justify-center space-x-2 gap-y-4">
+            {% for item in departments_with_products %}
+            <a href="#{{ item.department.link }}" class="flex flex-col items-center group">
+                <!-- Department Image -->
+                <img class="w-16 h-16 object-cover rounded-md mb-2 hover:ring ring-gray-300 transition" 
+                    src="{{ item.department.image.url }}" 
+                    alt="{{ item.department.name }}">
+                <!-- Department Name -->
+                <p class="text-sm md:text-base text-gray-700">{{ item.department.name }}</p>
             </a>
             {% endfor %}
         </div>
     </div>
-
-    {% comment %} <!-- Departments Section 2 -->
-    <div class="text-center flex-1 max-w-xs md:max-w-none">
-        <div class="font-bold text-2xl mb-4">Category</div>
-        <div class="flex flex-wrap justify-center space-x-2 gap-4">
-            {% for department in department %}
-            <a href="#{{ department.link }}" class="flex flex-col items-center">
-                <img class="w-20 h-20 object-cover rounded-md mb-2" src="{{ department.image.url }}" alt="{{ department.name }}">
-                <p class="text-sm md:text-base">{{ department.name }}</p>
-            </a>
-            {% endfor %}
-        </div>
-    </div> {% endcomment %}
 </div>
 
 
-{% for departments in department %}
-<div class="container mx-auto bg-gray-50" id="{{ departments.link }}"> <!-- Ensure the ID matches the href -->
+{% for item in departments_with_products %}
+<div class="container mx-auto bg-gray-50" id="{{ item.department.link }}"> <!-- Ensure the ID matches the href -->
     <div class="w-11/12 mx-auto my-7 p-7">
         <!-- Department Badge -->
         <div class="flex justify-center md:justify-start">
-            {% comment %} <div><img src="{{ departments.image }}" alt=""></div> {% endcomment %}
             <div class="rounded bg-lime-700 text-white text-md font-bold py-2 px-3 text-center">
-                {{ departments.name }}
+                {{ item.department.name }}
             </div>
         </div>
 
         <!-- Product Grid -->
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 my-7 gap-3">
-            {% for product in products %}
-                {% if product.department.id == departments.id and product.status %}
+            {% for product in item.products %}
+                {% if product.status %}
                 <div class="relative card bg-base-100 shadow-md border rounded-lg overflow-hidden transition-transform transform hover:-translate-y-1 hover:shadow-md">
                     
                     <!-- Discount Badge -->
@@ -66,6 +58,7 @@
                         {% endif %}
                     </a>
                     {% endif %}
+
 
                     <!-- Product Image -->
                     <figure>
@@ -108,23 +101,21 @@
         <!-- Department Badge -->
         <div class="flex justify-center md:justify-end">
             <form action="/departments" method="get">
-                <input type="hidden" name="department_id" value="{{ departments.id }}">
+                <input type="hidden" name="department_id" value="{{ item.department.id }}">
                 <button type="submit" class="rounded bg-lime-700 text-white text-md font-bold py-2 px-3 text-center">
-                   Show all {{ departments.name }} Products
+                   Show all {{ item.department.name }} Products
                 </button>
             </form>
         </div>
     </div>
 </div>
+{% endfor %}
 
 <button id="goToTop" 
-    class="hidden fixed bottom-4 right-4 bg-fuchsia-600 text-white p-3 rounded-full shadow-lg hover:bg-fuchsia-900 transition transform hover:scale-110">
+    class="hidden fixed bottom-4 right-4 bg-indigo-700 text-white p-3 rounded-full shadow-lg hover:bg-indigo-700 transition transform hover:scale-110">
     <i class="fas fa-arrow-up text-lg"></i> <!-- Font Awesome arrow icon -->
     <h2 class="font-bold">TOP</h2>
 </button>
-
-
-{% endfor %}
 
 <script>
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
