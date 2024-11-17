@@ -7,10 +7,10 @@
     <!-- Departments Section 1 -->
     <div class="text-center flex-1 max-w-xs md:max-w-none">
         <div class="font-bold text-2xl mb-4">Departments</div>
-        <div class="flex flex-wrap justify-center space-x-2 gap-4">
+        <div class="flex flex-wrap justify-center space-x-2 gap-1">
             {% for department in department %}
             <a href="#{{ department.link }}" class="flex flex-col items-center">
-                <img class="w-20 h-20 object-cover rounded-md mb-2" src="{{ department.image.url }}" alt="{{ department.name }}">
+                <img class="w-16 h-16 object-cover rounded-md mb-2 hover:ring" src="{{ department.image.url }}" alt="{{ department.name }}">
                 <p class="text-sm md:text-base">{{ department.name }}</p>
             </a>
             {% endfor %}
@@ -33,18 +33,18 @@
 
 
 {% for departments in department %}
-<div class="container mx-auto" id="{{ departments.link }}"> <!-- Ensure the ID matches the href -->
+<div class="container mx-auto bg-gray-50" id="{{ departments.link }}"> <!-- Ensure the ID matches the href -->
     <div class="w-11/12 mx-auto my-7 p-7">
         <!-- Department Badge -->
         <div class="flex justify-center md:justify-start">
-            <div><img src="{{ departments.image }}" alt=""></div>
+            {% comment %} <div><img src="{{ departments.image }}" alt=""></div> {% endcomment %}
             <div class="rounded bg-lime-700 text-white text-md font-bold py-2 px-3 text-center">
                 {{ departments.name }}
             </div>
         </div>
 
         <!-- Product Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 mt-7 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 my-7 gap-3">
             {% for product in products %}
                 {% if product.department.id == departments.id and product.status %}
                 <div class="relative card bg-base-100 shadow-md border rounded-lg overflow-hidden transition-transform transform hover:-translate-y-1 hover:shadow-md">
@@ -104,8 +104,19 @@
                 {% endif %}
             {% endfor %}
         </div>
+
+        <!-- Department Badge -->
+        <div class="flex justify-center md:justify-end">
+            <form action="/departments" method="get">
+                <input type="hidden" name="department_id" value="{{ departments.id }}">
+                <button type="submit" class="rounded bg-lime-700 text-white text-md font-bold py-2 px-3 text-center">
+                   Show all {{ departments.name }} Products
+                </button>
+            </form>
+        </div>
     </div>
 </div>
+
 <button id="goToTop" 
     class="hidden fixed bottom-4 right-4 bg-fuchsia-600 text-white p-3 rounded-full shadow-lg hover:bg-fuchsia-900 transition transform hover:scale-110">
     <i class="fas fa-arrow-up text-lg"></i> <!-- Font Awesome arrow icon -->
