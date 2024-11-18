@@ -155,6 +155,12 @@ class Delivery(models.Model):
     def linetotal(self):
         return self.product.selling_price * self.quantity
 
+class Tag(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
 
 class BlogPost(models.Model):
     title = models.CharField(max_length=255, blank=True, null=True)
@@ -162,7 +168,7 @@ class BlogPost(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     content = HTMLField()
     featured_image = models.ImageField(upload_to='Blogs/')
-    tags = models.ManyToManyField('Tag', blank=True)  # Assuming 'Tag' is defined elsewhere
+    tags = models.ManyToManyField(Tag, blank=True)  # Assuming 'Tag' is defined elsewhere
     category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True, blank=True)  # Assuming 'Category' is defined elsewhere
     excerpt = models.CharField(max_length=500, blank=True)
     publish_date = models.DateTimeField(default=timezone.now)  # Default to now
@@ -181,12 +187,19 @@ class BlogPost(models.Model):
 
     def __str__(self):
         return self.title
+    
 
-class Tag(models.Model):
-    name = models.CharField(max_length=100)
+class BlogPage(models.Model):
+    head = models.CharField(max_length=200)
+    description = models.CharField(max_length=300)
+    banner = models.ImageField(upload_to="Blogs")
+    banner_head = models.CharField(max_length=200)
+    banner_description = models.TextField()
+    status = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.name
+        return self.head
+    
 
 # Unusable model HomeCarousel
 class HomeCarousel(models.Model):

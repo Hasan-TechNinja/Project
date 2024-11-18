@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import Product, Departments, Category, Size, Cart, BlogPost, Tag, Billing_Details, Delivery, Brand, HomeCarousel, Review, WishList, Coupon, About, Social, PaymentMethod, FAQ, SpecialOffer
+from . models import Product, Departments, Category, Size, Cart, BlogPost, Tag, Billing_Details, Delivery, Brand, HomeCarousel, Review, WishList, Coupon, About, Social, PaymentMethod, FAQ, SpecialOffer, BlogPage
 
 # Register your models here.
 
@@ -132,6 +132,28 @@ class BlogPostAdmin(admin.ModelAdmin):
         status.update(status = "True")
 
 admin.site.register(BlogPost, BlogPostAdmin)
+
+
+class BlogPageAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'head',
+        'description',
+        'banner',
+        'banner_head',
+        'banner_description',
+        'status'
+    )
+    actions = ['Disable', 'Enable']
+
+    def Disable(self, request, status):
+        status.update(status= "False")
+
+    def Enable(self, request, status):
+        status.update(status="True")
+
+admin.site.register(BlogPage, BlogPageAdmin)
+
 
 class TagAdmin(admin.ModelAdmin):
     list_display = (

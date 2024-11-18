@@ -5,23 +5,27 @@
 
 <div class="container mx-auto my-12 px-4">
     <!-- Page Header -->
+     {% for blogPage in blogPage %}
+     {% if blogPage.status %}
     <div class="text-center mb-12">
-        <h1 class="text-4xl font-bold text-gray-800">Latest Articles & News</h1>
-        <p class="mt-4 text-gray-500">Stay updated with the latest news, product launches, and industry insights from our blog.</p>
+        <h1 class="text-4xl font-bold text-gray-800">{{ blogPage.head }}</h1>
+        <p class="mt-4 text-gray-500">{{ blogPage.description }}</p>
     </div>
 
     <!-- Featured Post Section -->
     <div class="mb-12">
         <div class="relative bg-gray-100 rounded-lg overflow-hidden shadow-lg">
-            <img src="{% static "img/blog.jpeg" %}" alt="Featured Post" class="w-full h-96 object-cover">
+            <img src="{{ blogPage.banner.url }}" alt="Banner not found" class="w-full h-96 object-cover">
             <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-start p-8">
-                <span class="bg-yellow-400 text-white px-3 py-1 rounded-lg font-semibold">Category</span>
-                <h2 class="text-white text-4xl mt-4 font-bold">Featured Blog Post Title</h2>
-                <p class="text-gray-200 mt-4">This is a brief excerpt of the featured post, summarizing the content to entice readers.</p>
-                <a href="#" class="mt-4 text-yellow-400 hover:text-yellow-300 text-lg">Read more &rarr;</a>
+                {% comment %} <span class="bg-yellow-400 text-white px-3 py-1 rounded-lg font-semibold">Category</span> {% endcomment %}
+                <h2 class="text-white text-4xl mt-4 font-bold">{{ blogPage.banner_head }}</h2>
+                <p class="text-gray-200 mt-4">{{ blogPage.banner_description }}.</p>
+                {% comment %} <a href="#" class="mt-4 text-yellow-400 hover:text-yellow-300 text-lg">Read more &rarr;</a> {% endcomment %}
             </div>
         </div>
     </div>
+    {% endif %}
+    {% endfor %}
 
     <!-- Blog Grid Section -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">

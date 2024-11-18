@@ -424,10 +424,10 @@
             </div>
         </div>
         
-        <div class="grid gap-6">
+        <div class="grid gap-1">
             {% for product in latest|slice:":5" %}
             {% if product.status %}
-            <a href="{% url 'product_details' product.id %}" class="block hover:shadow-lg rounded-lg transition-transform transform hover:scale-105 duration-300">
+            <a href="{% url 'product_details' product.id %}" class="block hover:shadow-lg rounded-lg transition-transform transform hover:scale-105 duration-300 shadow-lg">
                 <div class="flex items-center bg-gray-50 p-4 rounded-lg">
                     <!-- Product Image -->
                     <div class="w-1/4 flex-shrink-0">
@@ -462,10 +462,10 @@
             </div>
         </div>
         
-        <div class="grid gap-6">
+        <div class="grid gap-1">
             {% for top in top|slice:":5" %}
             {% if top.status %}
-            <a href="{% url 'product_details' top.id %}" class="block hover:shadow-lg rounded-lg transition-transform transform hover:scale-105 duration-300">
+            <a href="{% url 'product_details' top.id %}" class="block hover:shadow-lg rounded-lg transition-transform transform hover:scale-105 duration-300 shadow-lg">
                 <div class="flex items-center bg-gray-50 p-4 rounded-lg">
                     <!-- Product Image -->
                     <div class="w-1/4 flex-shrink-0">
@@ -498,10 +498,10 @@
         </div>
     </div>
     
-    <div class="grid gap-6">
+    <div class="grid gap-1">
         {% for review in review|slice:":5" %}
         {% if review.product.status %}
-        <a href="{% url 'product_details' review.product.id %}" class="block hover:shadow-lg rounded-lg transition-transform transform hover:scale-105 duration-300">
+        <a href="{% url 'product_details' review.product.id %}" class="block hover:shadow-lg rounded-lg transition-transform transform hover:scale-105 duration-300 shadow-lg">
             <div class="flex items-center bg-gray-50 p-4 rounded-lg">
                 <!-- Product Image -->
                 <div class="w-1/4 flex-shrink-0">

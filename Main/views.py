@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views import View
-from . models import Product, Departments, Cart, BlogPost, Billing_Details, HomeCarousel, Delivery, Review, WishList, Coupon, Social, PaymentMethod, About, FAQ, SpecialOffer
+from . models import Product, Departments, Cart, BlogPost, Billing_Details, HomeCarousel, Delivery, Review, WishList, Coupon, Social, PaymentMethod, About, FAQ, SpecialOffer, BlogPage
 from . forms import BillingDetailsForm, ReviewForm, ContactForm
 from django.contrib.auth import authenticate
 from django.utils.html import strip_tags
@@ -618,9 +618,11 @@ class DepartmentsView(View, LoginRequiredMixin):
     
 def BlogView(request):
     data = BlogPost.objects.all()
+    blog_page = BlogPage.objects.all()
 
     context = {
-        'data':data
+        'data':data,
+        'blogPage': blog_page
     }
     return render(request, 'blog.html', context)
 
