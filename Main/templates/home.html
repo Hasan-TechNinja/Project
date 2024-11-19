@@ -232,7 +232,7 @@
             <!-- Loop through top trending products dynamically -->
             {% for product in top %}
             {% if product.status %}
-            <div class="relative bg-white rounded-lg shadow-lg overflow-hidden border transition-transform transform hover:-translate-y-1 hover:shadow-2xl my-2">
+            <div class="relative bg-white rounded-lg shadow-lg overflow-hidden border transition-transform transform hover:-translate-y-1 hover:shadow-2xl my-1">
                 
                 <!-- Discount badge -->
                 {% if product.discount_percentage > 0 %}
@@ -322,11 +322,11 @@
     </div>
     
 {% comment %} show product {% endcomment %}
-<div class="w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+<div class="w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
     
     {% for product in products %}
     {% if product.status %}
-    <div class="relative card card-compact bg-base-100 shadow-xl border my-3 transition-transform transform hover:-translate-y-1 hover:shadow-xl">
+    <div class="relative card card-compact bg-base-100 shadow-xl border my-1 transition-transform transform hover:-translate-y-1 hover:shadow-xl">
         
         <!-- Discount badge -->
         {% if product.discount_percentage > 0 %}

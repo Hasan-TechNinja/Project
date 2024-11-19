@@ -49,8 +49,8 @@ class ContactForm(forms.ModelForm):
         model = Contact
         fields = ['name', 'email', 'order_number', 'message']
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control block w-full px-4 py-2 border rounded-lg text-gray-800 placeholder-gray-400'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control block w-full px-4 py-2 border rounded-lg text-gray-800 placeholder-gray-400'}),
-            'order_number': forms.TextInput(attrs={'class': 'form-control block w-full px-4 py-2 border rounded-lg text-gray-800 placeholder-gray-400'}),
-            'message': forms.Textarea(attrs={'class': 'form-control block w-full px-4 py-2 border rounded-lg text-gray-800 placeholder-gray-400'}),
+            'name': forms.TextInput(attrs={'class': 'form-control block w-full px-4 py-2 border rounded-lg text-gray-800 placeholder-gray-400 bg-gray-50', 'placeholder':'Enter your name..'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control block w-full px-4 py-2 border rounded-lg text-gray-800 placeholder-gray-400 bg-gray-50', 'placeholder':'Enter your email..'}),
+            'order_number': forms.TextInput(attrs={'class': 'form-control block w-full px-4 py-2 border rounded-lg text-gray-800 placeholder-gray-400 bg-gray-50', 'placeholder':'Enter order number'}),
+            'message': forms.Textarea(attrs={'class': 'form-control block w-full px-4 py-2 border rounded-lg text-gray-800 placeholder-gray-400 bg-gray-50', 'placeholder':'Enter your message here..'}),
         }

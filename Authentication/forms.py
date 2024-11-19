@@ -140,7 +140,6 @@ class CustomAuthenticationForm(AuthenticationForm):
 
 
 
-
 class CustomPasswordChangeForm(PasswordChangeForm):
     old_password = forms.CharField(
         widget=forms.PasswordInput(attrs={
@@ -149,12 +148,14 @@ class CustomPasswordChangeForm(PasswordChangeForm):
         })
     )
     new_password1 = forms.CharField(
+        label="New Password",
         widget=forms.PasswordInput(attrs={
             'class': 'w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none',
             'placeholder': 'New Password',
         })
     )
     new_password2 = forms.CharField(
+        label="Confirm Password",
         widget=forms.PasswordInput(attrs={
             'class': 'w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none',
             'placeholder': 'Confirm New Password',

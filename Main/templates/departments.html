@@ -9,7 +9,7 @@
             <h1 class="text-5xl font-bold text-text_col">Featured Products</h1>
       
             <!-- Departments List -->
-            <ul class="flex flex-wrap justify-center gap-7 font-medium my-7">
+            <ul class="flex flex-wrap justify-center gap-3 font-medium my-7">
                 {% for department in departments %}
                 {% if department.status %}
                   <li>
@@ -26,7 +26,7 @@
       
         <!-- If related products exist, display them -->
         {% if rproduct %}
-        <div class="w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div class="w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
         {% for product in rproduct %}
         <div class="relative card card-compact bg-base-100 shadow-xl border my-3 transition-transform transform hover:-translate-y-1 hover:shadow-xl">
         

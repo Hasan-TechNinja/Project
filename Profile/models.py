@@ -20,7 +20,7 @@ class ProfileModel(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=100, null=True, blank=True)
-    last_name = models.CharField(max_length=100, null=True, blank=True)
+    last_name = models.CharField(max_length=100, blank=True)
     about = models.CharField(default='Default about', max_length=300, null=True, blank=True)
     description = models.TextField(default='Default description', blank=True, null= True)
     address = models.CharField(max_length=200, null=True, blank=True)
