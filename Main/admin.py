@@ -217,6 +217,7 @@ admin.site.register(Delivery, DeliveryAdmin)
 
 class BrandAdmin(admin.ModelAdmin):
     list_display = (
+        'id',
         'name',
         'link',
         'logo',
@@ -227,6 +228,7 @@ admin.site.register(Brand, BrandAdmin)
 
 class HomeCarouselAdmin(admin.ModelAdmin):
     list_display = (
+        'id',
         'name',
         'title',
         'description',
@@ -238,6 +240,7 @@ admin.site.register(HomeCarousel, HomeCarouselAdmin)
 
 class ReviewAdmin(admin.ModelAdmin):
     list_display = (
+        'id',
         'product',
         'p_id',
         'user',
@@ -252,6 +255,7 @@ admin.site.register(Review, ReviewAdmin)
 
 class WishListAdmin(admin.ModelAdmin):
     list_display = (
+        'id',
         'user',
         'product',
     )
@@ -259,23 +263,24 @@ admin.site.register(WishList, WishListAdmin)
 
 
 
-class CouponAdmin(admin.ModelAdmin):
-    list_display = (
-        'code',
-        'discount',
-        'valid_from',
-        'valid_to',
-        'active'
-    )
-admin.site.register(Coupon, CouponAdmin)
+# class CouponAdmin(admin.ModelAdmin):
+#     list_display = (
+#         'code',
+#         'discount',
+#         'valid_from',
+#         'valid_to',
+#         'active'
+#     )
+# admin.site.register(Coupon, CouponAdmin)
 
 
 class AboutAdmin(admin.ModelAdmin):
     list_display = (
+        'id',
         'first_name',
         'last_name',
         'about',
-        'description',
+        # 'description',
         'contact',
         'email',
         'mission_statement',
