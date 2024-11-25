@@ -122,7 +122,7 @@
         {% else %}
         <form action="" class='d-inline'>
           {% csrf_token %}
-          <button type="button" class = "bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-gray-900">Stoke out</button>
+          <button type="button" class = "bg-red-600 text-white px-6 py-2 rounded-lg">Stoke out</button>
       </form>
         {% endif %}
 
@@ -135,8 +135,20 @@
         <ul class="mt-6 space-y-2">
 
           <li><strong>Availability:</strong> {{ stoke }}</li>
-          <li><strong>Shipping:</strong> {{product.shipping_time}} day shipping. <span class="text-red-500">Free pickup today</span></li>
-          <li><strong>Brand: </strong><a class='hover:underline hover:text-blue-700' href="#">{{ product.brand }}</a></li>
+          <li><strong>Shipping:</strong> {{product.shipping_time}} day shippin</li>
+          <li class="flex items-center space-x-2"><strong class="whitespace-nowrap">Brand:</strong>
+            <a href="{{ product.brand.link }}" target="_blank" class="text-blue-600 hover:underline">
+                {{ product.brand.name }}
+            </a>
+          </li>
+          <li class="flex items-center space-x-2">
+              <strong class="whitespace-nowrap">Size:</strong>
+              <span class="text-gray-700">{{ product.size }}</span>
+          </li>
+          <li>
+            <strong>Sold: </strong>
+            <span class="text-gray-700">{{ product.selles }}</span>
+          </li>  
           {% if product.SpecialOffer_price > 0 %}
           <div>
 

@@ -14,7 +14,7 @@
         <div class='bg-white w-full md:w-2/3 lg:w-1/2 p-4 m-2 rounded-md shadow-lg text-center'>
             <h1 class='text-2xl font-bold mb-4 text-start'>Profile Information</h1>
             <hr>
-            <img class='w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-40 lg:h-40 rounded-full object-cover mb-4 shadow-md transition-transform transform hover:scale-105 mx-auto mt-3' src="{{ profile.image.url }}" alt="Profile Image">
+            <img class='w-32 h-32 sm:w-32 sm:h-32 md:w-32 md:h-32 lg:w-40 lg:h-40 rounded-full object-cover mb-4 shadow-md transition-transform transform hover:scale-105 mx-auto mt-3' src="{{ profile.image.url }}" alt="Profile Image">
             <h2 class='text-3xl font-bold mb-2'>{{ name }}</h2>
             <p class='text-start font-bold'>{{ profile.about }}</p>
             <p class='text-sm text-start my-3'>{{ profile.description }}</p>
@@ -71,7 +71,7 @@
                     <a href="{% url "logout" %}"><button class='md:btn rounded-md p-1 my-1 text-sm bg-yellow-600 hover:bg-red-500 text-white md:p-2'>Logout</button></a>
                     {% comment %} <a href="#"><button class='md:btn rounded-md p-1 my-1 text-sm bg-red-500 hover:bg-red-700 text-white md:p-2 md:text-lg'>Delete Profile</button></a> {% endcomment %}
                     <!-- Delete Button -->
-                    <button id="deleteProfileBtn" class="bg-red-500 text-white p-2 rounded text-sm">Delete Account</button>
+                    <button id="deleteProfileBtn" class="md:btn rounded-md p-1 my-1 text-sm bg-red-500 hover:bg-red-600 text-white md:p-2">Delete Account</button>
 
                     <!-- Modal Popup -->
                     <div id="deleteModal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">

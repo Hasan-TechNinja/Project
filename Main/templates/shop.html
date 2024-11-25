@@ -4,34 +4,33 @@
 {% block content %}
 
 <div class="flex flex-wrap justify-center md:flex-nowrap gap-6">
-   <!-- Departments Section -->
+    <!-- Categories Section -->
     <div class="text-center flex-1 max-w-xs md:max-w-none">
         <!-- Section Title -->
-        <div class="font-bold text-2xl mb-4">Departments</div>
-        <!-- Department Links -->
+        <div class="font-bold text-2xl mb-4">Categories</div>
+        <!-- Category Links -->
         <div class="flex flex-wrap justify-center space-x-2 gap-y-4">
-            {% for item in departments_with_products %}
-            <a href="#{{ item.department.link }}" class="flex flex-col items-center group">
-                <!-- Department Image -->
+            {% for item in categories_with_products %}
+            <a href="#{{ item.category.link }}" class="flex flex-col items-center group">
+                <!-- Category Image -->
                 <img class="w-16 h-16 object-cover rounded-md mb-2 hover:ring ring-gray-300 transition" 
-                    src="{{ item.department.image.url }}" 
-                    alt="{{ item.department.name }}">
-                <!-- Department Name -->
-                <p class="text-sm md:text-base text-gray-700">{{ item.department.name }}</p>
+                    src="{{ item.category.image.url }}" 
+                    alt="{{ item.category.name }}">
+                <!-- Category Name -->
+                <p class="text-sm md:text-base text-gray-700">{{ item.category.name }}</p>
             </a>
             {% endfor %}
         </div>
     </div>
 </div>
 
-
-{% for item in departments_with_products %}
-<div class="container mx-auto bg-gray-50" id="{{ item.department.link }}"> <!-- Ensure the ID matches the href -->
+{% for item in categories_with_products %}
+<div class="container mx-auto bg-gray-50" id="{{ item.category.link }}">
     <div class="w-11/12 mx-auto my-7 p-7">
-        <!-- Department Badge -->
+        <!-- Category Badge -->
         <div class="flex justify-center md:justify-start">
             <div class="rounded bg-lime-700 text-white text-md font-bold py-2 px-3 text-center">
-                {{ item.department.name }}
+                {{ item.category.name }}
             </div>
         </div>
 
@@ -58,7 +57,6 @@
                         {% endif %}
                     </a>
                     {% endif %}
-
 
                     <!-- Product Image -->
                     <figure>
@@ -98,18 +96,19 @@
             {% endfor %}
         </div>
 
-        <!-- Department Badge -->
+        <!-- Category Button -->
         <div class="flex justify-center md:justify-end">
-            <form action="/departments" method="get">
-                <input type="hidden" name="department_id" value="{{ item.department.id }}">
+            <form action="/categories" method="get">
+                <input type="hidden" name="category_id" value="{{ item.category.id }}">
                 <button type="submit" class="rounded bg-lime-700 text-white text-md font-bold py-2 px-3 text-center">
-                   Show all {{ item.department.name }} Products
+                   Show all {{ item.category.name }} Products
                 </button>
             </form>
         </div>
     </div>
 </div>
 {% endfor %}
+
 
 <button id="goToTop" 
     class="hidden fixed bottom-4 right-4 bg-indigo-700 text-white p-3 rounded-full shadow-lg hover:bg-indigo-700 transition transform hover:scale-110">

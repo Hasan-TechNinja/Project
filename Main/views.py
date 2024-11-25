@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views import View
-from . models import Product, Departments, Cart, BlogPost, Billing_Details, HomeCarousel, Delivery, Review, WishList, Coupon, Social, PaymentMethod, About, FAQ, SpecialOffer, BlogPage
+from . models import Product, Departments, Cart, BlogPost, Billing_Details, HomeCarousel, Delivery, Review, WishList, Coupon, Social, PaymentMethod, About, FAQ, SpecialOffer, BlogPage, Category
 from . forms import BillingDetailsForm, ReviewForm, ContactForm
 from django.contrib.auth import authenticate
 from django.utils.html import strip_tags
@@ -108,26 +108,49 @@ def AboutView(request):
     return render(request, 'about.html', context)
 
     
+# class ShopView(View):
+#     def get(self, request):
+
+#         departments = Departments.objects.all()
+#         # Get the wishlist for the authenticated user
+#         wishlist = []
+#         if request.user.is_authenticated:
+#             wishlist = WishList.objects.filter(user=request.user).values_list('product_id', flat=True)
+
+
+#         departments_with_products = [
+#             {
+#                 "department": department,
+#                 "products": Product.objects.filter(department=department).order_by('-id')[:18]
+#             }
+#             for department in departments
+#         ]
+
+#         context = {
+#             'departments_with_products': departments_with_products,
+#             'wishlist': wishlist
+#         }
+#         return render(request, 'shop.html', context)
+
+
 class ShopView(View):
     def get(self, request):
 
-        departments = Departments.objects.all()
-        # Get the wishlist for the authenticated user
+        categories = Category.objects.filter(status=True)  # Get all active categories
         wishlist = []
         if request.user.is_authenticated:
             wishlist = WishList.objects.filter(user=request.user).values_list('product_id', flat=True)
 
-
-        departments_with_products = [
+        categories_with_products = [
             {
-                "department": department,
-                "products": Product.objects.filter(department=department).order_by('-id')[:18]
+                "category": category,
+                "products": Product.objects.filter(category=category).order_by('-id')[:18]
             }
-            for department in departments
+            for category in categories
         ]
 
         context = {
-            'departments_with_products': departments_with_products,
+            'categories_with_products': categories_with_products,
             'wishlist': wishlist
         }
         return render(request, 'shop.html', context)
@@ -535,7 +558,7 @@ class ProductReviewView(View):
             review = Review.objects.get(product=product, user=request.user)
             form = ReviewForm(instance=review) # Pre-fill the form with existing review
         except Review.DoesNotExist:
-            form = ReviewForm()  # Blank form if no review exists
+            form = ReviewForm()
 
         # Get all reviews for the product (optional, to display existing reviews)
         reviews = Review.objects.filter(product=product)
