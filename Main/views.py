@@ -156,6 +156,29 @@ class ShopView(View):
         return render(request, 'shop.html', context)
 
 
+class CategoryView(View, LoginRequiredMixin):
+    def get(self, request, pk = None):
+        categorys = Category.objects.all()
+
+        category_id = request.GET.get('category_id') or pk
+
+        if category_id:
+            category = get_object_or_404(Category, pk = category_id)
+
+            related_products = Product.objects.filter(category = category)
+
+            context = {
+                'category': category,
+                'rproduct':related_products,
+                'categorys':categorys
+            }
+        else:
+            context = {
+                'categorys' : categorys
+            }
+        return render(request, 'category.html', context)
+    
+    
 
 class ProductDetails(View):
     def get(self, request, pk):
