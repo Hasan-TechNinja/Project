@@ -144,7 +144,7 @@ class ShopView(View):
         categories_with_products = [
             {
                 "category": category,
-                "products": Product.objects.filter(category=category).order_by('-id')[:18]
+                "products": Product.objects.filter(category=category).order_by('-id')[:12]
             }
             for category in categories
         ]
@@ -192,7 +192,7 @@ class ProductDetails(View):
         department_description = product.department.description
         all = Product.objects.all()
         
-        related_products = Product.objects.filter(department=product.department).exclude(pk=pk)
+        related_products = Product.objects.filter(department=product.department).exclude(pk=pk)[:12:-1]
 
         review = Review.objects.filter(product = product)
         review_quantity = len(review)

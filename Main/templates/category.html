@@ -9,12 +9,12 @@
 
         <!-- Page Header -->
         <div class="text-center py-8">
-            <h1 class="text-5xl font-extrabold text-gray-800 tracking-wide">Explore Featured Products</h1>
+            <h1 class="text-4xl font-extrabold text-gray-800 tracking-wide">Explore Featured Products</h1>
             <p class="mt-4 text-lg text-gray-600">Discover the latest and greatest products in each category</p>
         </div>
 
         <!-- Categories List -->
-        <div class="flex flex-wrap justify-center gap-5 py-8">
+        <div class="flex flex-wrap justify-center gap-5 py-8 mb-6">
             {% for category in categorys %}
                 <div class="group flex flex-col items-center text-center transform transition-transform hover:scale-105">
                     <a href="{% url 'category' category.id %}" class="block w-20 h-20 rounded-full overflow-hidden ring-1 ring-gray-300 hover:ring-primary shadow-md">
@@ -27,9 +27,9 @@
 
         <!-- Products Section -->
         {% if rproduct %}
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-4">
             {% for product in rproduct %}
-            <div class="relative bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:shadow-lg hover:-translate-y-2">
+            <div class="relative bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:shadow-lg hover:-translate-y-1">
                 <!-- Discount Badge -->
                 {% if product.discount_percentage > 0 %}
                 <span class="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-lg z-10">
@@ -68,7 +68,7 @@
                     </div>
                     <p class="text-sm text-gray-600 mt-2">{{ product.description|truncatechars:80 }}</p>
                     <div class="mt-4">
-                        <a href="{% url 'product_details' product.id %}" class="w-full btn btn-primary block text-center">View Details</a>
+                        <a href="{% url 'product_details' product.id %}" class="w-full btn bg-gray-300 flex text-center justify-center items-center">View Details</a>
                     </div>
                 </div>
             </div>
