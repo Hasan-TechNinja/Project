@@ -24,7 +24,7 @@ class HomeView(View):
         # products = Product.objects.all(Departments.status == True)[:12:-1]
         products = Product.objects.filter(department__status=True).order_by('-id')[:12]
         departments = Departments.objects.all()
-        blog = BlogPost.objects.all()[0:3:-1]
+        blog = BlogPost.objects.all().order_by('-id')[:3]
         # latest_product = Product.objects.all().order_by('-id')
         latest_product = Product.objects.filter(department__status = True).order_by('-id')
 
@@ -663,7 +663,7 @@ class DepartmentsView(View, LoginRequiredMixin):
 
     
 def BlogView(request):
-    data = BlogPost.objects.all()
+    data = BlogPost.objects.all().order_by('-id')
     blog_page = BlogPage.objects.all()
 
     context = {

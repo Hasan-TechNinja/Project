@@ -8,39 +8,6 @@ import string
 from django.core.mail import send_mail
 
 
-
-# class CustomUserCreationForm(UserCreationForm):
-#     username = forms.CharField(
-#         widget=forms.TextInput(attrs={
-#             'class': 'w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none',
-#             'placeholder': 'Username',
-#         })
-#     )
-#     email = forms.EmailField(
-#         widget=forms.EmailInput(attrs={
-#             'class': 'w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none',
-#             'placeholder': 'Email',
-#         })
-#     )
-#     password1 = forms.CharField(
-#         widget=forms.PasswordInput(attrs={
-#             'class': 'w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none',
-#             'placeholder': 'Password',
-#         })
-#     )
-#     password2 = forms.CharField(
-#         widget=forms.PasswordInput(attrs={
-#             'class': 'w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none',
-#             'placeholder': 'Confirm Password',
-#         })
-#     )
-
-#     class Meta:
-#         model = User
-#         fields = ['username', 'email', 'password1', 'password2']
-
-
-
 class CustomUserCreationForm(forms.ModelForm):
     password1 = forms.CharField(label="Password", widget=forms.PasswordInput)
     password2 = forms.CharField(label="Confirm Password", widget=forms.PasswordInput)

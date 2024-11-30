@@ -170,8 +170,8 @@ USE_TZ = True
 
 # settings.py
 
-TIME_ZONE = 'Asia/Dhaka'  # Set this to your local timezone
-USE_TZ = True  # Make sure this is set to True
+TIME_ZONE = 'Asia/Dhaka' 
+USE_TZ = True  
 
 
 STATIC_URL = '/static/'
