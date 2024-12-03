@@ -8,26 +8,26 @@
     <div class="container mx-auto min-h-screen">
 
         <!-- Page Header -->
-        <div class="text-center py-8">
+        <div class="text-center py-8 bg-blue-50 rounded-md p-2 m-1">
             <h1 class="text-4xl font-extrabold text-gray-800 tracking-wide">Explore Featured Products</h1>
             <p class="mt-4 text-lg text-gray-600">Discover the latest and greatest products in each category</p>
         </div>
 
         <!-- Categories List -->
-        <div class="flex flex-wrap justify-center gap-5 py-8 mb-6">
+        <div class="flex flex-wrap justify-start gap-5 py-8 mb-6 bg-blue-50 p-2 m-1">
             {% for category in categorys %}
                 <div class="group flex flex-col items-center text-center transform transition-transform hover:scale-105">
-                    <a href="{% url 'category' category.id %}" class="block w-20 h-20 rounded-full overflow-hidden ring-1 ring-gray-300 hover:ring-primary shadow-md">
+                    <a href="{% url 'category' category.id %}" class="block w-20 h-20 rounded-full overflow-hidden ring-1 ring-gray-300 shadow-md">
                         <img src="{{ category.image.url }}" alt="{{ category.name }}" class="w-full h-full object-cover" />
                     </a>
-                    <span class="mt-3 text-lg font-medium text-gray-700 group-hover:text-primary">{{ category.name }}</span>
+                    <span class="mt-3 text-lg font-medium text-gray-700">{{ category.name }}</span>
                 </div>
             {% endfor %}
         </div>
 
         <!-- Products Section -->
         {% if rproduct %}
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-4 bg-blue-50 p-3">
             {% for product in rproduct %}
             <div class="relative bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:shadow-lg hover:-translate-y-1">
                 <!-- Discount Badge -->

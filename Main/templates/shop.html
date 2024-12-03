@@ -3,13 +3,13 @@
 {% block title %}Shop{% endblock title %}
 {% block content %}
 
-<div class="flex flex-wrap justify-center md:flex-nowrap gap-6">
+<div class="container mx-auto flex flex-wrap justify-left md:flex-nowrap gap-6">
     <!-- Categories Section -->
-    <div class="text-center flex-1 max-w-xs md:max-w-none">
+    <div class="container mx-auto bg-blue-50 p-3 text-sm">
         <!-- Section Title -->
         <div class="font-bold text-2xl mb-4">Categories</div>
         <!-- Category Links -->
-        <div class="flex flex-wrap justify-center space-x-2 gap-y-4">
+        <div class="flex flex-wrap justify-left space-x-2 gap-y-4">
             {% for item in categories_with_products %}
             <a href="#{{ item.category.link }}" class="flex flex-col items-center group">
                 <!-- Category Image -->
@@ -25,7 +25,7 @@
 </div>
 
 {% for item in categories_with_products %}
-<div class="container mx-auto bg-gray-50" id="{{ item.category.link }}">
+<div class="container mx-auto bg-blue-50" id="{{ item.category.link }}">
     <div class="w-11/12 mx-auto my-7 p-7">
         <!-- Category Badge -->
         <div class="flex justify-center md:justify-start">
