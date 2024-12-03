@@ -51,7 +51,7 @@ class Brand(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
-    selling_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    selling_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     discount_percentage = models.IntegerField(default=0)
     discount_price = models.DecimalField(max_digits=10, decimal_places=1, default=0)
     SpecialOffer_price = models.DecimalField(max_digits=10, decimal_places=1, default=0)
