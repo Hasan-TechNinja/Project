@@ -21,7 +21,7 @@ def RegistrationView(request):
             verification = EmailVerification(user=user, code=form.email_verification_code)
             verification.save()
 
-            return redirect('verify_email')  # Redirect to email verification page
+            return redirect('verify_email')
     else:
         form = CustomUserCreationForm()
 
