@@ -635,7 +635,7 @@ def cancel_order(request, order_id):
 
 class DepartmentsView(View, LoginRequiredMixin):
     def get(self, request, pk=None):
-        departments = Departments.objects.all()
+        departments = Departments.objects.filter(status=True)
  
         department_id = request.GET.get('department_id') or pk
         
