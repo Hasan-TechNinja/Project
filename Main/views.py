@@ -158,7 +158,7 @@ class ShopView(View):
 
 class CategoryView(View, LoginRequiredMixin):
     def get(self, request, pk = None):
-        categorys = Category.objects.all()
+        categorys = Category.objects.filter(status=True)
 
         category_id = request.GET.get('category_id') or pk
 
