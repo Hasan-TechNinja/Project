@@ -22,7 +22,7 @@ from Profile.models import ProfileModel
 class HomeView(View):
     def get(self, request, *args, **kwargs):
         # products = Product.objects.all(Departments.status == True)[:12:-1]
-        products = Product.objects.filter(department__status=True).order_by('-id')[:12]
+        products = Product.objects.filter(department__status=True).order_by('-id')[:13]
         departments = Departments.objects.all()
         blog = BlogPost.objects.all().order_by('-id')[:3]
         # latest_product = Product.objects.all().order_by('-id')
@@ -53,7 +53,19 @@ class HomeView(View):
             all_categories = set(cart_categories) | set(delivery_categories) | set(review_categories) | set(wishlist_categories)
 
             # just_for_you = Product.objects.filter(category__in=all_categories).exclude(Q(cart__user=request.user) | Q(delivery__user=request.user) | Q(reviews__user=request.user) | Q(wishlist__user=request.user)).distinct()
-            just_for_you = Product.objects.filter(category__in=all_categories, stock__gt=0).exclude(Q(cart__user=request.user) | Q(delivery__user=request.user) | Q(reviews__user=request.user) | Q(wishlist__user=request.user)).distinct()[:12]
+            # just_for_you = Product.objects.filter(category__in=all_categories, status = True, stock__gt=0).exclude(Q(cart__user=request.user) | Q(delivery__user=request.user) | Q(reviews__user=request.user) | Q(wishlist__user=request.user)).distinct()[:12]
+            just_for_you = Product.objects.filter(
+                            category__status=True,  # Ensure the category is active
+                            department__status=True,  # Ensure the department is active
+                            status=True,  # Ensure the product is active
+                            stock__gt=0  # Ensure the product is in stock
+                        ).exclude(
+                            Q(cart__user=request.user) |  # Exclude products in the user's cart
+                            Q(delivery__user=request.user) |  # Exclude products in the user's orders
+                            Q(reviews__user=request.user) |  # Exclude products the user has reviewed
+                            Q(wishlist__user=request.user)  # Exclude products in the user's wishlist
+                        ).distinct()[:12]
+
 
         offers = SpecialOffer.objects.filter(active=True).order_by('-start_date')
             
@@ -644,7 +656,7 @@ class DepartmentsView(View, LoginRequiredMixin):
             department = get_object_or_404(Departments, pk=department_id)
             
             # Fetch related products for the selected department
-            related_products = Product.objects.filter(department=department)
+            related_products = Product.objects.filter(department=department).order_by('-id')
 
             context = {
                 'department': department,   
