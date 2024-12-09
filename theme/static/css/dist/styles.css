@@ -3769,6 +3769,18 @@ select {
     margin-top: 0px;
   }
 
+  .md\:mr-1 {
+    margin-right: 0.25rem;
+  }
+
+  .md\:mr-14 {
+    margin-right: 3.5rem;
+  }
+
+  .md\:mr-10 {
+    margin-right: 2.5rem;
+  }
+
   .md\:flex {
     display: flex;
   }

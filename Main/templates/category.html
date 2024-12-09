@@ -5,12 +5,12 @@
 
 {% block content %}
 <div>
-    <div class="container mx-auto min-h-screen">
+    <div class="container mx-auto min-h-screen mb-5 rounded-sm">
 
         <!-- Page Header -->
         <div class="text-end py-8 bg-blue-50 rounded-md p-2 m-1">
-            <h1 class="text-2xl md:text-3xl font-extrabold text-gray-800 tracking-wide">Explore Featured Products</h1>
-            <p class="mt-4 text-sm md:text-lg text-gray-600">Discover the latest and greatest products in each category</p>
+            <h1 class="text-2xl md:text-3xl font-extrabold text-gray-800 tracking-wide md:mr-10">Explore Featured Products</h1>
+            <p class="mt-4 text-sm md:text-lg text-gray-600 md:mr-10">Discover the latest and greatest products in each category</p>
         </div>
 
         <!-- Categories List -->
@@ -55,7 +55,7 @@
                 </figure>
                 
                 <!-- Product Details -->
-                <h3 class="text-md font-semibold text-gray-700 mb-2">{{ product.name }}</h3>
+                <h3 class="text-md font-semibold text-gray-700 mb-2">{{ product.name|truncatechars:40 }}</h3>
                 
                 <div class="flex items-center justify-between">
                     {% if product.discount_percentage > 0 %}
