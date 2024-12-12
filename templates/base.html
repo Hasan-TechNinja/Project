@@ -245,7 +245,7 @@
       <div class="container mx-auto grid grid-cols-1 md:grid-cols-5 gap-6 text-sm">
           <!-- About Us Section -->
           <div>
-              <h4 class="font-bold mb-2"><a class='hover:text-blue-400' href="{% url "about" %}">About Us</a></h4>
+              <h4 class="font-bold mb-2 hover:underline"><a class='hover:text-blue-400' href="{% url "about" %}">About Us</a></h4>
               
               <p class='text-yellow-300 '>{{ about.about|truncatechars:60 }}</p>
               <p>{{ about.description | truncatechars:150 }}</p>
@@ -259,7 +259,7 @@
               <ul>
                   <li>Contact Us: <a class='text-sm hover:underline' href="mailto:email@example.com">{{ about.email }}</a></li>
                   <li class=''>Call Us: +880 {{ about.contact }}</li>
-                  <li><a class='hover:text-yellow-400' href="{% url "contact" %}">FAQs</a></li>
+                  <li><a class='hover:text-yellow-400 hover:underline' href="{% url "contact" %}">FAQs</a></li>
               </ul>
               
           </div>
