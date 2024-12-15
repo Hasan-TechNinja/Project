@@ -37,7 +37,7 @@ class HomeView(View):
         fifteen_days_ago = current_date - timedelta(days=15)
         
         # Get top 8 trending products based on `selles` in the last 15 days
-        trending_products = Product.objects.filter(updated_at__gte=fifteen_days_ago, department__status = True).order_by('-selles')[:8]
+        trending_products = Product.objects.filter(updated_at__gte=fifteen_days_ago, department__status = True, category__status = True).order_by('-selles')[:8]
 
         # review_product = Review.objects.all()
         review_product = Review.objects.filter(product__department__status=True)
@@ -58,7 +58,7 @@ class HomeView(View):
                             category__status=True,  # Ensure the category is active
                             department__status=True,  # Ensure the department is active
                             status=True,  # Ensure the product is active
-                            stock__gt=0  # Ensure the product is in stock
+                            stock__gt=0  # Ensure the product is in stock > 0 
                         ).exclude(
                             Q(cart__user=request.user) |  # Exclude products in the user's cart
                             Q(delivery__user=request.user) |  # Exclude products in the user's orders
@@ -89,7 +89,7 @@ class HomeView(View):
 def offer_details(request, offer_id):
 
     offer = get_object_or_404(SpecialOffer, id=offer_id)
-    products = offer.products.all()
+    products = offer.products.filter(status=True, category__status = True, department__status = True)
     
     discounted_products = []
     for product in products:
