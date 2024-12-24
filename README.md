@@ -5,8 +5,8 @@ This project is an E-commerce platform developed for my final-year project.
   <li>Personalized product recommendations.</li>
   <li>Product filtering.</li>
   <li>Secure user authentication with login and registration.</li>
-  <li>Profile management with details user information.</li>
-  <li>Advanced product search with text, category, department, and voice<.6/li>
+  <li>Profile management with detailed user information.</li>
+  <li>Advanced product search with text, category, department, and voice</li>
   <li>Shopping cart with quantity adjustments and checkout functionality.</li>
   <li>Order processing and tracking.</li>
   <li>Blog section</li>
