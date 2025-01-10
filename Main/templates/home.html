@@ -176,7 +176,7 @@
                 </figure>
 
                 <!-- Product Details -->
-                <h3 class="text-md font-semibold text-gray-700 mb-2">{{ product.name }}</h3>
+                <h3 class="text-md font-semibold text-gray-700 mb-2">{{ product.name|truncatechars:30 }}</h3>
                 
                 <div class="flex items-center justify-between">
                     {% if product.discount_percentage > 0 %}
@@ -262,7 +262,7 @@
 
                 <!-- Product Details -->
                 <div class="p-5">
-                    <h3 class="text-lg font-semibold text-gray-800">{{ product.name }}</h3>
+                    <h3 class="text-lg font-semibold text-gray-800">{{ product.name|truncatechars:40 }}</h3>
                     
                     <div class="flex items-center justify-between mt-2">
                         <!-- Pricing Details -->
@@ -354,7 +354,7 @@
 
         <div class="card-body">
             <div class='flex justify-between sm:flex-row sm:justify-between items-center'>
-                <h2 class="card-title text-xl font-semibold">{{ product.name }}</h2>
+                <h2 class="card-title text-xl font-semibold">{{ product.name|truncatechars:40 }}</h2>
                 
                 <div class="flex flex-col text-right">
                     {% if product.discount_percentage > 0 %}
@@ -435,7 +435,7 @@
                     </div>
                     <!-- Product Details -->
                     <div class="ml-4 flex flex-col">
-                        <h3 class="text-md font-semibold text-gray-800">{{ product.name }}</h3>
+                        <h3 class="text-md font-semibold text-gray-800">{{ product.name|truncatechars:30 }}</h3>
                         <p class="text-lg font-bold text-blue-600">Tk. {{ product.selling_price }}</p>
                     </div>
                 </div>
@@ -473,7 +473,7 @@
                     </div>
                     <!-- Product Details -->
                     <div class="ml-4 flex flex-col">
-                        <h3 class="text-md font-semibold text-gray-800">{{ top.name }}</h3>
+                        <h3 class="text-md font-semibold text-gray-800">{{ top.name|truncatechars:30 }}</h3>
                         <p class="text-lg font-bold text-blue-600">Tk {{ top.selling_price }}</p>
                     </div>
                 </div>
@@ -509,7 +509,7 @@
                 </div>
                 <!-- Product Details -->
                 <div class="ml-4 flex flex-col">
-                    <h3 class="text-md font-semibold text-gray-800">{{ review.product.name }}</h3>
+                    <h3 class="text-md font-semibold text-gray-800">{{ review.product.name|truncatechars:30 }}</h3>
                     <p class="text-lg font-bold text-blue-600">Tk {{ review.product.selling_price }}</p>
                     <p class="text-sm text-gray-500 mt-2">Reviewed: {{ review.created_at|date:"M d, Y" }}</p>
                 </div>
